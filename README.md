@@ -2,7 +2,7 @@
 
 Biboo 帮英语老师用一份教学材料准备课堂 PPT 和跟读作业，再把需要人工判断的跟读交给老师复核。复核结果可以带进下一节课的备课。
 
-项目保存在私有 GitHub 仓库，后续完成并验证的更新会继续同步。[GitHub 仓库](https://github.com/buu206/biboo)
+项目保存在私有 GitHub 仓库，后续完成并验证的更新会继续同步。[GitHub 仓库](https://github.com/buu206/biboo-demo)
 
 仓库右侧 About 的 Website 指向本机 Demo。请在运行 Biboo 的这台 Mac 上打开，服务需要保持启动。[打开 Biboo Demo](http://127.0.0.1:18766/)
 
