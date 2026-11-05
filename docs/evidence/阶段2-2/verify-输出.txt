@@ -1,0 +1,53 @@
+verify.sh 自检  2026-11-05 21:09:46  产品：Biboo（/Users/buu/Documents/个人产品/idea-to-launch-kit/projects/Biboo）
+
+================ 1. mock 自动化测试 ================
+...........................................                              [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/buu/Documents/个人产品/idea-to-launch-kit/projects/Biboo/backend/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+43 passed, 1 warning in 3.04s
+结果：通过（43/43）
+
+================ 2. 真实模型冒烟记录（docs/evidence/<阶段>/冒烟记录.md，须由冒烟脚本写入，格式见通用手册第十节） ================
+缺：docs/evidence/阶段2-2/冒烟记录.md。真实冒烟还没跑，或冒烟脚本没有写记录。无 Key 时如实填"待验"，不要手造记录。
+结果：待验（缺冒烟记录）
+
+================ 3. 密钥排除（扫描整个仓库会进 git 的文件，以及本产品的构建产物） ================
+通过：没有 .env 文件被 git 跟踪。
+通过：会进仓库的文件中未发现密钥样式字符串。
+通过：projects/Biboo/backend/.env 中 DEEPSEEK_API_KEY 的值未出现在任何跟踪文件或构建产物中。
+通过：projects/Biboo/backend/.env 中 AIHUBMIX_API_KEY 的值未出现在任何跟踪文件或构建产物中。
+通过：projects/Biboo/backend/.env 中 TENCENTCLOUD_SECRET_ID 的值未出现在任何跟踪文件或构建产物中。
+通过：projects/Biboo/backend/.env 中 TENCENTCLOUD_SECRET_KEY 的值未出现在任何跟踪文件或构建产物中。
+结果：通过
+
+================ 4. 数据重启恢复（verify.sh 自己起服务、写随机标记、杀进程、再起、读回；钩子 scripts/restart-check.sh 只提供 start/write/read/stop） ================
+通过：起服务（PID 84242）→ 写入随机标记 → 杀掉 → 再起（PID 84298）→ 按 ID 1 读回，标记一致。
+结果：通过（进程 84242→84298，随机标记读回一致）
+
+================ 5. 前端类型检查 / Lint / 生产构建 ================
+未找到 frontend/package.json，本阶段无正式前端。
+结果：N/A（本阶段无正式前端）
+
+================ 6. 文件齐全与位置（AGENTS.md 第 7 节的产出清单；根目录不放产品文件；前面阶段有没有被跳过） ================
+通过：根目录没有放错位置的文件。
+有：docs/阶段文档/阶段2-2技术开发文档.md
+有：docs/项目状态.md
+有：README.md
+有：docs/evidence/阶段2-2/照着做清单.md
+有：docs/evidence/阶段2-2/是否表.md
+有：docs/evidence/阶段2-2/ 下 1 张截图
+通过：前面阶段（阶段0 阶段1 阶段2-1）的产物都在。
+结果：通过
+
+================ 汇总（抄进是否表的就是这六行） ================
+是否表第 2 项  mock 测试：      通过（43/43）
+是否表第 3 项  真实模型冒烟：   待验（缺冒烟记录）
+是否表第 4 项  前端检查与构建： N/A（本阶段无正式前端）
+是否表第 5 项  密钥排除：       通过
+是否表第 6 项  重启后数据恢复： 通过（进程 84242→84298，随机标记读回一致）
+是否表第 10 项 文件齐全与位置： 通过
+总判定：有不通过、未配置或待验项，对应是否表只能填"否"（第 3 项填"待验"）。

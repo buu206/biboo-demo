@@ -1,0 +1,3613 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7460d6">
+<title>Biboo · 备好一堂课，陪伴每一次跟读</title>
+<style>
+:root {
+  color-scheme:light;
+  font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  color:#29253d;
+  background:#f5f4fa;
+  --ink:#29253d;
+  --muted:#756d80;
+  --purple:#7660cf;
+  --purple-dark:#5b43b1;
+  --lavender:#f0ecfb;
+  --line:#ece9f3;
+  --lime:#e2f5b4;
+}
+* {
+  box-sizing:border-box;
+}
+html {
+  scroll-behavior:smooth;
+}
+body {
+  margin:0;
+  padding:28px 38px 48px 290px;
+}
+a {
+  color:var(--purple-dark);
+  text-underline-offset:4px;
+}
+button,input,textarea,select {
+  font:inherit;
+}
+button,a,input,textarea,select,summary {
+  -webkit-tap-highlight-color:transparent;
+}
+:focus-visible {
+  outline:3px solid #b4a0ec;
+  outline-offset:4px;
+}
+button,.download-button {
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  border:1px solid transparent;
+  border-radius:12px;
+  padding:10px 17px;
+  background:#292533;
+  color:#fff;
+  font-weight:650;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .16s,transform .16s,box-shadow .16s;
+}
+button:hover,.download-button:hover {
+  background:#45404e;
+  box-shadow:0 5px 14px #7660cf20;
+}
+button:active,.download-button:active {
+  transform:translateY(1px);
+}
+button.secondary,.download-button.secondary {
+  background:#f3f0fb;
+  color:var(--purple-dark);
+  border-color:#e7e0f4;
+}
+button.secondary:hover,.download-button.secondary:hover {
+  background:#e9e2f8;
+}
+button:disabled {
+  opacity:.42;
+  cursor:default;
+  box-shadow:none;
+  transform:none;
+}
+button svg,.download-button svg {
+  width:18px;
+  height:18px;
+  flex:none;
+}
+input,textarea,select {
+  display:block;
+  width:100%;
+  min-width:0;
+  margin-top:7px;
+  padding:11px 13px;
+  color:var(--ink);
+  border:1px solid #e6e1ef;
+  border-radius:11px;
+  background:#fcfbfe;
+  transition:border-color .15s,box-shadow .15s;
+}
+input:focus,textarea:focus,select:focus {
+  border-color:#ac9ad9;
+  outline:none;
+  box-shadow:0 0 0 3px #7660cf0c;
+}
+input::placeholder,textarea::placeholder {
+  color:#66636e;
+}
+input:read-only,textarea:read-only {
+  background:#f7f5fb;
+}
+textarea {
+  resize:vertical;
+  min-height:88px;
+}
+label {
+  display:block;
+  font-size:12px;
+  font-weight:650;
+  color:#655f73;
+  margin-bottom:14px;
+}
+small {
+  font-size:12px;
+  color:var(--muted);
+}
+h1,h2,h3,p {
+  margin:0;
+}
+h1 {
+  font-size:23px;
+  line-height:1.45;
+  letter-spacing:-.8px;
+  font-weight:720;
+}
+h2 {
+  font-size:18px;
+  line-height:1.5;
+  font-weight:700;
+  letter-spacing:-.4px;
+}
+h3 {
+  font-size:15px;
+  line-height:1.6;
+  font-weight:700;
+}
+p {
+  margin:6px 0;
+}
+.card {
+  min-width:0;
+  border:1px solid #eeebf4;
+  background:#fff;
+  border-radius:20px;
+  padding:25px;
+}
+.card > p {
+  color:#686073;
+  font-size:12px;
+}
+.card-heading {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:19px;
+}
+.card-heading h2 {
+  margin:0;
+}
+.card-heading p {
+  color:var(--muted);
+  font-size:12px;
+  margin:3px 0 0;
+}
+.step-number {
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  color:#69579f;
+  background:#f0ebfb;
+  font-size:13px;
+  font-weight:750;
+  flex:none;
+}
+.eyebrow {
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:1.8px;
+  color:#695b78;
+}
+.row {
+  display:flex;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.row label {
+  flex:1 1 110px;
+  min-width:0;
+}
+.actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  align-items:center;
+}
+[hidden] {
+  display:none!important;
+}
+.app-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:25px;
+  max-width:1430px;
+}
+.breadcrumb {
+  font-size:12px;
+  color:#665e6e;
+  margin-bottom:6px;
+}
+.breadcrumb span {
+  margin:0 9px;
+  color:#66646c;
+}
+#account {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.account-avatar {
+  display:grid;
+  place-items:center;
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:#e4edd6;
+  color:#5c6944;
+  font-size:13px;
+}
+.account-copy small {
+  display:block;
+  font-size:12px;
+  margin-top:-3px;
+}
+#teacher {
+  font-size:12px;
+  font-weight:650;
+  margin:0;
+}
+#logout {
+  min-height:32px;
+  padding:6px 9px;
+  background:transparent;
+  border:0;
+  color:#66626c;
+  font-size:12px;
+}
+#workspace {
+  max-width:1430px;
+  margin:auto;
+}
+.sidebar {
+  position:fixed;
+  z-index:10;
+  inset:18px auto 18px 18px;
+  width:230px;
+  padding:27px 17px 20px;
+  border:1px solid #eeebf4;
+  border-radius:23px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 12px 33px;
+  text-decoration:none;
+  color:var(--ink);
+}
+.brand-mark {
+  width:38px;
+  height:38px;
+  background:#7861ce;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+}
+.brand-mark svg {
+  width:27px;
+  height:27px;
+}
+.brand strong {
+  font-size:25px;
+  letter-spacing:-1.2px;
+}
+.brand small {
+  display:block;
+  font-size:10px;
+  letter-spacing:1.8px;
+  margin-top:-5px;
+  color:#67616e;
+}
+.nav-label {
+  font-size:12px;
+  color:#675e73;
+  letter-spacing:1px;
+  padding:0 14px;
+  margin:0 0 10px;
+}
+.role-tabs {
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.role-tabs a {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  text-decoration:none;
+  color:#635e6e;
+  border-radius:12px;
+  min-height:49px;
+  padding:12px 14px;
+  font-size:13px;
+  font-weight:550;
+  transition:background .15s,color .15s;
+}
+.role-tabs svg {
+  width:19px;
+  height:19px;
+  flex:none;
+}
+.role-tabs a:hover {
+  background:#f7f4fd;
+  color:var(--purple-dark);
+}
+.role-tabs a[aria-current=page] {
+  background:#282431;
+  color:#fff;
+  font-weight:700;
+}
+.role-tabs a[aria-current=page] svg {
+  color:#d4ee9c;
+}
+.role-tabs a[aria-current=page]::after {
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#d4ee9c;
+  margin-left:auto;
+}
+.sidebar-note {
+  margin-top:auto;
+  padding:19px 13px;
+  border-radius:15px;
+  background:#f8f6fd;
+}
+.sidebar-note .note-art {
+  color:#6b5b8f;
+  font-size:24px;
+}
+.sidebar-note strong {
+  font-size:12px;
+  display:block;
+  margin:5px 0;
+}
+.sidebar-note p {
+  color:#695e74;
+  font-size:12px;
+  line-height:1.8;
+}
+.sidebar-foot {
+  margin-top:18px;
+  padding:0 12px;
+  color:#655d6f;
+  font-size:12px;
+}
+#status {
+  max-width:1430px;
+  font-size:12px;
+  color:#695e7f;
+  margin:0 auto 12px;
+  min-height:0;
+}
+#status:empty {
+  display:none;
+}
+#status.error,#practice-status.error,#courseware-status.error,#review-status.error {
+  color:#934a53;
+}
+.banner {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:8px 12px;
+  border-radius:9px;
+  background:#efedf4;
+  color:#696073;
+  font-size:12px;
+  margin:0 0 17px;
+}
+.banner::before {
+  content:"";
+  width:5px;
+  height:5px;
+  flex:none;
+  background:#b4a6d0;
+  border-radius:50%;
+}
+.hero {
+  position:relative;
+  overflow:hidden;
+  border-radius:23px;
+  padding:30px 35px;
+  min-height:205px;
+  margin-bottom:25px;
+  background:linear-gradient(110deg,#ece4fc 0%,#f8ecf6 53%,#f9eee3 100%);
+}
+.hero::after {
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  border:1px solid #ffffff80;
+  border-radius:50%;
+  right:-57px;
+  top:-85px;
+  pointer-events:none;
+}
+.hero-copy {
+  position:relative;
+  z-index:1;
+  max-width:70%;
+}
+.hero .eyebrow {
+  color:#6d5c82;
+  margin-bottom:11px;
+}
+.hero h2 {
+  font-size:29px;
+  letter-spacing:-1.1px;
+  color:#51406f;
+  margin:0 0 10px;
+  line-height:1.5;
+}
+.hero p {
+  color:#725c80;
+  font-size:12px;
+  max-width:420px;
+}
+.hero-pills {
+  display:flex;
+  gap:9px;
+  margin-top:20px;
+}
+.hero-pills span {
+  padding:5px 10px;
+  border:1px solid #ffffff95;
+  background:#ffffff70;
+  border-radius:7px;
+  color:#6f5d7f;
+  font-size:12px;
+}
+.hero-art {
+  position:absolute;
+  right:34px;
+  top:20px;
+  width:220px;
+  height:182px;
+}
+.prep-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 286px;
+  gap:22px;
+  grid-template-areas:"upload class" "goals guide";
+  align-items:start;
+}
+.courseware {
+  grid-area:upload;
+}
+.class-card {
+  grid-area:class;
+}
+#target {
+  grid-area:goals;
+}
+.flow-card {
+  grid-area:guide;
+}
+.courseware-file {
+  position:relative;
+  background:#faf8fe;
+  border:1.5px dashed #d9cfee;
+  border-radius:16px;
+  padding:24px 18px 18px;
+  text-align:center;
+  margin:0 0 20px;
+}
+.upload-glyph {
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  color:#6d5b91;
+  background:#ece5fa;
+  margin:0 auto 10px;
+}
+.upload-glyph svg {
+  width:23px;
+  height:23px;
+}
+.courseware-file label {
+  margin:0 0 9px;
+  font-size:13px;
+  color:#6d5f81;
+}
+.courseware-file input {
+  border:0;
+  background:transparent;
+  padding:7px 0 3px;
+  max-width:305px;
+  margin:0 auto 8px;
+  font-size:12px;
+  color:#675e71;
+  cursor:pointer;
+}
+input::file-selector-button {
+  border:1px solid #e1d6f2;
+  border-radius:7px;
+  padding:6px 9px;
+  background:#fff;
+  color:#6d5a90;
+  font:inherit;
+  cursor:pointer;
+  margin-right:8px;
+}
+.courseware-file small {
+  font-size:12px;
+  color:#6c6079;
+}
+#courseware-source {
+  margin-top:9px;
+  color:#6c5b78;
+  font-size:12px;
+  overflow-wrap:anywhere;
+}
+#courseware-title {
+  margin-bottom:19px;
+}
+#courseware-generate {
+  font-size:12px;
+  min-height:36px;
+  padding:7px 9px;
+  background:transparent;
+  border:0;
+  color:#6a6077;
+}
+#courseware-form .actions {
+  gap:8px;
+}
+#courseware-status,#review-status,#practice-status {
+  font-size:12px;
+  color:#6c5e77;
+  margin-top:12px;
+  overflow-wrap:anywhere;
+}
+#courseware-status:empty,#review-status:empty,#practice-status:empty {
+  display:none;
+}
+#courseware-result {
+  margin-top:13px;
+}
+#courseware-example {
+  font-size:12px;
+}
+.class-card {
+  background:#fff;
+}
+.class-card .row {
+  display:block;
+}
+.class-card .row button {
+  width:100%;
+  min-height:37px;
+  font-size:12px;
+}
+.class-card > label {
+  margin-top:5px;
+}
+.class-card .new-class-title {
+  display:block;
+  color:#695d75;
+  font-size:12px;
+  margin:22px 0 11px;
+  padding-top:17px;
+  border-top:1px solid var(--line);
+}
+.flow-card {
+  padding:24px;
+  background:#eaf3da;
+  border-color:#e6eedc;
+}
+.flow-card .eyebrow {
+  color:#5b654d;
+}
+.flow-card h3 {
+  margin:9px 0 15px;
+  color:#566744;
+}
+.flow-item {
+  padding:14px 0;
+  border-top:1px solid #dbe7cc;
+  display:flex;
+  gap:10px;
+}
+.flow-icon {
+  width:33px;
+  height:35px;
+  background:#ffffffa0;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  color:#556644;
+  flex:none;
+}
+.flow-icon svg {
+  width:19px;
+  height:19px;
+}
+.flow-item strong {
+  font-size:12px;
+  font-weight:650;
+  color:#566745;
+}
+.flow-item p {
+  font-size:12px;
+  line-height:1.8;
+  color:#5c674f;
+  margin:3px 0 0;
+}
+.flow-foot {
+  font-size:12px;
+  color:#5a674c;
+  margin-top:12px;
+}
+#target .row label:first-child {
+  flex:2 1 170px;
+}
+#target > p {
+  margin:-5px 0 20px;
+}
+#target > button {
+  margin-top:4px;
+  width:100%;
+  min-height:47px;
+}
+.goal-pair {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+#target,#lesson-output {
+  scroll-margin-top:23px;
+}
+#lesson-output {
+  margin-top:22px;
+}
+#lesson-output > p {
+  margin:-5px 0 20px;
+}
+#lesson-state {
+  display:inline-flex;
+  padding:7px 12px;
+  color:#6c5d89;
+  background:#f3effb;
+  font-size:12px;
+  border-radius:8px;
+  margin:10px 0 16px;
+}
+#quality {
+  color:#706243;
+  font-size:12px;
+  padding-left:18px;
+}
+#quality:empty {
+  display:none;
+}
+#outline,#items {
+  margin-top:26px;
+}
+#outline > h3,#items > h3 {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+}
+#outline > h3::before,#items > h3::before {
+  content:"";
+  width:4px;
+  height:14px;
+  background:#b49bdc;
+  border-radius:2px;
+}
+.entry {
+  border-top:1px solid var(--line);
+  padding:16px 0 4px;
+}
+#outline .entry {
+  display:grid;
+  grid-template-columns:140px 70px minmax(0,1fr);
+  align-items:start;
+}
+#items .entry {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+}
+.entry label {
+  margin:0 0 8px;
+}
+.entry textarea {
+  min-height:69px;
+}
+.entry audio {
+  grid-column:1/-1;
+}
+audio {
+  display:block;
+  margin:8px 0;
+  max-width:100%;
+  height:34px;
+}
+.result-box {
+  margin:20px 0;
+  padding:18px;
+  background:#f0f6e7;
+  border:1px solid #e6eedc;
+  border-radius:13px;
+  font-size:12px;
+  color:#57654a;
+}
+.result-box p {
+  margin-bottom:12px;
+}
+#student-share-url {
+  font-weight:400;
+  font-size:12px;
+  background:#ffffffb0;
+  border-color:#dfE8d4;
+}
+#student-view {
+  max-width:850px;
+  margin:auto;
+}
+.student-welcome {
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:4px 6px 21px;
+}
+.student-welcome h2 {
+  font-size:25px;
+  color:#66527d;
+  letter-spacing:-.7px;
+}
+.student-welcome p {
+  color:#705e7c;
+  font-size:12px;
+}
+.buddy {
+  flex:none;
+  width:67px;
+  height:67px;
+}
+.student-picker {
+  padding:19px 24px;
+  margin-bottom:18px;
+}
+.student-picker label {
+  margin:0;
+}
+.courseware-steps {
+  display:flex;
+  list-style:none;
+  padding:0;
+  margin:13px 0 0;
+  gap:17px;
+  color:#6c5b79;
+  font-size:12px;
+}
+.courseware-steps li::before {
+  content:"";
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#c7b6df;
+  margin-right:6px;
+  display:inline-block;
+  vertical-align:middle;
+}
+#practice {
+  padding:26px 34px;
+}
+.practice-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+.practice-top .eyebrow {
+  margin-bottom:3px;
+}
+.practice-top h2 {
+  color:#6e5f7e;
+  font-size:15px;
+}
+.practice-top .actions {
+  gap:4px;
+}
+.practice-top button {
+  min-height:29px;
+  padding:5px 9px;
+  color:#665d6e;
+  font-size:12px;
+  border:0;
+  background:#f7f4fb;
+}
+#practice > label {
+  margin-bottom:15px;
+}
+#practice-original {
+  text-align:center;
+  background:linear-gradient(145deg,#f4edff,#fcf7f3);
+  border:1px solid #eee5f6;
+  padding:30px 25px 27px;
+  border-radius:18px;
+  position:relative;
+  overflow:hidden;
+}
+#practice-original h3 {
+  font-size:12px;
+  letter-spacing:2px;
+  color:#6c587e;
+  font-weight:550;
+}
+.practice-orbit {
+  position:relative;
+  width:132px;
+  height:108px;
+  margin:9px auto 0;
+}
+.practice-orbit svg {
+  width:100%;
+  height:100%;
+}
+#practice-reference {
+  font-size:clamp(30px,4.5vw,45px);
+  font-weight:720;
+  letter-spacing:-1px;
+  line-height:1.35;
+  color:#6b528b;
+  margin:8px auto 22px;
+  overflow-wrap:anywhere;
+}
+#practice-speak {
+  background:#fff;
+  border-color:#e7ddf0;
+  border-radius:30px;
+  min-height:40px;
+  color:#6e5984;
+  padding:9px 21px;
+  font-size:12px;
+}
+#practice-example {
+  margin:12px auto 0;
+}
+#practice-upload {
+  text-align:center;
+  padding-top:21px;
+}
+.record-actions {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+#practice-record,#practice-stop {
+  min-height:61px;
+  padding:12px 28px;
+  border-radius:18px;
+  background:#fce394;
+  color:#79622e;
+  border:1px solid #f2d783;
+  box-shadow:0 5px 0 #edD493;
+}
+#practice-record:hover {
+  background:#f9dc7d;
+}
+#practice-record svg,#practice-stop svg {
+  width:23px;
+  height:23px;
+}
+#practice-upload > p {
+  color:#6b5e75;
+  font-size:12px;
+  margin:14px 0;
+}
+#practice-upload .file-alternative {
+  text-align:left;
+  margin:15px 0;
+  padding:12px 15px;
+  border-radius:10px;
+  background:#fbfafe;
+}
+.file-alternative summary {
+  cursor:pointer;
+  color:#696071;
+  font-size:12px;
+}
+.file-alternative label {
+  margin:10px 0 0;
+}
+#practice-samples {
+  background:#f7f5fb;
+  padding:14px 16px;
+  border-radius:12px;
+  margin-top:17px;
+}
+#practice-samples > p {
+  font-size:12px;
+  color:#6e5e79;
+  margin:0 0 9px;
+}
+#practice-samples .actions {
+  justify-content:center;
+  gap:7px;
+}
+#practice-samples button {
+  font-size:12px;
+  min-height:33px;
+  padding:6px 10px;
+  background:#fff;
+  border:1px solid #e9e2f0;
+  color:#6b5c77;
+}
+#practice-preview {
+  margin:16px auto;
+}
+#practice-send {
+  background:#8064c3;
+  margin-top:19px;
+  min-width:190px;
+  border-radius:13px;
+}
+#practice-drill {
+  margin-top:16px;
+  padding:21px;
+  border-radius:14px;
+  border:1px solid #e4ecd5;
+  background:#f4f8ee;
+}
+#practice-drill h3 {
+  color:#576543;
+  font-size:12px;
+}
+#practice-drill-text {
+  font-size:25px;
+  font-weight:650;
+  color:#54683d;
+  margin:7px 0 15px;
+}
+#practice-drill-mode {
+  width:auto;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:6px;
+  accent-color:#8aaa69;
+}
+#practice-latest {
+  background:#f0f7e8;
+}
+#practice-result-label {
+  font-size:16px;
+}
+#practice-result-feedback {
+  margin-top:8px;
+}
+.history-heading {
+  margin:27px 0 12px;
+  padding-top:23px;
+  border-top:1px solid var(--line);
+  color:#6c6075;
+  font-size:12px;
+}
+#practice-empty {
+  color:#6b5c75;
+  font-size:12px;
+}
+#practice-history {
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+#practice-history li {
+  border:1px solid #eee9f3;
+  background:#fdfcfe;
+  border-radius:11px;
+  padding:13px 15px;
+  margin-top:9px;
+  font-size:12px;
+  color:#665d6e;
+}
+#practice-history li strong {
+  color:#6a5b7a;
+  font-weight:600;
+}
+#practice-history li p {
+  margin:3px 0;
+}
+.review-intro {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:23px;
+}
+.review-intro h2 {
+  font-size:27px;
+  letter-spacing:-1px;
+  color:#635271;
+}
+.review-intro p {
+  color:#66606c;
+  font-size:12px;
+  margin-top:8px;
+}
+.review-badge {
+  flex:none;
+  display:grid;
+  place-items:center;
+  width:61px;
+  height:61px;
+  border-radius:19px;
+  background:#eaf2dc;
+  color:#586542;
+}
+.review-badge svg {
+  width:29px;
+  height:29px;
+}
+.review-filter {
+  padding:19px 24px;
+  margin-bottom:22px;
+}
+.review-filter .row {
+  align-items:end;
+}
+.review-filter label {
+  margin:0;
+}
+.review-filter .row button {
+  min-height:45px;
+}
+.review-overview {
+  margin-bottom:22px;
+}
+.review-card-title {
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:14px;
+}
+.review-card-title small {
+  font-size:12px;
+}
+#review-counts {
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0 24px;
+}
+.metric {
+  padding:17px 16px;
+  background:#f7f5fc;
+  border:1px solid #eeeaf5;
+  border-radius:13px;
+}
+.metric:nth-child(2),.metric:nth-child(6) {
+  background:#eff5e6;
+  border-color:#e7eedc;
+}
+.metric strong {
+  display:block;
+  font-size:25px;
+  font-weight:650;
+  color:#6d5d87;
+  line-height:1.25;
+  margin-bottom:7px;
+}
+.metric:nth-child(2) strong,.metric:nth-child(6) strong {
+  color:#5c694c;
+}
+.metric span {
+  font-size:12px;
+  color:#6d5f79;
+}
+#review-students {
+  list-style:none;
+  margin:0;
+  padding:0;
+  border-top:1px solid var(--line);
+}
+#review-students li {
+  padding:13px 5px;
+  border-bottom:1px solid var(--line);
+  color:#685f6f;
+  font-size:12px;
+}
+.review-columns {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 310px;
+  align-items:start;
+  gap:22px;
+}
+.review-columns > div {
+  min-width:0;
+}
+.review-columns .card + .card {
+  margin-top:22px;
+}
+.review-entry {
+  padding:21px 0 10px;
+}
+.review-entry:first-child {
+  border:0;
+  padding-top:4px;
+}
+.review-entry h3 {
+  color:#6e5d7a;
+  font-size:13px;
+}
+.review-entry > p {
+  color:#6d5b7a;
+  font-size:12px;
+}
+.review-entry > p[lang] {
+  color:#6f5b7d;
+  font-size:18px;
+  font-weight:600;
+  margin:11px 0;
+}
+.review-entry form {
+  margin-top:15px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 14px;
+}
+.review-entry form > label:first-child {
+  grid-column:1;
+}
+.review-entry form > label:nth-child(2) {
+  grid-row:2;
+  grid-column:1/-1;
+}
+.review-entry form > label:nth-child(3) {
+  grid-column:2;
+  grid-row:1;
+}
+.review-entry form > :nth-child(n+4) {
+  grid-column:1/-1;
+}
+.review-entry form > button {
+  justify-self:start;
+}
+.review-entry form > p:empty {
+  display:none;
+}
+.review-entry form > p {
+  font-size:12px;
+  color:#6f5b7c;
+}
+.review-entry details {
+  margin-top:15px;
+  color:#6d5a7a;
+  font-size:12px;
+}
+.review-entry summary {
+  cursor:pointer;
+}
+.review-columns .insight-card {
+  background:#f2edfa;
+  border-color:#e9e0f3;
+}
+.insight-card .eyebrow {
+  color:#6b597b;
+  margin-bottom:10px;
+}
+.insight-card h2 {
+  color:#715d82;
+}
+#review-issues {
+  font-size:12px;
+  color:#6b5e75;
+  margin:18px 0;
+}
+#review-suggestion {
+  border-top:1px solid #e0d4ed;
+  padding-top:17px;
+}
+#review-suggestion h3 {
+  color:#705b80;
+}
+#review-suggestion p {
+  font-size:12px;
+  color:#6c597a;
+  margin:11px 0;
+}
+#review-next-lesson {
+  width:100%;
+  margin-top:10px;
+  font-size:12px;
+}
+#review-reminder {
+  margin-top:20px;
+}
+#review-reminder button {
+  min-height:35px;
+  font-size:12px;
+}
+#review-reminder-result {
+  margin-top:15px;
+}
+#review-queue > p,#review-recent > p {
+  color:#6d5f77;
+  font-size:12px;
+  padding:20px 0;
+}
+#login {
+  max-width:440px;
+  margin:65px auto;
+  padding:36px;
+  box-shadow:0 18px 65px #8470ad10;
+}
+.login-mark {
+  display:grid;
+  place-items:center;
+  width:57px;
+  height:57px;
+  margin-bottom:24px;
+  background:#eee7fb;
+  color:#6c5b8d;
+  border-radius:17px;
+}
+.login-mark svg {
+  width:33px;
+  height:33px;
+}
+#login h2 {
+  font-size:24px;
+  color:#6c547d;
+}
+#login > p {
+  color:#6a5b76;
+  font-size:12px;
+  margin:11px 0 25px;
+}
+#login .row {
+  display:block;
+}
+#login button {
+  width:100%;
+  margin-top:5px;
+}
+body:not([data-authenticated]) {
+  padding-left:38px;
+}
+body:not([data-authenticated]) .app-header {
+  max-width:1100px;
+  margin:auto;
+}
+body:not([data-authenticated]) #status {
+  max-width:440px;
+  margin-top:25px;
+}
+@media(min-width:1750px) {
+  body {
+    padding-right:calc((100vw - 1710px)/2);
+  }
+}
+@media(max-width:1150px) {
+  body {
+    padding-left:244px;
+    padding-right:25px;
+  }
+  .sidebar {
+    width:200px;
+  }
+  .prep-grid {
+    grid-template-columns:minmax(0,1fr) 245px;
+    gap:17px;
+  }
+  .card {
+    padding:20px;
+  }
+  .review-columns {
+    grid-template-columns:minmax(0,1fr) 265px;
+    gap:17px;
+  }
+  .hero-art {
+    right:10px;
+    width:190px;
+  }
+  #review-counts {
+    gap:8px;
+  }
+  .metric {
+    padding:14px 10px;
+  }
+}
+@media(max-width:950px) {
+  body {
+    padding-left:217px;
+    padding-right:20px;
+  }
+  .sidebar {
+    width:178px;
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .brand {
+    padding-left:9px;
+  }
+  .role-tabs a {
+    padding:11px 10px;
+    gap:9px;
+    font-size:12px;
+  }
+  .sidebar-note {
+    padding:13px 10px;
+  }
+  .prep-grid {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"upload" "class" "goals" "guide";
+  }
+  .flow-card {
+    display:none;
+  }
+  .class-card .row {
+    display:flex;
+    align-items:end;
+  }
+  .class-card .new-class-title {
+    margin-top:13px;
+  }
+  .class-card .row label {
+    margin-bottom:0;
+  }
+  .class-card .row button {
+    width:auto;
+  }
+  .hero {
+    padding:25px;
+    min-height:193px;
+  }
+  .hero h2 {
+    font-size:25px;
+  }
+  .hero-art {
+    width:155px;
+    height:150px;
+    right:3px;
+    top:30px;
+  }
+  .hero-copy {
+    max-width:75%;
+  }
+  .hero p {
+    max-width:270px;
+  }
+  .hero-pills span:last-child {
+    display:none;
+  }
+  .review-columns {
+    grid-template-columns:minmax(0,1fr);
+  }
+  .review-columns > .insight-card {
+    margin-top:0;
+  }
+  #review-counts {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media(max-width:680px) {
+  body {
+    padding:21px 16px 102px;
+  }
+  .app-header {
+    margin-bottom:20px;
+  }
+  h1 {
+    font-size:19px;
+  }
+  .breadcrumb {
+    font-size:12px;
+  }
+  .account-copy {
+    display:none;
+  }
+  #account {
+    gap:3px;
+  }
+  .account-avatar {
+    width:33px;
+    height:33px;
+    font-size:12px;
+  }
+  #logout {
+    font-size:12px;
+  }
+  .sidebar {
+    inset:auto 12px 12px;
+    width:auto;
+    height:67px;
+    border-radius:19px;
+    padding:7px;
+    box-shadow:0 7px 30px #6c558d17;
+  }
+  .brand,.nav-label,.sidebar-note,.sidebar-foot {
+    display:none;
+  }
+  .role-tabs {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:5px;
+  }
+  .role-tabs a {
+    min-height:49px;
+    display:flex;
+    justify-content:center;
+    padding:10px 5px;
+    font-size:12px;
+    gap:7px;
+    border-radius:13px;
+  }
+  .role-tabs a[aria-current=page]::after {
+    display:none;
+  }
+  .role-tabs svg {
+    width:17px;
+    height:17px;
+  }
+  .hero {
+    padding:23px;
+    min-height:213px;
+    margin-bottom:17px;
+  }
+  .hero-copy {
+    max-width:81%;
+  }
+  .hero h2 {
+    font-size:24px;
+    line-height:1.6;
+    max-width:240px;
+  }
+  .hero p {
+    font-size:12px;
+    max-width:210px;
+  }
+  .hero .eyebrow {
+    font-size:11px;
+    letter-spacing:1px;
+  }
+  .hero-art {
+    width:130px;
+    height:124px;
+    top:79px;
+    right:-20px;
+    opacity:.84;
+  }
+  .hero-pills {
+    gap:5px;
+    position:relative;
+    z-index:2;
+  }
+  .hero-pills span {
+    padding:4px 7px;
+    font-size:10px;
+  }
+  .banner {
+    font-size:11px;
+    padding:7px 9px;
+  }
+  .card {
+    padding:21px 18px;
+    border-radius:17px;
+  }
+  .card-heading {
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .card-heading h2 {
+    font-size:16px;
+  }
+  .card-heading p {
+    font-size:12px;
+  }
+  .step-number {
+    width:33px;
+    height:33px;
+    border-radius:10px;
+    font-size:12px;
+  }
+  .prep-grid {
+    gap:17px;
+  }
+  .courseware-file {
+    padding:19px 10px 15px;
+  }
+  .courseware-file small {
+    font-size:11px;
+  }
+  .courseware-file input {
+    font-size:11px;
+    max-width:255px;
+  }
+  #courseware-form .actions {
+    gap:7px;
+  }
+  #courseware-form .actions button {
+    padding:9px 10px;
+    font-size:12px;
+  }
+  #courseware-generate {
+    width:100%;
+    justify-content:flex-start;
+    padding-left:0!important;
+    min-height:26px;
+  }
+  .goal-pair {
+    grid-template-columns:1fr;
+    gap:0;
+  }
+  #target .row {
+    gap:0 12px;
+  }
+  #target .row label:first-child {
+    flex-basis:100%;
+  }
+  #target .row label {
+    flex-basis:calc(50% - 6px);
+  }
+  input,textarea,select {
+    font-size:14px;
+    padding:10px 11px;
+  }
+  #target > button {
+    font-size:12px;
+  }
+  #outline .entry {
+    grid-template-columns:minmax(0,1fr) 67px;
+    gap:0 10px;
+  }
+  #outline .entry label:last-child {
+    grid-column:1/-1;
+  }
+  #items .entry {
+    grid-template-columns:1fr;
+    gap:0;
+  }
+  .actions button,.actions .download-button {
+    min-height:39px;
+    font-size:12px;
+    padding:8px 12px;
+  }
+  #lesson-output {
+    margin-top:17px;
+  }
+  #lesson-output > p {
+    font-size:12px;
+  }
+  .student-welcome {
+    gap:13px;
+    padding-bottom:17px;
+  }
+  .student-welcome h2 {
+    font-size:22px;
+  }
+  .student-welcome p {
+    font-size:12px;
+  }
+  .buddy {
+    width:54px;
+    height:54px;
+  }
+  .courseware-steps {
+    gap:9px;
+    font-size:10px;
+  }
+  .courseware-steps li::before {
+    margin-right:3px;
+    width:3px;
+    height:3px;
+  }
+  #practice {
+    padding:21px 18px;
+  }
+  .practice-top {
+    display:block;
+    margin-bottom:14px;
+  }
+  .practice-top .actions {
+    margin-top:10px;
+  }
+  #practice-original {
+    padding:23px 16px;
+  }
+  #practice-reference {
+    font-size:34px;
+    margin-top:6px;
+  }
+  .practice-orbit {
+    width:117px;
+    height:91px;
+  }
+  #practice-record,#practice-stop {
+    min-height:58px;
+    padding:11px 23px;
+  }
+  #practice-samples {
+    padding:13px 10px;
+  }
+  #practice-samples button {
+    font-size:11px;
+    padding:6px 8px;
+  }
+  .review-intro {
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .review-intro h2 {
+    font-size:22px;
+    line-height:1.55;
+  }
+  .review-intro p {
+    font-size:12px;
+  }
+  .review-badge {
+    width:48px;
+    height:48px;
+    border-radius:14px;
+  }
+  .review-badge svg {
+    width:23px;
+  }
+  .review-filter .row {
+    gap:10px;
+  }
+  .review-filter .row label {
+    flex-basis:100%;
+  }
+  .review-filter button {
+    width:100%;
+  }
+  .review-card-title {
+    display:block;
+  }
+  .review-card-title small {
+    display:block;
+    margin-top:5px;
+    font-size:11px;
+  }
+  #review-counts {
+    gap:7px;
+    margin-bottom:17px;
+  }
+  .metric {
+    padding:13px 10px;
+  }
+  .metric strong {
+    font-size:23px;
+  }
+  .metric span {
+    font-size:11px;
+  }
+  .review-entry form {
+    grid-template-columns:minmax(0,1fr);
+  }
+  .review-entry form > label:nth-child(2),.review-entry form > label:nth-child(3) {
+    grid-column:1;
+    grid-row:auto;
+  }
+  #login {
+    padding:30px 25px;
+    margin:40px auto;
+  }
+  body:not([data-authenticated]) {
+    padding-left:16px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto;
+  }
+  *,*::before,*::after {
+    transition:none!important;
+  }
+}
+.review-comparison {
+  display:grid;
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:13px;
+  margin:17px 0;
+}
+.automatic-assessment,.teacher-assessment {
+  min-width:0;
+  padding:16px;
+  border-radius:12px;
+  background:#f3effb;
+}
+.teacher-assessment {
+  background:#f0f6e7;
+}
+.assessment-label {
+  display:block;
+  font-size:10px;
+  font-weight:650;
+  letter-spacing:.6px;
+  color:#6a5d77;
+  margin-bottom:10px;
+}
+.automatic-assessment strong,.teacher-assessment strong {
+  display:block;
+  font-size:14px;
+  color:#51445e;
+  margin-bottom:12px;
+}
+.automatic-assessment p,.teacher-assessment p {
+  font-size:12px;
+  color:#6b5d76;
+  line-height:1.8;
+}
+.review-comparison audio {
+  width:100%;
+  height:32px;
+}
+.teacher-assessment form {
+  display:block;
+  margin-top:2px;
+}
+.teacher-assessment form > label {
+  margin-bottom:11px;
+}
+.teacher-assessment input,.teacher-assessment textarea,.teacher-assessment select {
+  background:#ffffffb8;
+  border-color:#dce5d0;
+  font-size:12px;
+}
+.teacher-assessment form > button {
+  font-size:12px;
+  min-height:37px;
+}
+.teacher-assessment form > label:last-of-type input[type=file] {
+  padding:7px;
+  font-size:10px;
+}
+@media(max-width:1250px) {
+  .review-comparison {
+    grid-template-columns:minmax(0,1fr);
+  }
+}
+
+.practice-management {
+  margin-top:25px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.practice-management button {
+  min-height:34px;
+  font-size:12px;
+  padding:7px 10px;
+}
+@media(max-width:680px) {
+  body[data-view=student] .app-header {
+    margin-bottom:12px;
+  }
+  body[data-view=student] .banner {
+    margin-bottom:12px;
+  }
+  .student-welcome,
+  .student-picker .courseware-steps,
+  #practice .practice-top {
+    display:none;
+  }
+  .student-picker {
+    padding:13px 16px;
+    margin-bottom:12px;
+  }
+  #practice {
+    padding:16px;
+  }
+  #practice > label {
+    margin-bottom:11px;
+  }
+  #practice-original {
+    padding:14px 15px 18px;
+  }
+  .practice-orbit {
+    width:90px;
+    height:69px;
+    margin-top:4px;
+  }
+  #practice-reference {
+    margin:5px auto 14px;
+  }
+  #practice-upload {
+    padding-top:16px;
+  }
+}
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <symbol id="icon-grid" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="2"/>
+          <rect x="14" y="3" width="7" height="7" rx="2"/>
+          <rect x="3" y="14" width="7" height="7" rx="2"/>
+          <rect x="14" y="14" width="7" height="7" rx="2"/>
+        </g>
+      </symbol>
+      <symbol id="icon-book" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 6c-3-3-7-3-9-2v15c3-1 6 0 9 2 3-2 6-3 9-2V4c-2-1-6-1-9 2Z"/>
+          <path d="M12 6v15M6 8h3M6 12h3m6-4h3m-3 4h3"/>
+        </g>
+      </symbol>
+      <symbol id="icon-mic" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <rect x="8" y="2" width="8" height="13" rx="4"/>
+          <path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/>
+        </g>
+      </symbol>
+      <symbol id="icon-listen" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m11 4-6 5H2v6h3l6 5V4Z"/>
+          <path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>
+        </g>
+      </symbol>
+      <symbol id="icon-upload" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5"/>
+        </g>
+      </symbol>
+      <symbol id="icon-spark" viewBox="0 0 24 24">
+        <path d="m12 2 2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6L12 2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <path d="m7 12 3 3 7-7"/>
+        </g>
+      </symbol>
+      <symbol id="biboo-buddy" viewBox="0 0 160 140">
+        <ellipse cx="81" cy="126" rx="48" ry="7" fill="#d9c9ec" opacity=".45"/>
+        <path d="m36 61-4-39 34 18M124 61l4-39-34 18" fill="#b99adc"/>
+        <ellipse cx="80" cy="77" rx="49" ry="47" fill="#b99adc"/>
+        <path d="M39 87c9 14 21 22 41 22s32-8 41-22c-2 25-16 38-41 38S41 112 39 87Z" fill="#ac8bd1"/>
+        <ellipse cx="62" cy="70" rx="22" ry="25" fill="#f7f1fc"/>
+        <ellipse cx="98" cy="70" rx="22" ry="25" fill="#f7f1fc"/>
+        <path d="M54 72q8-11 16 0m20 0q8-11 16 0" fill="none" stroke="#776092" stroke-width="4" stroke-linecap="round"/>
+        <path d="m75 80 5 8 5-8" fill="#f1c56b"/>
+        <ellipse cx="47" cy="85" rx="7" ry="4" fill="#e4b9d3"/>
+        <ellipse cx="113" cy="85" rx="7" ry="4" fill="#e4b9d3"/>
+        <path d="m49 121 10-8 5 9m32 0 6-9 10 8" fill="none" stroke="#d7b774" stroke-width="5" stroke-linecap="round"/>
+        <path d="m24 71 8 9-4 18m108-28-8 10 5 17" fill="none" stroke="#b99adc" stroke-width="12" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
+  <header class="app-header">
+    <div>
+      <p class="breadcrumb">
+        工作空间
+        <span>
+          /
+        </span>
+        <span id="page-context">
+          老师工作台
+        </span>
+      </p>
+      <h1 id="page-title">
+        从备课到跟读
+      </h1>
+    </div>
+    <div id="account" hidden>
+      <span class="account-avatar" aria-hidden="true">
+        教
+      </span>
+      <div class="account-copy">
+        <p id="teacher">
+        </p>
+        <small>
+          你的教学工作台
+        </small>
+      </div>
+      <button class="secondary" id="logout">
+        退出
+      </button>
+    </div>
+  </header>
+  <p id="status" role="status" aria-live="polite">
+  </p>
+  <form id="login" class="card" hidden>
+    <span class="login-mark" aria-hidden="true">
+      <svg>
+        <use href="#icon-book"/>
+      </svg>
+    </span>
+    <span class="eyebrow">
+      WELCOME TO BIBOO
+    </span>
+    <h2>
+      让每一次开口，都有回应。
+    </h2>
+    <p>
+      登录你的工作台，把备课、跟读和课后反馈连在一起。
+    </p>
+    <div class="row">
+      <label>
+        邀请码
+        <input name="invite_code" type="password" autocomplete="off" required maxlength="140" placeholder="输入你的老师邀请码">
+      </label>
+      <button>
+        登录
+      </button>
+    </div>
+  </form>
+  <main id="workspace" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="?view=teacher" data-view="teacher">
+        <span class="brand-mark" aria-hidden="true">
+          <svg>
+            <use href="#icon-book"/>
+          </svg>
+        </span>
+        <span>
+          <strong>
+            Biboo
+          </strong>
+          <small>
+            TEACH · LISTEN · GROW
+          </small>
+        </span>
+      </a>
+      <p class="nav-label">
+        我的工作空间
+      </p>
+      <nav class="role-tabs" aria-label="演示角色">
+        <a id="view-teacher" data-view="teacher" href="?view=teacher">
+          <svg aria-hidden="true">
+            <use href="#icon-grid"/>
+          </svg>
+          <span>
+            老师备课
+          </span>
+        </a>
+        <a id="view-review" data-view="review" href="?view=review">
+          <svg aria-hidden="true">
+            <use href="#icon-listen"/>
+          </svg>
+          <span>
+            老师复核
+          </span>
+        </a>
+        <a id="view-student" data-view="student" href="?view=student">
+          <svg aria-hidden="true">
+            <use href="#icon-mic"/>
+          </svg>
+          <span>
+            孩子跟读
+          </span>
+        </a>
+      </nav>
+      <div class="sidebar-note">
+        <span class="note-art" aria-hidden="true">
+          ✧
+        </span>
+        <strong>
+          陪伴每一次小小进步
+        </strong>
+        <p>
+          从课堂上的一个单词，到课后勇敢说出的每一句话。
+        </p>
+      </div>
+      <p class="sidebar-foot">
+        BIBOO · 让好课延续
+      </p>
+    </aside>
+    <p id="mode" class="banner" hidden>
+    </p>
+    <section id="teacher-view" hidden aria-label="老师备课">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            A LITTLE HELP, A BETTER LESSON
+          </p>
+          <h2>
+            把好课，带到每一次跟读。
+          </h2>
+          <p>
+            从一份教学材料开始，准备课堂课件，也为孩子留一份课后练习。
+          </p>
+          <div class="hero-pills">
+            <span>
+              01 上传材料
+            </span>
+            <span>
+              02 核对目标
+            </span>
+            <span>
+              03 生成并发布
+            </span>
+          </div>
+        </div>
+        <svg class="hero-art" viewBox="0 0 230 190" aria-hidden="true">
+          <circle cx="127" cy="92" r="78" fill="#ffffff42"/>
+          <path d="m36 35 4 10 11 2-9 7 1 11-9-6-10 4 4-11-7-9 11 1Z" fill="#d3b9e8"/>
+          <circle cx="204" cy="51" r="4" fill="#decda7"/>
+          <use href="#biboo-buddy" x="52" y="24" width="168" height="147"/>
+          <path d="m46 150 72-13 20 28-72 14Z" fill="#ccdbc0"/>
+          <path d="m46 146 72-13 20 28-72 14Z" fill="#dfedcf"/>
+          <path d="m60 145 52-9m-45 21 52-9" stroke="#b5c5a7" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="prep-grid">
+        <section class="card courseware" aria-labelledby="courseware-heading">
+          <div class="card-heading">
+            <span class="step-number">
+              01
+            </span>
+            <div>
+              <h2 id="courseware-heading">
+                上传教学材料
+              </h2>
+              <p>
+                教案、讲义和以前的课件，都可以成为起点。
+              </p>
+            </div>
+          </div>
+          <form id="courseware-form">
+            <div class="courseware-file">
+              <span class="upload-glyph" aria-hidden="true">
+                <svg>
+                  <use href="#icon-upload"/>
+                </svg>
+              </span>
+              <label for="courseware-file">
+                选择一份教学材料
+              </label>
+              <input id="courseware-file" type="file" accept=".pptx,.docx,.pdf,.txt,.md" aria-describedby="courseware-formats courseware-source">
+              <small id="courseware-formats">
+                PPTX · DOCX · 文字版 PDF · TXT · Markdown，限 10 MB
+              </small>
+              <p id="courseware-source">
+                还未选择材料。
+              </p>
+            </div>
+            <label for="courseware-title">
+              本课主题（可选）
+              <input id="courseware-title" maxlength="100" placeholder="默认使用材料文件名">
+            </label>
+            <div class="actions">
+              <button id="courseware-import" disabled>
+                <svg aria-hidden="true">
+                  <use href="#icon-spark"/>
+                </svg>
+                带入备课
+              </button>
+              <button type="button" id="courseware-example" class="secondary">
+                用示例材料试一试
+              </button>
+              <button type="button" id="courseware-generate" class="secondary" disabled>
+                仅生成 PPT ↗
+              </button>
+            </div>
+          </form>
+          <p id="courseware-status" role="status" aria-live="polite">
+          </p>
+          <div id="courseware-result" hidden>
+            <a id="courseware-download" class="download-button">
+              下载 PPTX
+            </a>
+          </div>
+        </section>
+        <section class="card class-card">
+          <div class="card-heading">
+            <span class="step-number">
+              02
+            </span>
+            <div>
+              <h2>
+                选择班级
+              </h2>
+              <p>
+                这堂课，为哪一群孩子准备？
+              </p>
+            </div>
+          </div>
+          <label>
+            当前班级
+            <select id="classes">
+            </select>
+          </label>
+          <span class="new-class-title">
+            也可以创建一个新班级
+          </span>
+          <form id="new-class" class="row">
+            <label>
+              班级名称
+              <input name="name" maxlength="140" required placeholder="例如：周六英语班">
+            </label>
+            <button class="secondary">
+              建班
+            </button>
+          </form>
+        </section>
+        <form class="card" id="target">
+          <div class="card-heading">
+            <span class="step-number">
+              03
+            </span>
+            <div>
+              <h2>
+                核对教学目标
+              </h2>
+              <p>
+                从材料带入，也可以直接填写。
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <label>
+              主题
+              <input name="topic" placeholder="例如：认识清辅音 th" maxlength="140" required>
+            </label>
+            <label>
+              年龄段
+              <input name="age_band" placeholder="7–9 岁" maxlength="140" required>
+            </label>
+            <label>
+              课时（分钟）
+              <input name="duration_minutes" type="number" min="5" max="180" value="25" required>
+            </label>
+          </div>
+          <label>
+            词汇（1–12 个，用逗号或换行分隔）
+            <textarea name="vocabulary" placeholder="think, three, thank" required>
+            </textarea>
+          </label>
+          <div class="goal-pair">
+            <label>
+              句型（可选，每行一句）
+              <textarea name="patterns" placeholder="I think there are three.">
+              </textarea>
+            </label>
+            <label>
+              发音重点（可选）
+              <input name="sound_focus" placeholder="例如：th">
+            </label>
+          </div>
+          <button id="new-lesson">
+            <svg aria-hidden="true">
+              <use href="#icon-spark"/>
+            </svg>
+            生成课件大纲与跟读作业
+          </button>
+        </form>
+        <aside class="card flow-card">
+          <p class="eyebrow">
+            MADE FOR YOUR CLASS
+          </p>
+          <h3>
+            同一份目标，两份好准备。
+          </h3>
+          <div class="flow-item">
+            <span class="flow-icon" aria-hidden="true">
+              <svg>
+                <use href="#icon-book"/>
+              </svg>
+            </span>
+            <div>
+              <strong>
+                带进课堂的 PPT
+              </strong>
+              <p>
+                教学目标和课堂活动，整理成可以继续编辑的课件。
+              </p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <span class="flow-icon" aria-hidden="true">
+              <svg>
+                <use href="#icon-mic"/>
+              </svg>
+            </span>
+            <div>
+              <strong>
+                带回家的跟读练习
+              </strong>
+              <p>
+                单词、句型和示范语音，让课堂内容在课后继续。
+              </p>
+            </div>
+          </div>
+          <p class="flow-foot">
+            发布前的每一处内容，都由你来确认。
+          </p>
+        </aside>
+      </div>
+      <section class="card" id="lesson-output">
+        <div class="card-heading">
+          <span class="step-number">
+            04
+          </span>
+          <div>
+            <h2>
+              检查、下载与发布
+            </h2>
+            <p>
+              把课堂活动和练习题，调整成你想要的样子。
+            </p>
+          </div>
+        </div>
+        <p>
+          修改后先保存。确认发布会生成示范音频并锁定这份作业。
+        </p>
+        <label>
+          班级作业
+          <select id="lesson-list">
+          </select>
+        </label>
+        <div id="detail" hidden>
+          <p id="lesson-state">
+          </p>
+          <ul id="quality">
+          </ul>
+          <div class="actions">
+            <button class="secondary" id="regenerate">
+              生成 / 重新生成
+            </button>
+            <button class="secondary" id="save">
+              保存修改
+            </button>
+            <a id="lesson-ppt" class="download-button secondary" download hidden>
+              下载本课 PPT
+            </a>
+            <button id="publish">
+              确认发布并生成音频
+            </button>
+          </div>
+          <div id="published-actions" class="result-box" hidden>
+            <p>
+              跟读作业已发布。在本次演示中，可切换到孩子视角。链接在登录同一个演示账号的浏览器中打开。
+            </p>
+            <label>
+              本课跟读链接
+              <input id="student-share-url" type="url" readonly>
+            </label>
+            <div class="actions">
+              <a id="student-entry" class="download-button" data-view="student">
+                打开孩子跟读
+              </a>
+              <button id="copy-student-link" class="secondary">
+                复制跟读链接
+              </button>
+            </div>
+          </div>
+          <div id="outline">
+          </div>
+          <div id="items">
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="student-view" hidden aria-label="孩子跟读">
+      <div class="student-welcome">
+        <svg class="buddy" aria-hidden="true">
+          <use href="#biboo-buddy"/>
+        </svg>
+        <div>
+          <p class="eyebrow">
+            LET’S SAY IT TOGETHER
+          </p>
+          <h2>
+            今天，也勇敢开口吧。
+          </h2>
+          <p>
+            先听一听，再慢慢读。每一次练习都算数。
+          </p>
+        </div>
+      </div>
+      <section class="card student-picker">
+        <label>
+          已发布作业
+          <select id="student-lesson">
+          </select>
+        </label>
+        <ol class="courseware-steps">
+          <li>
+            选一道题
+          </li>
+          <li>
+            听示范
+          </li>
+          <li>
+            录音并提交
+          </li>
+          <li>
+            看练习结果
+          </li>
+        </ol>
+        <p id="student-empty" hidden>
+          还没有已发布的作业。请先在
+          <a data-view="teacher" href="?view=teacher">
+            老师备课
+          </a>
+          生成并发布。
+        </p>
+      </section>
+      <section id="practice" class="card" hidden>
+        <div class="practice-top">
+          <div>
+            <p class="eyebrow">
+              ONE SMALL STEP AT A TIME
+            </p>
+            <h2>
+              开始练习
+            </h2>
+          </div>
+        </div>
+        <label>
+          选择练习题
+          <select id="practice-item">
+          </select>
+        </label>
+        <p id="practice-status" role="status" aria-live="polite">
+        </p>
+        <div id="practice-original">
+          <h3>
+            原题示范
+          </h3>
+          <div class="practice-orbit">
+            <svg viewBox="0 0 160 132" aria-hidden="true">
+              <circle cx="80" cy="62" r="54" fill="#f0e4fb"/>
+              <circle cx="22" cy="28" r="4" fill="#d5c09d"/>
+              <path d="m129 25 3 8 9 2-8 4-1 9-6-7-9 2 5-8-5-7 9 2Z" fill="#dbc7ec"/>
+              <use href="#biboo-buddy" x="17" y="6" width="126" height="116"/>
+            </svg>
+          </div>
+          <p id="practice-reference" lang="en">
+          </p>
+          <button id="practice-speak" class="secondary" hidden>
+            <svg aria-hidden="true">
+              <use href="#icon-listen"/>
+            </svg>
+            听示范
+          </button>
+          <audio id="practice-example" controls preload="none" hidden>
+          </audio>
+        </div>
+        <div id="practice-drill" hidden>
+          <h3>
+            我们再慢慢练一次
+          </h3>
+          <p id="practice-drill-text" lang="en">
+          </p>
+          <button id="practice-drill-speak" class="secondary" hidden>
+            <svg aria-hidden="true">
+              <use href="#icon-listen"/>
+            </svg>
+            听加练示范
+          </button>
+          <audio id="practice-drill-example" preload="none" hidden>
+          </audio>
+          <label>
+            <input id="practice-drill-mode" type="checkbox">
+            本次朗读加练内容
+          </label>
+        </div>
+        <div id="practice-upload">
+          <div class="record-actions">
+            <button id="practice-record" class="secondary">
+              <svg aria-hidden="true">
+                <use href="#icon-mic"/>
+              </svg>
+              开始录音
+            </button>
+            <button id="practice-stop" class="secondary" hidden>
+              <svg aria-hidden="true">
+                <use href="#icon-mic"/>
+              </svg>
+              结束录音
+            </button>
+          </div>
+          <p>
+            每段录音最长 30 秒，文件最大 2 MB。演示请使用成人录音。
+          </p>
+          <details class="file-alternative">
+            <summary>
+              也可以上传已有录音
+            </summary>
+            <label>
+              选择 WAV 文件
+              <input id="practice-file" type="file" accept=".wav,audio/wav,audio/x-wav">
+            </label>
+          </details>
+          <div id="practice-samples" hidden>
+            <p>
+              体验不同的练习反馈 · 模拟录音
+            </p>
+            <div class="actions">
+              <button type="button" class="secondary" data-peak="3000">
+                模拟读得好
+              </button>
+              <button type="button" class="secondary" data-peak="9000">
+                模拟需要加练
+              </button>
+              <button type="button" class="secondary" data-peak="0">
+                模拟录音不清
+              </button>
+            </div>
+          </div>
+          <audio id="practice-preview" controls preload="none" hidden>
+          </audio>
+          <button id="practice-send">
+            提交跟读
+          </button>
+        </div>
+        <div id="practice-latest" class="result-box" hidden>
+          <strong id="practice-result-label">
+          </strong>
+          <p id="practice-result-feedback">
+          </p>
+          <div id="practice-teacher-feedback">
+          </div>
+          <a id="practice-review-entry" data-view="review" hidden>
+            打开老师复核
+          </a>
+        </div>
+          <div class="actions practice-management">
+            <button id="practice-learner" class="secondary">
+              换一个测试学员
+            </button>
+            <button id="practice-refresh" class="secondary">
+              刷新跟读记录
+            </button>
+          </div>
+        <h3 class="history-heading">
+          我的练习记录
+        </h3>
+        <p id="practice-empty">
+          选择练习后可查看跟读记录。
+        </p>
+        <ol id="practice-history">
+        </ol>
+      </section>
+    </section>
+    <section id="review-view" hidden aria-label="老师复核">
+      <div class="review-intro">
+        <div>
+          <p class="eyebrow">
+            A TEACHER’S TOUCH
+          </p>
+          <h2>
+            把时间，留给需要你的孩子。
+          </h2>
+          <p>
+            先看班级进度，再听需要复核的录音。你的反馈，会成为下一次进步的起点。
+          </p>
+        </div>
+        <span class="review-badge" aria-hidden="true">
+          <svg>
+            <use href="#icon-listen"/>
+          </svg>
+        </span>
+      </div>
+      <section class="card review-filter">
+        <div class="row">
+          <label>
+            班级
+            <select id="review-class">
+            </select>
+          </label>
+          <label>
+            作业
+            <select id="review-lesson">
+            </select>
+          </label>
+          <button id="review-refresh" class="secondary">
+            刷新复核看板
+          </button>
+        </div>
+        <p id="review-status" role="status" aria-live="polite">
+        </p>
+        <p id="review-empty" hidden>
+          请先在
+          <a data-view="teacher" href="?view=teacher">
+            老师备课
+          </a>
+          创建班级。
+        </p>
+      </section>
+      <div id="review-dashboard" hidden>
+        <section class="card review-overview">
+          <div class="review-card-title">
+            <h2>
+              班级练习进度
+            </h2>
+            <small>
+              完成率按已有提交的测试学员统计。
+            </small>
+          </div>
+          <div id="review-counts">
+          </div>
+          <ul id="review-students">
+          </ul>
+          <div id="review-reminder" hidden>
+            <button id="review-reminder-show" class="secondary">
+              生成家长提醒文案
+            </button>
+            <label id="review-reminder-result" hidden>
+              给家长的提醒
+              <textarea id="review-reminder-text" readonly>
+              </textarea>
+            </label>
+          </div>
+        </section>
+        <div class="review-columns">
+          <div>
+            <section class="card">
+              <div class="review-card-title">
+                <h2>
+                  待老师复核
+                </h2>
+                <small>
+                  听一听，再给一句鼓励
+                </small>
+              </div>
+              <div id="review-queue">
+              </div>
+            </section>
+            <section class="card">
+              <h2>
+                已复核
+              </h2>
+              <div id="review-recent">
+              </div>
+            </section>
+          </div>
+          <aside class="card insight-card">
+            <p class="eyebrow">
+              LOOKING AHEAD
+            </p>
+            <h2>
+              共性问题与下一课
+            </h2>
+            <div id="review-issues">
+            </div>
+            <div id="review-suggestion" hidden>
+              <h3 id="review-suggestion-title">
+              </h3>
+              <p id="review-suggestion-reason">
+              </p>
+              <p id="review-suggestion-goals">
+              </p>
+              <button id="review-next-lesson">
+                带入下节课备课
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+<script>
+const $ = id => document.getElementById(id);
+async function readResponse(response) {
+  const result = response.status === 204 ? null : await response.json();
+  if (!response.ok) throw Object.assign(new Error(result?.error?.message || '请求失败，请稍后再试。'), {status: response.status});
+  return result;
+}
+const api = async (path, method = 'GET', body) => {
+  const options = {method};
+  if (body !== undefined) {
+    options.headers = {'Content-Type': 'application/json'};
+    options.body = JSON.stringify(body);
+  }
+  return readResponse(await fetch('/api/v1' + path, options));
+};
+const stateLabels = {draft:'草稿', generated:'待发布', published:'已发布'};
+const kinds = {word:'单词', sentence:'句子', dialogue:'对话'};
+const list = value => value.split(/[,，\n]/).map(part => part.trim()).filter(Boolean);
+let lesson, studentLesson, classRows = [], activeView = 'teacher', busy = false;
+const views = ['teacher', 'student', 'review'];
+const outlineFields = [], itemFields = [];
+function status(message, failed = false) {
+  $('status').textContent = message;
+  $('status').classList.toggle('error', failed);
+}
+function add(parent, tag, text) {
+  const node = document.createElement(tag);
+  if (text !== undefined) node.textContent = text;
+  parent.append(node);
+  return node;
+}
+function field(parent, label, value, readOnly, type = 'text') {
+  const control = add(add(parent, 'label', label), type === 'textarea' ? 'textarea' : 'input');
+  if (type !== 'textarea') control.type = type;
+  control.value = value;
+  control.readOnly = readOnly;
+  return control;
+}
+function render(data) {
+  lesson = data;
+  $('detail').hidden = !data;
+  $('outline').replaceChildren();
+  $('items').replaceChildren();
+  $('quality').replaceChildren();
+  outlineFields.length = itemFields.length = 0;
+  if (!data) {
+    $('student-share-url').value = '';
+    $('student-entry').removeAttribute('href');
+    $('lesson-ppt').removeAttribute('href');
+    return;
+  }
+  const locked = data.status === 'published';
+  $('lesson-state').textContent = data.topic + ' · ' + stateLabels[data.status];
+  $('regenerate').hidden = locked;
+  $('save').hidden = $('publish').hidden = data.status !== 'generated';
+  const ppt = $('lesson-ppt');
+  ppt.hidden = !data.outline;
+  ppt.href = '/api/v1/courseware/pptx/' + data.id;
+  $('published-actions').hidden = !locked;
+  if (locked) {
+    const url = viewUrl('student', data.id);
+    $('student-entry').href = url;
+    $('student-share-url').value = url;
+    $('copy-student-link').textContent = '复制跟读链接';
+  }
+  for (const note of data.quality_notes) add($('quality'), 'li', note);
+  if (!data.outline) return;
+  add($('outline'), 'h3', '课堂大纲');
+  for (const section of data.outline.sections) {
+    const row = add($('outline'), 'div');
+    row.className = 'entry row';
+    outlineFields.push({
+      title: field(row, '环节', section.title, locked),
+      minutes: field(row, '分钟', section.minutes, locked, 'number'),
+      activity: field(row, '活动', section.activity, locked, 'textarea'),
+    });
+  }
+  add($('items'), 'h3', '跟读作业');
+  for (const item of data.items) {
+    const row = add($('items'), 'div');
+    row.className = 'entry row';
+    itemFields.push({
+      id: item.id,
+      text: field(row, kinds[item.kind] + (item.speaker ? ' · ' + item.speaker : ''), item.text, locked),
+      translation: field(row, '译文', item.translation, locked),
+    });
+    if (item.audio_asset_id) {
+      const audio = add(row, 'audio');
+      audio.controls = true;
+      audio.preload = 'none';
+      audio.src = '/api/v1/assets/' + item.audio_asset_id;
+    }
+  }
+}
+function choices(control, rows, label, placeholder) {
+  control.replaceChildren(new Option(placeholder, ''));
+  for (const row of rows) control.add(new Option(label(row), row.id));
+}
+async function classes(selectId) {
+  classRows = await api('/classes');
+  choices($('classes'), classRows, row => row.name, '请选择班级');
+  $('classes').value = selectId ?? (classRows[0]?.id || '');
+  await lessons();
+}
+async function lessons(selectId) {
+  const id = $('classes').value;
+  const rows = id ? await api('/lessons?class_id=' + id) : [];
+  choices($('lesson-list'), rows, row => row.topic + ' · ' + stateLabels[row.status], '请选择作业');
+  $('lesson-list').value = selectId ?? (rows[0]?.id || '');
+  await openLesson();
+}
+async function openLesson() {
+  const id = $('lesson-list').value;
+  render(id ? await api('/lessons/' + id) : null);
+}
+function viewUrl(view, lessonId) {
+  const url = new URL(location.pathname, location.origin);
+  if (view !== 'teacher') url.searchParams.set('view', view);
+  if (lessonId) url.searchParams.set('lesson', lessonId);
+  return url.href;
+}
+function updateViewUrl(view, lessonId) {
+  history.replaceState(null, '', viewUrl(view, lessonId));
+}
+async function switchView(view, lessonId) {
+  activeView = views.includes(view) ? view : 'teacher';
+  document.body.dataset.view = activeView;
+  const pages = {
+    teacher: ['老师工作台', '从备课到跟读'],
+    student: ['孩子的练习空间', '一起，勇敢开口'],
+    review: ['班级与课后反馈', '老师复核'],
+  };
+  $('page-context').textContent = pages[activeView][0];
+  $('page-title').textContent = pages[activeView][1];
+  cancelCapture();
+  for (const audio of document.querySelectorAll('main audio')) audio.pause();
+  for (const role of views) {
+    $(role + '-view').hidden = role !== activeView;
+    const link = $('view-' + role);
+    if (role === activeView) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+  updateViewUrl(activeView, lessonId);
+  if (activeView === 'student') await studentLessons(lessonId);
+  if (activeView === 'review') await reviewClasses(lessonId);
+}
+async function studentLessons(lessonId) {
+  const rows = (await api('/lessons')).filter(row => row.status === 'published');
+  const select = $('student-lesson');
+  const wanted = String(lessonId || select.value || '');
+  choices(select, rows, row => row.topic, '请选择作业');
+  select.value = rows.some(row => String(row.id) === wanted) ? wanted : (rows[0]?.id || '');
+  select.closest('label').hidden = rows.length === 0;
+  $('student-empty').hidden = rows.length > 0;
+  await openStudentLesson();
+}
+async function openStudentLesson() {
+  const id = $('student-lesson').value;
+  pausePracticeExamples();
+  $('practice').hidden = true;
+  studentLesson = id ? await api('/lessons/' + id) : null;
+  configurePractice(studentLesson);
+  updateViewUrl('student', id);
+  await loadPractice();
+}
+async function showTeacher(teacher) {
+  document.body.toggleAttribute('data-authenticated', Boolean(teacher));
+  $('account').hidden = $('workspace').hidden = !teacher;
+  $('login').hidden = !!teacher;
+  selectPracticeLearner(teacher?.id);
+  if (teacher) {
+    $('teacher').textContent = teacher.name;
+    await classes();
+    const query = new URLSearchParams(location.search);
+    await switchView(query.get('view'), query.get('lesson'));
+  } else {
+    document.body.removeAttribute('data-view');
+    $('page-context').textContent = '欢迎来到 Biboo';
+    $('page-title').textContent = '备好一堂课，陪伴每一次跟读';
+    $('courseware-form').reset();
+    $('target').reset();
+    $('new-class').reset();
+    selectCourseware(null);
+    studentLesson = null;
+    configurePractice(null);
+    $('student-lesson').replaceChildren();
+    $('review-class').replaceChildren();
+    $('review-lesson').replaceChildren();
+    renderReview(null);
+    render(null);
+  }
+}
+async function perform(action, pending = '正在处理…', report = status) {
+  if (busy) return;
+  busy = true;
+  report(pending);
+  const controls = [...document.querySelectorAll('input, textarea, button, select')];
+  const disabled = controls.map(control => control.disabled);
+  controls.forEach(control => control.disabled = true);
+  try { report(await action() || ''); }
+  catch (error) { report(error.message, true); }
+  finally {
+    controls.forEach((control, index) => control.disabled = disabled[index]);
+    busy = false;
+    updateCoursewareControls();
+    updatePracticeControls();
+  }
+}
+function submit(id, action) {
+  $(id).addEventListener('submit', event => {
+    event.preventDefault();
+    const fields = new FormData(event.currentTarget);
+    perform(() => action(fields));
+  });
+}
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[data-view]');
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  const id = new URL(link.href).searchParams.get('lesson');
+  perform(async () => {
+    await switchView(link.dataset.view, id);
+    window.scrollTo(0, 0);
+  }, '正在打开…');
+});
+$('student-lesson').onchange = () => perform(openStudentLesson, '正在读取作业…');
+$('copy-student-link').onclick = async () => {
+  const field = $('student-share-url');
+  try {
+    await navigator.clipboard.writeText(field.value);
+    $('copy-student-link').textContent = '已复制跟读链接';
+  } catch {
+    field.focus();
+    field.select();
+    $('copy-student-link').textContent = '链接已选中，请复制';
+  }
+};
+submit('login', async fields => {
+  const teacher = await api('/auth/login', 'POST', {invite_code: fields.get('invite_code')});
+  $('login').reset();
+  await showTeacher(teacher);
+  return '已登录。';
+});
+$('logout').onclick = () => perform(async () => {
+  await api('/auth/logout', 'POST');
+  await showTeacher(null);
+  return '已退出。';
+});
+submit('new-class', async fields => {
+  const row = await api('/classes', 'POST', {name: fields.get('name')});
+  $('new-class').reset();
+  await classes(row.id);
+  return '班级已创建。';
+});
+$('classes').onchange = () => perform(() => lessons());
+$('lesson-list').onchange = () => perform(openLesson);
+submit('target', async fields => {
+  if (!$('classes').value) throw new Error('请先选择一个班级。');
+  const target = Object.fromEntries(fields.entries());
+  for (const key of ['vocabulary', 'sound_focus']) target[key] = list(target[key]);
+  target.patterns = target.patterns.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+  target.duration_minutes = Number(target.duration_minutes);
+  target.class_id = Number($('classes').value);
+  const draft = await api('/lessons', 'POST', target);
+  await lessons(draft.id);
+  await api('/lessons/' + draft.id + '/generate', 'POST');
+  await lessons(draft.id);
+  $('lesson-output').scrollIntoView({behavior:'smooth', block:'start'});
+  return '已生成课堂大纲与跟读作业。';
+});
+$('regenerate').onclick = () => {
+  if (lesson.status === 'generated' && !confirm('重新生成会替换这份未发布的内容。继续吗？')) return;
+  perform(async () => {
+    await api('/lessons/' + lesson.id + '/generate', 'POST');
+    await lessons(lesson.id);
+    return '已生成。';
+  }, '正在生成大纲与作业…');
+};
+function editedContent() {
+  return {
+    revision: lesson.revision,
+    outline: outlineFields.map(row => ({title: row.title.value, minutes: Number(row.minutes.value), activity: row.activity.value})),
+    items: itemFields.map(row => ({id: row.id, text: row.text.value, translation: row.translation.value})),
+  };
+}
+$('save').onclick = () => perform(async () => {
+  render(await api('/lessons/' + lesson.id + '/content', 'PUT', editedContent()));
+  return '修改已保存。';
+});
+function hasUnsavedContent() {
+  const edited = editedContent();
+  const original = lesson.outline.sections;
+  return edited.outline.some((row, i) => Object.keys(row).some(key => row[key] !== original[i][key]))
+    || edited.items.some((row, i) => row.text !== lesson.items[i].text || row.translation !== lesson.items[i].translation);
+}
+$('lesson-ppt').onclick = event => {
+  if (!hasUnsavedContent()) return;
+  event.preventDefault();
+  status('请先保存修改，再下载本课 PPT。', true);
+};
+$('publish').onclick = () => {
+  if (hasUnsavedContent()) return status('请先保存修改，再确认发布。', true);
+  if (!practiceMockMode && !confirm('确认发布当前版本？发布时会生成示范音频，发布后内容将锁定。')) return;
+  perform(async () => {
+    await api('/lessons/' + lesson.id + '/publish', 'POST', {confirm: true, revision: lesson.revision});
+    await lessons(lesson.id);
+    return '已发布，可以打开孩子跟读。';
+  }, '正在生成示范音频并发布…');
+};
+
+const coursewareMime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+const maxCoursewareBytes = 10 * 1024 * 1024;
+const coursewareExample = [
+  '认识清辅音 th',
+  '',
+  '学习目标',
+  '听辨并朗读 think、three、thank。',
+  '词汇：think、three、thank',
+  '句型：I think there are three.',
+  '发音：/θ/',
+  '',
+  '发音讲解',
+  '舌尖轻放在上下牙齿之间，让气流通过。',
+  '先单独练习 th 的发音，再把它接到后面的音。',
+  '',
+  '课堂练习',
+  '听老师读 think、three、thank，每个词跟读两遍。',
+  '两人一组，轮流读词并找出每个词开头相同的音。',
+  '',
+  '离堂回顾',
+  '说出一个今天学到的 th 单词，并读给同桌听。',
+].join('\n');
+let coursewareFile, coursewareUrl;
+
+function reportCourseware(message, failed = false) {
+  $('courseware-status').textContent = message;
+  $('courseware-status').classList.toggle('error', failed);
+}
+function clearCoursewareResult() {
+  if (coursewareUrl) URL.revokeObjectURL(coursewareUrl);
+  coursewareUrl = null;
+  $('courseware-download').removeAttribute('href');
+  $('courseware-result').hidden = true;
+}
+function selectCourseware(file) {
+  clearCoursewareResult();
+  reportCourseware('');
+  coursewareFile = null;
+  if (file) {
+    if (!/\.(pptx|docx|pdf|txt|md)$/i.test(file.name)) {
+      reportCourseware('请选择 PPTX、DOCX、PDF、TXT 或 Markdown 文件。', true);
+    } else if (!file.size || file.size > maxCoursewareBytes) {
+      reportCourseware('请选择有内容、且不超过 10 MB 的材料。', true);
+    } else {
+      coursewareFile = file;
+    }
+  }
+  $('courseware-source').textContent = coursewareFile ? '已选择 ' + coursewareFile.name : '还未选择材料。';
+  updateCoursewareControls();
+  $('courseware-title').placeholder = coursewareFile ? coursewareFile.name.replace(/\.[^.]+$/, '') : '默认使用材料文件名';
+}
+function updateCoursewareControls() {
+  $('courseware-import').disabled = $('courseware-generate').disabled = busy || !coursewareFile;
+}
+function fillGoals(goals) {
+  const fields = $('target').elements;
+  fields.topic.value = goals.topic || '';
+  fields.vocabulary.value = (goals.vocabulary || []).join('\n');
+  fields.patterns.value = (goals.patterns || []).join('\n');
+  fields.sound_focus.value = (goals.sound_focus || []).join(', ');
+  if (!fields.age_band.value) fields.age_band.value = '7–9 岁';
+}
+function uploadCourseware(action, title) {
+  const query = new URLSearchParams({filename: coursewareFile.name, title});
+  return fetch('/api/v1/courseware/' + action + '?' + query, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/octet-stream'},
+    body: coursewareFile,
+  }).catch(() => { throw new Error('暂时连不上 Biboo，请刷新后再试。'); });
+}
+function coursewareFilename(response, title) {
+  const disposition = response.headers.get('Content-Disposition') || '';
+  const utf8Name = disposition.match(/filename\*=UTF-8''([^;]+)/i);
+  if (utf8Name) {
+    try { return decodeURIComponent(utf8Name[1]); } catch {}
+  }
+  return (title || coursewareFile.name.replace(/\.[^.]+$/, '')).replace(/[\\/:*?"<>|]/g, '_') + '.pptx';
+}
+$('courseware-file').onchange = event => selectCourseware(event.currentTarget.files[0]);
+$('courseware-example').onclick = () => {
+  $('courseware-file').value = '';
+  $('courseware-title').value = '';
+  selectCourseware(new File([coursewareExample], '认识清辅音 th.txt', {type:'text/plain'}));
+};
+$('courseware-title').oninput = () => {
+  clearCoursewareResult();
+  reportCourseware('');
+};
+$('courseware-form').onsubmit = event => {
+  event.preventDefault();
+  if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
+  perform(async () => {
+    const response = await uploadCourseware('goals', $('courseware-title').value.trim());
+    fillGoals(await readResponse(response));
+    const step = $('classes').value ? $('target') : $('new-class');
+    step.scrollIntoView({behavior:'smooth', block:'start'});
+    return '教学目标已带入。请选择班级，核对目标后生成课件和跟读作业。';
+  }, '正在从材料提取教学目标…', reportCourseware);
+};
+$('courseware-generate').onclick = () => {
+  if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
+  const title = $('courseware-title').value.trim();
+  perform(async () => {
+    clearCoursewareResult();
+    const response = await uploadCourseware('pptx', title);
+    if (!response.ok) {
+      try { await readResponse(response); }
+      catch (error) {
+        if (error instanceof SyntaxError) throw new Error('课件生成失败，请稍后再试。');
+        throw error;
+      }
+    }
+    if (response.headers.get('Content-Type')?.split(';')[0] !== coursewareMime) {
+      throw new Error('暂时无法读取课件，请重新生成。');
+    }
+    coursewareUrl = URL.createObjectURL(await response.blob());
+    const link = $('courseware-download');
+    link.href = coursewareUrl;
+    link.download = coursewareFilename(response, title);
+    $('courseware-result').hidden = false;
+    const slides = Number(response.headers.get('X-Slide-Count'));
+    return slides > 0 ? '已生成 ' + slides + ' 页课件，可下载编辑。' : '已生成课件，可下载编辑。';
+  }, '正在读取材料并生成 PPT…', reportCourseware);
+};
+
+const practiceDecisions = {good:'读得好', practice:'再练一轮', teacher_review:'等老师听'};
+const teacherVerdicts = {good:'读得好', practice:'建议继续巩固'};
+const maxRecordingSeconds = 30;
+const maxAudioBytes = 2_000_000;
+const sampleRate = 16000;
+let learnerId, learnerStorageKey, practiceAttempts = [], practiceLoaded = false;
+let capture = null, pendingAudio = null, previewUrl = null;
+let practiceMockMode = false;
+const practiceSampleButtons = $('practice-samples').querySelectorAll('button');
+
+function practiceStatus(message, failed = false) {
+  $('practice-status').textContent = message;
+  $('practice-status').classList.toggle('error', failed);
+}
+function randomId() {
+  if (crypto.randomUUID) return crypto.randomUUID();
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  bytes[6] = (bytes[6] & 15) | 64;
+  bytes[8] = (bytes[8] & 63) | 128;
+  const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+  return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-');
+}
+function selectPracticeLearner(teacherId) {
+  learnerStorageKey = teacherId == null ? null : 'biboo-demo-learner-' + teacherId;
+  learnerId = null;
+  if (!learnerStorageKey) return;
+  try { learnerId = localStorage.getItem(learnerStorageKey); } catch {}
+  if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(learnerId || '')) newPracticeLearner();
+}
+function newPracticeLearner() {
+  learnerId = randomId();
+  try { localStorage.setItem(learnerStorageKey, learnerId); } catch {}
+}
+function practiceItem() {
+  const selected = $('practice-item').value;
+  return studentLesson?.items.find(item => String(item.id) === selected);
+}
+function practiceUrl(item) {
+  return '/practice/items/' + item.id + '/attempts?learner_id=' + encodeURIComponent(learnerId);
+}
+function clearPendingAudio() {
+  pendingAudio = null;
+  if (previewUrl) URL.revokeObjectURL(previewUrl);
+  previewUrl = null;
+  const preview = $('practice-preview');
+  preview.removeAttribute('src');
+  preview.load();
+  preview.hidden = true;
+  $('practice-file').value = '';
+}
+function cancelCapture() {
+  if (!capture) return;
+  const current = capture;
+  capture = null;
+  clearTimeout(current.timer);
+  if (current.recorder.state !== 'inactive') current.recorder.stop();
+  current.stream.getTracks().forEach(track => track.stop());
+  current.onEnded?.();
+}
+function canRecordAudio() {
+  return Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+}
+function resetPractice() {
+  cancelCapture();
+  pausePracticeExamples();
+  clearPendingAudio();
+  practiceAttempts = [];
+  practiceLoaded = false;
+  $('practice-drill-mode').checked = false;
+  renderPractice();
+}
+function configurePractice(data) {
+  const items = data?.status === 'published' ? data.items : [];
+  const previous = $('practice-item').value;
+  choices($('practice-item'), items, item => kinds[item.kind] + ' · ' + item.text, '请选择练习');
+  $('practice-item').value = items.some(item => String(item.id) === previous) ? previous : (items[0]?.id || '');
+  $('practice').hidden = items.length === 0;
+  practiceStatus('');
+  resetPractice();
+}
+function pausePracticeExamples() {
+  $('practice-example').pause();
+  $('practice-drill-example').pause();
+}
+function setPracticeAudioSource(audio, source) {
+  if (audio.getAttribute('src') === source) return;
+  if (source) audio.src = source;
+  else {
+    audio.removeAttribute('src');
+    audio.load();
+  }
+}
+const practiceAudioError = '示范音频暂时无法播放，请再试一次。';
+async function playPracticeExample(audio) {
+  const source = audio.getAttribute('src');
+  if (!source || capture) return;
+  for (const audio of $('practice').querySelectorAll('audio')) audio.pause();
+  if ($('practice-status').textContent === practiceAudioError) practiceStatus('');
+  if (audio.error) audio.load();
+  audio.currentTime = 0;
+  try {
+    await audio.play();
+  } catch (error) {
+    if (error.name !== 'AbortError' && activeView === 'student' && audio.getAttribute('src') === source) {
+      practiceStatus(practiceAudioError, true);
+    }
+  }
+}
+function renderPractice() {
+  const item = practiceItem();
+  const latest = practiceAttempts.at(-1);
+  const drill = latest?.decision === 'practice' ? latest.drill : null;
+  $('practice-original').hidden = !item;
+  $('practice-reference').textContent = item?.text || '';
+  const example = $('practice-example');
+  const demoSource = practiceMockMode && item ? '/api/v1/practice/items/' + item.id + '/demo-audio' : null;
+  const assetSource = !practiceMockMode && item?.audio_asset_id ? '/api/v1/assets/' + item.audio_asset_id : null;
+  $('practice-speak').hidden = !demoSource;
+  example.hidden = !assetSource;
+  setPracticeAudioSource(example, demoSource || assetSource);
+  $('practice-drill').hidden = !drill;
+  $('practice-drill-text').textContent = drill?.text || '';
+  const drillSource = demoSource && drill ? demoSource + '?drill_attempt_id=' + latest.id : null;
+  $('practice-drill-speak').hidden = !drillSource;
+  setPracticeAudioSource($('practice-drill-example'), drillSource);
+  if (!drill) $('practice-drill-mode').checked = false;
+  $('practice-empty').hidden = practiceAttempts.length > 0;
+  $('practice-empty').textContent = practiceLoaded ? '还没有跟读记录。' : '选择练习后可查看跟读记录。';
+  const result = $('practice-latest');
+  const teacher = latest?.teacher_feedback;
+  result.hidden = !latest;
+  $('practice-result-label').textContent = teacher ? '老师已复核 · ' + teacherVerdicts[teacher.verdict] : (practiceDecisions[latest?.decision] || '');
+  $('practice-result-feedback').textContent = teacher
+    ? (teacher.note || '老师听过这段录音了。')
+    : (latest?.feedback || '');
+  const teacherDetails = $('practice-teacher-feedback');
+  teacherDetails.replaceChildren();
+  if (teacher?.focus) add(teacherDetails, 'p', '练习重点 · ' + teacher.focus);
+  playback(teacherDetails, teacher?.audio_url, '听老师语音反馈');
+  const reviewLink = $('practice-review-entry');
+  reviewLink.hidden = latest?.decision !== 'teacher_review' || Boolean(teacher);
+  if (!reviewLink.hidden) reviewLink.href = viewUrl('review', studentLesson.id);
+  const history = $('practice-history');
+  history.replaceChildren();
+  for (const attempt of practiceAttempts) {
+    const row = add(history, 'li');
+    const round = attempt.round === 0 ? '原题' : '第 ' + attempt.round + ' 轮加练';
+    add(row, 'strong', round + ' · ' + (practiceDecisions[attempt.decision] || '已评测'));
+    add(row, 'p', attempt.reference).lang = 'en';
+    add(row, 'p', attempt.feedback);
+  }
+  updatePracticeControls();
+}
+function updatePracticeControls() {
+  const item = practiceItem();
+  const latest = practiceAttempts.at(-1);
+  const closed = latest?.decision === 'good' || latest?.decision === 'teacher_review';
+  const canUpload = Boolean(item && practiceLoaded && !closed);
+  const recording = Boolean(capture);
+  $('practice-speak').disabled = busy || recording;
+  $('practice-drill-speak').disabled = busy || recording;
+  $('practice-upload').hidden = !canUpload;
+  $('practice-record').hidden = recording || !canRecordAudio();
+  $('practice-record').disabled = busy || !canUpload;
+  $('practice-stop').hidden = !recording;
+  $('practice-stop').disabled = busy || !recording;
+  $('practice-file').disabled = busy || recording || !canUpload;
+  $('practice-samples').hidden = !practiceMockMode || !canUpload;
+  practiceSampleButtons.forEach(button => button.disabled = busy || recording || !canUpload);
+  $('practice-send').disabled = busy || recording || !canUpload || !pendingAudio;
+  $('practice-drill-mode').disabled = busy || recording;
+  $('practice-learner').disabled = busy || recording;
+  $('practice-item').disabled = busy || recording;
+  $('practice-refresh').disabled = busy || recording || !item;
+}
+async function loadPractice() {
+  const item = practiceItem();
+  const learner = learnerId;
+  if (!item || !learner) return;
+  const attempts = await api(practiceUrl(item));
+  if (learnerId !== learner || practiceItem()?.id !== item.id) return;
+  practiceAttempts = attempts;
+  practiceLoaded = true;
+  $('practice-drill-mode').checked = Boolean(attempts.at(-1)?.drill);
+  renderPractice();
+}
+
+function pcmWav(buffer) {
+  const frames = buffer.length;
+  if (!frames || frames > maxRecordingSeconds * sampleRate) throw new Error('请选择 30 秒以内的有效录音。');
+  const bytes = new ArrayBuffer(44 + frames * 2);
+  const view = new DataView(bytes);
+  function tag(offset, text) {
+    for (let i = 0; i < text.length; i++) view.setUint8(offset + i, text.charCodeAt(i));
+  }
+  tag(0, 'RIFF');
+  view.setUint32(4, 36 + frames * 2, true);
+  tag(8, 'WAVE');
+  tag(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  tag(36, 'data');
+  view.setUint32(40, frames * 2, true);
+  const channels = Array.from({length: buffer.numberOfChannels}, (_, channel) => buffer.getChannelData(channel));
+  for (let i = 0; i < frames; i++) {
+    let sample = 0;
+    for (const channel of channels) sample += channel[i];
+    sample = Math.max(-1, Math.min(1, sample / channels.length));
+    view.setInt16(44 + i * 2, Math.round(sample * (sample < 0 ? 32768 : 32767)), true);
+  }
+  return new Blob([bytes], {type: 'audio/wav'});
+}
+async function prepareWav(blob, nativeUpload) {
+  if (!blob.size || blob.size > maxAudioBytes) throw new Error('请选择 2 MB 以内的有效录音。');
+  const bytes = await blob.arrayBuffer();
+  const signature = new Uint8Array(bytes, 0, Math.min(12, bytes.byteLength));
+  const wav = String.fromCharCode(...signature.slice(0, 4)) === 'RIFF'
+    && String.fromCharCode(...signature.slice(8, 12)) === 'WAVE';
+  if (nativeUpload && !wav) throw new Error('请选择有效的 WAV 文件。');
+  const OfflineContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  let decoded;
+  if (OfflineContext) {
+    try { decoded = await new OfflineContext(1, 1, sampleRate).decodeAudioData(bytes.slice(0)); }
+    catch {}
+  }
+  if (decoded?.sampleRate === sampleRate) return pcmWav(decoded);
+  if (wav) return new Blob([bytes], {type: 'audio/wav'});
+  throw new Error('浏览器无法转换这段录音。请上传 16 kHz 单声道 16 位 PCM WAV 文件。');
+}
+async function usePracticeAudio(blob, nativeUpload) {
+  clearPendingAudio();
+  previewPracticeWav(await prepareWav(blob, nativeUpload));
+}
+function previewPracticeWav(wav) {
+  pendingAudio = {wav, key: randomId(), drill: $('practice-drill-mode').checked};
+  previewUrl = URL.createObjectURL(wav);
+  const preview = $('practice-preview');
+  preview.src = previewUrl;
+  preview.hidden = false;
+}
+function practiceSampleWav(peak) {
+  const samples = new Float32Array(sampleRate);
+  for (let frame = 0; frame < samples.length; frame++) {
+    samples[frame] = peak / 32767 * Math.sin(2 * Math.PI * 440 * frame / sampleRate);
+  }
+  return pcmWav({length: samples.length, numberOfChannels: 1, getChannelData: () => samples});
+}
+async function startRecording(onAudio, onError, onEnded) {
+  cancelCapture();
+  const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+  try {
+    const recorder = new MediaRecorder(stream);
+    const current = {stream, recorder, chunks: [], timer: null, onEnded};
+    recorder.ondataavailable = event => {
+      if (event.data.size) current.chunks.push(event.data);
+    };
+    recorder.onstop = () => {
+      if (capture !== current) return;
+      cancelCapture();
+      onAudio(new Blob(current.chunks, {type: recorder.mimeType}));
+    };
+    recorder.onerror = () => {
+      if (capture !== current) return;
+      cancelCapture();
+      onError();
+    };
+    recorder.start();
+    capture = current;
+    current.timer = setTimeout(stopRecording, maxRecordingSeconds * 1000 - 500);
+  } catch (error) {
+    stream.getTracks().forEach(track => track.stop());
+    throw error;
+  }
+}
+function stopRecording() {
+  if (capture?.recorder.state === 'recording') capture.recorder.stop();
+}
+async function startPracticeRecording() {
+  pausePracticeExamples();
+  await startRecording(
+    blob => perform(async () => {
+      await usePracticeAudio(blob, false);
+      return '录音已就绪，可以试听或提交。';
+    }, '正在处理录音…', practiceStatus),
+    () => practiceStatus('录音失败，请重试或上传 WAV 文件。', true),
+    updatePracticeControls,
+  );
+  return '正在录音，读完后点「结束录音」。';
+}
+
+$('practice-speak').onclick = () => playPracticeExample($('practice-example'));
+$('practice-drill-speak').onclick = () => playPracticeExample($('practice-drill-example'));
+$('practice-item').onchange = () => {
+  resetPractice();
+  perform(loadPractice, '正在读取跟读记录…', practiceStatus);
+};
+$('practice-learner').onclick = () => perform(async () => {
+  newPracticeLearner();
+  resetPractice();
+  await loadPractice();
+  return '已换一个测试学员。';
+}, '正在切换学员…', practiceStatus);
+$('practice-refresh').onclick = () => perform(loadPractice, '正在读取跟读记录…', practiceStatus);
+$('practice-drill-mode').onchange = () => {
+  clearPendingAudio();
+  updatePracticeControls();
+  practiceStatus($('practice-drill-mode').checked ? '请朗读上方加练内容。' : '请朗读原题。');
+};
+$('practice-record').onclick = () => perform(async () => {
+  clearPendingAudio();
+  return startPracticeRecording();
+}, '正在请求麦克风权限…', practiceStatus);
+$('practice-stop').onclick = stopRecording;
+$('practice-file').onchange = event => {
+  const file = event.currentTarget.files[0];
+  if (!file) return;
+  perform(async () => {
+    await usePracticeAudio(file, true);
+    return '录音已就绪，可以试听或提交。';
+  }, '正在处理录音…', practiceStatus);
+};
+practiceSampleButtons.forEach(button => {
+  button.onclick = () => perform(() => {
+    clearPendingAudio();
+    previewPracticeWav(practiceSampleWav(Number(button.dataset.peak)));
+    return '已选中「' + button.textContent + '」，点「提交跟读」查看结果。';
+  }, '正在准备模拟录音…', practiceStatus);
+});
+$('practice-send').onclick = () => perform(async () => {
+  const item = practiceItem();
+  if (!item || !pendingAudio) return;
+  const {wav, key, drill} = pendingAudio;
+  const response = await fetch('/api/v1' + practiceUrl(item) + '&drill=' + drill, {
+    method: 'POST',
+    headers: {'Content-Type': 'audio/wav', 'Idempotency-Key': key},
+    body: wav,
+  });
+  const attempt = await readResponse(response);
+  if (!practiceAttempts.some(previous => previous.id === attempt.id)) practiceAttempts.push(attempt);
+  clearPendingAudio();
+  $('practice-drill-mode').checked = Boolean(attempt.drill);
+  renderPractice();
+  return '跟读结果已更新。';
+}, '正在评测跟读…', practiceStatus);
+
+const studentProgressLabels = {completed:'已完成', pending_review:'等老师听', in_progress:'练习中'};
+let currentReview;
+function reviewStatus(message, failed = false) {
+  $('review-status').textContent = message;
+  $('review-status').classList.toggle('error', failed);
+}
+async function reviewClasses(lessonId) {
+  const classSelect = $('review-class');
+  let selectedClass = classSelect.value || $('classes').value || classRows[0]?.id || '';
+  if (lessonId) {
+    const targetLesson = (await api('/lessons')).find(row => String(row.id) === String(lessonId));
+    if (targetLesson) selectedClass = targetLesson.class_id;
+  }
+  choices(classSelect, classRows, row => row.name, '请选择班级');
+  classSelect.value = selectedClass;
+  await reviewLessons(lessonId);
+}
+async function reviewLessons(lessonId) {
+  const classId = $('review-class').value;
+  const select = $('review-lesson');
+  const wanted = String(lessonId || select.value || '');
+  const rows = classId ? (await api('/lessons?class_id=' + classId)).filter(row => row.status === 'published') : [];
+  choices(select, rows, row => row.topic, '全部作业');
+  select.value = rows.some(row => String(row.id) === wanted) ? wanted : '';
+  await loadReview();
+}
+async function loadReview() {
+  cancelCapture();
+  const classId = $('review-class').value;
+  const lessonId = $('review-lesson').value;
+  $('review-empty').hidden = Boolean(classId);
+  updateViewUrl('review', lessonId);
+  const query = lessonId ? '?lesson_id=' + lessonId : '';
+  renderReview(classId ? await api('/review/classes/' + classId + '/dashboard' + query) : null);
+}
+function playback(container, src, label) {
+  if (!src) return;
+  add(container, 'p', label);
+  const audio = add(container, 'audio');
+  audio.setAttribute('aria-label', label);
+  audio.controls = true;
+  audio.preload = 'none';
+  audio.src = src;
+}
+function renderReview(data) {
+  currentReview = data;
+  $('review-dashboard').hidden = !data;
+  for (const id of ['review-counts', 'review-students', 'review-queue', 'review-recent', 'review-issues']) $(id).replaceChildren();
+  $('review-suggestion').hidden = !data?.suggestion;
+  $('review-reminder').hidden = !data?.reminder;
+  $('review-reminder-result').hidden = true;
+  $('review-reminder-text').value = '';
+  if (!data) return;
+  const metrics = {learners:'测试学员', completed:'已完成', pending_review:'待复核', reviewed:'已复核', attempts:'跟读记录'};
+  function metric(value, label) {
+    const card = add($('review-counts'), 'div');
+    card.className = 'metric';
+    add(card, 'strong', value);
+    add(card, 'span', label);
+  }
+  for (const [key, label] of Object.entries(metrics)) metric(data.counts[key], label);
+  const {completed, learners} = data.counts;
+  metric(learners ? Math.round(100 * completed / learners) + '%' : '—', '作业完成率');
+  if (!data.students.length) add($('review-students'), 'li', '本次筛选还没有学员记录。');
+  for (const student of data.students) {
+    const progress = student.completed_items + '/' + student.total_items + ' 题完成';
+    add($('review-students'), 'li', [student.label, progress, studentProgressLabels[student.status]].filter(Boolean).join(' · '));
+  }
+  if (!data.queue.length) add($('review-queue'), 'p', '暂时没有待复核的录音。');
+  for (const attempt of data.queue) reviewEntry($('review-queue'), attempt, true);
+  if (!data.recent_reviews.length) add($('review-recent'), 'p', '暂时没有已复核的记录。');
+  for (const attempt of data.recent_reviews) reviewEntry($('review-recent'), attempt, false);
+  if (!data.common_issues.length) add($('review-issues'), 'p', '目前没有可归纳的共性问题。');
+  for (const issue of data.common_issues) add($('review-issues'), 'p', issue.label + ' · ' + issue.learner_count + ' 位学员');
+  if (data.suggestion) {
+    $('review-suggestion-title').textContent = '下节课建议 · ' + data.suggestion.topic;
+    $('review-suggestion-reason').textContent = data.suggestion.reason;
+    $('review-suggestion-goals').textContent = [data.suggestion.vocabulary, data.suggestion.patterns, data.suggestion.sound_focus]
+      .flat().filter(Boolean).join(' · ');
+  }
+}
+function reviewEntry(parent, attempt, pending) {
+  const row = add(parent, 'article');
+  row.className = 'entry review-entry';
+  add(row, 'h3', attempt.learner_label + ' · ' + attempt.lesson_title);
+  add(row, 'p', attempt.reference).lang = 'en';
+  const comparison = add(row, 'div');
+  comparison.className = 'review-comparison';
+  const automatic = add(comparison, 'div');
+  automatic.className = 'automatic-assessment';
+  add(automatic, 'span', practiceMockMode ? '自动评测 · 模拟' : '自动评测').className = 'assessment-label';
+  add(automatic, 'strong', practiceDecisions[attempt.decision]);
+  if (attempt.reason) add(automatic, 'p', attempt.reason);
+  if (attempt.feedback) add(automatic, 'p', attempt.feedback);
+  playback(automatic, attempt.audio_url, '听原录音');
+  const teacherPanel = add(comparison, 'div');
+  teacherPanel.className = 'teacher-assessment';
+  add(teacherPanel, 'span', '老师确认').className = 'assessment-label';
+  if (!pending) {
+    const review = attempt.review;
+    add(teacherPanel, 'strong', teacherVerdicts[review.verdict]);
+    if (review.note) add(teacherPanel, 'p', review.note);
+    if (review.focus) add(teacherPanel, 'p', '练习重点 · ' + review.focus);
+    playback(teacherPanel, review.audio_url, '老师语音反馈');
+  }
+  const form = add(pending ? teacherPanel : row, pending ? 'form' : 'details');
+  if (!pending) add(form, 'summary', '修改复核或补录语音');
+  const fields = pending ? form : add(form, 'form');
+  const verdict = add(add(fields, 'label', '老师判定'), 'select');
+  verdict.add(new Option('建议继续巩固', 'practice'));
+  verdict.add(new Option('读得好', 'good'));
+  verdict.value = attempt.review?.verdict || 'practice';
+  const note = field(fields, '给孩子的反馈（可选）', attempt.review?.note || '', false, 'textarea');
+  note.maxLength = 600;
+  const focus = field(fields, '建议加练的内容（可选）', attempt.review?.focus || '', false);
+  focus.maxLength = 60;
+  verdict.onchange = () => focus.closest('label').hidden = verdict.value === 'good';
+  verdict.onchange();
+  const voiceStatus = add(fields, 'p');
+  voiceStatus.setAttribute('role', 'status');
+  const record = add(fields, 'button', '录制语音点评');
+  record.type = 'button';
+  record.className = 'secondary';
+  record.hidden = !canRecordAudio();
+  const stop = add(fields, 'button', '结束点评录音');
+  stop.type = 'button';
+  stop.className = 'secondary';
+  stop.hidden = true;
+  const file = add(add(fields, 'label', '或上传语音点评（可选 WAV）'), 'input');
+  file.type = 'file';
+  file.accept = '.wav,audio/wav,audio/x-wav';
+  let recordedVoice = null, recording = false, processing = false;
+  record.onclick = () => perform(async () => {
+    if (processing) return;
+    for (const audio of $('review-view').querySelectorAll('audio')) audio.pause();
+    try {
+      await startRecording(async blob => {
+        processing = true;
+        voiceStatus.textContent = '正在处理点评录音…';
+        try {
+          recordedVoice = await prepareWav(blob, false);
+          voiceStatus.textContent = '语音已就绪，点「保存复核」一并提交。';
+        } catch (error) {
+          voiceStatus.textContent = error.message;
+        } finally {
+          processing = false;
+        }
+      }, () => {
+        voiceStatus.textContent = '录音失败，请重试或上传 WAV。';
+      }, () => {
+        recording = false;
+        record.hidden = false;
+        stop.hidden = true;
+        voiceStatus.textContent = '';
+      });
+    } catch {
+      voiceStatus.textContent = '无法打开麦克风。请检查权限，或上传 WAV。';
+      return;
+    }
+    recordedVoice = null;
+    file.value = '';
+    recording = true;
+    record.hidden = true;
+    stop.hidden = false;
+    voiceStatus.textContent = '正在录音，最长 30 秒。';
+  }, '正在请求麦克风权限…', reviewStatus);
+  stop.onclick = stopRecording;
+  add(fields, 'button', '保存复核');
+  const feedbackStatus = add(fields, 'p');
+  feedbackStatus.setAttribute('role', 'status');
+  fields.onsubmit = event => {
+    event.preventDefault();
+    if (recording || processing) {
+      voiceStatus.textContent = recording ? '请先结束点评录音。' : '请等录音处理完成。';
+      return;
+    }
+    const payload = {verdict:verdict.value, note:note.value.trim(), focus:verdict.value === 'practice' ? focus.value.trim() : ''};
+    const fileUpload = file.files[0];
+    const report = (message, failed = false) => {
+      feedbackStatus.textContent = message;
+      reviewStatus(message, failed);
+    };
+    perform(async () => {
+      const wav = fileUpload ? await prepareWav(fileUpload, true) : recordedVoice;
+      await api('/review/attempts/' + attempt.id, 'PUT', payload);
+      if (wav) {
+        try {
+          await readResponse(await fetch('/api/v1/review/attempts/' + attempt.id + '/feedback-audio', {
+            method:'PUT', headers:{'Content-Type':'audio/wav'}, body:wav,
+          }));
+        } catch {
+          await loadReview();
+          throw new Error('文字复核已保存。语音上传失败，可在「已复核」里补录。');
+        }
+      }
+      await loadReview();
+      return '复核已保存，切回孩子跟读可看到老师反馈。';
+    }, '正在保存复核…', report);
+  };
+}
+$('review-reminder-show').onclick = () => {
+  $('review-reminder-text').value = currentReview.reminder;
+  $('review-reminder-result').hidden = false;
+  $('review-reminder-text').focus();
+  $('review-reminder-text').select();
+};
+$('review-class').onchange = () => perform(() => reviewLessons(), '正在读取复核看板…', reviewStatus);
+$('review-lesson').onchange = () => perform(loadReview, '正在读取复核看板…', reviewStatus);
+$('review-refresh').onclick = () => perform(loadReview, '正在读取复核看板…', reviewStatus);
+$('review-next-lesson').onclick = () => perform(async () => {
+  if (!currentReview?.suggestion) return;
+  const {suggestion, class_id} = currentReview;
+  if ($('classes').value !== String(class_id)) await classes(class_id);
+  fillGoals(suggestion);
+  await switchView('teacher');
+  $('target').scrollIntoView({behavior:'smooth', block:'start'});
+  return '下节课的目标已带入备课。';
+});
+
+(async () => {
+  try {
+    const health = await api('/health');
+    practiceMockMode = health.mode === 'mock';
+    if (health.mode !== 'real') {
+      $('mode').hidden = false;
+      $('mode').textContent = health.mode === 'mock'
+        ? '演示模式。可用预设录音测试跟读结果，示范使用本机英文语音。'
+        : '跟读作业的真实模型凭证未配齐。';
+    }
+    try { await showTeacher(await api('/auth/me')); }
+    catch (error) { if (error.status === 401) await showTeacher(null); else throw error; }
+  } catch (error) { status(error.message, true); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# Local credentials and environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+
+# Runtime data, recordings and generated assets
+data/
+recordings/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.log
+
+# Frontend build output
+node_modules/
+.next/
+dist/
