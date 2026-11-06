@@ -553,15 +553,26 @@ input::file-selector-button {
   overflow-wrap:anywhere;
 }
 #courseware-title {
-  margin-bottom:19px;
+  margin-bottom:15px;
+}
+#courseware-style-hint {
+  display:block;
+  margin:8px 0 19px;
+  line-height:1.65;
+  font-size:12px;
+  color:#6c6079;
+}
+#lesson-ppt-style-field {
+  max-width:330px;
+  margin:15px 0;
 }
 #courseware-generate {
-  font-size:12px;
-  min-height:36px;
-  padding:7px 9px;
-  background:transparent;
-  border:0;
-  color:#6a6077;
+  font-size:13px;
+  min-height:40px;
+  padding:9px 14px;
+  background:#29252f;
+  border:1px solid #29252f;
+  color:#fff;
 }
 #courseware-form .actions {
   gap:8px;
@@ -1540,9 +1551,8 @@ body:not([data-authenticated]) #status {
   }
   #courseware-generate {
     width:100%;
-    justify-content:flex-start;
-    padding-left:0!important;
-    min-height:26px;
+    justify-content:center;
+    min-height:44px;
   }
   .goal-pair {
     grid-template-columns:1fr;
@@ -2077,7 +2087,20 @@ body:not([data-authenticated]) #status {
               本课主题（可选）
               <input id="courseware-title" maxlength="100" placeholder="默认使用材料文件名">
             </label>
+            <label for="courseware-style">
+              课堂 PPT 风格
+              <select id="courseware-style" aria-describedby="courseware-style-hint">
+                <option value="children" selected>儿童互动（6–10岁）</option>
+                <option value="standard">文字整理</option>
+              </select>
+            </label>
+            <small id="courseware-style-hint">
+              卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。本课 PPT 下载也使用这个风格。
+            </small>
             <div class="actions">
+              <button type="button" id="courseware-generate" disabled>
+                生成儿童互动 PPT
+              </button>
               <button id="courseware-import" disabled>
                 <svg aria-hidden="true">
                   <use href="#icon-spark"/>
@@ -2086,9 +2109,6 @@ body:not([data-authenticated]) #status {
               </button>
               <button type="button" id="courseware-example" class="secondary">
                 用示例材料试一试
-              </button>
-              <button type="button" id="courseware-generate" class="secondary" disabled>
-                仅生成 PPT ↗
               </button>
             </div>
           </form>
@@ -2201,7 +2221,7 @@ body:not([data-authenticated]) #status {
                 带进课堂的 PPT
               </strong>
               <p>
-                教学目标和课堂活动，整理成可以继续编辑的课件。
+                用卡通、短句和课堂活动准备一份可以继续编辑的课件。
               </p>
             </div>
           </div>
@@ -2252,6 +2272,13 @@ body:not([data-authenticated]) #status {
           </p>
           <ul id="quality">
           </ul>
+          <label id="lesson-ppt-style-field" for="lesson-ppt-style" hidden>
+            本课 PPT 风格
+            <select id="lesson-ppt-style">
+              <option value="children" selected>儿童互动（6–10岁）</option>
+              <option value="standard">文字整理</option>
+            </select>
+          </label>
           <div class="actions">
             <button class="secondary" id="regenerate">
               生成 / 重新生成
@@ -2645,9 +2672,7 @@ function render(data) {
   $('lesson-state').textContent = data.topic + ' · ' + stateLabels[data.status];
   $('regenerate').hidden = locked;
   $('save').hidden = $('publish').hidden = data.status !== 'generated';
-  const ppt = $('lesson-ppt');
-  ppt.hidden = !data.outline;
-  ppt.href = '/api/v1/courseware/pptx/' + data.id;
+  updateLessonPptLink();
   $('published-actions').hidden = !locked;
   if (locked) {
     const url = viewUrl('student', data.id);
@@ -2954,6 +2979,21 @@ function selectCourseware(file) {
 function updateCoursewareControls() {
   $('courseware-import').disabled = $('courseware-generate').disabled = busy || !coursewareFile;
 }
+function selectedCoursewareStyle() {
+  return $('courseware-style').value === 'standard' ? 'standard' : 'children';
+}
+function updateLessonPptLink() {
+  const ppt = $('lesson-ppt');
+  ppt.hidden = !lesson?.outline;
+  $('lesson-ppt-style-field').hidden = !lesson?.outline;
+  if (!lesson) {
+    ppt.removeAttribute('href');
+    return;
+  }
+  ppt.href = '/api/v1/courseware/pptx/' + lesson.id + '?style=' + selectedCoursewareStyle();
+  ppt.textContent = selectedCoursewareStyle() === 'children' ? '下载本课儿童互动 PPT' : '下载本课文字 PPT';
+  ppt.title = selectedCoursewareStyle() === 'children' ? '放映时先回答问题，再翻页揭晓；教学提示在备注里。' : '';
+}
 function fillGoals(goals) {
   const fields = $('target').elements;
   fields.topic.value = goals.topic || '';
@@ -2964,6 +3004,7 @@ function fillGoals(goals) {
 }
 function uploadCourseware(action, title) {
   const query = new URLSearchParams({filename: coursewareFile.name, title});
+  if (action === 'pptx') query.set('style', selectedCoursewareStyle());
   return fetch('/api/v1/courseware/' + action + '?' + query, {
     method: 'POST',
     headers: {'Content-Type': 'application/octet-stream'},
@@ -2988,6 +3029,20 @@ $('courseware-title').oninput = () => {
   clearCoursewareResult();
   reportCourseware('');
 };
+function selectCoursewareStyle(style) {
+  const value = style === 'standard' ? 'standard' : 'children';
+  $('courseware-style').value = $('lesson-ppt-style').value = value;
+  clearCoursewareResult();
+  reportCourseware('');
+  const children = selectedCoursewareStyle() === 'children';
+  $('courseware-generate').textContent = children ? '生成儿童互动 PPT' : '生成文字 PPT';
+  $('courseware-style-hint').textContent = children
+    ? '卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。本课 PPT 下载也使用这个风格。'
+    : '提取材料文字，按统一版式分页；原图和动画不保留。本课 PPT 下载也使用这个风格。';
+  updateLessonPptLink();
+}
+$('courseware-style').onchange = event => selectCoursewareStyle(event.currentTarget.value);
+$('lesson-ppt-style').onchange = event => selectCoursewareStyle(event.currentTarget.value);
 $('courseware-form').onsubmit = event => {
   event.preventDefault();
   if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
@@ -3002,6 +3057,7 @@ $('courseware-form').onsubmit = event => {
 $('courseware-generate').onclick = () => {
   if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
   const title = $('courseware-title').value.trim();
+  const children = selectedCoursewareStyle() === 'children';
   perform(async () => {
     clearCoursewareResult();
     const response = await uploadCourseware('pptx', title);
@@ -3021,8 +3077,9 @@ $('courseware-generate').onclick = () => {
     link.download = coursewareFilename(response, title);
     $('courseware-result').hidden = false;
     const slides = Number(response.headers.get('X-Slide-Count'));
-    return slides > 0 ? '已生成 ' + slides + ' 页课件，可下载编辑。' : '已生成课件，可下载编辑。';
-  }, '正在读取材料并生成 PPT…', reportCourseware);
+    const summary = slides > 0 ? '已生成 ' + slides + ' 页课件，可下载编辑。' : '已生成课件，可下载编辑。';
+    return children ? summary + ' 放映时先让孩子回答，再翻页揭晓；教学提示在 PPT 备注里。' : summary;
+  }, children ? '正在整理材料、安排课堂互动并生成 PPT…' : '正在读取材料并生成 PPT…', reportCourseware);
 };
 
 const practiceDecisions = {good:'读得好', practice:'再练一轮', teacher_review:'等老师听'};

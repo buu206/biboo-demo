@@ -1,0 +1,47 @@
+{
+  "mode": "built-in image_gen",
+  "purpose": "Biboo classroom courseware for ages 6–10",
+  "assets": [
+    {
+      "filename": "ocean.png",
+      "transparent_background": false,
+      "prompt": "Use case: illustration-story. Create a wide 16:9 landscape illustration to be used as the background of a children's English classroom slide for ages 6–10. A warm, magical yet uncluttered undersea coral garden. Cohesive hand-painted gouache and paper-cut children's picture-book illustration, gentle matte paper texture, clear friendly silhouettes, no dark or scary detail. Palette: pale turquoise water, coral orange, soft lavender, warm golden yellow and ivory. Composition: the entire left 60 percent is clean pale aqua water with only a few very faint bubbles, reserved for large editable title text that will be added later. On the right side, three smiling aquatic friends: a soft coral octopus, a small turquoise sea turtle, and a lavender jellyfish, floating above coral at bottom right. Organic, elegant composition, lush but restrained, no borders or panels. No text, no letters, no logos, no watermark. High resolution."
+    },
+    {
+      "filename": "owl.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset for a premium children's English classroom slide for ages 6–10. Single character cutout on a genuinely transparent alpha background, no background rectangle, no floor shadow, no scene, no letters, no text, no logos, no watermark. Style: charming hand-painted gouache picture-book illustration with gentle visible matte paper texture and clean soft-edged silhouette, tasteful coral orange / pale turquoise / soft lavender / golden yellow palette, friendly calm expressive eyes. Entire character comfortably inside canvas with margin; high resolution square composition. Subject: Biboo, an original adorable lavender owl explorer, upright front three-quarter pose with one wing raised as if inviting children to join an adventure. Rounded body, cream heart-shaped face, big warm dark eyes, tiny golden beak and feet, tiny turquoise explorer satchel. No clothes or features resembling existing characters. Sweet and clever, suitable for6–10yearolds rather than a baby toy. Precisely two wings, two feet."
+    },
+    {
+      "filename": "octopus.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset for a premium children's English classroom slide for ages 6–10. Single character cutout on a genuinely transparent alpha background, no background rectangle, no floor shadow, no scene, no letters, no text, no logos, no watermark. Style: charming hand-painted gouache picture-book illustration with gentle visible matte paper texture and clean soft-edged silhouette, tasteful coral orange / pale turquoise / soft lavender / golden yellow palette, friendly calm expressive eyes. Entire character comfortably inside canvas with margin; high resolution square composition. Subject: a friendly coral orange octopus seen from the front. Anatomically essential: EXACTLY EIGHT arms, all eight clearly and separately visible and countable with no overlapping, no hidden arm and no extra limb. Four arms fan out on the left and four fan out on the right, each arm is a separate broad curling S curve attached below a single rounded head, suckers on underside. Space between every arm so a child can count them. Rounded head, two smiling dark eyes, soft happy expression. No accessories."
+    },
+    {
+      "filename": "crab.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset for a premium children's English classroom slide for ages 6–10. Single character cutout on a genuinely transparent alpha background, no background rectangle, no floor shadow, no scene, no letters, no text, no logos, no watermark. Style: charming hand-painted gouache picture-book illustration with gentle visible matte paper texture and clean soft-edged silhouette, tasteful coral orange / pale turquoise / soft lavender / golden yellow palette, friendly calm expressive eyes. Entire character comfortably inside canvas with margin; high resolution square composition. Subject: one friendly warm coral-orange crab, front view, with a broad rounded shell, two small eyes on stalks, exactly TWO large raised pincers/claws framing its face, and four small walking legs visible on each side. Happy gentle expression, the two claws are clearly separated and readable. No accessories."
+    },
+    {
+      "filename": "jellyfish.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset for a premium children's English classroom slide for ages 6–10. Single character cutout on a genuinely transparent alpha background, no background rectangle, no floor shadow, no scene, no letters, no text, no logos, no watermark. Style: charming hand-painted gouache picture-book illustration with gentle visible matte paper texture and clean soft-edged silhouette, tasteful coral orange / pale turquoise / soft lavender / golden yellow palette, friendly calm expressive eyes. Entire character comfortably inside canvas with generous margin; high resolution square composition. Subject: one friendly lavender jellyfish with a soft translucent-looking domed bell, a gently scalloped ivory bell edge, two warm smiling eyes and rosy cheeks on the bell. Six or more long distinct flowing lavender and turquoise tentacles underneath with ample space between them, visually clearly different from the thick arms of an octopus. Elegant floating movement, not scary. No accessories."
+    },
+    {
+      "filename": "turtle.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset for a premium children's English classroom slide for ages 6–10. Single character cutout on a genuinely transparent alpha background, no background rectangle, no floor shadow, no scene, no letters, no text, no logos, no watermark. Style: charming hand-painted gouache picture-book illustration with gentle visible matte paper texture and clean soft-edged silhouette, tasteful coral orange / pale turquoise / soft lavender / golden yellow palette, friendly calm expressive eyes. Entire character comfortably inside canvas with generous margin; high resolution square composition. Subject: one cheerful pale turquoise sea turtle swimming diagonally upward, in a three-quarter view. Rounded forest-turquoise shell with broad muted golden segment outlines, pale golden chest, friendly dark eyes. Clearly a sea turtle with four flippers, a small tail and one head. Soft watercolor/gouache brush textures with cream highlights, no hard outlines. Entire turtle clearly separated from background with generous margin."
+    },
+    {
+      "filename": "sea-star.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset for a premium children's English classroom slide for ages 6–10. Single character cutout on a genuinely transparent alpha background, no background rectangle, no floor shadow, no scene, no letters, no text, no logos, no watermark. Style: charming hand-painted gouache picture-book illustration with gentle visible matte paper texture and clean soft-edged silhouette, tasteful coral orange / pale turquoise / soft lavender / golden yellow palette, friendly calm expressive eyes. Entire character comfortably inside canvas with generous margin; high resolution square composition. Subject: one cheerful golden-orange sea star in a flat frontal view, exactly five distinct arms forming a clear starfish silhouette. Gentle rounded tapered arms, warm coral speckles and soft ivory edge, two small warm dark eyes and tiny happy mouth in the center. No hands, no feet, no hat or clothes, no extra appendages. Enough empty transparent space around all five tips."
+    }
+  ],
+  "review_notes": [
+    "All character PNG files retain generated RGBA transparency.",
+    "Octopus cutout has eight separate countable arms.",
+    "Crab cutout has two clear claws; stylized walking-leg count is not a teaching reference.",
+    "Ocean is a decorative scene; use individual characters for anatomy and counting exercises."
+  ]
+}

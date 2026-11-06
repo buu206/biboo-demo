@@ -1,5 +1,5 @@
 from pathlib import PurePosixPath
-from typing import Annotated
+from typing import Annotated, Literal
 from urllib.parse import quote
 
 from fastapi import APIRouter, Query, Request, Response
@@ -15,12 +15,13 @@ from app.services.lessons import get_lesson
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 Filename = Annotated[str, Query(min_length=1, max_length=255)]
 Title = Annotated[str, Query(max_length=100)]
+CoursewareStyle = Literal["standard", "children"]
 UPLOAD_BODY = {"requestBody": {"required": True, "content": {
     "application/octet-stream": {"schema": {"type": "string", "format": "binary"}},
 }}}
 router = APIRouter(
     prefix="/api/v1/courseware",
-    responses={code: {"model": ErrorResponse} for code in (401, 413, 415, 422)},
+    responses={code: {"model": ErrorResponse} for code in (401, 413, 415, 422, 503)},
 )
 
 
@@ -39,19 +40,33 @@ async def material(request: Request, filename: str, title: str) -> tuple[str, st
     return clean_title, source
 
 
-def pptx_response(clean_title: str, pptx: bytes, slide_count: int) -> Response:
+def pptx_response(
+    clean_title: str, pptx: bytes, slide_count: int, style: CoursewareStyle = "standard",
+) -> Response:
     download_stem = "".join(
         "_" if character in '/\\:*?"<>|' else character for character in clean_title
     ).strip(" .") or "课堂课件"
-    encoded_name = quote(f"{download_stem}.pptx", safe="")
+    suffix = "-儿童互动" if style == "children" else ""
+    encoded_name = quote(f"{download_stem}{suffix}.pptx", safe="")
     return Response(
         pptx,
         media_type=PPTX_MIME,
         headers={
             "Content-Disposition": f"attachment; filename=\"Biboo-lesson.pptx\"; filename*=UTF-8''{encoded_name}",
             "X-Slide-Count": str(slide_count),
+            "X-Courseware-Style": style,
         },
     )
+
+
+def render_courseware(
+    title: str, source: str, style: CoursewareStyle, *, lesson: bool = False,
+) -> tuple[bytes, int]:
+    if style == "children":
+        from app.services.courseware_children_pptx import build_children_courseware
+
+        return build_children_courseware(title, source, lesson=lesson)
+    return build_courseware(title, source, lesson=lesson)
 
 
 @router.post("/goals", openapi_extra=UPLOAD_BODY)
@@ -65,14 +80,17 @@ async def import_goals(
 @router.post("/pptx", response_class=Response, openapi_extra=UPLOAD_BODY)
 async def make_pptx(
     request: Request, teacher: CurrentTeacher, filename: Filename, title: Title = "",
+    style: CoursewareStyle = "standard",
 ) -> Response:
     clean_title, source = await material(request, filename, title)
-    pptx, count = await run_in_threadpool(build_courseware, clean_title, source)
-    return pptx_response(clean_title, pptx, count)
+    pptx, count = await run_in_threadpool(render_courseware, clean_title, source, style)
+    return pptx_response(clean_title, pptx, count, style)
 
 
 @router.get("/pptx/{lesson_id}", response_class=Response)
-def lesson_pptx(lesson_id: int, db: Database, teacher: CurrentTeacher) -> Response:
+def lesson_pptx(
+    lesson_id: int, db: Database, teacher: CurrentTeacher, style: CoursewareStyle = "standard",
+) -> Response:
     lesson = get_lesson(db, teacher.id, lesson_id)
     if not lesson.outline:
         raise invalid_state("请先生成课堂活动，再下载本课 PPT。")
@@ -86,5 +104,11 @@ def lesson_pptx(lesson_id: int, db: Database, teacher: CurrentTeacher) -> Respon
         lines.extend([f"{section['title']} · {section['minutes']} 分钟", section["activity"]])
     lines.append("本课跟读")
     lines.extend(item.text for item in lesson.items)
-    pptx, count = build_courseware(lesson.topic, "\n".join(lines), lesson=True)
-    return pptx_response(lesson.topic, pptx, count)
+    if style == "children":
+        lines = [
+            "Vocabulary", *lesson.vocabulary,
+            "Sentence patterns", *lesson.patterns,
+            "课堂活动", *lines,
+        ]
+    pptx, count = render_courseware(lesson.topic, "\n".join(lines), style, lesson=True)
+    return pptx_response(lesson.topic, pptx, count, style)
