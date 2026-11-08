@@ -1916,37 +1916,72 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
  .new-course-tabs button {font-size:12px;padding:9px 11px;}#assistant-result {padding:12px;margin-bottom:18px;}
 }
 
-/* Quiet, slowly drifting light behind the teacher workspace. */
-body {isolation:isolate;}
-.teacher-ambience {display:none;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(155deg,#f7f5fc 0%,#f2eff9 54%,#f8f6fc 100%);}
-body[data-authenticated][data-view=teacher] .teacher-ambience,
-body[data-authenticated][data-view=review] .teacher-ambience {display:block;}
-.teacher-ambience::before,.teacher-ambience::after {content:"";position:absolute;inset:-15%;pointer-events:none;transform-origin:center;}
-.teacher-ambience::before {
-  background:radial-gradient(ellipse at 20% 26%,#b8a0e657 0%,#cbb6ed30 24%,transparent 55%),radial-gradient(ellipse at 82% 78%,#b9a7df40 0%,transparent 50%);
-  animation:biboo-light-drift 26s ease-in-out infinite alternate;
+
+/* Biboo & friends: a light stage around real teaching tools. */
+:root {background:#fff;--ink:#24222b;}
+body,body[data-authenticated] {padding:20px 28px 56px;max-width:1240px;background:#fff;}
+body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min-height:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;margin:0;}
+.sidebar {position:relative;z-index:2;max-width:1060px;margin:0 auto 15px;padding:10px 14px 10px 19px;min-height:65px;border:1px solid #eeedf2;border-radius:50px;background:#fff;box-shadow:0 5px 22px #34314c07;gap:16px;flex-wrap:nowrap;}
+.sidebar .brand {display:flex;gap:6px;flex:none;text-decoration:none;color:#28232d;}.sidebar .brand strong {font-size:24px;letter-spacing:-1.1px;line-height:1;}.brand-dot {color:#9b7ec6;}
+.sidebar .brand-mark {width:34px;height:34px;background:#eee5fb;border-radius:50%;overflow:hidden;box-shadow:none;}.sidebar .brand-mark svg {width:38px;height:38px;flex:none;}
+.role-tabs {gap:3px;margin:0 auto;flex:none;width:auto;}.role-tabs a {min-height:39px;padding:8px 15px;font-size:12px;color:#766d81;}.role-tabs a svg {width:16px;height:16px;}.role-tabs a[aria-current=page] {background:#f1eafa;color:#715190;}
+.sidebar #account {gap:10px;margin:0;flex:none;}.sidebar #teacher {font-weight:500;font-size:11px;max-width:110px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}.sidebar #logout {min-height:34px;padding:6px 12px;border-radius:24px;border:1px solid #e9e5ed;background:#fff;color:#81758b;font-size:11px;}
+.banner {max-width:1030px;margin:0 auto 10px;padding:4px 0;background:transparent;border:0;color:#928999;font-size:11px;text-align:center;line-height:1.6;}
+#status:not(:empty) {max-width:1040px;margin:8px auto 13px;}
+.assistant-home {isolation:isolate;position:relative;max-width:none;margin:0 auto 15px;padding:23px 30px 42px;border-radius:38px 38px 0 0;background:#f6f9fd;text-align:center;}
+.assistant-intro {display:flex;align-items:center;justify-content:center;gap:7px;font-size:10px;letter-spacing:1.3px;font-weight:650;color:#9a8aa6;line-height:1.4;}
+.intro-dot {width:6px;height:6px;border-radius:50%;background:#b49ad0;box-shadow:0 0 0 4px #ede7f5;}
+.assistant-home h2 {font-size:43px;line-height:1.2;letter-spacing:-1.8px;font-weight:800;color:#232127;margin:17px 0 13px;}
+.hero-title-line {display:flex;align-items:center;justify-content:center;gap:10px;min-height:61px;}.hero-title-line+ .hero-title-line {margin-top:3px;}.hero-title-line>span:not(.character-disc):not(.character-group) {white-space:nowrap;}
+.character-disc {display:inline-grid;place-items:center;flex:none;width:57px;height:57px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 4px 10px #36264f08;transition:transform .3s cubic-bezier(.2,.8,.25,1.4);}.character-disc svg {width:66px;height:66px;}
+.hero-boo {background:#e8daf8;transform:rotate(-8deg);}.hero-hui {background:#ffead3;transform:rotate(-10deg);}.hero-lang {background:#dceefc;transform:rotate(6deg);}.hero-ya {background:#dff3e7;transform:rotate(-4deg);}
+.character-group {display:inline-flex;align-items:center;flex:none;padding-left:2px;}.character-group .character-disc {width:48px;height:48px;margin-left:-10px;}.character-group .character-disc:first-child {margin-left:0;}.character-group svg {width:56px;height:56px;}
+.assistant-home .character-disc:hover {transform:translateY(-5px) rotate(5deg);}.assistant-lead {font-size:13px;line-height:1.7;margin:0 0 19px;color:#8b8195;}
+.assistant-composer {position:relative;max-width:760px;margin:0 auto;padding:12px 18px 12px;border:1px solid #e4deed;border-radius:23px;background:#fff;box-shadow:0 8px 25px #6b57890b;}
+.assistant-composer:focus-within {border-color:#b097ce;box-shadow:0 0 0 4px #d9c8ec33,0 10px 28px #6b578914;}
+.assistant-composer #assistant-prompt {min-height:78px;max-height:270px;padding:6px 2px 9px;font-size:14px;line-height:1.85;color:#4c4356;}.assistant-composer #assistant-prompt::placeholder {color:#a59bac;}
+.composer-actions {padding-top:8px;}.composer-tool {min-height:35px;padding:6px 9px;}.assistant-submit {min-height:38px;padding:8px 16px;background:#7c5d9e;border-radius:30px;gap:18px;}.assistant-submit:hover {background:#684887;}
+.assistant-examples {gap:7px;margin:12px auto 0;}.assistant-examples>span {font-size:10px;color:#a69cad;}.assistant-examples button {padding:5px 10px;min-height:28px;font-size:10px;border-color:#e5e1ec;background:#ffffff8a;color:#918298;}
+.assistant-help {font-size:10px;line-height:1.6;margin:10px auto 0;color:#a499ad;}.assistant-status {max-width:750px;margin:10px auto 0;}
+.hero-cloud {position:absolute;left:0;right:0;bottom:-1px;width:100%;height:33px;pointer-events:none;z-index:-1;}
+.stage-spark {position:absolute;color:#ccbddb;pointer-events:none;z-index:-1;}.stage-spark-one {left:9%;top:76px;font-size:32px;transform:rotate(-14deg);}.stage-spark-two {right:9%;top:152px;color:#d5dfee;font-size:20px;}
+.buddy-launches {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1090px;margin:0 auto 32px;}
+.buddy-launch {position:relative;display:flex;align-items:center;justify-content:flex-start;gap:9px;text-align:left;min-height:127px;padding:15px 15px 15px 10px;border:1px solid #f2e8dc;border-radius:23px;background:#fff9f0;color:#3e3445;font-weight:400;box-shadow:none;transition:transform .24s,box-shadow .24s,border-color .24s;}
+.buddy-launch-lang {background:#f2f8fe;border-color:#e4eef7;}.buddy-launch-ya {background:#f3faf5;border-color:#e5f0e7;}
+.launch-art {display:grid;place-items:center;flex:none;width:79px;height:87px;}.buddy-launch .launch-art svg {width:89px;height:89px;transition:transform .35s cubic-bezier(.2,.8,.25,1.35);transform-origin:50% 85%;}
+.launch-copy {display:flex;flex-direction:column;min-width:0;gap:3px;}.launch-name {font-size:9px;color:#aa9381;letter-spacing:.1px;}.buddy-launch-lang .launch-name {color:#8b9fb2;}.buddy-launch-ya .launch-name {color:#91a798;}
+.launch-copy strong {font-size:17px;line-height:1.5;font-weight:700;letter-spacing:-.3px;color:#403648;}.launch-description {font-size:10px;color:#9a8e9f;line-height:1.7;}.launch-arrow {align-self:flex-start;color:#baa8c2;margin:2px 0 0 auto;font-size:17px;}
+.buddy-launch:hover,.buddy-launch:focus-visible {transform:translateY(-4px);background:#fff8ed;box-shadow:0 10px 22px #5b437611;border-color:#e3d2ed;}.buddy-launch-lang:hover,.buddy-launch-lang:focus-visible {background:#edf6fe;}.buddy-launch-ya:hover,.buddy-launch-ya:focus-visible {background:#eef8f1;}
+.buddy-launch:hover .launch-art svg,.buddy-launch:focus-visible .launch-art svg {transform:translateY(-5px) rotate(-7deg) scale(1.04);}
+#course-home>.course-toolbar,#course-home>#course-grid,#course-home>#course-load-status,#course-home>#course-empty {max-width:1090px;margin-left:auto;margin-right:auto;}
+.course-toolbar {gap:10px;margin-bottom:15px;}.course-toolbar h2 {font-size:18px;}.course-toolbar label {font-size:10px;color:#9a90a2;}.course-toolbar select {width:150px;padding:7px 10px;border-color:#eee9f2;border-radius:20px;font-size:11px;}.course-toolbar .quiet-button {font-size:11px;min-height:32px;padding:5px 8px;}
+.course-grid {gap:14px;}.course-card {padding:19px;border-radius:20px;border-color:#efebf2;}.course-card h3 {font-size:17px;margin-top:15px;}.course-card-art {width:31px;height:31px;border-radius:10px;font-size:18px;}.course-card .course-class {margin-bottom:18px;}.course-card .actions button {font-size:11px;min-height:35px;}.course-state {font-size:10px;}
+@media(prefers-reduced-motion:no-preference) {
+ .assistant-home {animation:friends-appear .55s ease-out both;}.hero-boo svg {animation:buddy-float 6s ease-in-out infinite;}.hero-lang svg {animation:buddy-float 7s ease-in-out 1.4s infinite;}
+ @keyframes friends-appear {from {opacity:0;transform:translateY(7px);}to {opacity:1;transform:none;}}
+ @keyframes buddy-float {0%,100% {transform:translateY(1px);}50% {transform:translateY(-3px);}}
 }
-.teacher-ambience::after {
-  background:radial-gradient(ellipse at 81% 22%,#d1b5e94a 0%,#e1cff22b 25%,transparent 53%),radial-gradient(ellipse at 28% 82%,#b8b2e53b 0%,transparent 49%);
-  animation:biboo-light-breathe 34s ease-in-out infinite alternate;
+@media(max-width:900px) {
+ .sidebar {gap:10px;}.sidebar .account-copy {display:none;}.role-tabs a {padding:8px 12px;}.buddy-launch {padding:14px 11px;gap:5px;}.launch-art {width:60px;}.buddy-launch .launch-art svg {width:73px;height:73px;}.launch-copy strong {font-size:15px;}.launch-name {font-size:8px;}.launch-arrow {display:none;}
 }
-@keyframes biboo-light-drift {
-  from {transform:translate3d(-3%,-2%,0) scale(1);opacity:.72;}
-  to {transform:translate3d(5%,4%,0) scale(1.06);opacity:1;}
+@media(max-width:560px) {
+ body,body[data-authenticated],body:not([data-authenticated]) {padding:12px 14px 35px;}
+ .sidebar {padding:7px 9px;min-height:53px;gap:6px;margin-bottom:8px;border-radius:35px;}.sidebar .brand {display:flex;gap:3px;}.sidebar .brand strong {font-size:18px;letter-spacing:-.9px;}.sidebar .brand-mark {width:25px;height:25px;}.sidebar .brand-mark svg {width:29px;height:29px;}.role-tabs {width:auto;gap:0;justify-content:center;flex:1;}.role-tabs a {min-height:40px;padding:6px 7px;font-size:11px;gap:0;white-space:nowrap;}.role-tabs a svg {display:none;}.sidebar #account {gap:0;}.sidebar #logout {font-size:11px;min-height:40px;padding:4px 7px;}.banner {font-size:10px;padding:3px 5px;margin-bottom:9px;}
+ .assistant-home {margin:0 -3px 11px;padding:19px 12px 30px;border-radius:27px 27px 0 0;}.assistant-intro {font-size:8px;letter-spacing:1px;gap:6px;}.intro-dot {width:5px;height:5px;}.assistant-home h2 {font-size:25px;line-height:1.2;letter-spacing:-1px;margin:13px 0 11px;}.hero-title-line {min-height:41px;gap:5px;}.hero-title-line+.hero-title-line {margin-top:0;}.character-disc {width:39px;height:39px;border-width:2px;}.character-disc svg {width:46px;height:46px;}.character-group .character-disc {width:32px;height:32px;margin-left:-9px;}.character-group svg {width:39px;height:39px;}.assistant-lead {font-size:10px;margin-bottom:15px;line-height:1.7;}
+ .assistant-composer {padding:11px 11px 10px;border-radius:19px;}.assistant-composer #assistant-prompt {font-size:14px;line-height:1.85;min-height:85px;padding:3px 1px 8px;}.composer-actions {padding-top:7px;gap:5px;}.composer-tools {gap:0;}.composer-tool {font-size:10px;padding:5px 6px;min-height:33px;gap:3px;}.composer-tool svg {width:13px;height:13px;}.assistant-submit {font-size:12px;padding:7px 11px;min-height:40px;gap:9px;}.assistant-submit span:last-child {font-size:16px;}
+ .assistant-examples {justify-content:center;gap:5px;margin-top:11px;}.assistant-examples>span {display:none;}.assistant-examples button {font-size:11px;padding:6px 9px;min-height:32px;}.assistant-help {text-align:center;font-size:10px;margin-top:8px;}.assistant-status {font-size:11px;}.hero-cloud {height:22px;}.stage-spark-one {left:3%;top:72px;font-size:17px;}.stage-spark-two {right:3%;top:115px;font-size:13px;}
+ .buddy-launches {gap:7px;margin-bottom:25px;}.buddy-launch {flex-direction:column;justify-content:flex-start;gap:4px;min-height:137px;border-radius:17px;padding:8px 6px 11px;text-align:center;}.launch-art {width:54px;height:52px;}.buddy-launch .launch-art svg {width:63px;height:63px;}.launch-copy {gap:4px;}.launch-name {display:none;}.launch-copy strong {font-size:12px;letter-spacing:-.2px;line-height:1.5;white-space:nowrap;}.launch-description {font-size:11px;line-height:1.6;}.launch-arrow {display:none;}
+ .course-toolbar {flex-wrap:wrap;gap:7px;margin-bottom:12px;}.course-toolbar h2 {width:auto;font-size:16px;margin-right:auto;}.course-toolbar label {margin:0;font-size:0;gap:0;}.course-toolbar select {width:111px;font-size:10px;padding:6px 9px;}.course-toolbar .quiet-button {font-size:10px;}.course-grid {gap:11px;}.course-card {padding:17px;}.course-empty {padding:27px 17px;}
 }
-@keyframes biboo-light-breathe {
-  from {transform:translate3d(4%,-3%,0) scale(1.05);opacity:.8;}
-  to {transform:translate3d(-5%,4%,0) scale(1);opacity:.55;}
-}
-body[data-view=teacher] .assistant-composer {background:#fffffff2;border-color:#d9cce9;box-shadow:0 8px 32px #6951840b;}
-body[data-view=teacher] .assistant-composer:focus-within {border-color:#ac91c8;box-shadow:0 0 0 4px #a98bc316,0 12px 36px #69518412;}
+@media(max-width:360px) {.role-tabs a {font-size:10px;padding:6px 5px;}.sidebar .brand strong {font-size:16px;}.assistant-home h2 {font-size:22px;}.launch-copy strong {white-space:normal;}}
 @media(prefers-reduced-motion:reduce) {
-  .teacher-ambience::before,.teacher-ambience::after {animation:none;transform:none;opacity:.7;}
+ *,*::before,*::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+ .character-disc,.assistant-home .character-disc:hover,.buddy-launch:hover,.buddy-launch:focus-visible,.buddy-launch:active,.buddy-launch:hover .launch-art svg,.buddy-launch:focus-visible .launch-art svg {transform:none;}
 }
+
 </style>
 </head>
 <body>
-  <div class="teacher-ambience" aria-hidden="true"></div>
   <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
     <defs>
       <symbol id="icon-grid" viewBox="0 0 24 24">
@@ -2003,6 +2038,98 @@ body[data-view=teacher] .assistant-composer:focus-within {border-color:#ac91c8;b
         <path d="m49 121 10-8 5 9m32 0 6-9 10 8" fill="none" stroke="#d7b774" stroke-width="5" stroke-linecap="round"/>
         <path d="m24 71 8 9-4 18m108-28-8 10 5 17" fill="none" stroke="#b99adc" stroke-width="12" stroke-linecap="round"/>
       </symbol>
+
+    <symbol id="b-buddy-boo" viewBox="0 0 200 200">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#D6C8E5" opacity=".38"/>
+        <path d="M65 164v11m-7 0h14m56-11v11m-7 0h14" fill="none" stroke="#E6B968" stroke-width="8" stroke-linecap="round"/>
+        <path d="M44 75c-2-16-7-38 1-40 6-2 21 8 30 16 16-7 34-7 50 0 9-8 24-18 30-16 8 2 3 24 1 40 10 12 14 29 11 46-5 32-28 52-67 52s-62-20-67-52c-3-17 1-34 11-46Z" fill="#B79BDD"/>
+        <path d="M40 119c11 23 32 35 61 35s51-12 61-35c-6 34-27 54-62 54s-57-20-60-54Z" fill="#A88ACD"/>
+        <path d="m48 46 19 13-18 8m103-21-19 13 18 8" fill="#CDB7E9"/>
+        <path d="M35 92c-16 8-20 27-14 39 3 6 8 8 12 5 8-5 17-21 18-34 1-9-7-15-16-10Z" fill="#B79BDD"/>
+        <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
+        <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        <ellipse cx="77" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <ellipse cx="123" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+        <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+        <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
+        <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+        <ellipse cx="62" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <path d="M94 106q6-3 12 0l-4 9q-2 3-4 0Z" fill="#E4B45D"/>
+        <path d="M92 122q8 8 16 0" fill="none" stroke="#6A507C" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="m77 140 5 5 5-5m8 2 5 5 5-5m8-2 5 5 5-5" fill="none" stroke="#D9C4EC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </symbol>
+    <symbol id="b-buddy-hui" viewBox="0 0 200 200">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#E8CDB9" opacity=".38"/>
+        <path d="M72 153v19m-6 1h13m49-20v19m-6 1h13" fill="none" stroke="#E6B18A" stroke-width="8" stroke-linecap="round"/>
+        <path d="M35 96c-9-5-19-2-20 7-2 10 7 20 20 19m130-25c11-7 18-4 20 3 2 8-6 17-17 18" fill="#EFBF96"/>
+        <path d="M32 58c0-7 6-12 13-12 20-1 39 3 55 14 16-11 35-15 55-14 7 0 13 5 13 12v88c0 7-7 11-13 9-19-5-36-2-49 7-4 3-8 3-12 0-13-9-30-12-49-7-6 2-13-2-13-9Z" fill="#F4C79E"/>
+        <path d="M38 137c20-5 43-1 62 9 19-10 42-14 62-9v9c0 4-4 6-8 5-20-4-36 0-49 9-3 2-7 2-10 0-13-9-29-13-49-9-4 1-8-1-8-5Z" fill="#E9B78F"/>
+        <path d="M43 59c0-3 2-5 5-5 17-1 32 3 46 12v77c-15-8-31-11-51-7Z" fill="#FFF9ED"/>
+        <path d="M157 59c0-3-2-5-5-5-17-1-32 3-46 12v77c15-8 31-11 51-7Z" fill="#FFF3DF"/>
+        <path d="M99 70v75" fill="none" stroke="#EDBB91" stroke-width="3" stroke-linecap="round"/>
+        <path d="M138 48v28l8-6 8 6V48" fill="#DFA5A1"/>
+        <ellipse cx="78" cy="98" rx="7" ry="9" fill="#483650"/>
+        <ellipse cx="122" cy="98" rx="7" ry="9" fill="#483650"/>
+        <circle cx="80" cy="95" r="2.4" fill="#FFFEF8"/>
+        <circle cx="124" cy="95" r="2.4" fill="#FFFEF8"/>
+        <ellipse cx="62" cy="113" rx="8" ry="4.5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="113" rx="8" ry="4.5" fill="#F2CCCF"/>
+        <path d="M91 116q9 10 18 0" fill="none" stroke="#483650" stroke-width="3.8" stroke-linecap="round"/>
+        <path d="m28 83 8-2 5 21-8 2Z" fill="#AFA0D9" transform="rotate(-20 34 92)"/>
+        <path d="m28 83 8-2-6-7Z" fill="#FFF7E8" transform="rotate(-20 34 92)"/>
+      </g>
+    </symbol>
+    <symbol id="b-buddy-lang" viewBox="0 0 200 200">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#BED9EA" opacity=".38"/>
+        <path d="M77 157v16m-6 2h13m39-18v16m-6 2h13" fill="none" stroke="#81B8D7" stroke-width="8" stroke-linecap="round"/>
+        <path d="M35 98c-12-2-19 4-19 11s8 15 22 14m124-25c12-3 21 3 21 11s-8 14-21 13" fill="#A9D5ED"/>
+        <path d="M101 38c42 0 68 25 68 61 0 35-28 61-67 61-10 0-19-1-28-4l-20 10c-5 3-10-1-9-6l4-20c-12-11-18-25-18-41 0-36 28-61 70-61Z" fill="#A9D5ED"/>
+        <path d="M38 119c15 18 35 26 63 26 30 0 50-10 63-28-9 27-33 43-62 43-10 0-19-1-28-4l-20 10c-5 3-10-1-9-6l4-20c-5-5-9-12-11-21Z" fill="#8BC2E1"/>
+        <path d="M55 65c7-16 23-24 46-24 22 0 39 8 47 24" fill="none" stroke="#FFF7E8" stroke-width="8" stroke-linecap="round"/>
+        <rect x="33" y="77" width="15" height="32" rx="7.5" fill="#78B1D2"/>
+        <rect x="153" y="77" width="15" height="32" rx="7.5" fill="#78B1D2"/>
+        <ellipse cx="79" cy="91" rx="7" ry="9" fill="#483650"/>
+        <ellipse cx="122" cy="91" rx="7" ry="9" fill="#483650"/>
+        <circle cx="81" cy="88" r="2.4" fill="#FFFEF8"/>
+        <circle cx="124" cy="88" r="2.4" fill="#FFFEF8"/>
+        <ellipse cx="62" cy="107" rx="9" ry="4.5" fill="#FFE5D2"/>
+        <ellipse cx="138" cy="107" rx="9" ry="4.5" fill="#FFE5D2"/>
+        <path d="M89 111q11 14 22 0Z" fill="#483650"/>
+        <path d="M95 120q6-5 12 0" fill="#DCB0BE"/>
+        <g transform="rotate(17 163 132)">
+          <path d="M163 137v17" fill="none" stroke="#6F6593" stroke-width="7" stroke-linecap="round"/>
+          <rect x="155" y="117" width="16" height="25" rx="8" fill="#6F6593"/>
+          <path d="M160 124h6m-6 6h6" fill="none" stroke="#FFF7E8" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M152 135q0 12 11 12t11-12" fill="none" stroke="#8175A5" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </g>
+    </symbol>
+    <symbol id="b-buddy-ya" viewBox="0 0 200 200">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#C5E1D0" opacity=".38"/>
+        <path d="M101 52c-1-12 1-20 5-26" fill="none" stroke="#79B99B" stroke-width="5" stroke-linecap="round"/>
+        <path d="M102 40c-18 0-27-8-25-19 15-2 28 5 25 19Z" fill="#A6D9AF"/>
+        <path d="M104 34c0-15 10-23 23-20 0 13-8 22-23 20Z" fill="#79B99B"/>
+        <path d="M91 49c4-8 14-8 18 0l17 30 34 5c10 2 13 11 6 18l-24 24 5 34c2 10-6 16-15 11l-32-15-32 15c-9 5-17-1-15-11l5-34-24-24c-7-7-4-16 6-18l34-5Z" fill="#AFE0C6"/>
+        <path d="M53 151c16 5 30-1 47-8 17 7 31 13 47 8l1 9c1 10-7 16-16 11l-32-15-32 15c-9 5-17-1-15-11Z" fill="#91CDAE"/>
+        <path d="M82 61c-3 5-7 11-9 17" fill="none" stroke="#D1EDD9" stroke-width="5" stroke-linecap="round"/>
+        <ellipse cx="80" cy="103" rx="7" ry="9" fill="#483650"/>
+        <ellipse cx="120" cy="103" rx="7" ry="9" fill="#483650"/>
+        <circle cx="82" cy="100" r="2.4" fill="#FFFEF8"/>
+        <circle cx="122" cy="100" r="2.4" fill="#FFFEF8"/>
+        <ellipse cx="65" cy="117" rx="8.5" ry="4.5" fill="#FFE5D2"/>
+        <ellipse cx="135" cy="117" rx="8.5" ry="4.5" fill="#FFE5D2"/>
+        <path d="M91 121q9 10 18 0" fill="none" stroke="#483650" stroke-width="3.8" stroke-linecap="round"/>
+        <path d="m99 133 3 5 6 1-4 4 1 6-6-3-5 3 1-6-4-4 6-1Z" fill="#FFF2CF"/>
+      </g>
+    </symbol>
+
     </defs>
   </svg>
   <header class="app-header">
@@ -2019,21 +2146,6 @@ body[data-view=teacher] .assistant-composer:focus-within {border-color:#ac91c8;b
       <h1 id="page-title">
         从备课到跟读
       </h1>
-    </div>
-    <div id="account" hidden>
-      <span class="account-avatar" aria-hidden="true">
-        教
-      </span>
-      <div class="account-copy">
-        <p id="teacher">
-        </p>
-        <small>
-          一起陪伴孩子成长
-        </small>
-      </div>
-      <button class="secondary" id="logout">
-        退出
-      </button>
     </div>
   </header>
   <p id="status" role="status" aria-live="polite">
@@ -2064,26 +2176,9 @@ body[data-view=teacher] .assistant-composer:focus-within {border-color:#ac91c8;b
     </div>
   </form>
   <main id="workspace" hidden>
-    <aside class="sidebar">
-      <a class="brand" href="?view=teacher" data-view="teacher">
-        <span class="brand-mark" aria-hidden="true">
-          <svg>
-            <use href="#icon-book"/>
-          </svg>
-        </span>
-        <span>
-          <strong>
-            Biboo
-          </strong>
-          <small>
-            TEACH · LISTEN · GROW
-          </small>
-        </span>
-      </a>
-      <p class="nav-label">
-        我的工作空间
-      </p>
-      <nav class="role-tabs" aria-label="演示角色">
+    <aside class="sidebar" aria-label="Biboo 导航">
+      <a class="brand" href="?view=teacher" data-view="teacher" aria-label="Biboo 备课首页"><span class="brand-mark"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-boo"/></svg></span><strong>Biboo<span class="brand-dot">.</span></strong></a>
+      <nav class="role-tabs" aria-label="主要导航">
         <a id="view-teacher" data-view="teacher" href="?view=teacher">
           <svg aria-hidden="true">
             <use href="#icon-spark"/>
@@ -2109,37 +2204,45 @@ body[data-view=teacher] .assistant-composer:focus-within {border-color:#ac91c8;b
           </span>
         </a>
       </nav>
-      <div class="sidebar-note">
-        <span class="note-art" aria-hidden="true">
-          ✧
-        </span>
-        <strong>
-          陪伴每一次小小进步
-        </strong>
-        <p>
-          从课堂上的一个单词，到课后勇敢说出的每一句话。
+    <div id="account" hidden>
+      <span class="account-avatar" aria-hidden="true">
+        教
+      </span>
+      <div class="account-copy">
+        <p id="teacher">
         </p>
+        <small>
+          一起陪伴孩子成长
+        </small>
       </div>
-      <p class="sidebar-foot">
-        BIBOO · 让好课延续
-      </p>
+      <button class="secondary" id="logout">
+        退出
+      </button>
+    </div>
     </aside>
     <p id="mode" class="banner" hidden>
     </p>
     <section id="teacher-view" hidden aria-label="备课助手">
       <div id="course-home">
         <section class="assistant-home" aria-labelledby="assistant-title">
-          <div class="assistant-intro"><span class="assistant-avatar"><svg viewBox="0 0 160 140" aria-hidden="true"><use href="#biboo-buddy"/></svg></span><span>Biboo · 你的备课助手</span></div>
-          <h2 id="assistant-title">今天，想和孩子们探索什么？</h2>
-          <p class="assistant-lead">告诉我你的备课想法，我们一起把它变成一堂好课。</p>
+          <span class="stage-spark stage-spark-one" aria-hidden="true">✧</span><span class="stage-spark stage-spark-two" aria-hidden="true">✦</span>
+          <div class="assistant-intro"><span class="intro-dot" aria-hidden="true"></span>BIBOO · 布布和朋友们</div>
+          <h2 id="assistant-title"><span class="hero-title-line"><span>把你的灵感</span><span class="character-disc hero-boo" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-boo"/></svg></span><span>变成好课</span></span><span class="hero-title-line"><span>让每个孩子</span><span class="character-group" aria-hidden="true"><span class="character-disc hero-hui"><svg viewBox="0 0 200 200"><use href="#b-buddy-hui"/></svg></span><span class="character-disc hero-lang"><svg viewBox="0 0 200 200"><use href="#b-buddy-lang"/></svg></span><span class="character-disc hero-ya"><svg viewBox="0 0 200 200"><use href="#b-buddy-ya"/></svg></span></span><span>爱上开口</span></span></h2>
+          <p class="assistant-lead">一个想法，一份课件。剩下的，我们一起准备。</p>
           <form id="assistant-form" class="assistant-composer">
-            <label class="sr-only" for="assistant-prompt">告诉 Biboo 你的备课想法</label>
-            <textarea id="assistant-prompt" maxlength="4000" rows="3" required placeholder="想教什么？孩子多大？比如：给 6–8 岁孩子上一堂 25 分钟的海洋动物课，学习 octopus、crab、turtle…" aria-describedby="assistant-help assistant-status"></textarea>
+            <label class="sr-only" for="assistant-prompt">告诉布布，你的备课想法</label>
+            <textarea id="assistant-prompt" maxlength="4000" rows="2" required placeholder="想教什么？孩子多大？比如：给 6–8 岁孩子上一堂 25 分钟的海洋动物课，学习 octopus、crab、turtle…" aria-describedby="assistant-help assistant-status"></textarea>
             <div class="composer-actions"><div class="composer-tools"><button type="button" id="new-course-open" class="composer-tool"><svg aria-hidden="true"><use href="#icon-upload"/></svg>上传材料</button><button type="button" id="manual-course-open" class="composer-tool">自己填写</button></div><button id="assistant-start" class="assistant-submit"><span>帮我准备</span><span aria-hidden="true">↗</span></button></div>
           </form>
           <div class="assistant-examples" aria-label="试试这些备课想法"><span>试试这样说</span><button type="button" data-assistant-example="ocean">🐙 探索海洋动物</button><button type="button" data-assistant-example="fruit">🍎 水果小市场</button><button type="button" data-assistant-example="phonics">✦ 练一练 th 发音</button></div>
           <p id="assistant-status" class="assistant-status" role="status" aria-live="polite"></p>
           <p id="assistant-help" class="assistant-help">Demo 会整理描述中已有的词句；确认目标后再生成课程。</p>
+          <svg class="hero-cloud" viewBox="0 0 1400 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 43C50 7 112 12 157 35C198 3 262 6 306 32C367 8 413 23 458 41C519 6 570 11 617 34C679 11 734 18 778 40C833 13 882 9 936 34C990 8 1039 17 1089 39C1137 11 1193 14 1235 36C1293 6 1354 15 1400 40V70H0Z" fill="#fff"/></svg>
+        </section>
+        <section class="buddy-launches" aria-label="让小伙伴帮你准备">
+          <button type="button" id="buddy-ppt" class="buddy-launch buddy-launch-hui"><span class="launch-art" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-hui"/></svg></span><span class="launch-copy"><span class="launch-name">绘绘 · 把灵感画进课堂</span><strong>生成课堂 PPT</strong><span class="launch-description">上传材料，做一份能一起玩的课件。</span></span><span class="launch-arrow" aria-hidden="true">↗</span></button>
+          <button type="button" id="buddy-homework" class="buddy-launch buddy-launch-lang"><span class="launch-art" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-lang"/></svg></span><span class="launch-copy"><span class="launch-name">朗朗 · 陪孩子勇敢开口</span><strong>准备跟读作业</strong><span class="launch-description">选好词句，把课堂延续到课后。</span></span><span class="launch-arrow" aria-hidden="true">↗</span></button>
+          <button type="button" id="buddy-feedback" class="buddy-launch buddy-launch-ya"><span class="launch-art" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-ya"/></svg></span><span class="launch-copy"><span class="launch-name">芽芽 · 看见每一点进步</span><strong>看看课后反馈</strong><span class="launch-description">听听孩子的练习，再准备下一课。</span></span><span class="launch-arrow" aria-hidden="true">↗</span></button>
         </section>
         <div class="course-toolbar"><h2>我的课程 <span id="course-count"></span></h2><label>班级筛选<select id="course-filter"><option value="">全部班级</option></select></label><button id="course-refresh" class="quiet-button">刷新</button></div>
         <p id="course-load-status" role="status" aria-live="polite"></p>
@@ -2794,6 +2897,9 @@ $('new-course-dialog').addEventListener('close', () => {
 $('new-course-close').onclick = closeNewCourse;
 for (const id of ['new-course-open','empty-new-course']) $(id).onclick = () => { if (!busy) openNewCourse(); };
 $('manual-course-open').onclick = () => { if (!busy) openNewCourse('goals'); };
+$('buddy-ppt').onclick = () => { if (!busy) openNewCourse('material'); };
+$('buddy-homework').onclick = () => { if (!busy) openNewCourse('goals'); };
+$('buddy-feedback').onclick = () => perform(() => switchView('review'), '正在读取课后反馈…');
 $('new-material-tab').onclick = () => setNewCourseTab('material');
 $('new-goals-tab').onclick = () => setNewCourseTab('goals');
 for (const id of ['tab-homework','tab-classroom']) $(id).onclick = () => setDetailTab(id.split('-')[1]);
