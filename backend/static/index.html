@@ -1890,6 +1890,32 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
  #new-course-dialog {padding:22px 18px;max-height:calc(100dvh - 24px);width:calc(100vw - 24px);}.new-course-heading h2 {font-size:21px;}.new-course-heading p {font-size:12px;}.new-course-tabs button {padding:9px 14px;}.banner {font-size:11px;}.preview-section .word-preview span {font-size:16px;}#published-actions {padding:18px 14px;}
 }
 
+/* Start with a teaching idea; reveal the structured workflow only when needed. */
+.assistant-home {max-width:880px;margin:12px auto 42px;text-align:center;}
+.assistant-intro {display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:600;color:#82708f;}
+.assistant-avatar {display:grid;place-items:center;width:51px;height:46px;}.assistant-avatar svg {width:55px;height:49px;}
+.assistant-home h2 {font-size:32px;line-height:1.45;letter-spacing:-.7px;margin:11px 0 8px;color:#30263d;}
+.assistant-lead {font-size:14px;line-height:1.8;color:#887c91;margin:0 0 24px;}
+.assistant-composer {text-align:left;margin:0;padding:18px 19px 15px;border:1px solid #ded4e9;border-radius:23px;background:#fff;box-shadow:0 7px 28px #59467c09;transition:border-color .2s,box-shadow .2s;}
+.assistant-composer:focus-within {border-color:#aa91c4;box-shadow:0 0 0 3px #b3a0cd18,0 7px 28px #59467c09;}
+.assistant-composer #assistant-prompt {padding:5px 3px 10px;margin:0;min-height:105px;max-height:300px;background:transparent;border:0;box-shadow:none;border-radius:0;font-size:15px;line-height:1.9;resize:vertical;color:#42374f;}
+.assistant-composer #assistant-prompt:focus {outline:none;box-shadow:none;}.assistant-composer #assistant-prompt::placeholder {color:#a399ad;}
+.composer-actions,.composer-tools {display:flex;align-items:center;gap:8px;}.composer-actions {justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid #f2edf7;}
+.composer-tool {display:inline-flex;align-items:center;gap:6px;background:transparent;color:#81718e;border:0;box-shadow:none;padding:7px 9px;min-height:37px;font-size:12px;font-weight:500;}.composer-tool:hover {background:#f6f2fa;color:#5e487b;}.composer-tool svg {width:16px;height:16px;}
+.assistant-submit {display:inline-flex;align-items:center;gap:20px;background:#675084;min-height:42px;border-radius:13px;padding:10px 17px;font-size:13px;box-shadow:none;}.assistant-submit span:last-child {font-size:19px;line-height:1;}
+.assistant-examples {display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin:17px 0 0;}.assistant-examples>span {font-size:11px;color:#aa9eb2;margin-right:4px;}.assistant-examples button {font-size:11px;font-weight:500;padding:7px 12px;min-height:33px;color:#81718e;border:1px solid #e9e2f0;border-radius:18px;background:transparent;box-shadow:none;}.assistant-examples button:hover {background:#eee6f6;}
+.assistant-help {font-size:11px;line-height:1.7;color:#a196aa;margin:14px 0 0;}.assistant-status {font-size:12px;line-height:1.7;color:#766184;margin:12px 0 0;}.assistant-status:empty {display:none;}.assistant-status.error {color:var(--danger);}
+#assistant-result {padding:14px 16px;background:#f5f0fa;border:1px solid #ece3f4;border-radius:15px;margin:14px 0 22px;text-align:left;}
+#assistant-result-summary {font-size:13px;font-weight:600;color:#6e5684;margin:0 0 5px;}#assistant-result-note {font-size:12px;line-height:1.7;color:#8b7b97;}
+#new-course-dialog #assistant-result details {margin:8px 0 0;}#assistant-original {font-size:12px;line-height:1.8;color:#796b86;white-space:pre-wrap;overflow-wrap:anywhere;max-height:170px;overflow:auto;}
+.step-number {display:inline-grid;place-items:center;width:20px;height:20px;margin-right:3px;border:1px solid currentColor;border-radius:50%;font-size:11px;}
+@media(max-width:560px) {
+ .assistant-home {margin:8px auto 30px;}.assistant-intro {font-size:12px;gap:7px;}.assistant-avatar {width:38px;height:36px;}.assistant-avatar svg {width:44px;height:40px;}.assistant-home h2 {font-size:25px;letter-spacing:-.5px;line-height:1.5;margin-top:12px;}.assistant-lead {font-size:12px;margin-bottom:19px;}
+ .assistant-composer {padding:14px 13px 12px;border-radius:20px;}.assistant-composer #assistant-prompt {font-size:14px;min-height:126px;line-height:1.8;}.composer-actions {gap:7px;padding-top:10px;}.composer-tools {gap:0;}.composer-tool {font-size:11px;padding:6px 6px;gap:4px;}.composer-tool svg {width:14px;height:14px;}.assistant-submit {font-size:12px;gap:10px;padding:9px 12px;min-height:39px;white-space:nowrap;}.assistant-submit span:last-child {font-size:17px;}
+ .assistant-examples {justify-content:flex-start;gap:6px;margin-top:14px;}.assistant-examples>span {width:100%;text-align:left;margin-bottom:1px;}.assistant-examples button {padding:6px 9px;font-size:10px;min-height:30px;}.assistant-help {text-align:left;font-size:10px;margin-top:11px;}.assistant-status {text-align:left;}
+ .new-course-tabs button {font-size:12px;padding:9px 11px;}#assistant-result {padding:12px;margin-bottom:18px;}
+}
+
 </style>
 </head>
 <body>
@@ -2032,10 +2058,10 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
       <nav class="role-tabs" aria-label="演示角色">
         <a id="view-teacher" data-view="teacher" href="?view=teacher">
           <svg aria-hidden="true">
-            <use href="#icon-grid"/>
+            <use href="#icon-spark"/>
           </svg>
           <span>
-            我的课程
+            备课助手
           </span>
         </a>
         <a id="view-review" data-view="review" href="?view=review">
@@ -2072,19 +2098,28 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
     </aside>
     <p id="mode" class="banner" hidden>
     </p>
-    <section id="teacher-view" hidden aria-label="我的课程">
+    <section id="teacher-view" hidden aria-label="备课助手">
       <div id="course-home">
-        <div class="course-welcome">
-          <div><p class="eyebrow">A LITTLE HELP, A BETTER LESSON</p><h2>准备下一堂好课</h2><p>课件、作业和孩子们的反馈，都在这里。</p><button id="new-course-open">＋ 准备新课</button></div>
-          <svg viewBox="0 0 160 140" aria-hidden="true"><use href="#biboo-buddy"/></svg>
-        </div>
+        <section class="assistant-home" aria-labelledby="assistant-title">
+          <div class="assistant-intro"><span class="assistant-avatar"><svg viewBox="0 0 160 140" aria-hidden="true"><use href="#biboo-buddy"/></svg></span><span>Biboo · 你的备课助手</span></div>
+          <h2 id="assistant-title">今天，想和孩子们探索什么？</h2>
+          <p class="assistant-lead">告诉我你的备课想法，我们一起把它变成一堂好课。</p>
+          <form id="assistant-form" class="assistant-composer">
+            <label class="sr-only" for="assistant-prompt">告诉 Biboo 你的备课想法</label>
+            <textarea id="assistant-prompt" maxlength="4000" rows="3" required placeholder="想教什么？孩子多大？比如：给 6–8 岁孩子上一堂 25 分钟的海洋动物课，学习 octopus、crab、turtle…" aria-describedby="assistant-help assistant-status"></textarea>
+            <div class="composer-actions"><div class="composer-tools"><button type="button" id="new-course-open" class="composer-tool"><svg aria-hidden="true"><use href="#icon-upload"/></svg>上传材料</button><button type="button" id="manual-course-open" class="composer-tool">自己填写</button></div><button id="assistant-start" class="assistant-submit"><span>帮我准备</span><span aria-hidden="true">↗</span></button></div>
+          </form>
+          <div class="assistant-examples" aria-label="试试这些备课想法"><span>试试这样说</span><button type="button" data-assistant-example="ocean">🐙 探索海洋动物</button><button type="button" data-assistant-example="fruit">🍎 水果小市场</button><button type="button" data-assistant-example="phonics">✦ 练一练 th 发音</button></div>
+          <p id="assistant-status" class="assistant-status" role="status" aria-live="polite"></p>
+          <p id="assistant-help" class="assistant-help">Demo 会整理描述中已有的词句；确认目标后再生成课程。</p>
+        </section>
         <div class="course-toolbar"><h2>我的课程 <span id="course-count"></span></h2><label>班级筛选<select id="course-filter"><option value="">全部班级</option></select></label><button id="course-refresh" class="quiet-button">刷新</button></div>
         <p id="course-load-status" role="status" aria-live="polite"></p>
         <div id="course-grid" class="course-grid"></div>
         <div id="course-empty" class="course-empty" hidden><h3>这里还没有课程</h3><p>上传一份教学材料，或者写下这节课要教的词。</p><button id="empty-new-course">准备第一堂课</button></div>
       </div>
       <section id="lesson-output" class="course-detail" hidden aria-label="课程详情">
-        <button id="course-back" class="quiet-button">← 我的课程</button>
+        <button id="course-back" class="quiet-button">← 返回首页</button>
         <div class="course-detail-heading"><div><p id="lesson-state"></p><h2 id="course-title"></h2><p id="course-meta"></p></div><div class="actions"><button id="edit-course" class="secondary">修改内容</button><button id="save" hidden>保存修改</button><button id="cancel-edit" class="quiet-button" hidden>取消修改</button><button id="regenerate" class="quiet-button" hidden>继续生成</button></div></div>
         <p id="edit-hint" hidden>修改后可直接发布，Biboo 会先保存。离开时也会提醒你保存。</p>
         <ul id="quality"></ul>
@@ -2108,8 +2143,8 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
         </div>
       </section>
       <dialog id="new-course-dialog" aria-labelledby="new-course-title">
-        <div class="new-course-heading"><div><h2 id="new-course-title">准备新课</h2><p>从现有材料开始，也可以自己写几个目标。</p></div><button id="new-course-close" class="quiet-button" aria-label="关闭准备新课">×</button></div>
-        <div class="new-course-tabs" role="tablist" aria-label="新课准备方式"><button id="new-material-tab" role="tab" aria-selected="true" aria-controls="new-material-panel">从材料开始</button><button id="new-goals-tab" role="tab" aria-selected="false" aria-controls="new-goals-panel" tabindex="-1">自己填写</button></div>
+        <div class="new-course-heading"><div><h2 id="new-course-title">准备新课</h2><p id="new-course-description">提供材料，再确认这堂课的目标。</p></div><button id="new-course-close" class="quiet-button" aria-label="关闭准备新课">×</button></div>
+        <div class="new-course-tabs" role="tablist" aria-label="新课准备方式"><button id="new-material-tab" role="tab" aria-selected="true" aria-controls="new-material-panel"><span class="step-number">1</span> 提供材料</button><button id="new-goals-tab" role="tab" aria-selected="false" aria-controls="new-goals-panel" tabindex="-1"><span class="step-number">2</span> 确认目标</button></div>
         <p id="new-course-status" role="status" aria-live="polite"></p>
         <section id="new-material-panel" role="tabpanel" aria-labelledby="new-material-tab">
           <h3 id="courseware-heading" class="sr-only">上传教学材料</h3>
@@ -2170,6 +2205,7 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
 
         </section>
         <section id="new-goals-panel" role="tabpanel" aria-labelledby="new-goals-tab" hidden>
+          <div id="assistant-result" class="assistant-result" hidden><p id="assistant-result-summary"></p><p id="assistant-result-note"></p><details><summary>查看我的原始描述</summary><p id="assistant-original"></p></details></div>
           <label>上课班级<select id="classes"></select></label>
           <details id="new-class-details"><summary>＋ 新建班级</summary><form id="new-class" class="row"><label>班级名称<input name="name" maxlength="140" required placeholder="例如：周六英语班"></label><button class="secondary">建班</button></form></details>
           <form id="target">
@@ -2501,7 +2537,8 @@ const kinds = {word:'单词', sentence:'句子', dialogue:'对话'};
 const list = value => value.split(/[,，\n]/).map(part => part.trim()).filter(Boolean);
 let lesson, studentLesson, classRows = [], courseRows = [], activeView = 'teacher', busy = false;
 let editingCourse = false, detailTab = 'homework', newCourseOrigin = null, newCourseSnapshot = '';
-let creationPending = false;
+let creationPending = false, focusAfterAction = null;
+let assistantSource = '', assistantAcceptedPrompt = '';
 const views = ['teacher', 'student', 'review'];
 const outlineFields = [], itemFields = [];
 function status(message, failed = false) {
@@ -2695,12 +2732,14 @@ async function showCourseHome() {
 }
 function newCourseValues() {
   const goals = [...$('target').elements].filter(control => control.name).map(control => [control.name, control.value]);
-  return JSON.stringify({goals,title:$('courseware-title').value,file:coursewareFile?.name || ''});
+  return JSON.stringify({goals,title:$('courseware-title').value,file:coursewareFile?.name || '',source:assistantSource});
 }
 function setNewCourseTab(tab, focus = false) {
   const material = tab !== 'goals';
   $('new-material-panel').hidden = !material;
   $('new-goals-panel').hidden = material;
+  $('new-course-title').textContent = material ? '准备新课' : '确认这堂课';
+  $('new-course-description').textContent = material ? '提供材料，再确认这堂课的目标。也可以直接生成课堂 PPT。' : '目标都可以调整，确认后再生成课件大纲与作业。';
   for (const [id, selected] of [['new-material-tab',material],['new-goals-tab',!material]]) {
     $(id).setAttribute('aria-selected',String(selected)); $(id).tabIndex = selected ? 0 : -1;
   }
@@ -2712,7 +2751,8 @@ function openNewCourse(tab = 'material') {
   if (!newCourseSnapshot) newCourseSnapshot = newCourseValues();
   setNewCourseTab(tab);
   $('new-course-dialog').showModal();
-  $(tab === 'goals' ? 'new-goals-tab':'new-material-tab').focus();
+  const initialFocus = $(tab === 'goals' ? 'new-goals-tab':'new-material-tab');
+  if (busy) focusAfterAction = initialFocus; else initialFocus.focus();
 }
 function closeNewCourse() {
   if (busy) return;
@@ -2720,11 +2760,12 @@ function closeNewCourse() {
 }
 $('new-course-dialog').addEventListener('cancel', event => { if (busy) event.preventDefault(); });
 $('new-course-dialog').addEventListener('close', () => {
-  if (newCourseOrigin?.isConnected && !newCourseOrigin.closest('[hidden]')) newCourseOrigin.focus();
-  else ($('lesson-output').hidden ? $('new-course-open') : $('course-back')).focus();
+  const returnFocus = newCourseOrigin?.isConnected && !newCourseOrigin.closest('[hidden]') ? newCourseOrigin : ($('lesson-output').hidden ? $('new-course-open') : $('course-back'));
+  if (busy) focusAfterAction = returnFocus; else returnFocus.focus();
 });
 $('new-course-close').onclick = closeNewCourse;
 for (const id of ['new-course-open','empty-new-course']) $(id).onclick = () => { if (!busy) openNewCourse(); };
+$('manual-course-open').onclick = () => { if (!busy) openNewCourse('goals'); };
 $('new-material-tab').onclick = () => setNewCourseTab('material');
 $('new-goals-tab').onclick = () => setNewCourseTab('goals');
 for (const id of ['tab-homework','tab-classroom']) $(id).onclick = () => setDetailTab(id.split('-')[1]);
@@ -2752,7 +2793,7 @@ $('cancel-edit').onclick = () => {
   render(lesson);
 };
 window.addEventListener('beforeunload', event => {
-  if (hasUnsavedContent() || (newCourseSnapshot && newCourseSnapshot !== newCourseValues())) {
+  if (hasUnsavedContent() || (newCourseSnapshot && newCourseSnapshot !== newCourseValues()) || $('assistant-prompt').value.trim() !== assistantAcceptedPrompt) {
     event.preventDefault(); event.returnValue = '';
   }
 });
@@ -2770,7 +2811,7 @@ async function switchView(view, lessonId) {
   activeView = views.includes(view) ? view : 'teacher';
   document.body.dataset.view = activeView;
   const pages = {
-    teacher: ['我的课程', '我的课程'],
+    teacher: ['Biboo 备课助手', '备课助手'],
     student: ['孩子的练习空间', '一起，勇敢开口'],
     review: ['班级与课后反馈', '老师复核'],
   };
@@ -2823,6 +2864,8 @@ async function showTeacher(teacher) {
   } else {
     if ($('new-course-dialog').open) $('new-course-dialog').close();
     courseRows = []; newCourseSnapshot = ''; creationPending = false;
+    $('assistant-form').reset(); assistantAcceptedPrompt = ''; clearAssistantSource();
+    $('assistant-status').textContent = '';
     $('course-grid').replaceChildren();
     document.body.removeAttribute('data-view');
     $('page-context').textContent = '欢迎来到 Biboo';
@@ -2855,6 +2898,8 @@ async function perform(action, pending = '正在处理…', report = status) {
     busy = false;
     updateCoursewareControls();
     updatePracticeControls();
+    if (focusAfterAction?.isConnected && !focusAfterAction.closest('[hidden]')) focusAfterAction.focus();
+    focusAfterAction = null;
   }
 }
 function submit(id, action) {
@@ -2894,7 +2939,7 @@ submit('login', async fields => {
 });
 $('logout').onclick = () => perform(async () => {
   if (!(await leaveCourseSafely())) return '';
-  if (newCourseSnapshot && newCourseSnapshot !== newCourseValues() && !confirm('退出会清除这次尚未生成的新课内容。确认退出？')) return '';
+  if (((newCourseSnapshot && newCourseSnapshot !== newCourseValues()) || $('assistant-prompt').value.trim() !== assistantAcceptedPrompt) && !confirm('退出会清除这次尚未生成的新课内容。确认退出？')) return '';
   await api('/auth/logout', 'POST');
   await showTeacher(null);
   return '已退出。';
@@ -2923,6 +2968,8 @@ submit('target', async fields => {
   try {
     const draft = await api('/lessons', 'POST', target);
     $('target').reset(); newCourseSnapshot = '';
+    if (assistantSource) assistantAcceptedPrompt = assistantSource;
+    clearAssistantSource();
     $('courseware-file').value = ''; $('courseware-title').value = ''; selectCourseware(null);
     $('new-course-dialog').close();
     await lessons(draft.id);
@@ -3075,6 +3122,87 @@ function fillGoals(goals) {
   fields.sound_focus.value = (goals.sound_focus || []).join(', ');
   if (!fields.age_band.value) fields.age_band.value = '6–10 岁';
 }
+const assistantExamples = {
+  ocean:'给 6–8 岁孩子上一堂 25 分钟的英语课，主题：海洋动物。\n词汇：octopus, crab, turtle, fish\n句型：It is a turtle.\n希望有猜谜和模仿动物的课堂互动。',
+  fruit:'给 7–9 岁孩子上一堂 30 分钟的英语课，主题：水果小市场。\n词汇：apple, banana, pear, orange\n句型：I like apples.\n想让孩子扮演顾客和店员，轮流开口。',
+  phonics:'给 8 岁孩子准备一堂 20 分钟的英语课，主题：认识 th 发音。\n词汇：think, three, thank\n句型：I think there are three.\n发音重点：/θ/\n希望有听辨和同桌跟读练习。',
+};
+function clearAssistantSource() {
+  assistantSource = '';
+  $('assistant-result').hidden = true;
+  for (const id of ['assistant-original','assistant-result-summary','assistant-result-note']) $(id).textContent = '';
+}
+function assistantStatus(message, failed = false) {
+  $('assistant-status').textContent = message;
+  $('assistant-status').classList.toggle('error', failed);
+  if ($('new-course-dialog').open) {
+    $('new-course-status').textContent = message;
+    $('new-course-status').classList.toggle('error', failed);
+  }
+}
+function parseAssistantContext(source) {
+  // Only explicit numeric values are recognized; ambiguous descriptions stay editable defaults.
+  const ageMatches = [...source.matchAll(/(?<![\d.])(\d{1,2})(?:\s*[-–—~～到至]\s*(\d{1,2}))?\s*岁/g)];
+  const minuteMatches = [...source.matchAll(/(?<![\d.\-–—~～到至])(\d{1,3})\s*(?:分钟|minutes?\b|min\b)/gi)];
+  const minuteRange = /\d+\s*[-–—~～到至]\s*\d+\s*(?:分钟|minutes?\b|min\b)/i.test(source);
+  const ageMatch = ageMatches.length === 1 ? ageMatches[0] : null;
+  const low = Number(ageMatch?.[1]), high = Number(ageMatch?.[2] || ageMatch?.[1]);
+  const age = ageMatch && low >= 1 && high <= 18 && high >= low ? (low === high ? low + ' 岁' : low + '–' + high + ' 岁') : null;
+  const minutes = !minuteRange && minuteMatches.length === 1 ? Number(minuteMatches[0][1]) : null;
+  const duration = minutes >= 5 && minutes <= 180 ? minutes : null;
+  const explicitTopic = source.match(/(?:^|[\n，,。；;])\s*(?:主题|课题)\s*[:：]\s*([^\n，,。；;]+)/);
+  const topic = (explicitTopic?.[1] || source.split(/[\n。！？]/)[0]).trim().slice(0, 60);
+  return {age:age || '6–10 岁', duration:duration || 25, topic,
+    defaults:[!age ? '年龄暂用 6–10 岁' : '', !duration ? '课时暂用 25 分钟' : ''].filter(Boolean)};
+}
+for (const chip of document.querySelectorAll('[data-assistant-example]')) {
+  chip.onclick = () => {
+    if (busy) return;
+    const current = $('assistant-prompt').value.trim();
+    const example = assistantExamples[chip.dataset.assistantExample];
+    if (current && current !== assistantAcceptedPrompt && !Object.values(assistantExamples).includes(current)
+      && !confirm('替换为这个示例？你刚写的备课想法还没有生成课程；点「取消」会保留原文。')) return;
+    $('assistant-prompt').value = example;
+    assistantStatus('可以改成你的想法，再点「帮我准备」。');
+    $('assistant-prompt').focus();
+  };
+}
+$('assistant-prompt').addEventListener('keydown', event => {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'Enter' && !busy) {
+    event.preventDefault(); $('assistant-form').requestSubmit();
+  }
+});
+$('assistant-form').onsubmit = event => {
+  event.preventDefault();
+  if (busy) return;
+  const source = $('assistant-prompt').value.trim();
+  if (!source) { assistantStatus('先写下这堂课想教什么，或点一个示例试试。', true); return; }
+  if (newCourseSnapshot && newCourseSnapshot !== newCourseValues() && !confirm('确认页里还有尚未生成的内容。用这次描述重新整理目标？')) return;
+  const context = parseAssistantContext(source);
+  const origin = document.activeElement;
+  perform(async () => {
+    const query = new URLSearchParams({filename:'备课想法.txt',title:context.topic});
+    const response = await fetch('/api/v1/courseware/goals?' + query, {
+      method:'POST',headers:{'Content-Type':'application/octet-stream'},body:new Blob([source],{type:'text/plain;charset=utf-8'}),
+    });
+    const goals = await readResponse(response);
+    openNewCourse('goals');
+    newCourseOrigin = origin;
+    fillGoals(goals);
+    const fields = $('target').elements;
+    fields.age_band.value = context.age; fields.duration_minutes.value = context.duration;
+    $('target-options').open = true;
+    assistantSource = source;
+    $('assistant-original').textContent = source;
+    $('assistant-result-summary').textContent = goals.vocabulary.length ? '已整理出这些内容，请确认。' : '还需要你补充想教的英文词汇。';
+    $('assistant-result-note').textContent = [context.defaults.join('，'), '本轮按规则整理描述中已有的词句，请核对；互动玩法等要求请在生成后调整。'].filter(Boolean).join('。');
+    $('assistant-result').hidden = false;
+    if (!$('classes').value) $('new-class-details').open = true;
+    focusAfterAction = goals.vocabulary.length ? fields.topic : fields.vocabulary;
+    $('new-course-dialog').scrollTop = 0;
+    return goals.vocabulary.length ? '目标已整理好。调整一下，再生成这堂课。' : '没有找到可用的英文词汇。请在「想教的词汇」里补充，Biboo 不会替你猜。';
+  }, '正在整理你的备课想法…', assistantStatus);
+};
 function uploadCourseware(action, title) {
   const query = new URLSearchParams({filename: coursewareFile.name, title});
   if (action === 'pptx') query.set('style', selectedCoursewareStyle());
@@ -3121,11 +3249,12 @@ $('courseware-form').onsubmit = event => {
   if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
   perform(async () => {
     const response = await uploadCourseware('goals', $('courseware-title').value.trim());
-    fillGoals(await readResponse(response));
+    const goals = await readResponse(response);
+    clearAssistantSource(); fillGoals(goals);
     setNewCourseTab('goals');
     if (!$('classes').value) $('new-class-details').open = true;
     $('new-course-dialog').scrollTop = 0;
-    $('target').elements.topic.focus();
+    focusAfterAction = $('target').elements.topic;
     return '材料里的目标已带入，可以修改后生成课程。';
   }, '正在从材料提取教学目标…', reportCourseware);
 };
@@ -3723,9 +3852,9 @@ $('review-next-lesson').onclick = () => perform(async () => {
   if ($('classes').value !== String(class_id)) await classes(class_id);
   await switchView('teacher');
   openNewCourse('goals');
-  fillGoals(suggestion);
+  clearAssistantSource(); fillGoals(suggestion);
   $('classes').value = class_id;
-  $('target').elements.topic.focus();
+  focusAfterAction = $('target').elements.topic;
   return '下节课的目标已带入，调整后生成一堂新课。';
 });
 
