@@ -1916,9 +1916,37 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
  .new-course-tabs button {font-size:12px;padding:9px 11px;}#assistant-result {padding:12px;margin-bottom:18px;}
 }
 
+/* Quiet, slowly drifting light behind the teacher workspace. */
+body {isolation:isolate;}
+.teacher-ambience {display:none;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(155deg,#f7f5fc 0%,#f2eff9 54%,#f8f6fc 100%);}
+body[data-authenticated][data-view=teacher] .teacher-ambience,
+body[data-authenticated][data-view=review] .teacher-ambience {display:block;}
+.teacher-ambience::before,.teacher-ambience::after {content:"";position:absolute;inset:-15%;pointer-events:none;transform-origin:center;}
+.teacher-ambience::before {
+  background:radial-gradient(ellipse at 20% 26%,#b8a0e657 0%,#cbb6ed30 24%,transparent 55%),radial-gradient(ellipse at 82% 78%,#b9a7df40 0%,transparent 50%);
+  animation:biboo-light-drift 26s ease-in-out infinite alternate;
+}
+.teacher-ambience::after {
+  background:radial-gradient(ellipse at 81% 22%,#d1b5e94a 0%,#e1cff22b 25%,transparent 53%),radial-gradient(ellipse at 28% 82%,#b8b2e53b 0%,transparent 49%);
+  animation:biboo-light-breathe 34s ease-in-out infinite alternate;
+}
+@keyframes biboo-light-drift {
+  from {transform:translate3d(-3%,-2%,0) scale(1);opacity:.72;}
+  to {transform:translate3d(5%,4%,0) scale(1.06);opacity:1;}
+}
+@keyframes biboo-light-breathe {
+  from {transform:translate3d(4%,-3%,0) scale(1.05);opacity:.8;}
+  to {transform:translate3d(-5%,4%,0) scale(1);opacity:.55;}
+}
+body[data-view=teacher] .assistant-composer {background:#fffffff2;border-color:#d9cce9;box-shadow:0 8px 32px #6951840b;}
+body[data-view=teacher] .assistant-composer:focus-within {border-color:#ac91c8;box-shadow:0 0 0 4px #a98bc316,0 12px 36px #69518412;}
+@media(prefers-reduced-motion:reduce) {
+  .teacher-ambience::before,.teacher-ambience::after {animation:none;transform:none;opacity:.7;}
+}
 </style>
 </head>
 <body>
+  <div class="teacher-ambience" aria-hidden="true"></div>
   <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
     <defs>
       <symbol id="icon-grid" viewBox="0 0 24 24">
