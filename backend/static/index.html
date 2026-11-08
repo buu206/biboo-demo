@@ -2093,6 +2093,37 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
 @media(max-width:360px) {body.is-studio-home .sidebar {gap:5px;padding:8px;}body.is-studio-home .role-tabs {gap:8px;}body.is-studio-home .role-tabs a {font-size:9px;}.sidebar .brand-mark {display:none;}.scene-copy h2 {font-size:25px;}.scene-badges {width:66px;height:43px;}.scene-badge {width:43px;height:43px;}.scene-badge + .scene-badge {margin-left:-20px;}.scene-heading-line {gap:4px;}.lesson-workbench .assistant-examples {gap:5px;}.lesson-workbench .assistant-examples button {font-size:10px;padding:7px 9px;}}
 @media(prefers-reduced-motion:reduce) {.scene-prop .prop-float,.scene-mascot .mascot-float,.scene-mascot .scene-wave,.scene-mascot .buddy-blink {animation:none!important;}.scene-prop,.scene-cloud,.scene-mascot {transform:none!important;}.scene-prop .prop-art,.scene-badge,.scene-primary,.scene-mascot .scene-face,.scene-mascot-caption {transition:none;}.scene-prop:hover .prop-art {transform:rotate(var(--angle));}.scene-primary:hover {transform:none;}.scene-badge:hover {transform:none;}.scene-badge + .scene-badge:hover {transform:rotate(11deg);}}
 
+/* A short welcome, using the same owl artwork as the homepage. */
+html:has(#biboo-intro[open]) {overflow:hidden;}
+#biboo-intro {position:fixed;inset:0;width:100%;max-width:none;height:100%;height:100dvh;max-height:none;margin:0;padding:0;border:0;overflow:clip;color:#282431;background:#f7faff;opacity:1;transition:opacity .4s ease;}
+#biboo-intro[open] {display:grid;place-items:center;}
+#biboo-intro::backdrop {background:transparent;}
+#biboo-intro.is-leaving {opacity:0;}
+.intro-stage {position:relative;text-align:center;width:min(440px,100%);padding:28px 20px 60px;outline:none;}
+.intro-portrait {position:relative;width:220px;height:220px;margin:0 auto 16px;}
+.intro-halo {position:absolute;inset:12px;border-radius:50%;background:#eeebf8;animation:intro-halo-in 1.4s cubic-bezier(.2,.7,.3,1) both;}
+#intro-owl {position:relative;display:block;width:100%;height:100%;overflow:visible;animation:intro-arrive .85s cubic-bezier(.2,.8,.25,1) both;}
+#intro-owl .buddy-blink {transform-box:view-box;animation:intro-awake .95s ease both;}
+#intro-owl .scene-wave {transform-box:view-box;animation:intro-wave 1.05s ease-in-out .75s both;}
+.intro-spark {position:absolute;width:27px;height:27px;animation:intro-spark-in 1s ease .3s both;}
+.intro-spark-one {left:-9px;top:52px;transform:rotate(-13deg);}
+.intro-spark-two {right:0;top:12px;width:18px;height:18px;animation-delay:.6s;}
+.intro-wordmark {margin:0;font-size:43px;font-weight:700;line-height:1.2;letter-spacing:-2px;animation:intro-copy-in .65s ease .35s both;}
+.intro-caption {margin:16px 0 0;font-size:14px;line-height:1.8;letter-spacing:1px;color:#837d91;animation:intro-copy-in .65s ease .55s both;}
+.intro-cloud {position:absolute;pointer-events:none;width:55vw;height:40vw;max-height:450px;min-height:180px;bottom:-26vw;border-radius:50%;background:white;animation:intro-cloud-in 2s ease both;}
+.intro-cloud-left {left:-15vw;}.intro-cloud-right {right:-17vw;bottom:-23vw;animation-delay:.15s;}
+#intro-skip {position:absolute;right:max(26px,env(safe-area-inset-right));top:max(24px,env(safe-area-inset-top));min-height:44px;padding:10px 16px;border:1px solid #e9e7ef;border-radius:24px;background:transparent;color:#807a8b;box-shadow:none;font-size:12px;font-weight:400;}
+#intro-skip:hover {background:white;color:#493b60;border-color:#d6c8e5;}
+#intro-skip:focus-visible {outline:2px solid #9b80bd;outline-offset:4px;}
+@keyframes intro-arrive {from {opacity:0;transform:translateY(18px) scale(.94);}to {opacity:1;transform:translateY(0) scale(1);}}
+@keyframes intro-halo-in {from {opacity:0;transform:scale(.8);}to {opacity:1;transform:scale(1);}}
+@keyframes intro-awake {0%,28% {transform:scaleY(.13);}52%,100% {transform:scaleY(1);}72% {transform:scaleY(.15);}85% {transform:scaleY(1);}}
+@keyframes intro-wave {0%,100% {transform:rotate(0);}20%,60% {transform:rotate(-22deg);}40%,80% {transform:rotate(7deg);}}
+@keyframes intro-copy-in {from {opacity:0;transform:translateY(8px);}to {opacity:1;transform:translateY(0);}}
+@keyframes intro-spark-in {0% {opacity:0;scale:.5;}65% {opacity:1;scale:1.08;}100% {opacity:1;scale:1;}}
+@keyframes intro-cloud-in {from {translate:0 18px;opacity:0;}to {translate:0 0;opacity:1;}}
+@media(max-width:500px) {.intro-portrait {width:186px;height:186px;}.intro-wordmark {font-size:38px;}.intro-caption {font-size:12px;}.intro-stage {padding-bottom:35px;}#intro-skip {top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));}.intro-cloud {bottom:-12vw;}.intro-cloud-right {bottom:-8vw;}}
+@media(prefers-reduced-motion:reduce) {#biboo-intro {transition:none;}#biboo-intro * {animation:none!important;}}
 .mobile-only {display:none;}@media(max-width:760px){.mobile-only{display:initial;}}
 </style>
 </head>
@@ -2823,6 +2854,80 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
       </div>
     </section>
   </main>
+<dialog id="biboo-intro" aria-labelledby="intro-wordmark" aria-describedby="intro-caption">
+  <div class="intro-cloud intro-cloud-left" aria-hidden="true"></div>
+  <div class="intro-cloud intro-cloud-right" aria-hidden="true"></div>
+  <div class="intro-stage" tabindex="-1" autofocus>
+    <div class="intro-portrait" aria-hidden="true">
+      <span class="intro-halo"></span>
+      <svg class="intro-spark intro-spark-one" viewBox="0 0 200 200"><use href="#b-scene-spark"/></svg>
+      <svg class="intro-spark intro-spark-two" viewBox="0 0 200 200"><use href="#b-scene-spark"/></svg>
+      <svg id="intro-owl" viewBox="0 0 200 200"></svg>
+    </div>
+    <p class="intro-wordmark" id="intro-wordmark">Biboo</p>
+    <p class="intro-caption" id="intro-caption">让好奇心，开启每一堂课。</p>
+  </div>
+  <button type="button" id="intro-skip">跳过开场 <span aria-hidden="true">→</span></button>
+</dialog>
+<script>
+// Independent of API startup: the welcome must never hold up login or a lesson.
+(() => {
+  const dialog = document.getElementById('biboo-intro');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const url = new URL(location.href);
+  const replay = url.searchParams.get('intro') === '1';
+  const key = 'biboo-welcome-v1';
+  if (replay) {
+    url.searchParams.delete('intro');
+    history.replaceState(history.state, '', url);
+  }
+  if (reduced.matches || document.hidden || url.hash || url.searchParams.has('lesson') ||
+      (url.searchParams.has('view') && url.searchParams.get('view') !== 'teacher')) return;
+  try { if (!replay && sessionStorage.getItem(key)) return; } catch (_) { /* Storage is optional. */ }
+  const source = document.getElementById('b-scene-boo');
+  const owl = document.getElementById('intro-owl');
+  if (!source || !owl || typeof dialog.showModal !== 'function') return;
+  let exitTimer, closeTimer, closed = false, restoreFocus = false;
+  const close = () => {
+    if (closed) return;
+    closed = true;
+    clearTimeout(exitTimer); clearTimeout(closeTimer);
+    dialog.close();
+    document.body.removeAttribute('data-intro-active');
+    document.removeEventListener('visibilitychange', onVisibility);
+    window.removeEventListener('pagehide', close);
+    reduced.removeEventListener('change', onReduced);
+    if (restoreFocus) {
+      const target = document.body.classList.contains('is-studio-home')
+        ? document.getElementById('scene-start') : document.querySelector('#login h2');
+      if (target?.getClientRects().length) {
+        if (target.tagName === 'H2') target.tabIndex = -1;
+        target.focus({preventScroll:true});
+      }
+    }
+  };
+  const leave = () => {
+    if (closed || dialog.classList.contains('is-leaving')) return;
+    clearTimeout(exitTimer);
+    dialog.classList.add('is-leaving');
+    closeTimer = setTimeout(close, 420);
+  };
+  const onVisibility = () => { if (document.hidden) close(); };
+  const onReduced = () => { if (reduced.matches) close(); };
+  dialog.addEventListener('cancel', event => { event.preventDefault(); restoreFocus = true; close(); });
+  document.getElementById('intro-skip').addEventListener('click', () => { restoreFocus = true; close(); });
+  try {
+    owl.replaceChildren(...Array.from(source.childNodes, node => node.cloneNode(true)));
+    document.body.setAttribute('data-intro-active', '');
+    dialog.showModal();
+    try { sessionStorage.setItem(key, 'seen'); } catch (_) { /* Do not block on storage policy. */ }
+    exitTimer = setTimeout(() => leave(), 1850);
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pagehide', close);
+    reduced.addEventListener('change', onReduced);
+  } catch (_) { close(); }
+})();
+</script>
 <script>
 const $ = id => document.getElementById(id);
 async function readResponse(response) {
@@ -3199,7 +3304,7 @@ async function perform(action, pending = '正在处理…', report = status) {
   if (busy) return;
   busy = true;
   report(pending);
-  const controls = [...document.querySelectorAll('input, textarea, button, select')];
+  const controls = [...document.querySelectorAll('input, textarea, button, select')].filter(control => !control.closest('#biboo-intro'));
   const disabled = controls.map(control => control.disabled);
   controls.forEach(control => control.disabled = true);
   try { report(await action() || ''); }
@@ -4351,7 +4456,7 @@ $('review-next-lesson').onclick = () => perform(async () => {
     return !stage.closest('[hidden]') && document.body.dataset.view === 'teacher';
   }
   function canAnimate() {
-    return !reduced.matches && !document.hidden && intersecting && isHome() && !byId('new-course-dialog')?.open;
+    return !reduced.matches && !document.hidden && intersecting && isHome() && !document.body.hasAttribute('data-intro-active') && !byId('new-course-dialog')?.open;
   }
   function canPoint() { return canAnimate() && finePointer.matches; }
   function paint() {
@@ -4445,7 +4550,7 @@ $('review-next-lesson').onclick = () => perform(async () => {
   window.addEventListener('blur',stopMotion);
   window.addEventListener('pagehide',()=>{stopMotion();clearHello();});
   const sceneObserver = new MutationObserver(checkMotion);
-  sceneObserver.observe(document.body,{attributes:true,attributeFilter:['data-view','data-authenticated']});
+  sceneObserver.observe(document.body,{attributes:true,attributeFilter:['data-view','data-authenticated','data-intro-active']});
   for (let parent=stage;parent && parent!==document.body;parent=parent.parentElement) sceneObserver.observe(parent,{attributes:true,attributeFilter:['hidden']});
   if (byId('new-course-dialog')) sceneObserver.observe(byId('new-course-dialog'),{attributes:true,attributeFilter:['open']});
   new IntersectionObserver(entries=>{intersecting=entries[0]?.isIntersecting??false;checkMotion();}).observe(stage);
