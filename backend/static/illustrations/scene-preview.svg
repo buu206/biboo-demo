@@ -1,21 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420"><rect width="1200" height="420" fill="#f5faff"/><defs>
-<symbol id="b-scene-boo" viewBox="0 0 280 260">
- <g class="scene-wave" style="transform-origin:88px 144px"><g transform="translate(88 144) scale(.82) translate(-88 -144)">
- <path d="M91 153C62 145 46 120 41 94L35 70C33 62 40 58 44 65L51 80L44 55C42 47 50 43 54 51L62 73L56 46C54 38 63 36 67 45L75 70L73 49C72 40 81 40 84 49L90 75L96 65C102 57 109 62 105 69L93 93C88 104 94 120 107 126Z" fill="#63B4FF"/>
- <path d="M51 80L56 96M62 73L68 91M75 70L80 86" fill="none" stroke="#318FF0" stroke-width="2.5" stroke-linecap="round"/>
- </g></g>
- <path d="M92 91C86 67 102 44 127 44C140 44 150 49 157 57C169 40 193 41 207 57C218 69 218 84 213 97C237 105 249 126 244 150C241 166 230 178 217 183C231 203 225 226 204 236C189 243 173 238 163 229C146 246 119 247 101 232C87 221 82 203 88 187C67 181 55 162 59 141C62 119 75 102 92 91Z" fill="#63B4FF"/>
- <path d="M213 97C236 105 249 126 244 150C242 163 236 172 227 178C236 161 235 138 224 123C220 117 217 107 213 97Z" fill="#318FF0"/>
- <g class="scene-face" style="transform-origin:153px 144px">
- <path d="M116 136C119 125 128 124 132 135M163 135C167 124 176 126 179 137" fill="none" stroke="#193952" stroke-width="5" stroke-linecap="round"/>
- <path d="M135 154C140 158 153 161 164 155C169 152 172 154 171 160C169 174 158 183 147 179C139 177 133 168 132 160C131 155 132 153 135 154Z" fill="#193952"/>
- <path d="M144 176C149 169 159 170 164 175C158 181 151 182 144 176Z" fill="#FF9E70"/>
- </g>
- <g class="scene-rest-hand" style="transform-origin:206px 198px">
- <path d="M211 189C229 187 243 202 238 217C234 230 219 233 207 226L187 212C181 209 181 202 185 199C189 196 192 198 198 200L190 190C185 182 193 178 199 184L207 192Z" fill="#63B4FF"/>
- <path d="M211 189C229 187 243 202 238 217M187 212L204 223M198 200L207 207" fill="none" stroke="#318FF0" stroke-width="2.5" stroke-linecap="round"/>
- </g>
-</symbol>
+<symbol id="b-scene-boo" viewBox="0 0 200 200">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#D6C8E5" opacity=".38"/>
+        <path d="M65 164v11m-7 0h14m56-11v11m-7 0h14" fill="none" stroke="#E6B968" stroke-width="8" stroke-linecap="round"/>
+        <path d="M44 75c-2-16-7-38 1-40 6-2 21 8 30 16 16-7 34-7 50 0 9-8 24-18 30-16 8 2 3 24 1 40 10 12 14 29 11 46-5 32-28 52-67 52s-62-20-67-52c-3-17 1-34 11-46Z" fill="#B79BDD"/>
+        <path d="M40 119c11 23 32 35 61 35s51-12 61-35c-6 34-27 54-62 54s-57-20-60-54Z" fill="#A88ACD"/>
+        <path d="m48 46 19 13-18 8m103-21-19 13 18 8" fill="#CDB7E9"/>
+        <path d="M35 92c-16 8-20 27-14 39 3 6 8 8 12 5 8-5 17-21 18-34 1-9-7-15-16-10Z" fill="#B79BDD"/>
+        <g class="buddy-wave scene-wave" style="transform-origin:155px 104px">
+          <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
+          <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <ellipse cx="77" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <ellipse cx="123" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes scene-face">
+            <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
+            <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="62" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <path d="M94 106q6-3 12 0l-4 9q-2 3-4 0Z" fill="#E4B45D"/>
+        <path d="M90 121q10 15 20 0Z" fill="#6A507C"/>
+        <path d="M95 128q5-4 10 0" fill="#E6ACBF"/>
+        <path d="m77 140 5 5 5-5m8 2 5 5 5-5m8-2 5 5 5-5" fill="none" stroke="#D9C4EC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </symbol>
 <symbol id="b-scene-plane" viewBox="0 0 200 200"><path d="M22 37L180 87L112 113L81 166L62 101Z" fill="#FFCFB4"/><path d="M22 37L112 113L81 166L85 99Z" fill="#FF9E70"/><path d="M22 37L85 99L180 87Z" fill="#FFEADF"/><path d="M85 99L81 166L68 117Z" fill="#FFBA91"/>
 </symbol>
 <symbol id="b-scene-book" viewBox="0 0 200 200"><path d="M22 59C47 50 75 55 100 75C125 55 153 50 178 59L172 150C147 143 124 148 104 165C102 167 98 167 96 165C76 148 53 143 28 150Z" fill="#318FF0"/><path d="M26 48C53 42 78 48 100 66L100 151C79 134 55 128 29 135Z" fill="#D4EAFF"/><path d="M100 66C122 48 147 42 174 48L171 135C145 128 121 134 100 151Z" fill="#A5D3FF"/><path d="M100 68V149" fill="none" stroke="#63B4FF" stroke-width="3"/><path d="M45 72C57 72 69 76 80 82M45 87C57 87 68 91 79 97M45 103C58 103 67 106 78 111M120 82C131 76 143 72 155 72M121 97C132 91 143 87 155 87" fill="none" stroke="#FFF" stroke-width="5" stroke-linecap="round"/><path d="M143 47L142 86L151 79L158 84L160 46Z" fill="#FF9E70"/>

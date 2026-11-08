@@ -10,7 +10,7 @@ Biboo 帮英语老师用一份教学材料准备课堂 PPT 和跟读作业，再
 
 在 Biboo 产品目录运行 `backend/.venv/bin/python scripts/demo.py`。第一次运行或更新依赖后，先执行下方的依赖安装命令。老师用邀请码 `biboo-demo` 登录。[打开本机 Demo](http://127.0.0.1:18766/)
 
-老师端首屏参考 [Genie Studio](https://geniestudio.app/) 的场景构图：两侧是无脸的扁平教学道具，中央为黑色标题、内嵌图形徽章和「开始备课」按钮，底部是一个蓝色 Biboo 角色。道具缓慢漂浮，靠近鼠标时轻轻推移并惯性回位；云层与道具随滚动产生不同幅度的位移。蓝色角色独立挥手，点击会打招呼。系统开启「减少动态效果」时保持静态；页面隐藏、离开首屏或打开操作弹窗时暂停场景动画。
+老师端首屏参考 [Genie Studio](https://geniestudio.app/) 的场景构图：两侧是无脸的扁平教学道具，中央为黑色标题、内嵌图形徽章和「开始备课」按钮，底部是一个紫色猫头鹰 Biboo 角色。道具缓慢漂浮，靠近鼠标时轻轻推移并惯性回位；云层与道具随滚动产生不同幅度的位移。猫头鹰角色独立挥手，点击会打招呼。系统开启「减少动态效果」时保持静态；页面隐藏、离开首屏或打开操作弹窗时暂停场景动画。
 
 点「开始备课」会滚动到下方输入工作区：描述想法、选择示例或上传材料，整理出的主题和英文词汇先由老师确认，再生成课程。工作区后保留可操作的课堂课件、跟读与反馈示例：课件可翻页、猜词和揭晓，跟读可选词，反馈可筛选；示例下的主按钮进入实际功能。已有课程继续放在下方。进入课程后按课件、作业分别操作，默认预览，点击「修改内容」才展开编辑。顶部可进入「课后反馈」和「孩子跟读」。
 
@@ -95,3 +95,5 @@ AIHubMix 的默认模型为 `gpt-4o-mini-tts`，音色为 `coral`。`AIHUBMIX_TT
 在本机 `backend/.env` 中填写 `TENCENT_SOE_APP_ID`、`TENCENTCLOUD_SECRET_ID` 和 `TENCENTCLOUD_SECRET_KEY`，保留 `DEEPSEEK_API_KEY`，并设 `BIBOO_FAKE_MODELS=0`。凭证说明见腾讯云新版口语评测文档。[腾讯云快速入门](https://cloud.tencent.com/document/product/1774/107347)
 
 真实冒烟从产品目录运行 `backend/.venv/bin/python scripts/smoke_practice.py`，带 `--adult-consent` 和 5–10 个 `--case 类型=路径.wav` 参数，覆盖 `clean`、`wrong`、`noisy`。录音文本为 `think`，格式为 16 kHz 单声道 16 位 PCM WAV。结果和评分样例会写入 `docs/evidence/阶段2-2/`。
+
+本项目的 IP 沿用 Biboo 原有紫色猫头鹰。外部设计参考只用于布局、背景层次和交互方式，不替换或照搬他人的角色造型。

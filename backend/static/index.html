@@ -2028,7 +2028,7 @@ body.is-studio-home .role-tabs a[aria-current=page] {color:#252c35;background:no
 body.is-studio-home .role-tabs a svg {display:none;}
 body.is-studio-home #mode {position:absolute;top:calc(var(--scene-height) + 20px);right:50%;transform:translateX(50%);z-index:2;font-size:10px;width:max-content;max-width:85%;padding:0;opacity:.8;text-align:center;}
 body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;transform:translateX(-50%);z-index:20;border-radius:20px;padding:10px 20px;background:#fff;box-shadow:0 5px 30px #1b263510;}
-.scene-hero {--scene-x:0px;--scene-y:0px;--scene-scroll:0px;position:relative;isolation:isolate;min-height:840px;height:var(--scene-height);margin:0;border-radius:32px;background:radial-gradient(ellipse at 50% 65%,#eff8ff 0%,#f8fcff 72%);overflow:hidden;text-align:center;}
+.scene-hero {--scene-x:0px;--scene-y:0px;--scene-scroll:0px;position:relative;isolation:isolate;min-height:840px;height:var(--scene-height);margin:0;border-radius:32px;background:radial-gradient(ellipse at 50% 65%,#eff8ff 0%,#f8fcff 72%);overflow:clip;text-align:center;}
 .scene-copy {position:relative;z-index:3;padding-top:240px;max-width:850px;margin:0 auto;pointer-events:none;}
 .scene-copy h2 {margin:0;color:#10151d;font-size:clamp(40px,3.55vw,52px);font-weight:500;letter-spacing:-1.8px;line-height:1.35;}
 .scene-heading-line {display:flex;align-items:center;justify-content:center;white-space:nowrap;gap:13px;}
@@ -2064,15 +2064,15 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
 .scene-star {--float:6px;width:24px;opacity:.75;}.scene-star svg {fill:#b9dfff;}.scene-star-one {left:22%;top:115px;--angle:12deg;--delay:-3s;--depth:.05;}.scene-star-two {right:21%;top:130px;--angle:-10deg;--delay:-1s;--depth:.03;}.scene-star-three {left:12%;top:250px;--angle:16deg;--delay:-5s;--depth:.08;}.scene-star-four {right:36%;bottom:175px;--angle:18deg;--delay:-2s;--depth:.1;}.scene-star-five {left:36%;bottom:110px;--angle:-8deg;--delay:-3s;--depth:.14;}
 .scene-dot {width:20px;height:20px;border-radius:50%;background:#c9e6ff;}.scene-dot-one {left:11.5%;bottom:290px;--depth:.09;}.scene-dot-two {right:12.3%;top:430px;--depth:.11;width:20px;height:20px;}.scene-dot-three {right:15%;top:318px;width:10px;height:10px;--depth:.09;}
 .scene-mascot {--mascot-x:0px;--mascot-y:0px;position:absolute;left:calc(50% - 117px);bottom:100px;width:234px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;z-index:3;transform:translate(var(--mascot-x),calc(var(--mascot-y) + var(--scene-scroll)*.08));cursor:pointer;}
-.scene-mascot:hover,.scene-mascot:active,.scene-mascot:focus-visible {background:none;box-shadow:none;}.scene-mascot svg {width:100%;height:auto;overflow:visible;display:block;}.scene-mascot .mascot-float {display:block;animation:scene-bob 6s ease-in-out infinite;}
-.scene-mascot .scene-wave {transform-box:view-box;transform-origin:88px 144px;animation:scene-wave 4.8s ease-in-out infinite;}
+.scene-mascot:hover,.scene-mascot:active,.scene-mascot:focus-visible {background:none;box-shadow:none;}.scene-mascot svg {width:100%;height:auto;overflow:visible;display:block;}.scene-mascot .buddy-blink {animation:studio-blink 7s ease-in-out -1.7s infinite;}.scene-mascot .mascot-float {display:block;animation:scene-bob 6s ease-in-out infinite;}
+.scene-mascot .scene-wave {transform-box:view-box;transform-origin:155px 104px;animation:scene-wave 4.8s ease-in-out infinite;}
 .scene-mascot .scene-face {transform:translate(var(--face-x,0px),var(--face-y,0px));transition:transform .25s;}
 .scene-mascot.is-hello .scene-wave,.scene-mascot:hover .scene-wave,.scene-mascot:focus-visible .scene-wave {animation:scene-wave-hello .65s ease-in-out infinite;}
 .scene-mascot.is-hello .mascot-float {animation:scene-jump .7s cubic-bezier(.3,.8,.3,1);}
 .scene-mascot-caption {position:absolute;left:50%;bottom:99%;transform:translate(-50%,8px);opacity:0;white-space:nowrap;background:#fff;color:#436a8b;border-radius:18px;padding:9px 15px;font-size:12px;transition:opacity .25s,transform .25s;pointer-events:none;}
 .scene-mascot:hover .scene-mascot-caption,.scene-mascot:focus-visible .scene-mascot-caption,.scene-mascot.is-hello .scene-mascot-caption {opacity:1;transform:translate(-50%,0);}
 .scene-bottom-link {position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:4;background:none;border:0;box-shadow:none;color:#6c8194;font-size:11px;padding:5px 12px;min-height:30px;}.scene-bottom-link:hover {background:#fff;color:#2785ce;}
-.scene-hero.is-motion-paused .prop-float,.scene-hero.is-motion-paused .mascot-float,.scene-hero.is-motion-paused .scene-wave {animation-play-state:paused;}
+.scene-hero.is-motion-paused .prop-float,.scene-hero.is-motion-paused .mascot-float,.scene-hero.is-motion-paused .scene-wave,.scene-hero.is-motion-paused .buddy-blink {animation-play-state:paused;}
 @keyframes scene-drift {0%,100% {transform:translateY(0) rotate(-2deg);}50% {transform:translateY(calc(var(--float)*-1)) rotate(3deg);}}
 @keyframes scene-bob {0%,100% {transform:translateY(0) rotate(-3deg);}50% {transform:translateY(-10px) rotate(2deg);}}
 @keyframes scene-wave {0%,15%,100% {transform:rotate(0deg);}3%,9% {transform:rotate(14deg);}6%,12% {transform:rotate(-11deg);}}
@@ -2091,7 +2091,7 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
 @media(max-width:760px) {body.is-studio-home {--scene-height:780px;padding:12px 12px 45px;}body.is-studio-home .sidebar {width:calc(100% - 30px);top:8px;min-height:60px;padding:8px 16px;gap:12px;}body.is-studio-home .role-tabs {margin:0 auto;gap:12px;}body.is-studio-home .role-tabs a {font-size:11px;}body.is-studio-home .sidebar #logout {font-size:10px;padding:5px 10px;min-height:31px;}body.is-studio-home .sidebar .brand strong {font-size:23px;}.scene-hero {min-height:780px;height:780px;border-radius:25px;}.scene-copy {padding-top:255px;max-width:600px;}.scene-copy h2 {font-size:35px;letter-spacing:-1.5px;}.scene-heading-line {gap:8px;}.scene-badges {width:91px;height:58px;margin:0;}.scene-badge {width:58px;height:58px;border-width:4px;}.scene-badge + .scene-badge {margin-left:-25px;}.scene-copy>p {max-width:340px;padding:0 10px;margin:22px auto 27px;font-size:13px;}.scene-primary {min-height:48px;font-size:15px;padding:10px 25px;}.prop-plane {left:9%;top:118px;width:61px;}.prop-book {right:9%;top:120px;width:91px;}.prop-headphones {top:340px;left:2%;width:53px;}.prop-envelope {top:380px;right:2%;width:63px;}.prop-palette {left:10%;top:520px;width:75px;}.prop-card {right:14%;top:500px;width:51px;}.prop-pencil {right:10%;bottom:95px;width:71px;}.prop-check {left:14%;bottom:100px;width:45px;}.scene-star-one {left:35%;top:130px;width:18px;}.scene-star-two {right:29%;top:195px;width:19px;}.scene-star-three {left:8%;top:250px;width:19px;}.scene-star-four {right:29%;bottom:142px;width:17px;}.scene-star-five {left:29%;bottom:198px;width:18px;}.scene-dot-one {left:7%;bottom:230px;width:13px;height:13px;}.scene-dot-two {right:9%;top:320px;width:12px;height:12px;}.scene-dot-three {display:none;}.scene-cloud-small {left:-30px;top:140px;transform:scale(.7);}.scene-cloud-top {right:-35px;top:145px;transform:scale(.6);}.scene-cloud-left {width:300px;height:270px;bottom:-100px;left:-210px;}.scene-cloud-left::before {width:200px;height:190px;left:150px;top:150px;}.scene-cloud-right {width:320px;height:310px;right:-230px;bottom:-75px;}.scene-cloud-right::before {width:210px;height:210px;right:140px;top:210px;}.scene-mascot {width:186px;left:calc(50% - 93px);bottom:44px;}.lesson-workbench {margin:65px auto;padding:0 14px;}.lesson-workbench h2 {font-size:29px;}.lesson-workbench .workbench-lead {font-size:12px;}.lesson-workbench #assistant-prompt {font-size:16px;}.lesson-workbench .assistant-composer {padding:18px 16px 13px;}.lesson-workbench .assistant-examples>span {display:none;}.lesson-workbench .assistant-examples button {font-size:11px;}.lesson-workbench .assistant-help {font-size:10px;}}
 @media(max-width:500px) {body.is-studio-home .sidebar {width:calc(100% - 20px);padding:8px 12px;gap:9px;}body.is-studio-home .sidebar .brand strong {font-size:20px;}.sidebar .brand-mark {width:24px;height:28px;}.sidebar .brand-mark svg {width:26px;height:29px;}body.is-studio-home .role-tabs {gap:11px;}body.is-studio-home .role-tabs a {font-size:10px;}body.is-studio-home .sidebar #logout {font-size:9px;min-height:28px;padding:4px 7px;}body.is-studio-home {--scene-height:740px;}body.is-studio-home #mode {font-size:8px;}.scene-hero {min-height:740px;height:740px;}.scene-copy {padding:238px 10px 0;}.scene-copy h2 {font-size:28px;letter-spacing:-1.2px;}.scene-heading-line {gap:5px;}.scene-heading-line + .scene-heading-line {margin-top:10px;}.scene-badges {width:74px;height:49px;}.scene-badge {width:49px;height:49px;border-width:3px;}.scene-badge + .scene-badge {margin-left:-24px;}.scene-copy>p {max-width:265px;font-size:12px;line-height:1.8;margin:22px auto 25px;}.prop-headphones {left:3%;top:200px;width:43px;}.prop-envelope {right:3%;top:212px;width:47px;}.prop-palette {left:5%;top:465px;width:65px;}.prop-card {right:8%;top:465px;width:45px;}.prop-pencil {right:5%;bottom:100px;width:62px;}.prop-check {left:7%;bottom:110px;width:40px;}.scene-star-three {left:9%;top:320px;width:13px;opacity:.4;}.scene-dot-two {right:6%;top:340px;opacity:.5;}.scene-mascot {width:176px;left:calc(50% - 88px);bottom:36px;}.scene-star-five {left:28%;bottom:180px;}.lesson-workbench {padding:0 7px;}.lesson-workbench h2 {font-size:26px;}.lesson-workbench .workbench-overline {font-size:9px;}.lesson-workbench .workbench-lead {font-size:12px;}.lesson-workbench .composer-tool {font-size:11px;padding:7px 6px;}.lesson-workbench .assistant-submit {font-size:12px;padding:9px 15px;gap:12px;}}
 @media(max-width:360px) {body.is-studio-home .sidebar {gap:5px;padding:8px;}body.is-studio-home .role-tabs {gap:8px;}body.is-studio-home .role-tabs a {font-size:9px;}.sidebar .brand-mark {display:none;}.scene-copy h2 {font-size:25px;}.scene-badges {width:66px;height:43px;}.scene-badge {width:43px;height:43px;}.scene-badge + .scene-badge {margin-left:-20px;}.scene-heading-line {gap:4px;}.lesson-workbench .assistant-examples {gap:5px;}.lesson-workbench .assistant-examples button {font-size:10px;padding:7px 9px;}}
-@media(prefers-reduced-motion:reduce) {.scene-prop .prop-float,.scene-mascot .mascot-float,.scene-mascot .scene-wave {animation:none!important;}.scene-prop,.scene-cloud,.scene-mascot {transform:none!important;}.scene-prop .prop-art,.scene-badge,.scene-primary,.scene-mascot .scene-face,.scene-mascot-caption {transition:none;}.scene-prop:hover .prop-art {transform:rotate(var(--angle));}.scene-primary:hover {transform:none;}.scene-badge:hover {transform:none;}.scene-badge + .scene-badge:hover {transform:rotate(11deg);}}
+@media(prefers-reduced-motion:reduce) {.scene-prop .prop-float,.scene-mascot .mascot-float,.scene-mascot .scene-wave,.scene-mascot .buddy-blink {animation:none!important;}.scene-prop,.scene-cloud,.scene-mascot {transform:none!important;}.scene-prop .prop-art,.scene-badge,.scene-primary,.scene-mascot .scene-face,.scene-mascot-caption {transition:none;}.scene-prop:hover .prop-art {transform:rotate(var(--angle));}.scene-primary:hover {transform:none;}.scene-badge:hover {transform:none;}.scene-badge + .scene-badge:hover {transform:rotate(11deg);}}
 
 .mobile-only {display:none;}@media(max-width:760px){.mobile-only{display:initial;}}
 </style>
@@ -2104,23 +2104,36 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
 <symbol id="b-scene-check" viewBox="0 0 200 200"><path d="M100 53C114 33 141 43 141 65C165 65 174 92 154 106C169 126 152 150 130 142C124 164 95 166 87 144C64 153 45 129 60 109C39 96 47 68 72 67C69 44 92 37 100 53Z" fill="#FFF"/><path d="M80 100L94 113L123 84" fill="none" stroke="#318FF0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
 
-<symbol id="b-scene-boo" viewBox="0 0 280 260">
- <g class="scene-wave" style="transform-origin:88px 144px"><g transform="translate(88 144) scale(.82) translate(-88 -144)">
- <path d="M91 153C62 145 46 120 41 94L35 70C33 62 40 58 44 65L51 80L44 55C42 47 50 43 54 51L62 73L56 46C54 38 63 36 67 45L75 70L73 49C72 40 81 40 84 49L90 75L96 65C102 57 109 62 105 69L93 93C88 104 94 120 107 126Z" fill="#63B4FF"/>
- <path d="M51 80L56 96M62 73L68 91M75 70L80 86" fill="none" stroke="#318FF0" stroke-width="2.5" stroke-linecap="round"/>
- </g></g>
- <path d="M92 91C86 67 102 44 127 44C140 44 150 49 157 57C169 40 193 41 207 57C218 69 218 84 213 97C237 105 249 126 244 150C241 166 230 178 217 183C231 203 225 226 204 236C189 243 173 238 163 229C146 246 119 247 101 232C87 221 82 203 88 187C67 181 55 162 59 141C62 119 75 102 92 91Z" fill="#63B4FF"/>
- <path d="M213 97C236 105 249 126 244 150C242 163 236 172 227 178C236 161 235 138 224 123C220 117 217 107 213 97Z" fill="#318FF0"/>
- <g class="scene-face" style="transform-origin:153px 144px">
- <path d="M116 136C119 125 128 124 132 135M163 135C167 124 176 126 179 137" fill="none" stroke="#193952" stroke-width="5" stroke-linecap="round"/>
- <path d="M135 154C140 158 153 161 164 155C169 152 172 154 171 160C169 174 158 183 147 179C139 177 133 168 132 160C131 155 132 153 135 154Z" fill="#193952"/>
- <path d="M144 176C149 169 159 170 164 175C158 181 151 182 144 176Z" fill="#FF9E70"/>
- </g>
- <g class="scene-rest-hand" style="transform-origin:206px 198px">
- <path d="M211 189C229 187 243 202 238 217C234 230 219 233 207 226L187 212C181 209 181 202 185 199C189 196 192 198 198 200L190 190C185 182 193 178 199 184L207 192Z" fill="#63B4FF"/>
- <path d="M211 189C229 187 243 202 238 217M187 212L204 223M198 200L207 207" fill="none" stroke="#318FF0" stroke-width="2.5" stroke-linecap="round"/>
- </g>
-</symbol>
+<symbol id="b-scene-boo" viewBox="0 0 200 200">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#D6C8E5" opacity=".38"/>
+        <path d="M65 164v11m-7 0h14m56-11v11m-7 0h14" fill="none" stroke="#E6B968" stroke-width="8" stroke-linecap="round"/>
+        <path d="M44 75c-2-16-7-38 1-40 6-2 21 8 30 16 16-7 34-7 50 0 9-8 24-18 30-16 8 2 3 24 1 40 10 12 14 29 11 46-5 32-28 52-67 52s-62-20-67-52c-3-17 1-34 11-46Z" fill="#B79BDD"/>
+        <path d="M40 119c11 23 32 35 61 35s51-12 61-35c-6 34-27 54-62 54s-57-20-60-54Z" fill="#A88ACD"/>
+        <path d="m48 46 19 13-18 8m103-21-19 13 18 8" fill="#CDB7E9"/>
+        <path d="M35 92c-16 8-20 27-14 39 3 6 8 8 12 5 8-5 17-21 18-34 1-9-7-15-16-10Z" fill="#B79BDD"/>
+        <g class="buddy-wave scene-wave" style="transform-origin:155px 104px">
+          <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
+          <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <ellipse cx="77" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <ellipse cx="123" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes scene-face">
+            <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
+            <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="62" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <path d="M94 106q6-3 12 0l-4 9q-2 3-4 0Z" fill="#E4B45D"/>
+        <path d="M90 121q10 15 20 0Z" fill="#6A507C"/>
+        <path d="M95 128q5-4 10 0" fill="#E6ACBF"/>
+        <path d="m77 140 5 5 5-5m8 2 5 5 5-5m8-2 5 5 5-5" fill="none" stroke="#D9C4EC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </symbol>
 <symbol id="b-scene-plane" viewBox="0 0 200 200"><path d="M22 37L180 87L112 113L81 166L62 101Z" fill="#FFCFB4"/><path d="M22 37L112 113L81 166L85 99Z" fill="#FF9E70"/><path d="M22 37L85 99L180 87Z" fill="#FFEADF"/><path d="M85 99L81 166L68 117Z" fill="#FFBA91"/>
 </symbol>
 <symbol id="b-scene-book" viewBox="0 0 200 200"><path d="M22 59C47 50 75 55 100 75C125 55 153 50 178 59L172 150C147 143 124 148 104 165C102 167 98 167 96 165C76 148 53 143 28 150Z" fill="#318FF0"/><path d="M26 48C53 42 78 48 100 66L100 151C79 134 55 128 29 135Z" fill="#D4EAFF"/><path d="M100 66C122 48 147 42 174 48L171 135C145 128 121 134 100 151Z" fill="#A5D3FF"/><path d="M100 68V149" fill="none" stroke="#63B4FF" stroke-width="3"/><path d="M45 72C57 72 69 76 80 82M45 87C57 87 68 91 79 97M45 103C58 103 67 106 78 111M120 82C131 76 143 72 155 72M121 97C132 91 143 87 155 87" fill="none" stroke="#FFF" stroke-width="5" stroke-linecap="round"/><path d="M143 47L142 86L151 79L158 84L160 46Z" fill="#FF9E70"/>
@@ -2184,10 +2197,23 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
           <path d="m7 12 3 3 7-7"/>
         </g>
       </symbol>
-      <symbol id="biboo-buddy" viewBox="0 0 280 260"><use href="#b-scene-boo"/></symbol>
+      <symbol id="biboo-buddy" viewBox="0 0 160 140">
+        <ellipse cx="81" cy="126" rx="48" ry="7" fill="#d9c9ec" opacity=".45"/>
+        <path d="m36 61-4-39 34 18M124 61l4-39-34 18" fill="#b99adc"/>
+        <ellipse cx="80" cy="77" rx="49" ry="47" fill="#b99adc"/>
+        <path d="M39 87c9 14 21 22 41 22s32-8 41-22c-2 25-16 38-41 38S41 112 39 87Z" fill="#ac8bd1"/>
+        <ellipse cx="62" cy="70" rx="22" ry="25" fill="#f7f1fc"/>
+        <ellipse cx="98" cy="70" rx="22" ry="25" fill="#f7f1fc"/>
+        <path d="M54 72q8-11 16 0m20 0q8-11 16 0" fill="none" stroke="#776092" stroke-width="4" stroke-linecap="round"/>
+        <path d="m75 80 5 8 5-8" fill="#f1c56b"/>
+        <ellipse cx="47" cy="85" rx="7" ry="4" fill="#e4b9d3"/>
+        <ellipse cx="113" cy="85" rx="7" ry="4" fill="#e4b9d3"/>
+        <path d="m49 121 10-8 5 9m32 0 6-9 10 8" fill="none" stroke="#d7b774" stroke-width="5" stroke-linecap="round"/>
+        <path d="m24 71 8 9-4 18m108-28-8 10 5 17" fill="none" stroke="#b99adc" stroke-width="12" stroke-linecap="round"/>
+      </symbol>
 
 
-    <symbol id="b-buddy-boo" viewBox="0 0 280 260"><use href="#b-scene-boo"/></symbol>
+    <symbol id="b-buddy-boo" viewBox="0 0 200 200"><use href="#b-scene-boo"/></symbol>
     <symbol id="b-buddy-hui" viewBox="0 0 200 200"><use href="#b-scene-book"/></symbol>
     <symbol id="b-buddy-lang" viewBox="0 0 200 200"><use href="#b-scene-headphones"/></symbol>
     <symbol id="b-buddy-ya" viewBox="0 0 200 200"><use href="#b-scene-check"/></symbol>
@@ -2317,23 +2343,36 @@ body.is-studio-home #status:not(:empty) {position:fixed;top:100px;left:50%;trans
             <p>从课件、课堂互动，到课后跟读，<br class="mobile-only">和 Biboo 一起准备。</p>
             <button type="button" id="scene-start" class="scene-primary">开始备课<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
-          <button type="button" id="scene-mascot" class="scene-mascot" aria-label="和 Biboo 打个招呼"><span class="scene-mascot-caption">嗨，今天想教点什么？</span><span class="mascot-float"><svg viewBox="0 0 280 260" aria-hidden="true">
- <g class="scene-wave" style="transform-origin:88px 144px"><g transform="translate(88 144) scale(.82) translate(-88 -144)">
- <path d="M91 153C62 145 46 120 41 94L35 70C33 62 40 58 44 65L51 80L44 55C42 47 50 43 54 51L62 73L56 46C54 38 63 36 67 45L75 70L73 49C72 40 81 40 84 49L90 75L96 65C102 57 109 62 105 69L93 93C88 104 94 120 107 126Z" fill="#63B4FF"/>
- <path d="M51 80L56 96M62 73L68 91M75 70L80 86" fill="none" stroke="#318FF0" stroke-width="2.5" stroke-linecap="round"/>
- </g></g>
- <path d="M92 91C86 67 102 44 127 44C140 44 150 49 157 57C169 40 193 41 207 57C218 69 218 84 213 97C237 105 249 126 244 150C241 166 230 178 217 183C231 203 225 226 204 236C189 243 173 238 163 229C146 246 119 247 101 232C87 221 82 203 88 187C67 181 55 162 59 141C62 119 75 102 92 91Z" fill="#63B4FF"/>
- <path d="M213 97C236 105 249 126 244 150C242 163 236 172 227 178C236 161 235 138 224 123C220 117 217 107 213 97Z" fill="#318FF0"/>
- <g class="scene-face" style="transform-origin:153px 144px">
- <path d="M116 136C119 125 128 124 132 135M163 135C167 124 176 126 179 137" fill="none" stroke="#193952" stroke-width="5" stroke-linecap="round"/>
- <path d="M135 154C140 158 153 161 164 155C169 152 172 154 171 160C169 174 158 183 147 179C139 177 133 168 132 160C131 155 132 153 135 154Z" fill="#193952"/>
- <path d="M144 176C149 169 159 170 164 175C158 181 151 182 144 176Z" fill="#FF9E70"/>
- </g>
- <g class="scene-rest-hand" style="transform-origin:206px 198px">
- <path d="M211 189C229 187 243 202 238 217C234 230 219 233 207 226L187 212C181 209 181 202 185 199C189 196 192 198 198 200L190 190C185 182 193 178 199 184L207 192Z" fill="#63B4FF"/>
- <path d="M211 189C229 187 243 202 238 217M187 212L204 223M198 200L207 207" fill="none" stroke="#318FF0" stroke-width="2.5" stroke-linecap="round"/>
- </g>
-</svg></span></button>
+          <button type="button" id="scene-mascot" class="scene-mascot" aria-label="和 Biboo 打个招呼"><span class="scene-mascot-caption">嗨，今天想教点什么？</span><span class="mascot-float"><svg viewBox="0 0 200 200" aria-hidden="true">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#D6C8E5" opacity=".38"/>
+        <path d="M65 164v11m-7 0h14m56-11v11m-7 0h14" fill="none" stroke="#E6B968" stroke-width="8" stroke-linecap="round"/>
+        <path d="M44 75c-2-16-7-38 1-40 6-2 21 8 30 16 16-7 34-7 50 0 9-8 24-18 30-16 8 2 3 24 1 40 10 12 14 29 11 46-5 32-28 52-67 52s-62-20-67-52c-3-17 1-34 11-46Z" fill="#B79BDD"/>
+        <path d="M40 119c11 23 32 35 61 35s51-12 61-35c-6 34-27 54-62 54s-57-20-60-54Z" fill="#A88ACD"/>
+        <path d="m48 46 19 13-18 8m103-21-19 13 18 8" fill="#CDB7E9"/>
+        <path d="M35 92c-16 8-20 27-14 39 3 6 8 8 12 5 8-5 17-21 18-34 1-9-7-15-16-10Z" fill="#B79BDD"/>
+        <g class="buddy-wave scene-wave" style="transform-origin:155px 104px">
+          <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
+          <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <ellipse cx="77" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <ellipse cx="123" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes scene-face">
+            <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
+            <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="62" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <path d="M94 106q6-3 12 0l-4 9q-2 3-4 0Z" fill="#E4B45D"/>
+        <path d="M90 121q10 15 20 0Z" fill="#6A507C"/>
+        <path d="M95 128q5-4 10 0" fill="#E6ACBF"/>
+        <path d="m77 140 5 5 5-5m8 2 5 5 5-5m8-2 5 5 5-5" fill="none" stroke="#D9C4EC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg></span></button>
           <p id="studio-speech" class="sr-only" role="status" aria-live="polite"></p>
           <button type="button" id="scene-explore" class="scene-bottom-link">往下探索 ↓</button>
         </section>
