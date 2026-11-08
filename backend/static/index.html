@@ -1917,68 +1917,125 @@ body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 
 }
 
 
-/* Biboo & friends: a light stage around real teaching tools. */
-:root {background:#fff;--ink:#24222b;}
-body,body[data-authenticated] {padding:20px 28px 56px;max-width:1240px;background:#fff;}
+/* Interactive teaching studio: a scene to explore and a tool to use. */
+:root {background:#fff;--ink:#20242c;--studio-blue:#318bee;--studio-ease:cubic-bezier(.2,.75,.25,1);}
+body,body[data-authenticated] {padding:20px 20px 64px;max-width:1480px;background:#fff;}
 body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min-height:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;margin:0;}
-.sidebar {position:relative;z-index:2;max-width:1060px;margin:0 auto 15px;padding:10px 14px 10px 19px;min-height:65px;border:1px solid #eeedf2;border-radius:50px;background:#fff;box-shadow:0 5px 22px #34314c07;gap:16px;flex-wrap:nowrap;}
-.sidebar .brand {display:flex;gap:6px;flex:none;text-decoration:none;color:#28232d;}.sidebar .brand strong {font-size:24px;letter-spacing:-1.1px;line-height:1;}.brand-dot {color:#9b7ec6;}
+.sidebar {position:relative;z-index:5;max-width:1080px;margin:0 auto 14px;padding:10px 18px 10px 22px;min-height:66px;border:1px solid #edf0f4;border-radius:50px;background:#ffffffed;box-shadow:0 8px 28px #34415a05;gap:18px;flex-wrap:nowrap;}
+.sidebar .brand {display:flex;gap:7px;flex:none;text-decoration:none;color:#24232d;}.sidebar .brand strong {font-size:25px;letter-spacing:-1.2px;line-height:1;}.brand-dot {color:#8a6eb1;}
 .sidebar .brand-mark {width:34px;height:34px;background:#eee5fb;border-radius:50%;overflow:hidden;box-shadow:none;}.sidebar .brand-mark svg {width:38px;height:38px;flex:none;}
-.role-tabs {gap:3px;margin:0 auto;flex:none;width:auto;}.role-tabs a {min-height:39px;padding:8px 15px;font-size:12px;color:#766d81;}.role-tabs a svg {width:16px;height:16px;}.role-tabs a[aria-current=page] {background:#f1eafa;color:#715190;}
-.sidebar #account {gap:10px;margin:0;flex:none;}.sidebar #teacher {font-weight:500;font-size:11px;max-width:110px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}.sidebar #logout {min-height:34px;padding:6px 12px;border-radius:24px;border:1px solid #e9e5ed;background:#fff;color:#81758b;font-size:11px;}
-.banner {max-width:1030px;margin:0 auto 10px;padding:4px 0;background:transparent;border:0;color:#928999;font-size:11px;text-align:center;line-height:1.6;}
-#status:not(:empty) {max-width:1040px;margin:8px auto 13px;}
-.assistant-home {isolation:isolate;position:relative;max-width:none;margin:0 auto 15px;padding:23px 30px 42px;border-radius:38px 38px 0 0;background:#f6f9fd;text-align:center;}
-.assistant-intro {display:flex;align-items:center;justify-content:center;gap:7px;font-size:10px;letter-spacing:1.3px;font-weight:650;color:#9a8aa6;line-height:1.4;}
-.intro-dot {width:6px;height:6px;border-radius:50%;background:#b49ad0;box-shadow:0 0 0 4px #ede7f5;}
-.assistant-home h2 {font-size:43px;line-height:1.2;letter-spacing:-1.8px;font-weight:800;color:#232127;margin:17px 0 13px;}
-.hero-title-line {display:flex;align-items:center;justify-content:center;gap:10px;min-height:61px;}.hero-title-line+ .hero-title-line {margin-top:3px;}.hero-title-line>span:not(.character-disc):not(.character-group) {white-space:nowrap;}
-.character-disc {display:inline-grid;place-items:center;flex:none;width:57px;height:57px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 4px 10px #36264f08;transition:transform .3s cubic-bezier(.2,.8,.25,1.4);}.character-disc svg {width:66px;height:66px;}
-.hero-boo {background:#e8daf8;transform:rotate(-8deg);}.hero-hui {background:#ffead3;transform:rotate(-10deg);}.hero-lang {background:#dceefc;transform:rotate(6deg);}.hero-ya {background:#dff3e7;transform:rotate(-4deg);}
-.character-group {display:inline-flex;align-items:center;flex:none;padding-left:2px;}.character-group .character-disc {width:48px;height:48px;margin-left:-10px;}.character-group .character-disc:first-child {margin-left:0;}.character-group svg {width:56px;height:56px;}
-.assistant-home .character-disc:hover {transform:translateY(-5px) rotate(5deg);}.assistant-lead {font-size:13px;line-height:1.7;margin:0 0 19px;color:#8b8195;}
-.assistant-composer {position:relative;max-width:760px;margin:0 auto;padding:12px 18px 12px;border:1px solid #e4deed;border-radius:23px;background:#fff;box-shadow:0 8px 25px #6b57890b;}
-.assistant-composer:focus-within {border-color:#b097ce;box-shadow:0 0 0 4px #d9c8ec33,0 10px 28px #6b578914;}
-.assistant-composer #assistant-prompt {min-height:78px;max-height:270px;padding:6px 2px 9px;font-size:14px;line-height:1.85;color:#4c4356;}.assistant-composer #assistant-prompt::placeholder {color:#a59bac;}
-.composer-actions {padding-top:8px;}.composer-tool {min-height:35px;padding:6px 9px;}.assistant-submit {min-height:38px;padding:8px 16px;background:#7c5d9e;border-radius:30px;gap:18px;}.assistant-submit:hover {background:#684887;}
-.assistant-examples {gap:7px;margin:12px auto 0;}.assistant-examples>span {font-size:10px;color:#a69cad;}.assistant-examples button {padding:5px 10px;min-height:28px;font-size:10px;border-color:#e5e1ec;background:#ffffff8a;color:#918298;}
-.assistant-help {font-size:10px;line-height:1.6;margin:10px auto 0;color:#a499ad;}.assistant-status {max-width:750px;margin:10px auto 0;}
-.hero-cloud {position:absolute;left:0;right:0;bottom:-1px;width:100%;height:33px;pointer-events:none;z-index:-1;}
-.stage-spark {position:absolute;color:#ccbddb;pointer-events:none;z-index:-1;}.stage-spark-one {left:9%;top:76px;font-size:32px;transform:rotate(-14deg);}.stage-spark-two {right:9%;top:152px;color:#d5dfee;font-size:20px;}
-.buddy-launches {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1090px;margin:0 auto 32px;}
-.buddy-launch {position:relative;display:flex;align-items:center;justify-content:flex-start;gap:9px;text-align:left;min-height:127px;padding:15px 15px 15px 10px;border:1px solid #f2e8dc;border-radius:23px;background:#fff9f0;color:#3e3445;font-weight:400;box-shadow:none;transition:transform .24s,box-shadow .24s,border-color .24s;}
-.buddy-launch-lang {background:#f2f8fe;border-color:#e4eef7;}.buddy-launch-ya {background:#f3faf5;border-color:#e5f0e7;}
-.launch-art {display:grid;place-items:center;flex:none;width:79px;height:87px;}.buddy-launch .launch-art svg {width:89px;height:89px;transition:transform .35s cubic-bezier(.2,.8,.25,1.35);transform-origin:50% 85%;}
-.launch-copy {display:flex;flex-direction:column;min-width:0;gap:3px;}.launch-name {font-size:9px;color:#aa9381;letter-spacing:.1px;}.buddy-launch-lang .launch-name {color:#8b9fb2;}.buddy-launch-ya .launch-name {color:#91a798;}
-.launch-copy strong {font-size:17px;line-height:1.5;font-weight:700;letter-spacing:-.3px;color:#403648;}.launch-description {font-size:10px;color:#9a8e9f;line-height:1.7;}.launch-arrow {align-self:flex-start;color:#baa8c2;margin:2px 0 0 auto;font-size:17px;}
-.buddy-launch:hover,.buddy-launch:focus-visible {transform:translateY(-4px);background:#fff8ed;box-shadow:0 10px 22px #5b437611;border-color:#e3d2ed;}.buddy-launch-lang:hover,.buddy-launch-lang:focus-visible {background:#edf6fe;}.buddy-launch-ya:hover,.buddy-launch-ya:focus-visible {background:#eef8f1;}
-.buddy-launch:hover .launch-art svg,.buddy-launch:focus-visible .launch-art svg {transform:translateY(-5px) rotate(-7deg) scale(1.04);}
-#course-home>.course-toolbar,#course-home>#course-grid,#course-home>#course-load-status,#course-home>#course-empty {max-width:1090px;margin-left:auto;margin-right:auto;}
-.course-toolbar {gap:10px;margin-bottom:15px;}.course-toolbar h2 {font-size:18px;}.course-toolbar label {font-size:10px;color:#9a90a2;}.course-toolbar select {width:150px;padding:7px 10px;border-color:#eee9f2;border-radius:20px;font-size:11px;}.course-toolbar .quiet-button {font-size:11px;min-height:32px;padding:5px 8px;}
-.course-grid {gap:14px;}.course-card {padding:19px;border-radius:20px;border-color:#efebf2;}.course-card h3 {font-size:17px;margin-top:15px;}.course-card-art {width:31px;height:31px;border-radius:10px;font-size:18px;}.course-card .course-class {margin-bottom:18px;}.course-card .actions button {font-size:11px;min-height:35px;}.course-state {font-size:10px;}
+.role-tabs {gap:4px;margin:0 auto;flex:none;width:auto;}.role-tabs a {min-height:40px;padding:8px 16px;font-size:13px;color:#77798a;}.role-tabs a svg {width:16px;height:16px;}.role-tabs a[aria-current=page] {background:#edf5fd;color:#2877bb;}
+.sidebar #account {gap:12px;margin:0;flex:none;}.sidebar #teacher {font-weight:500;font-size:12px;max-width:100px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}.sidebar #logout {min-height:36px;padding:6px 13px;border-radius:24px;border:1px solid #e9edf2;background:#fff;color:#77798a;font-size:12px;}
+.banner {max-width:1080px;margin:0 auto 10px;padding:0 7px;background:transparent;border:0;color:#9a9eaa;font-size:10px;text-align:right;line-height:1.6;}
+#status:not(:empty) {max-width:1080px;margin:8px auto 13px;}
+#lesson-output,#student-view,#review-view {max-width:1120px;margin-left:auto;margin-right:auto;}
+.studio-hero {position:relative;isolation:isolate;max-width:none;min-height:740px;margin:0;padding:62px 24px 42px;border-radius:36px;background:radial-gradient(ellipse at 50% 60%,#eaf5ff 0,#f3faff 50%,#f9fcff 100%);text-align:center;overflow:hidden;}
+.studio-hero-content {position:relative;z-index:2;max-width:760px;margin:0 auto;}
+.studio-eyebrow {font-size:10px;font-weight:650;line-height:1.6;letter-spacing:1.7px;color:#8591a2;margin:0 0 20px;}
+.studio-eyebrow>span {display:inline-block;width:6px;height:6px;margin-right:5px;border-radius:50%;background:#79afe2;box-shadow:0 0 0 4px #e0eefb;}
+.studio-hero h2 {font-size:clamp(42px,4.7vw,66px);font-weight:760;line-height:1.35;letter-spacing:-2.8px;margin:0 0 18px;color:#1e2832;}
+.studio-changing-word {position:relative;color:#3b8dd7;white-space:nowrap;}.studio-changing-word::after {content:"";position:absolute;bottom:-5px;left:3%;width:94%;height:10px;border-top:3px solid #b8dbf9;border-radius:50%;transform:rotate(-2deg);}
+.title-spark {display:inline-block;font-size:32px;vertical-align:top;color:#f2b77a;margin:13px 0 0 9px;}
+.studio-hero .assistant-lead {font-size:15px;line-height:1.8;color:#7a8796;margin:0 0 29px;}
+.studio-hero .assistant-composer {position:relative;max-width:640px;margin:0 auto;padding:18px 21px 14px;border:1px solid #dce7f1;border-radius:24px;background:#fff;box-shadow:0 15px 45px #5382b311,0 2px 5px #5382b305;transition:box-shadow .3s,border-color .3s,transform .3s;}
+.studio-hero .assistant-composer:focus-within {border-color:#90bce9;box-shadow:0 0 0 5px #b7d9f530,0 20px 45px #5382b31c;transform:translateY(-2px);}
+.studio-hero #assistant-prompt {min-height:92px;max-height:260px;margin:0;padding:0 1px 14px;border:0;background:transparent;box-shadow:none;color:#354354;font-size:16px;line-height:1.9;resize:vertical;}.studio-hero #assistant-prompt::placeholder {color:#a3adba;}
+.studio-hero .composer-actions {border-top:1px solid #eef2f7;padding-top:12px;gap:8px;}.studio-hero .composer-tool {min-height:42px;padding:7px 9px;font-size:12px;color:#7c8a9c;border-radius:12px;}.studio-hero .composer-tool:hover {background:#eef6fd;color:#347fbf;}
+.studio-hero .assistant-submit {min-height:44px;padding:10px 18px;background:#243244;border:0;border-radius:25px;box-shadow:0 3px 0 #15233314;color:#fff;font-size:13px;gap:21px;transition:background .2s,transform .2s,box-shadow .2s;}.studio-hero .assistant-submit:hover {background:#287fca;transform:translateY(-2px);box-shadow:0 6px 15px #3e8cc02b;}.studio-hero .assistant-submit:active {transform:translateY(0);}
+.studio-hero .assistant-examples {gap:8px;margin:17px auto 0;}.studio-hero .assistant-examples>span {font-size:10px;color:#9ca8b6;margin-right:3px;}.studio-hero .assistant-examples button {padding:6px 10px;min-height:33px;border:1px solid #dce9f5;border-radius:20px;background:#ffffffa6;font-size:11px;color:#76879a;transition:transform .2s,background .2s;}.studio-hero .assistant-examples button:hover {transform:translateY(-3px) rotate(-2deg);background:#fff;}
+.studio-hero .assistant-help {margin:10px auto 0;font-size:10px;color:#a1acba;}.studio-hero .assistant-status {max-width:640px;margin:10px auto 0;font-size:12px;}
+.studio-scroll-cue {display:inline-flex;align-items:center;gap:13px;margin:27px auto 0;padding:7px 13px;background:transparent;border:0;border-radius:20px;box-shadow:none;color:#6e8ba7;font-size:11px;font-weight:500;}.studio-scroll-cue span {display:inline-grid;place-items:center;width:22px;height:22px;border:1px solid #cbddeb;border-radius:50%;transition:transform .2s;}.studio-scroll-cue:hover {background:#ffffffa8;color:#2f78b8;}.studio-scroll-cue:hover span {transform:translateY(3px);}
+.studio-sky {position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}.sky-cloud {position:absolute;width:340px;height:160px;border-radius:50% 55% 0 0;background:#ffffffc7;}.sky-cloud::before {content:"";position:absolute;width:230px;height:210px;background:inherit;border-radius:50%;left:-70px;top:-90px;}.sky-cloud::after {content:"";position:absolute;width:130px;height:120px;background:inherit;border-radius:50%;right:40px;top:-45px;}.cloud-left {left:-120px;bottom:-70px;transform:rotate(8deg);}.cloud-right {right:-100px;bottom:-38px;transform:rotate(-10deg);width:320px;height:200px;}
+.sky-star {position:absolute;font-style:normal;color:#b9dcf8;font-size:30px;}.star-a {left:19%;top:72px;font-size:23px;}.star-b {right:18%;top:45px;color:#f1cfaa;font-size:35px;}.star-c {right:4%;top:53%;font-size:24px;}.star-d {left:23%;bottom:52px;font-size:27px;color:#a4d8dc;}.sky-orbit {position:absolute;width:13px;height:13px;border:3px solid #d4e9fa;border-radius:50%;}.orbit-a {left:3%;top:50%;}.orbit-b {right:27%;bottom:77px;width:8px;height:8px;background:#c6e0f6;border:0;}.sky-plane {position:absolute;right:5%;top:65px;width:65px;transform:rotate(14deg);}
+.studio-actor {--look-x:0px;--look-y:0px;--drift-x:0px;--drift-y:0px;--tilt:0deg;position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;width:150px;min-height:160px;padding:0;border:0;background:transparent;box-shadow:none;color:#5c6473;transform:translate(var(--drift-x),var(--drift-y)) rotate(var(--tilt));outline-offset:9px;}
+.studio-actor:hover,.studio-actor:active,.studio-actor:focus-visible {background:transparent;box-shadow:none;}
+.studio-actor .svg-motion,.studio-actor .svg-body {display:block;width:100%;}.studio-actor svg {display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 12px 10px #657d9410);}
+.actor-boo {left:5%;top:126px;width:151px;--float-delay:-1s;--blink-delay:-1.7s;}.actor-hui {right:4%;top:188px;width:153px;--float-delay:-2.6s;--blink-delay:-3s;}.actor-lang {left:9%;bottom:65px;width:144px;--float-delay:-4s;--blink-delay:-5s;}.actor-ya {right:10%;bottom:34px;width:132px;--float-delay:-.6s;--blink-delay:-6.3s;}
+.actor-caption {font-size:12px;line-height:1.5;background:#ffffffd9;padding:5px 10px;border:1px solid #e9eef4;border-radius:16px;box-shadow:0 3px 12px #6b8caa05;transform:rotate(-4deg);transition:transform .25s,background .25s;white-space:nowrap;}.actor-caption span {font-size:10px;margin-left:5px;color:#9ba5b2;}.actor-hui .actor-caption {transform:rotate(5deg);}.actor-ya .actor-caption {transform:rotate(3deg);}.studio-actor:hover .actor-caption,.studio-actor:focus-visible .actor-caption {background:#fff;transform:translateY(-4px) rotate(0deg);}
+.studio-actor:hover,.studio-actor:focus-visible,.studio-actor.is-greeting {--wave-animation:studio-wave .7s ease-in-out 2;}
+.buddy-eyes {transform:translate(var(--look-x,0px),var(--look-y,0px));}.buddy-wave,.buddy-blink,.buddy-eyes {transform-box:view-box;}.buddy-wave {animation:var(--wave-animation,none);}
+.studio-speech {position:absolute;left:50%;bottom:17px;transform:translateX(-50%);width:min(520px,70%);margin:0;font-size:10px;line-height:1.8;color:#9babb9;}
+.studio-hero.is-working .assistant-submit {background:#4d8abd;}.studio-hero[data-studio-mode=practice] .studio-changing-word {color:#8d78bd;}.studio-hero[data-studio-mode=feedback] .studio-changing-word {color:#61a685;}
+.studio-playground {max-width:1150px;margin:94px auto 80px;scroll-margin-top:30px;}
+.studio-section-heading {text-align:center;margin:0 0 30px;}.studio-section-heading .studio-eyebrow {font-size:9px;letter-spacing:2px;color:#a0a0ab;margin-bottom:14px;}.studio-section-heading h2 {font-size:38px;line-height:1.4;letter-spacing:-1.6px;margin:0 0 12px;}.studio-section-heading h2 span {color:#7797bd;}.studio-section-heading>p:last-child {font-size:13px;color:#9295a1;line-height:1.8;}
+.studio-mode-tabs {display:flex;justify-content:center;gap:9px;margin:0 auto 32px;}.studio-mode-tabs button {display:flex;align-items:center;gap:9px;min-height:54px;padding:5px 21px 5px 12px;border:1px solid #eceef3;border-radius:40px;background:#fff;color:#9194a1;box-shadow:none;font-size:13px;transition:background .25s,box-shadow .25s,transform .25s;}.studio-mode-tabs svg {width:39px;height:39px;transition:transform .3s var(--studio-ease);}.studio-mode-tabs button:hover svg {transform:translateY(-4px) rotate(-8deg);}.studio-mode-tabs button[aria-selected=true] {background:#f0f6fc;color:#344b65;border-color:#dce9f6;box-shadow:0 5px 14px #6a8db20d;}.studio-mode-tabs button[aria-selected=true] svg {transform:scale(1.12);}
+.studio-preview-shell {padding:35px;border:1px solid #ebeff3;border-radius:30px;background:#f8fafc;transition:background .35s;}.studio-playground[data-studio-mode=practice] .studio-preview-shell {background:#faf8fe;border-color:#efebf6;}.studio-playground[data-studio-mode=feedback] .studio-preview-shell {background:#f7fbf8;border-color:#e7f0e9;}
+.studio-panel {display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.4fr);align-items:center;gap:38px;min-height:403px;}.studio-panel[hidden],.preview-slide[hidden],.feedback-children [hidden] {display:none;}
+.studio-panel-copy {padding:10px 0 10px 8px;}.studio-number {font-size:9px;letter-spacing:1.6px;color:#9eaab6;}.studio-panel-copy h3 {font-size:28px;line-height:1.6;letter-spacing:-.9px;font-weight:650;margin:20px 0 16px;color:#303c4a;}.studio-panel-copy>p {font-size:12px;line-height:1.95;color:#8a96a4;max-width:270px;}.studio-tags {display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}.studio-tags span {font-size:9px;color:#8e9baa;padding:5px 8px;border:1px solid #e5ebf0;border-radius:20px;}
+.studio-companion-note {display:flex;align-items:center;gap:8px;margin-top:29px;}.studio-companion-note svg {width:55px;height:55px;}.studio-companion-note span {font-size:10px;color:#a2a6af;line-height:1.9;}.studio-companion-note strong {font-weight:500;font-size:11px;color:#8293a5;}
+.studio-deck {overflow:hidden;min-width:0;border:5px solid #fff;border-radius:18px;background:white;box-shadow:0 22px 44px #3a587e10,0 2px 6px #3a587e08;transform:rotate(-1deg);transition:transform .4s var(--studio-ease);}.studio-deck:focus-within,.studio-deck:hover {transform:rotate(0deg);}
+.deck-chrome {display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 12px;color:#a3adb7;font-size:8px;background:#fff;}.deck-chrome>span:first-child {display:flex;gap:4px;}.deck-chrome i {width:5px;height:5px;border-radius:50%;background:#e8dfd9;}.deck-chrome i:nth-child(2) {background:#e5e9cc;}.deck-chrome i:nth-child(3) {background:#d8e9df;}
+.preview-slides {position:relative;aspect-ratio:1.65;background:#dff3fa;border-radius:11px;overflow:hidden;}.preview-slide {position:relative;width:100%;height:100%;min-height:310px;overflow:hidden;text-align:left;}
+.slide-paper-label {display:inline-block;position:absolute;z-index:2;left:24px;top:20px;font-size:8px;letter-spacing:1.5px;line-height:1.7;font-weight:650;color:#53849a;}.slide-cover {background:#dff2f7;}.slide-cover-copy {position:absolute;z-index:2;left:30px;top:65px;}.slide-cover-copy>span {font-size:10px;color:#6b98a6;}.slide-cover h4 {position:relative;font-family:Georgia,serif;font-size:54px;font-weight:500;letter-spacing:-1.5px;line-height:1.06;color:#24627a;margin:10px 0 15px;}.slide-cover h4 em {font-style:normal;color:#e38961;}.slide-star {position:absolute;right:-30px;top:-5px;color:#f1b45e;font-size:24px;}.slide-cover-copy>p {font-size:10px;color:#5f8b99;}
+.slide-octopus {position:absolute;right:-12px;bottom:16px;width:53%;z-index:1;transform:rotate(7deg);}.slide-wave {position:absolute;bottom:-37px;left:-15%;width:130%;height:100px;background:#bce1e9;border-radius:50%;transform:rotate(-4deg);}.slide-footer {position:absolute;bottom:14px;left:26px;font-size:7px;letter-spacing:1.6px;color:#80a8b4;z-index:2;}.slide-bubble {position:absolute;border:2px solid #ffffffbe;border-radius:50%;}.bubble-one {width:25px;height:25px;top:40px;right:20%;}.bubble-two {width:12px;height:12px;top:95px;right:7%;}.bubble-three {width:16px;height:16px;bottom:130px;left:48%;}
+.slide-quiz {background:#f8edda;}.slide-quiz .slide-paper-label {color:#ac9575;}.quiz-layout {display:grid;grid-template-columns:43% 1fr;gap:6px;align-items:center;height:100%;padding:47px 24px 13px 10px;}.quiz-layout>svg {width:100%;}.quiz-layout h4 {font-family:Georgia,serif;font-size:29px;line-height:1.2;font-weight:500;letter-spacing:-.7px;color:#79573d;margin:0 0 8px;}.quiz-layout p {font-size:12px;color:#9c8162;line-height:1.5;}.quiz-choices {display:flex;gap:7px;margin:15px 0 10px;}.quiz-choices button {font-size:12px;min-height:38px;padding:8px 11px;border-radius:11px;background:#fffaf1;color:#a0835e;border:1px solid #e7d4b6;box-shadow:0 3px 0 #e7d4b65c;}.quiz-choices button:hover {background:#fff;transform:translateY(-2px);}.quiz-choices .is-correct {background:#e6f4df;color:#527d4b;border-color:#aacb98;}.quiz-choices .is-wrong {background:#fce4dc;color:#ad6b57;border-color:#e3b6a4;}
+#studio-quiz-status {font-size:9px;min-height:27px;color:#ac9476;margin-top:3px;}#studio-answer {font-size:12px;font-weight:650;color:#658151;margin:5px 0;}#studio-answer[hidden] {display:none;}.preview-text-button {padding:5px 0;min-height:30px;background:transparent;border:0;color:#9d8665;box-shadow:none;font-size:10px;}.preview-text-button:hover {color:#705532;background:transparent;}
+.slide-action {background:#e9e5f8;text-align:center;padding:28px 20px 20px;}.slide-action .slide-paper-label {color:#a397bc;}.slide-action>svg {position:absolute;right:-10px;bottom:11px;width:38%;transform:rotate(13deg);}.slide-action h4 {font-family:Georgia,serif;font-size:43px;line-height:1.1;font-weight:500;color:#78609b;position:relative;margin:38px 75px 15px 0;}.slide-action>p {font-size:11px;color:#9e8bb7;position:relative;margin-right:80px;}.activity-pill {display:inline-block;position:relative;margin:20px 100px 0 0;padding:7px 12px;border-radius:20px;font-size:9px;color:#9180a7;background:#f6f1ff;}
+.deck-controls {display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;padding:10px 10px 5px;color:#a2acb7;font-size:9px;}.deck-controls>div {display:flex;align-items:center;gap:12px;}#studio-page-index {font-size:9px;letter-spacing:1px;color:#8894a3;}.deck-controls button {display:grid;place-items:center;min-height:30px;width:32px;padding:4px;background:#f2f6fa;color:#607e9e;border:0;border-radius:50%;box-shadow:none;font-size:16px;}.deck-controls button:hover {background:#dcebf8;}.deck-controls button:disabled {opacity:.32;}
+.studio-preview-bottom {display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px 7px 0;}.studio-preview-bottom>span {font-size:11px;color:#a0a4af;}#studio-start {display:inline-flex;align-items:center;gap:25px;border-radius:30px;min-height:46px;padding:11px 20px;background:#253445;color:#fff;border:0;box-shadow:none;font-size:12px;transition:transform .2s,background .2s;}#studio-start:hover {transform:translateY(-3px);background:#397fb7;}#studio-start>span:last-child {font-size:20px;}
+.practice-demo,.feedback-demo {min-height:403px;border-radius:20px;border:5px solid #fff;background:#f0eafa;box-shadow:0 22px 44px #67548310;text-align:center;padding:20px;overflow:hidden;}.preview-demo-label {font-size:9px;letter-spacing:.2px;color:#a5a0b1;margin-bottom:19px;}.practice-word-tabs {display:flex;justify-content:center;gap:7px;}.practice-word-tabs button {font-size:11px;min-height:34px;padding:6px 14px;background:#ffffff65;color:#a292b8;border:1px solid #dfd5ec;border-radius:18px;box-shadow:none;}.practice-word-tabs button[aria-pressed=true] {background:#fff;color:#776094;border-color:#cdb8e1;}
+.practice-demo-orbit {position:relative;max-width:210px;margin:10px auto 0;height:117px;}.practice-demo-orbit svg {width:124px;height:124px;}.practice-demo-orbit span {position:absolute;left:10px;top:24px;padding:4px 9px;border-radius:50%;background:#fff;color:#ad93c9;font-size:14px;font-family:Georgia,serif;transform:rotate(-12deg);}.practice-demo-orbit i {position:absolute;right:0;bottom:30px;color:#c9bce2;font-size:28px;font-style:normal;}.practice-demo h4 {font-family:Georgia,serif;font-size:38px;font-weight:500;color:#71608e;line-height:1.2;margin:0 0 3px;}.practice-demo>p {color:#a597b8;font-size:11px;line-height:1.8;}.practice-waveform {height:34px;display:flex;align-items:center;justify-content:center;gap:4px;margin:13px auto 10px;}.practice-waveform i {width:4px;height:11px;border-radius:3px;background:#cbb8e2;}.practice-waveform i:nth-child(3n) {height:30px;}.practice-waveform i:nth-child(4n) {height:22px;}#studio-practice-tip {max-width:330px;margin:auto;min-height:40px;font-size:10px;}
+.feedback-demo {background:#f2f9f3;text-align:left;padding:19px 23px;}.feedback-demo .preview-demo-label {text-align:center;color:#9bac9e;}.feedback-demo-heading {display:flex;align-items:center;justify-content:space-between;margin:3px 0 13px;}.feedback-demo-heading h4 {font-size:21px;font-weight:600;letter-spacing:-.4px;color:#5c7f67;}.feedback-demo-heading svg {width:70px;height:70px;margin-top:-10px;}.feedback-filters {display:flex;gap:8px;margin-bottom:17px;}.feedback-filters button {min-height:32px;padding:5px 11px;border:1px solid #deeadf;border-radius:16px;background:transparent;color:#9aac9e;font-size:10px;box-shadow:none;}.feedback-filters button[aria-pressed=true] {background:#fff;border-color:#b8d2bd;color:#5c8767;}.feedback-children {min-height:183px;}.feedback-children article {display:flex;align-items:center;gap:11px;padding:13px 2px;border-bottom:1px solid #e4eee4;}.demo-avatar {display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:11px;font-family:Georgia,serif;color:#a67764;font-size:13px;background:#f7e5d5;}.demo-avatar.mint {color:#7b9a7d;background:#e0ecd8;}.demo-avatar.blue {color:#6f97a5;background:#ddeef2;}.feedback-children strong {font-size:11px;font-weight:600;color:#637e68;}.feedback-children small {font-size:8px;font-weight:400;color:#a2b1a5;margin-left:6px;}.feedback-children p {font-size:9px;color:#a0b0a4;margin-top:3px;}.feedback-state {font-size:9px;color:#bd986d;background:#fbefdb;border-radius:20px;padding:4px 8px;margin-left:auto;white-space:nowrap;}.feedback-state.done {color:#8faa83;background:#e9f2e2;}#studio-feedback-count {font-size:9px;color:#a0b2a4;margin-top:15px;}
+#course-home>.course-toolbar,#course-home>#course-grid,#course-home>#course-load-status,#course-home>#course-empty {max-width:1120px;margin-left:auto;margin-right:auto;}.course-toolbar {padding-top:25px;border-top:1px solid #edf0f4;margin-bottom:24px;gap:12px;}.course-toolbar h2 {font-size:22px;color:#354252;}.course-toolbar label {font-size:10px;color:#9ca6b2;}.course-toolbar select {width:150px;padding:8px 11px;border-color:#e7edf3;border-radius:20px;font-size:11px;}.course-toolbar .quiet-button {font-size:11px;}
+.course-grid {gap:18px;}.course-card {padding:22px;border-radius:23px;border-color:#e8edf3;transition:transform .3s,box-shadow .3s;}.course-card:hover {transform:translateY(-5px);box-shadow:0 16px 35px #344f6c0c;}.course-card h3 {font-size:18px;margin-top:16px;}.course-card-art {width:36px;height:36px;border-radius:12px;font-size:20px;}.course-card .actions button {font-size:12px;min-height:38px;}.course-state {font-size:10px;}
 @media(prefers-reduced-motion:no-preference) {
- .assistant-home {animation:friends-appear .55s ease-out both;}.hero-boo svg {animation:buddy-float 6s ease-in-out infinite;}.hero-lang svg {animation:buddy-float 7s ease-in-out 1.4s infinite;}
- @keyframes friends-appear {from {opacity:0;transform:translateY(7px);}to {opacity:1;transform:none;}}
- @keyframes buddy-float {0%,100% {transform:translateY(1px);}50% {transform:translateY(-3px);}}
+ .studio-hero-content {animation:studio-enter .8s var(--studio-ease) both;}.studio-actor .svg-body {animation:studio-float 6s ease-in-out var(--float-delay,0s) infinite;}.studio-actor {--blink-animation:studio-blink 7s ease-in-out var(--blink-delay,0s) infinite;}.buddy-blink {animation:var(--blink-animation,none);animation-play-state:var(--motion-state,running);}.studio-panel:not([hidden]) {animation:studio-panel-in .38s var(--studio-ease) both;}.preview-slide:not([hidden]) {animation:studio-slide-in .32s var(--studio-ease) both;}.studio-actor.is-greeting .svg-motion {animation:studio-bounce .7s var(--studio-ease);}
+ .studio-hero.is-motion-paused {--motion-state:paused;--wave-animation:none;}.studio-hero.is-motion-paused .svg-body {animation-play-state:paused;}
+ @keyframes studio-enter {from {opacity:0;transform:translateY(18px);}to {opacity:1;transform:none;}}
+ @keyframes studio-float {0%,100% {transform:translateY(0) rotate(-3deg);}50% {transform:translateY(-13px) rotate(3deg);}}
+ @keyframes studio-wave {0%,100% {transform:rotate(0);}25%,65% {transform:rotate(-22deg);}45%,85% {transform:rotate(8deg);}}
+ @keyframes studio-blink {0%,43%,46%,100% {transform:scaleY(1);}44%,45% {transform:scaleY(.1);}}
+ @keyframes studio-bounce {0%,100% {transform:scale(1);}25% {transform:scale(1.12,.9);}55% {transform:translateY(-16px) scale(.98,1.06);}78% {transform:scale(1.03,.98);}}
+ @keyframes studio-panel-in {from {opacity:0;transform:translateY(12px);}to {opacity:1;transform:none;}}
+ @keyframes studio-slide-in {from {opacity:.4;transform:translateX(13px);}to {opacity:1;transform:none;}}
 }
-@media(max-width:900px) {
- .sidebar {gap:10px;}.sidebar .account-copy {display:none;}.role-tabs a {padding:8px 12px;}.buddy-launch {padding:14px 11px;gap:5px;}.launch-art {width:60px;}.buddy-launch .launch-art svg {width:73px;height:73px;}.launch-copy strong {font-size:15px;}.launch-name {font-size:8px;}.launch-arrow {display:none;}
+@media(max-width:1100px) {
+ .sidebar {gap:12px;}.sidebar .account-copy {display:none;}.studio-hero {min-height:715px;padding-top:58px;}.studio-hero h2 {font-size:52px;}.studio-actor {width:112px;min-height:125px;}.actor-boo {left:1%;top:120px;}.actor-hui {right:1%;top:180px;}.actor-lang {left:4%;bottom:30px;}.actor-ya {right:4%;bottom:27px;}.studio-hero .assistant-composer {max-width:590px;}.actor-caption span {display:none;}.studio-speech {bottom:16px;max-width:400px;}.studio-preview-shell {padding:27px;}.studio-panel {gap:24px;grid-template-columns:.7fr 1.3fr;}.studio-panel-copy h3 {font-size:23px;}.studio-panel-copy>p {font-size:11px;}.studio-tags {gap:5px;}.studio-tags span {font-size:8px;}.preview-slide {min-height:295px;}.slide-cover h4 {font-size:44px;}.slide-octopus {right:-15px;bottom:28px;width:53%;}.quiz-layout {padding:50px 14px 12px 5px;grid-template-columns:39% 1fr;}.quiz-layout h4 {font-size:25px;}.quiz-choices {gap:5px;}.quiz-choices button {font-size:11px;padding:7px 9px;}.feedback-demo {padding:18px 16px;}.feedback-demo-heading h4 {font-size:18px;}
+}
+@media(max-width:800px) {
+ body,body[data-authenticated] {padding:16px 14px 45px;}.role-tabs a {padding:8px 11px;}.sidebar {padding:8px 13px;}.studio-hero {min-height:780px;padding:42px 20px 140px;}.studio-hero-content {max-width:600px;}.studio-hero h2 {font-size:46px;}.studio-actor {width:94px;min-height:110px;top:auto;bottom:47px;}.actor-boo {left:11%;}.actor-hui {left:32%;right:auto;}.actor-lang {left:53%;}.actor-ya {left:74%;right:auto;}.actor-caption {font-size:10px;padding:3px 8px;}.studio-speech {bottom:18px;width:85%;max-width:none;}.star-a {left:7%;top:80px;}.star-b {right:8%;top:50px;}.sky-plane {width:41px;right:6%;top:250px;}.sky-star.star-c {right:4%;top:67%;}.studio-hero .assistant-composer {max-width:570px;}.studio-hero .assistant-examples>span {display:none;}.studio-hero .assistant-lead {font-size:13px;margin-bottom:24px;}.studio-scroll-cue {margin-top:18px;}.studio-panel {grid-template-columns:1fr;gap:25px;}.studio-panel-copy {padding:0 5px;display:grid;grid-template-columns:1.2fr 1fr;gap:0 20px;align-items:center;}.studio-number {grid-column:1/-1;}.studio-panel-copy h3 {font-size:25px;margin:13px 0 0;}.studio-panel-copy>p {grid-row:2;grid-column:2;max-width:none;}.studio-tags {margin-top:15px;grid-column:1/-1;}.studio-companion-note {display:none;}.studio-playground {margin:65px auto;}.studio-section-heading h2 {font-size:32px;}.studio-preview-shell {padding:26px;}.studio-deck {transform:none;}.preview-slide {min-height:300px;}.slide-cover h4 {font-size:52px;}.slide-cover-copy {top:64px;}.practice-demo,.feedback-demo {min-height:385px;}.feedback-children p {font-size:10px;}
 }
 @media(max-width:560px) {
- body,body[data-authenticated],body:not([data-authenticated]) {padding:12px 14px 35px;}
- .sidebar {padding:7px 9px;min-height:53px;gap:6px;margin-bottom:8px;border-radius:35px;}.sidebar .brand {display:flex;gap:3px;}.sidebar .brand strong {font-size:18px;letter-spacing:-.9px;}.sidebar .brand-mark {width:25px;height:25px;}.sidebar .brand-mark svg {width:29px;height:29px;}.role-tabs {width:auto;gap:0;justify-content:center;flex:1;}.role-tabs a {min-height:40px;padding:6px 7px;font-size:11px;gap:0;white-space:nowrap;}.role-tabs a svg {display:none;}.sidebar #account {gap:0;}.sidebar #logout {font-size:11px;min-height:40px;padding:4px 7px;}.banner {font-size:10px;padding:3px 5px;margin-bottom:9px;}
- .assistant-home {margin:0 -3px 11px;padding:19px 12px 30px;border-radius:27px 27px 0 0;}.assistant-intro {font-size:8px;letter-spacing:1px;gap:6px;}.intro-dot {width:5px;height:5px;}.assistant-home h2 {font-size:25px;line-height:1.2;letter-spacing:-1px;margin:13px 0 11px;}.hero-title-line {min-height:41px;gap:5px;}.hero-title-line+.hero-title-line {margin-top:0;}.character-disc {width:39px;height:39px;border-width:2px;}.character-disc svg {width:46px;height:46px;}.character-group .character-disc {width:32px;height:32px;margin-left:-9px;}.character-group svg {width:39px;height:39px;}.assistant-lead {font-size:10px;margin-bottom:15px;line-height:1.7;}
- .assistant-composer {padding:11px 11px 10px;border-radius:19px;}.assistant-composer #assistant-prompt {font-size:14px;line-height:1.85;min-height:85px;padding:3px 1px 8px;}.composer-actions {padding-top:7px;gap:5px;}.composer-tools {gap:0;}.composer-tool {font-size:10px;padding:5px 6px;min-height:33px;gap:3px;}.composer-tool svg {width:13px;height:13px;}.assistant-submit {font-size:12px;padding:7px 11px;min-height:40px;gap:9px;}.assistant-submit span:last-child {font-size:16px;}
- .assistant-examples {justify-content:center;gap:5px;margin-top:11px;}.assistant-examples>span {display:none;}.assistant-examples button {font-size:11px;padding:6px 9px;min-height:32px;}.assistant-help {text-align:center;font-size:10px;margin-top:8px;}.assistant-status {font-size:11px;}.hero-cloud {height:22px;}.stage-spark-one {left:3%;top:72px;font-size:17px;}.stage-spark-two {right:3%;top:115px;font-size:13px;}
- .buddy-launches {gap:7px;margin-bottom:25px;}.buddy-launch {flex-direction:column;justify-content:flex-start;gap:4px;min-height:137px;border-radius:17px;padding:8px 6px 11px;text-align:center;}.launch-art {width:54px;height:52px;}.buddy-launch .launch-art svg {width:63px;height:63px;}.launch-copy {gap:4px;}.launch-name {display:none;}.launch-copy strong {font-size:12px;letter-spacing:-.2px;line-height:1.5;white-space:nowrap;}.launch-description {font-size:11px;line-height:1.6;}.launch-arrow {display:none;}
- .course-toolbar {flex-wrap:wrap;gap:7px;margin-bottom:12px;}.course-toolbar h2 {width:auto;font-size:16px;margin-right:auto;}.course-toolbar label {margin:0;font-size:0;gap:0;}.course-toolbar select {width:111px;font-size:10px;padding:6px 9px;}.course-toolbar .quiet-button {font-size:10px;}.course-grid {gap:11px;}.course-card {padding:17px;}.course-empty {padding:27px 17px;}
+ body,body[data-authenticated],body:not([data-authenticated]) {padding:12px 11px 35px;}.sidebar {min-height:56px;padding:7px 8px;gap:6px;margin-bottom:7px;}.sidebar .brand {display:flex;gap:3px;}.sidebar .brand strong {font-size:18px;letter-spacing:-.9px;}.sidebar .brand-mark {width:25px;height:25px;}.sidebar .brand-mark svg {width:29px;height:29px;}.role-tabs {width:auto;gap:0;justify-content:center;flex:1;}.role-tabs a {min-height:40px;padding:6px 6px;font-size:10px;gap:0;white-space:nowrap;}.role-tabs a svg {display:none;}.sidebar #account {gap:0;}.sidebar #logout {font-size:10px;min-height:40px;padding:4px 6px;}.banner {font-size:9px;text-align:center;padding:2px 3px;margin-bottom:8px;}
+ .studio-hero {min-height:725px;padding:35px 15px 148px;border-radius:28px;}.studio-eyebrow {font-size:8px;letter-spacing:1.2px;margin-bottom:19px;}.studio-hero h2 {font-size:36px;letter-spacing:-1.6px;line-height:1.4;margin:0 0 17px;}.title-spark {font-size:19px;margin-top:9px;margin-left:3px;}.studio-changing-word::after {height:7px;border-width:2px;bottom:-4px;}.studio-hero .assistant-lead {font-size:11px;margin-bottom:24px;line-height:1.8;}.studio-hero .assistant-composer {padding:16px 13px 12px;border-radius:20px;}.studio-hero #assistant-prompt {font-size:14px;min-height:110px;line-height:1.85;}.studio-hero .composer-actions {gap:5px;padding-top:8px;}.studio-hero .composer-tool {font-size:10px;padding:7px 6px;min-height:40px;}.studio-hero .composer-tool svg {width:13px;height:13px;}.studio-hero .assistant-submit {font-size:11px;min-height:40px;padding:8px 13px;gap:11px;}.studio-hero .assistant-submit span:last-child {font-size:17px;}.studio-hero .assistant-examples {gap:5px;margin-top:13px;}.studio-hero .assistant-examples button {font-size:10px;padding:5px 8px;min-height:32px;}.studio-hero .assistant-help {font-size:9px;margin-top:10px;}.studio-hero .assistant-status {font-size:11px;}.studio-scroll-cue {font-size:10px;margin-top:19px;}
+ .studio-actor {width:77px;min-height:94px;bottom:50px;}.actor-boo {left:2%;}.actor-hui {left:26%;}.actor-lang {left:50%;}.actor-ya {left:74%;}.actor-caption {font-size:9px;padding:3px 7px;}.studio-speech {width:85%;font-size:8px;bottom:17px;line-height:1.6;}.sky-plane {width:34px;right:4%;top:30px;}.star-a {left:5%;top:120px;font-size:16px;}.star-b {top:195px;right:3%;font-size:19px;}.star-c,.star-d,.orbit-b {display:none;}.cloud-left {left:-205px;bottom:-80px;}.cloud-right {right:-210px;bottom:-70px;}
+ .studio-playground {margin:58px auto 45px;scroll-margin-top:18px;}.studio-section-heading {margin-bottom:23px;}.studio-section-heading .studio-eyebrow {font-size:7px;letter-spacing:1.4px;margin-bottom:13px;}.studio-section-heading h2 {font-size:27px;letter-spacing:-1px;margin-bottom:12px;}.studio-section-heading>p:last-child {font-size:10px;max-width:260px;margin:auto;}.studio-mode-tabs {gap:6px;margin-bottom:20px;}.studio-mode-tabs button {gap:3px;font-size:11px;padding:5px 10px 5px 5px;min-height:44px;}.studio-mode-tabs svg {width:30px;height:30px;}.studio-preview-shell {padding:17px 12px;border-radius:23px;}.studio-panel {gap:22px;}.studio-panel-copy {padding:3px 8px;display:block;}.studio-number {font-size:8px;}.studio-panel-copy h3 {font-size:23px;line-height:1.45;margin:12px 0 10px;}.studio-panel-copy h3 br {display:initial;}.studio-panel-copy>p {font-size:11px;line-height:1.9;max-width:none;}.studio-tags {margin-top:13px;}.studio-tags span {font-size:8px;padding:4px 8px;}.studio-deck {border-width:4px;border-radius:15px;}.deck-chrome {height:29px;font-size:7px;padding:0 8px;}.preview-slides {aspect-ratio:auto;height:248px;}.preview-slide {min-height:248px;}.slide-paper-label {left:17px;top:16px;font-size:7px;}.slide-cover-copy {left:19px;top:60px;}.slide-cover-copy>span {font-size:8px;}.slide-cover h4 {font-size:39px;letter-spacing:-.8px;}.slide-cover-copy>p {font-size:8px;}.slide-octopus {right:-23px;bottom:24px;width:55%;}.slide-star {font-size:17px;right:-16px;}.slide-footer {font-size:6px;left:18px;bottom:12px;}.slide-wave {bottom:-49px;}.deck-controls {padding:8px 4px 3px;font-size:8px;}.deck-controls>div {gap:9px;}.deck-controls button {width:32px;min-height:32px;}.quiz-layout {padding:46px 11px 10px 2px;grid-template-columns:34% 1fr;gap:0;}.quiz-layout h4 {font-size:25px;}.quiz-layout p {font-size:10px;}.quiz-choices {gap:6px;margin:12px 0 6px;}.quiz-choices button {font-size:10px;padding:7px 8px;min-height:37px;}#studio-quiz-status {font-size:8px;min-height:23px;}#studio-answer {font-size:10px;margin:2px 0;}.preview-text-button {font-size:9px;min-height:31px;}.slide-action h4 {font-size:33px;margin:37px 54px 14px 0;}.slide-action>p {font-size:9px;margin-right:43px;}.slide-action>svg {width:36%;right:-11px;bottom:20px;}.activity-pill {font-size:8px;margin:17px 65px 0 0;padding:6px 9px;}
+ .studio-preview-bottom {align-items:stretch;flex-direction:column;gap:14px;padding:20px 3px 0;text-align:center;}.studio-preview-bottom>span {font-size:10px;}#studio-start {justify-content:center;font-size:12px;min-height:45px;}.practice-demo,.feedback-demo {min-height:375px;padding:18px 13px;border-width:4px;border-radius:17px;}.practice-word-tabs button {padding:7px 11px;min-height:36px;}.practice-demo h4 {font-size:34px;}.feedback-demo-heading h4 {font-size:18px;}.feedback-demo-heading svg {width:58px;height:58px;}.feedback-filters {gap:6px;}.feedback-filters button {font-size:10px;min-height:35px;padding:5px 10px;}.feedback-children article {gap:8px;padding:13px 1px;}.feedback-children small {display:none;}.feedback-children p {font-size:9px;}.feedback-state {font-size:8px;padding:4px 6px;}.preview-demo-label {font-size:8px;margin-bottom:17px;}
+ .course-toolbar {flex-wrap:wrap;gap:7px;padding-top:20px;}.course-toolbar h2 {width:auto;font-size:18px;margin-right:auto;}.course-toolbar label {margin:0;font-size:0;gap:0;}.course-toolbar select {width:106px;font-size:10px;padding:6px 8px;}.course-toolbar .quiet-button {font-size:10px;}.course-grid {gap:12px;}.course-card {padding:19px;}.course-card h3 {font-size:17px;}
 }
-@media(max-width:360px) {.role-tabs a {font-size:10px;padding:6px 5px;}.sidebar .brand strong {font-size:16px;}.assistant-home h2 {font-size:22px;}.launch-copy strong {white-space:normal;}}
+@media(max-width:360px) {.sidebar .brand strong {font-size:16px;}.role-tabs a {padding:6px 4px;font-size:9px;}.studio-hero {padding-left:11px;padding-right:11px;min-height:735px;}.studio-hero h2 {font-size:31px;}.studio-hero .assistant-examples button {font-size:9px;padding:5px 6px;}.studio-actor {width:65px;}.studio-section-heading h2 {font-size:24px;}.studio-mode-tabs button {padding-right:7px;font-size:10px;}.studio-mode-tabs svg {width:26px;height:26px;}.studio-preview-shell {padding-left:8px;padding-right:8px;}.slide-cover h4 {font-size:35px;}.quiz-layout {grid-template-columns:29% 1fr;}.feedback-children p {font-size:8px;}.studio-hero .composer-tool {padding:6px 4px;}}
 @media(prefers-reduced-motion:reduce) {
  *,*::before,*::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
- .character-disc,.assistant-home .character-disc:hover,.buddy-launch:hover,.buddy-launch:focus-visible,.buddy-launch:active,.buddy-launch:hover .launch-art svg,.buddy-launch:focus-visible .launch-art svg {transform:none;}
+ .studio-actor,.studio-actor .svg-body,.studio-actor .svg-motion,.buddy-eyes,.buddy-wave,.buddy-blink,.studio-deck,.studio-deck:hover,.course-card:hover,.studio-hero .assistant-composer:focus-within,.studio-hero .assistant-submit:hover,.studio-hero .assistant-examples button:hover,.studio-mode-tabs button:hover svg,.studio-mode-tabs button[aria-selected=true] svg,#studio-start:hover {transform:none;}
 }
 
+/* Responses remain legible, including on touch screens. */
+#studio-speech {font-size:11px;color:#587187;}
+#studio-quiz-status {font-size:11px;line-height:1.65;color:#7d6145;min-height:36px;}
+#studio-practice-tip {font-size:11px;color:#79638e;}
+#studio-feedback-count {font-size:11px;color:#66816c;}
+.studio-actor:hover,.studio-actor:active,.studio-actor:focus-visible {transform:translate(var(--drift-x),var(--drift-y)) rotate(var(--tilt));}
+@media(max-width:560px) {
+ .studio-actor {bottom:65px;}
+ #studio-speech {bottom:10px;font-size:10px;line-height:1.65;}
+ .preview-slides {height:285px;}.preview-slide {min-height:285px;}
+ .quiz-choices button {min-height:42px;font-size:11px;}
+ #studio-reveal {font-size:11px;min-height:37px;}
+ #studio-quiz-status {font-size:11px;}#studio-answer {font-size:12px;}
+ .deck-controls button {width:38px;min-height:38px;}
+ .practice-word-tabs button,.feedback-filters button {min-height:40px;font-size:11px;}
+ .studio-hero #assistant-prompt {font-size:16px;}
+ .studio-hero .assistant-submit {min-height:44px;font-size:12px;}
+}
+@media(prefers-reduced-motion:reduce) {
+ .studio-actor:hover,.studio-actor:active,.studio-actor:focus-visible,
+ .studio-actor:hover .actor-caption,.studio-actor:focus-visible .actor-caption,
+ .quiz-choices button:hover,.quiz-choices button:active,
+ .studio-scroll-cue:hover span,.studio-scroll-cue:active,
+ .studio-mode-tabs button:active,.practice-word-tabs button:active,
+ .feedback-filters button:active,.deck-controls button:active,
+ .studio-hero button:active,#studio-start:active {transform:none;}
+}
 </style>
 </head>
 <body>
@@ -2039,6 +2096,7 @@ body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min
         <path d="m24 71 8 9-4 18m108-28-8 10 5 17" fill="none" stroke="#b99adc" stroke-width="12" stroke-linecap="round"/>
       </symbol>
 
+
     <symbol id="b-buddy-boo" viewBox="0 0 200 200">
       <g class="buddy-body">
         <ellipse cx="100" cy="176" rx="49" ry="7" fill="#D6C8E5" opacity=".38"/>
@@ -2047,18 +2105,25 @@ body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min
         <path d="M40 119c11 23 32 35 61 35s51-12 61-35c-6 34-27 54-62 54s-57-20-60-54Z" fill="#A88ACD"/>
         <path d="m48 46 19 13-18 8m103-21-19 13 18 8" fill="#CDB7E9"/>
         <path d="M35 92c-16 8-20 27-14 39 3 6 8 8 12 5 8-5 17-21 18-34 1-9-7-15-16-10Z" fill="#B79BDD"/>
-        <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
-        <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        <g class="buddy-wave" style="transform-origin:155px 104px">
+          <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
+          <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        </g>
         <ellipse cx="77" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
         <ellipse cx="123" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
-        <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
-        <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
-        <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
-        <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes">
+            <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
+            <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+          </g>
+        </g>
         <ellipse cx="62" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
         <ellipse cx="138" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
         <path d="M94 106q6-3 12 0l-4 9q-2 3-4 0Z" fill="#E4B45D"/>
-        <path d="M92 122q8 8 16 0" fill="none" stroke="#6A507C" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M90 121q10 15 20 0Z" fill="#6A507C"/>
+        <path d="M95 128q5-4 10 0" fill="#E6ACBF"/>
         <path d="m77 140 5 5 5-5m8 2 5 5 5-5m8-2 5 5 5-5" fill="none" stroke="#D9C4EC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
       </g>
     </symbol>
@@ -2066,17 +2131,24 @@ body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min
       <g class="buddy-body">
         <ellipse cx="100" cy="176" rx="49" ry="7" fill="#E8CDB9" opacity=".38"/>
         <path d="M72 153v19m-6 1h13m49-20v19m-6 1h13" fill="none" stroke="#E6B18A" stroke-width="8" stroke-linecap="round"/>
-        <path d="M35 96c-9-5-19-2-20 7-2 10 7 20 20 19m130-25c11-7 18-4 20 3 2 8-6 17-17 18" fill="#EFBF96"/>
+        <path d="M35 96c-9-5-19-2-20 7-2 10 7 20 20 19" fill="#EFBF96"/>
+        <g class="buddy-wave" style="transform-origin:164px 110px">
+          <path d="M165 97c11-7 18-4 20 3 2 8-6 17-17 18" fill="#EFBF96"/>
+        </g>
         <path d="M32 58c0-7 6-12 13-12 20-1 39 3 55 14 16-11 35-15 55-14 7 0 13 5 13 12v88c0 7-7 11-13 9-19-5-36-2-49 7-4 3-8 3-12 0-13-9-30-12-49-7-6 2-13-2-13-9Z" fill="#F4C79E"/>
         <path d="M38 137c20-5 43-1 62 9 19-10 42-14 62-9v9c0 4-4 6-8 5-20-4-36 0-49 9-3 2-7 2-10 0-13-9-29-13-49-9-4 1-8-1-8-5Z" fill="#E9B78F"/>
         <path d="M43 59c0-3 2-5 5-5 17-1 32 3 46 12v77c-15-8-31-11-51-7Z" fill="#FFF9ED"/>
         <path d="M157 59c0-3-2-5-5-5-17-1-32 3-46 12v77c15-8 31-11 51-7Z" fill="#FFF3DF"/>
         <path d="M99 70v75" fill="none" stroke="#EDBB91" stroke-width="3" stroke-linecap="round"/>
         <path d="M138 48v28l8-6 8 6V48" fill="#DFA5A1"/>
-        <ellipse cx="78" cy="98" rx="7" ry="9" fill="#483650"/>
-        <ellipse cx="122" cy="98" rx="7" ry="9" fill="#483650"/>
-        <circle cx="80" cy="95" r="2.4" fill="#FFFEF8"/>
-        <circle cx="124" cy="95" r="2.4" fill="#FFFEF8"/>
+        <g class="buddy-blink" style="transform-origin:100px 98px">
+          <g class="buddy-eyes">
+            <ellipse cx="78" cy="98" rx="7" ry="9" fill="#483650"/>
+            <ellipse cx="122" cy="98" rx="7" ry="9" fill="#483650"/>
+            <circle cx="80" cy="95" r="2.4" fill="#FFFEF8"/>
+            <circle cx="124" cy="95" r="2.4" fill="#FFFEF8"/>
+          </g>
+        </g>
         <ellipse cx="62" cy="113" rx="8" ry="4.5" fill="#F2CCCF"/>
         <ellipse cx="138" cy="113" rx="8" ry="4.5" fill="#F2CCCF"/>
         <path d="M91 116q9 10 18 0" fill="none" stroke="#483650" stroke-width="3.8" stroke-linecap="round"/>
@@ -2088,25 +2160,32 @@ body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min
       <g class="buddy-body">
         <ellipse cx="100" cy="176" rx="49" ry="7" fill="#BED9EA" opacity=".38"/>
         <path d="M77 157v16m-6 2h13m39-18v16m-6 2h13" fill="none" stroke="#81B8D7" stroke-width="8" stroke-linecap="round"/>
-        <path d="M35 98c-12-2-19 4-19 11s8 15 22 14m124-25c12-3 21 3 21 11s-8 14-21 13" fill="#A9D5ED"/>
+        <path d="M35 98c-12-2-19 4-19 11s8 15 22 14" fill="#A9D5ED"/>
         <path d="M101 38c42 0 68 25 68 61 0 35-28 61-67 61-10 0-19-1-28-4l-20 10c-5 3-10-1-9-6l4-20c-12-11-18-25-18-41 0-36 28-61 70-61Z" fill="#A9D5ED"/>
         <path d="M38 119c15 18 35 26 63 26 30 0 50-10 63-28-9 27-33 43-62 43-10 0-19-1-28-4l-20 10c-5 3-10-1-9-6l4-20c-5-5-9-12-11-21Z" fill="#8BC2E1"/>
         <path d="M55 65c7-16 23-24 46-24 22 0 39 8 47 24" fill="none" stroke="#FFF7E8" stroke-width="8" stroke-linecap="round"/>
         <rect x="33" y="77" width="15" height="32" rx="7.5" fill="#78B1D2"/>
         <rect x="153" y="77" width="15" height="32" rx="7.5" fill="#78B1D2"/>
-        <ellipse cx="79" cy="91" rx="7" ry="9" fill="#483650"/>
-        <ellipse cx="122" cy="91" rx="7" ry="9" fill="#483650"/>
-        <circle cx="81" cy="88" r="2.4" fill="#FFFEF8"/>
-        <circle cx="124" cy="88" r="2.4" fill="#FFFEF8"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes">
+            <ellipse cx="79" cy="91" rx="7" ry="9" fill="#483650"/>
+            <ellipse cx="122" cy="91" rx="7" ry="9" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.4" fill="#FFFEF8"/>
+            <circle cx="124" cy="88" r="2.4" fill="#FFFEF8"/>
+          </g>
+        </g>
         <ellipse cx="62" cy="107" rx="9" ry="4.5" fill="#FFE5D2"/>
         <ellipse cx="138" cy="107" rx="9" ry="4.5" fill="#FFE5D2"/>
         <path d="M89 111q11 14 22 0Z" fill="#483650"/>
         <path d="M95 120q6-5 12 0" fill="#DCB0BE"/>
-        <g transform="rotate(17 163 132)">
-          <path d="M163 137v17" fill="none" stroke="#6F6593" stroke-width="7" stroke-linecap="round"/>
-          <rect x="155" y="117" width="16" height="25" rx="8" fill="#6F6593"/>
-          <path d="M160 124h6m-6 6h6" fill="none" stroke="#FFF7E8" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M152 135q0 12 11 12t11-12" fill="none" stroke="#8175A5" stroke-width="3" stroke-linecap="round"/>
+        <g class="buddy-wave" style="transform-origin:161px 110px">
+          <path d="M162 98c12-3 21 3 21 11s-8 14-21 13" fill="#A9D5ED"/>
+          <g transform="rotate(17 163 132)">
+            <path d="M163 137v17" fill="none" stroke="#6F6593" stroke-width="7" stroke-linecap="round"/>
+            <rect x="155" y="117" width="16" height="25" rx="8" fill="#6F6593"/>
+            <path d="M160 124h6m-6 6h6" fill="none" stroke="#FFF7E8" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M152 135q0 12 11 12t11-12" fill="none" stroke="#8175A5" stroke-width="3" stroke-linecap="round"/>
+          </g>
         </g>
       </g>
     </symbol>
@@ -2116,19 +2195,36 @@ body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min
         <path d="M101 52c-1-12 1-20 5-26" fill="none" stroke="#79B99B" stroke-width="5" stroke-linecap="round"/>
         <path d="M102 40c-18 0-27-8-25-19 15-2 28 5 25 19Z" fill="#A6D9AF"/>
         <path d="M104 34c0-15 10-23 23-20 0 13-8 22-23 20Z" fill="#79B99B"/>
+        <g class="buddy-wave" style="transform-origin:151px 111px">
+          <path d="M148 106c12 0 16-10 21-19 3-6 10-7 14-2 6 8 2 19-6 25-9 8-18 11-28 8Z" fill="#AFE0C6"/>
+          <path d="M174 91c0 5-3 10-7 13" fill="none" stroke="#D1EDD9" stroke-width="4" stroke-linecap="round"/>
+        </g>
         <path d="M91 49c4-8 14-8 18 0l17 30 34 5c10 2 13 11 6 18l-24 24 5 34c2 10-6 16-15 11l-32-15-32 15c-9 5-17-1-15-11l5-34-24-24c-7-7-4-16 6-18l34-5Z" fill="#AFE0C6"/>
         <path d="M53 151c16 5 30-1 47-8 17 7 31 13 47 8l1 9c1 10-7 16-16 11l-32-15-32 15c-9 5-17-1-15-11Z" fill="#91CDAE"/>
         <path d="M82 61c-3 5-7 11-9 17" fill="none" stroke="#D1EDD9" stroke-width="5" stroke-linecap="round"/>
-        <ellipse cx="80" cy="103" rx="7" ry="9" fill="#483650"/>
-        <ellipse cx="120" cy="103" rx="7" ry="9" fill="#483650"/>
-        <circle cx="82" cy="100" r="2.4" fill="#FFFEF8"/>
-        <circle cx="122" cy="100" r="2.4" fill="#FFFEF8"/>
+        <g class="buddy-blink" style="transform-origin:100px 103px">
+          <g class="buddy-eyes">
+            <ellipse cx="80" cy="103" rx="7" ry="9" fill="#483650"/>
+            <ellipse cx="120" cy="103" rx="7" ry="9" fill="#483650"/>
+            <circle cx="82" cy="100" r="2.4" fill="#FFFEF8"/>
+            <circle cx="122" cy="100" r="2.4" fill="#FFFEF8"/>
+          </g>
+        </g>
         <ellipse cx="65" cy="117" rx="8.5" ry="4.5" fill="#FFE5D2"/>
         <ellipse cx="135" cy="117" rx="8.5" ry="4.5" fill="#FFE5D2"/>
         <path d="M91 121q9 10 18 0" fill="none" stroke="#483650" stroke-width="3.8" stroke-linecap="round"/>
         <path d="m99 133 3 5 6 1-4 4 1 6-6-3-5 3 1-6-4-4 6-1Z" fill="#FFF2CF"/>
       </g>
     </symbol>
+        <symbol id="studio-octopus" viewBox="0 0 240 240">
+        <ellipse cx="120" cy="209" rx="86" ry="12" fill="#2c6887" opacity=".09"/>
+        <g fill="none" stroke="#ff956e" stroke-width="24" stroke-linecap="round"><path d="M70 151Q32 180 23 147T15 143"/><path d="M82 169Q60 218 42 201"/><path d="M108 178Q102 227 85 219"/><path d="M134 177Q139 228 155 218"/><path d="M158 169Q181 216 197 202"/><path d="M170 150Q208 179 218 149T227 143"/></g>
+        <path d="M54 119c0-45 24-77 66-77s66 32 66 77v21c0 30-27 52-66 52s-66-22-66-52Z" fill="#ffab83"/>
+        <path d="M59 125c4 43 35 62 66 62 29 0 52-10 61-35-6 27-31 40-66 40-39 0-66-22-66-52v-20Z" fill="#fa936f"/>
+        <ellipse cx="87" cy="122" rx="10" ry="14" fill="#fff9ef"/><ellipse cx="152" cy="122" rx="10" ry="14" fill="#fff9ef"/><ellipse cx="90" cy="125" rx="6" ry="9" fill="#53404a"/><ellipse cx="149" cy="125" rx="6" ry="9" fill="#53404a"/><circle cx="92" cy="121" r="2" fill="#fff"/><circle cx="151" cy="121" r="2" fill="#fff"/>
+        <ellipse cx="75" cy="146" rx="12" ry="6" fill="#ff7d73"/><ellipse cx="165" cy="146" rx="12" ry="6" fill="#ff7d73"/><path d="M108 148q12 20 25 0Z" fill="#6c3d4a"/><path d="M113 157q7-7 15 0" fill="#f38a91"/>
+        <ellipse cx="95" cy="77" rx="11" ry="7" transform="rotate(-30 95 77)" fill="#ffd4a3"/><ellipse cx="120" cy="65" rx="8" ry="5" fill="#ffd4a3"/>
+      </symbol>
 
     </defs>
   </svg>
@@ -2224,25 +2320,170 @@ body[data-authenticated] .app-header {position:absolute;width:1px;height:1px;min
     </p>
     <section id="teacher-view" hidden aria-label="备课助手">
       <div id="course-home">
-        <section class="assistant-home" aria-labelledby="assistant-title">
-          <span class="stage-spark stage-spark-one" aria-hidden="true">✧</span><span class="stage-spark stage-spark-two" aria-hidden="true">✦</span>
-          <div class="assistant-intro"><span class="intro-dot" aria-hidden="true"></span>BIBOO · 布布和朋友们</div>
-          <h2 id="assistant-title"><span class="hero-title-line"><span>把你的灵感</span><span class="character-disc hero-boo" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-boo"/></svg></span><span>变成好课</span></span><span class="hero-title-line"><span>让每个孩子</span><span class="character-group" aria-hidden="true"><span class="character-disc hero-hui"><svg viewBox="0 0 200 200"><use href="#b-buddy-hui"/></svg></span><span class="character-disc hero-lang"><svg viewBox="0 0 200 200"><use href="#b-buddy-lang"/></svg></span><span class="character-disc hero-ya"><svg viewBox="0 0 200 200"><use href="#b-buddy-ya"/></svg></span></span><span>爱上开口</span></span></h2>
-          <p class="assistant-lead">一个想法，一份课件。剩下的，我们一起准备。</p>
-          <form id="assistant-form" class="assistant-composer">
-            <label class="sr-only" for="assistant-prompt">告诉布布，你的备课想法</label>
-            <textarea id="assistant-prompt" maxlength="4000" rows="2" required placeholder="想教什么？孩子多大？比如：给 6–8 岁孩子上一堂 25 分钟的海洋动物课，学习 octopus、crab、turtle…" aria-describedby="assistant-help assistant-status"></textarea>
-            <div class="composer-actions"><div class="composer-tools"><button type="button" id="new-course-open" class="composer-tool"><svg aria-hidden="true"><use href="#icon-upload"/></svg>上传材料</button><button type="button" id="manual-course-open" class="composer-tool">自己填写</button></div><button id="assistant-start" class="assistant-submit"><span>帮我准备</span><span aria-hidden="true">↗</span></button></div>
-          </form>
-          <div class="assistant-examples" aria-label="试试这些备课想法"><span>试试这样说</span><button type="button" data-assistant-example="ocean">🐙 探索海洋动物</button><button type="button" data-assistant-example="fruit">🍎 水果小市场</button><button type="button" data-assistant-example="phonics">✦ 练一练 th 发音</button></div>
-          <p id="assistant-status" class="assistant-status" role="status" aria-live="polite"></p>
-          <p id="assistant-help" class="assistant-help">Demo 会整理描述中已有的词句；确认目标后再生成课程。</p>
-          <svg class="hero-cloud" viewBox="0 0 1400 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 43C50 7 112 12 157 35C198 3 262 6 306 32C367 8 413 23 458 41C519 6 570 11 617 34C679 11 734 18 778 40C833 13 882 9 936 34C990 8 1039 17 1089 39C1137 11 1193 14 1235 36C1293 6 1354 15 1400 40V70H0Z" fill="#fff"/></svg>
+        <section id="biboo-studio" class="assistant-home studio-hero" aria-labelledby="assistant-title" data-studio-mode="ppt">
+          <div class="studio-sky" aria-hidden="true"><i class="sky-cloud cloud-left"></i><i class="sky-cloud cloud-right"></i><i class="sky-star star-a">✦</i><i class="sky-star star-b">✧</i><i class="sky-star star-c">✦</i><i class="sky-star star-d">+</i><span class="sky-orbit orbit-a"></span><span class="sky-orbit orbit-b"></span><svg class="sky-plane" viewBox="0 0 80 80"><path d="m5 31 69-21-25 62-13-27Z" fill="#b9dfff"/><path d="m36 45 38-35-28 43-9 16Z" fill="#68b1f5"/><path d="m36 45 38-35-24 22Z" fill="#fff"/></svg></div>
+          <button type="button" class="studio-actor actor-boo" data-studio-actor="boo" aria-label="布布：一起想这堂课" title="点我，写下你的备课想法"><span class="svg-motion"><span class="svg-body"><svg viewBox="0 0 200 200" aria-hidden="true">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#D6C8E5" opacity=".38"/>
+        <path d="M65 164v11m-7 0h14m56-11v11m-7 0h14" fill="none" stroke="#E6B968" stroke-width="8" stroke-linecap="round"/>
+        <path d="M44 75c-2-16-7-38 1-40 6-2 21 8 30 16 16-7 34-7 50 0 9-8 24-18 30-16 8 2 3 24 1 40 10 12 14 29 11 46-5 32-28 52-67 52s-62-20-67-52c-3-17 1-34 11-46Z" fill="#B79BDD"/>
+        <path d="M40 119c11 23 32 35 61 35s51-12 61-35c-6 34-27 54-62 54s-57-20-60-54Z" fill="#A88ACD"/>
+        <path d="m48 46 19 13-18 8m103-21-19 13 18 8" fill="#CDB7E9"/>
+        <path d="M35 92c-16 8-20 27-14 39 3 6 8 8 12 5 8-5 17-21 18-34 1-9-7-15-16-10Z" fill="#B79BDD"/>
+        <g class="buddy-wave" style="transform-origin:155px 104px">
+          <path d="M152 98c1-12 10-23 19-27 7-4 13 0 13 7 0 12-11 28-22 31-6 2-11-4-10-11Z" fill="#B79BDD"/>
+          <path d="M169 83c-2 7-6 13-11 17" fill="none" stroke="#CDB7E9" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <ellipse cx="77" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <ellipse cx="123" cy="91" rx="30" ry="33" fill="#FFF7E8"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes">
+            <ellipse cx="79" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <ellipse cx="121" cy="91" rx="7.5" ry="9.5" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.5" fill="#FFFEF8"/>
+            <circle cx="123" cy="88" r="2.5" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="62" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="107" rx="9" ry="5" fill="#F2CCCF"/>
+        <path d="M94 106q6-3 12 0l-4 9q-2 3-4 0Z" fill="#E4B45D"/>
+        <path d="M90 121q10 15 20 0Z" fill="#6A507C"/>
+        <path d="M95 128q5-4 10 0" fill="#E6ACBF"/>
+        <path d="m77 140 5 5 5-5m8 2 5 5 5-5m8-2 5 5 5-5" fill="none" stroke="#D9C4EC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg></span></span><span class="actor-caption">布布 <span>一起想</span></span></button>
+          <button type="button" class="studio-actor actor-hui" data-studio-actor="hui" aria-label="绘绘：体验互动课件" title="点我，先玩一页课堂课件"><span class="svg-motion"><span class="svg-body"><svg viewBox="0 0 200 200" aria-hidden="true">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#E8CDB9" opacity=".38"/>
+        <path d="M72 153v19m-6 1h13m49-20v19m-6 1h13" fill="none" stroke="#E6B18A" stroke-width="8" stroke-linecap="round"/>
+        <path d="M35 96c-9-5-19-2-20 7-2 10 7 20 20 19" fill="#EFBF96"/>
+        <g class="buddy-wave" style="transform-origin:164px 110px">
+          <path d="M165 97c11-7 18-4 20 3 2 8-6 17-17 18" fill="#EFBF96"/>
+        </g>
+        <path d="M32 58c0-7 6-12 13-12 20-1 39 3 55 14 16-11 35-15 55-14 7 0 13 5 13 12v88c0 7-7 11-13 9-19-5-36-2-49 7-4 3-8 3-12 0-13-9-30-12-49-7-6 2-13-2-13-9Z" fill="#F4C79E"/>
+        <path d="M38 137c20-5 43-1 62 9 19-10 42-14 62-9v9c0 4-4 6-8 5-20-4-36 0-49 9-3 2-7 2-10 0-13-9-29-13-49-9-4 1-8-1-8-5Z" fill="#E9B78F"/>
+        <path d="M43 59c0-3 2-5 5-5 17-1 32 3 46 12v77c-15-8-31-11-51-7Z" fill="#FFF9ED"/>
+        <path d="M157 59c0-3-2-5-5-5-17-1-32 3-46 12v77c15-8 31-11 51-7Z" fill="#FFF3DF"/>
+        <path d="M99 70v75" fill="none" stroke="#EDBB91" stroke-width="3" stroke-linecap="round"/>
+        <path d="M138 48v28l8-6 8 6V48" fill="#DFA5A1"/>
+        <g class="buddy-blink" style="transform-origin:100px 98px">
+          <g class="buddy-eyes">
+            <ellipse cx="78" cy="98" rx="7" ry="9" fill="#483650"/>
+            <ellipse cx="122" cy="98" rx="7" ry="9" fill="#483650"/>
+            <circle cx="80" cy="95" r="2.4" fill="#FFFEF8"/>
+            <circle cx="124" cy="95" r="2.4" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="62" cy="113" rx="8" ry="4.5" fill="#F2CCCF"/>
+        <ellipse cx="138" cy="113" rx="8" ry="4.5" fill="#F2CCCF"/>
+        <path d="M91 116q9 10 18 0" fill="none" stroke="#483650" stroke-width="3.8" stroke-linecap="round"/>
+        <path d="m28 83 8-2 5 21-8 2Z" fill="#AFA0D9" transform="rotate(-20 34 92)"/>
+        <path d="m28 83 8-2-6-7Z" fill="#FFF7E8" transform="rotate(-20 34 92)"/>
+      </g>
+    </svg></span></span><span class="actor-caption">绘绘 <span>一起画</span></span></button>
+          <button type="button" class="studio-actor actor-lang" data-studio-actor="lang" aria-label="朗朗：体验跟读练习" title="点我，看看跟读练习"><span class="svg-motion"><span class="svg-body"><svg viewBox="0 0 200 200" aria-hidden="true">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#BED9EA" opacity=".38"/>
+        <path d="M77 157v16m-6 2h13m39-18v16m-6 2h13" fill="none" stroke="#81B8D7" stroke-width="8" stroke-linecap="round"/>
+        <path d="M35 98c-12-2-19 4-19 11s8 15 22 14" fill="#A9D5ED"/>
+        <path d="M101 38c42 0 68 25 68 61 0 35-28 61-67 61-10 0-19-1-28-4l-20 10c-5 3-10-1-9-6l4-20c-12-11-18-25-18-41 0-36 28-61 70-61Z" fill="#A9D5ED"/>
+        <path d="M38 119c15 18 35 26 63 26 30 0 50-10 63-28-9 27-33 43-62 43-10 0-19-1-28-4l-20 10c-5 3-10-1-9-6l4-20c-5-5-9-12-11-21Z" fill="#8BC2E1"/>
+        <path d="M55 65c7-16 23-24 46-24 22 0 39 8 47 24" fill="none" stroke="#FFF7E8" stroke-width="8" stroke-linecap="round"/>
+        <rect x="33" y="77" width="15" height="32" rx="7.5" fill="#78B1D2"/>
+        <rect x="153" y="77" width="15" height="32" rx="7.5" fill="#78B1D2"/>
+        <g class="buddy-blink" style="transform-origin:100px 91px">
+          <g class="buddy-eyes">
+            <ellipse cx="79" cy="91" rx="7" ry="9" fill="#483650"/>
+            <ellipse cx="122" cy="91" rx="7" ry="9" fill="#483650"/>
+            <circle cx="81" cy="88" r="2.4" fill="#FFFEF8"/>
+            <circle cx="124" cy="88" r="2.4" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="62" cy="107" rx="9" ry="4.5" fill="#FFE5D2"/>
+        <ellipse cx="138" cy="107" rx="9" ry="4.5" fill="#FFE5D2"/>
+        <path d="M89 111q11 14 22 0Z" fill="#483650"/>
+        <path d="M95 120q6-5 12 0" fill="#DCB0BE"/>
+        <g class="buddy-wave" style="transform-origin:161px 110px">
+          <path d="M162 98c12-3 21 3 21 11s-8 14-21 13" fill="#A9D5ED"/>
+          <g transform="rotate(17 163 132)">
+            <path d="M163 137v17" fill="none" stroke="#6F6593" stroke-width="7" stroke-linecap="round"/>
+            <rect x="155" y="117" width="16" height="25" rx="8" fill="#6F6593"/>
+            <path d="M160 124h6m-6 6h6" fill="none" stroke="#FFF7E8" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M152 135q0 12 11 12t11-12" fill="none" stroke="#8175A5" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        </g>
+      </g>
+    </svg></span></span><span class="actor-caption">朗朗 <span>一起说</span></span></button>
+          <button type="button" class="studio-actor actor-ya" data-studio-actor="ya" aria-label="芽芽：体验课后反馈" title="点我，看见每一点进步"><span class="svg-motion"><span class="svg-body"><svg viewBox="0 0 200 200" aria-hidden="true">
+      <g class="buddy-body">
+        <ellipse cx="100" cy="176" rx="49" ry="7" fill="#C5E1D0" opacity=".38"/>
+        <path d="M101 52c-1-12 1-20 5-26" fill="none" stroke="#79B99B" stroke-width="5" stroke-linecap="round"/>
+        <path d="M102 40c-18 0-27-8-25-19 15-2 28 5 25 19Z" fill="#A6D9AF"/>
+        <path d="M104 34c0-15 10-23 23-20 0 13-8 22-23 20Z" fill="#79B99B"/>
+        <g class="buddy-wave" style="transform-origin:151px 111px">
+          <path d="M148 106c12 0 16-10 21-19 3-6 10-7 14-2 6 8 2 19-6 25-9 8-18 11-28 8Z" fill="#AFE0C6"/>
+          <path d="M174 91c0 5-3 10-7 13" fill="none" stroke="#D1EDD9" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <path d="M91 49c4-8 14-8 18 0l17 30 34 5c10 2 13 11 6 18l-24 24 5 34c2 10-6 16-15 11l-32-15-32 15c-9 5-17-1-15-11l5-34-24-24c-7-7-4-16 6-18l34-5Z" fill="#AFE0C6"/>
+        <path d="M53 151c16 5 30-1 47-8 17 7 31 13 47 8l1 9c1 10-7 16-16 11l-32-15-32 15c-9 5-17-1-15-11Z" fill="#91CDAE"/>
+        <path d="M82 61c-3 5-7 11-9 17" fill="none" stroke="#D1EDD9" stroke-width="5" stroke-linecap="round"/>
+        <g class="buddy-blink" style="transform-origin:100px 103px">
+          <g class="buddy-eyes">
+            <ellipse cx="80" cy="103" rx="7" ry="9" fill="#483650"/>
+            <ellipse cx="120" cy="103" rx="7" ry="9" fill="#483650"/>
+            <circle cx="82" cy="100" r="2.4" fill="#FFFEF8"/>
+            <circle cx="122" cy="100" r="2.4" fill="#FFFEF8"/>
+          </g>
+        </g>
+        <ellipse cx="65" cy="117" rx="8.5" ry="4.5" fill="#FFE5D2"/>
+        <ellipse cx="135" cy="117" rx="8.5" ry="4.5" fill="#FFE5D2"/>
+        <path d="M91 121q9 10 18 0" fill="none" stroke="#483650" stroke-width="3.8" stroke-linecap="round"/>
+        <path d="m99 133 3 5 6 1-4 4 1 6-6-3-5 3 1-6-4-4 6-1Z" fill="#FFF2CF"/>
+      </g>
+    </svg></span></span><span class="actor-caption">芽芽 <span>一起长大</span></span></button>
+          <div class="studio-hero-content">
+            <p class="studio-eyebrow"><span></span> BIBOO · 你的 AI 教学搭档</p>
+            <h2 id="assistant-title">把一个想法，<br>变成<span class="studio-changing-word" id="studio-mode-label">会互动的课</span><span class="title-spark" aria-hidden="true">✳</span></h2>
+            <p class="assistant-lead">你带来灵感，我们陪你把课堂变得有趣。</p>
+            <form id="assistant-form" class="assistant-composer">
+              <label class="sr-only" for="assistant-prompt">告诉布布，你的备课想法</label>
+              <textarea id="assistant-prompt" maxlength="4000" rows="2" required placeholder="今天想带孩子探索什么？&#10;比如：6–8 岁的海洋动物课，学习 octopus、crab、turtle…" aria-describedby="assistant-help assistant-status"></textarea>
+              <div class="composer-actions"><div class="composer-tools"><button type="button" id="new-course-open" class="composer-tool"><svg aria-hidden="true"><use href="#icon-upload"/></svg>上传材料</button><button type="button" id="manual-course-open" class="composer-tool">自己填写</button></div><button id="assistant-start" class="assistant-submit"><span>帮我准备</span><span aria-hidden="true">↗</span></button></div>
+            </form>
+            <div class="assistant-examples" aria-label="试试这些备课想法"><span>灵感从这里开始</span><button type="button" data-assistant-example="ocean">🐙 海洋探险</button><button type="button" data-assistant-example="fruit">🍎 水果小市场</button><button type="button" data-assistant-example="phonics">✦ 神奇的 th</button></div>
+            <p id="assistant-status" class="assistant-status" role="status" aria-live="polite"></p>
+            <p id="assistant-help" class="assistant-help">Demo 整理已有词句，教学目标由你确认。</p>
+            <button type="button" id="studio-try" class="studio-scroll-cue">先玩一堂示例课 <span aria-hidden="true">↓</span></button>
+          </div>
+          <p id="studio-speech" class="studio-speech" role="status" aria-live="polite">移动鼠标，和小伙伴打个招呼。也可以点它们开始探索。</p>
         </section>
-        <section class="buddy-launches" aria-label="让小伙伴帮你准备">
-          <button type="button" id="buddy-ppt" class="buddy-launch buddy-launch-hui"><span class="launch-art" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-hui"/></svg></span><span class="launch-copy"><span class="launch-name">绘绘 · 把灵感画进课堂</span><strong>生成课堂 PPT</strong><span class="launch-description">上传材料，做一份能一起玩的课件。</span></span><span class="launch-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" id="buddy-homework" class="buddy-launch buddy-launch-lang"><span class="launch-art" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-lang"/></svg></span><span class="launch-copy"><span class="launch-name">朗朗 · 陪孩子勇敢开口</span><strong>准备跟读作业</strong><span class="launch-description">选好词句，把课堂延续到课后。</span></span><span class="launch-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" id="buddy-feedback" class="buddy-launch buddy-launch-ya"><span class="launch-art" aria-hidden="true"><svg viewBox="0 0 200 200"><use href="#b-buddy-ya"/></svg></span><span class="launch-copy"><span class="launch-name">芽芽 · 看见每一点进步</span><strong>看看课后反馈</strong><span class="launch-description">听听孩子的练习，再准备下一课。</span></span><span class="launch-arrow" aria-hidden="true">↗</span></button>
+
+        <section id="studio-playground" class="studio-playground" aria-labelledby="studio-preview-title" data-studio-mode="ppt">
+          <div class="studio-section-heading"><p class="studio-eyebrow">A LITTLE PLAY. A LOT OF POSSIBILITY.</p><h2 id="studio-preview-title">让知识点，<span>变成参与感。</span></h2><p>点一点，试一试。感受一堂课从课堂到课后的样子。</p></div>
+          <div class="studio-mode-tabs" role="tablist" aria-label="选择体验内容"><button type="button" id="studio-tab-ppt" role="tab" data-studio-mode="ppt" aria-controls="studio-panel-ppt" aria-selected="true"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-hui"/></svg><span>互动课件</span></button><button type="button" id="studio-tab-practice" role="tab" data-studio-mode="practice" aria-controls="studio-panel-practice" aria-selected="false" tabindex="-1"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-lang"/></svg><span>跟读作业</span></button><button type="button" id="studio-tab-feedback" role="tab" data-studio-mode="feedback" aria-controls="studio-panel-feedback" aria-selected="false" tabindex="-1"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-ya"/></svg><span>课后反馈</span></button></div>
+          <div class="studio-preview-shell">
+            <section id="studio-panel-ppt" role="tabpanel" aria-labelledby="studio-tab-ppt" class="studio-panel">
+              <div class="studio-panel-copy"><span class="studio-number">01 / CLASSROOM</span><h3>把每一个单词，<br>变成一场小游戏。</h3><p>猜一猜、动一动、说出来。让孩子成为课堂的主角。</p><div class="studio-tags"><span>6–10 岁</span><span>互动示例</span><span>可编辑 PPTX</span></div><div class="studio-companion-note"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-hui"/></svg><span>绘绘的小提示<br><strong>试试翻页，再选一个答案。</strong></span></div></div>
+              <div class="studio-deck">
+                <div class="deck-chrome"><span><i></i><i></i><i></i></span><span>海洋探险 · 课堂玩法示例</span><span>✧</span></div>
+                <div class="preview-slides">
+                  <div class="preview-slide slide-cover" data-preview-slide="0"><div class="slide-paper-label">LET’S EXPLORE!</div><div class="slide-cover-copy"><span>深呼吸，潜入蓝色世界</span><h4>Ocean<br><em>Friends</em><span class="slide-star">✦</span></h4><p>你会遇见什么海洋朋友？</p></div><svg class="slide-octopus" viewBox="0 0 240 240" aria-label="微笑的橙色章鱼"><use href="#studio-octopus"/></svg><span class="slide-bubble bubble-one"></span><span class="slide-bubble bubble-two"></span><span class="slide-bubble bubble-three"></span><div class="slide-wave" aria-hidden="true"></div><span class="slide-footer">BIBOO LITTLE EXPLORERS</span></div>
+                  <div class="preview-slide slide-quiz" data-preview-slide="1" hidden><span class="slide-paper-label">GUESS WHO?</span><div class="quiz-layout"><svg viewBox="0 0 240 240" aria-hidden="true"><use href="#studio-octopus"/></svg><div><h4>Who am I?</h4><p>I have eight arms.</p><div class="quiz-choices"><button type="button" data-quiz-answer="wrong">A. crab</button><button type="button" data-quiz-answer="right">B. octopus</button></div><p id="studio-quiz-status" role="status">选一个答案，和孩子一起猜。</p><div id="studio-answer" hidden>✦ Yes! An octopus!</div><button type="button" id="studio-reveal" class="preview-text-button">揭晓答案 ↗</button></div></div></div>
+                  <div class="preview-slide slide-action" data-preview-slide="2" hidden><span class="slide-paper-label">YOUR TURN!</span><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-lang"/></svg><h4>Move like<br>an octopus!</h4><p>伸出手臂，和同桌一起变成小章鱼。</p><span class="activity-pill">动一动 · 说一说 · 一起玩</span></div>
+                </div>
+                <div class="deck-controls"><span>课堂互动示例</span><div><button type="button" id="studio-prev" aria-label="上一页示例">←</button><span id="studio-page-index" aria-live="polite">01 / 03</span><button type="button" id="studio-next" aria-label="下一页示例">→</button></div></div>
+              </div>
+            </section>
+            <section id="studio-panel-practice" role="tabpanel" aria-labelledby="studio-tab-practice" class="studio-panel" hidden>
+              <div class="studio-panel-copy"><span class="studio-number">02 / LITTLE VOICES</span><h3>把课堂里的勇气，<br>带到每一次开口。</h3><p>围绕这堂课的词句准备练习。孩子跟着示范读，老师跟进需要帮助的部分。</p><div class="studio-tags"><span>逐词练习</span><span>示范跟读</span><span>课后延伸</span></div><div class="studio-companion-note"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-lang"/></svg><span>朗朗的小提示<br><strong>点一个词，换个小目标。</strong></span></div></div>
+              <div class="practice-demo"><div class="preview-demo-label">跟读内容示例 · 不录音、不评分</div><div class="practice-word-tabs" aria-label="选择示例单词"><button type="button" data-practice-word="octopus" aria-pressed="true">octopus</button><button type="button" data-practice-word="crab" aria-pressed="false">crab</button><button type="button" data-practice-word="turtle" aria-pressed="false">turtle</button></div><div class="practice-demo-orbit"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-lang"/></svg><span>hello!</span><i>✦</i></div><h4 id="studio-practice-word">octopus</h4><p id="studio-practice-meaning">章鱼</p><div class="practice-waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p id="studio-practice-tip" role="status">从一个词开始，慢慢来，每一次开口都值得鼓励。</p></div>
+            </section>
+            <section id="studio-panel-feedback" role="tabpanel" aria-labelledby="studio-tab-feedback" class="studio-panel" hidden>
+              <div class="studio-panel-copy"><span class="studio-number">03 / EVERY LITTLE STEP</span><h3>看见进步，<br>也看见需要你的时刻。</h3><p>把注意力留给需要帮助的孩子。听一听，再给他们一句有温度的反馈。</p><div class="studio-tags"><span>老师复核</span><span>语音点评</span><span>下节课建议</span></div><div class="studio-companion-note"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-ya"/></svg><span>芽芽的小提示<br><strong>切换分类，看看怎么跟进。</strong></span></div></div>
+              <div class="feedback-demo"><div class="preview-demo-label">虚构学员 · 反馈展示示例</div><div class="feedback-demo-heading"><h4>每一点进步，都算数。</h4><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#b-buddy-ya"/></svg></div><div class="feedback-filters" aria-label="筛选示例反馈"><button type="button" data-feedback-filter="all" aria-pressed="true">全部</button><button type="button" data-feedback-filter="review" aria-pressed="false">等老师听</button><button type="button" data-feedback-filter="done" aria-pressed="false">完成练习</button></div><div class="feedback-children"><article data-feedback-status="review"><span class="demo-avatar peach">M</span><div><strong>小米 <small>示例学员</small></strong><p>octopus · 想请老师听一听</p></div><span class="feedback-state">等老师听</span></article><article data-feedback-status="done"><span class="demo-avatar mint">D</span><div><strong>朵朵 <small>示例学员</small></strong><p>这次练习，勇敢地读完了！</p></div><span class="feedback-state done">已完成</span></article><article data-feedback-status="done"><span class="demo-avatar blue">L</span><div><strong>乐乐 <small>示例学员</small></strong><p>又向前迈出了一小步。</p></div><span class="feedback-state done">已完成</span></article></div><p id="studio-feedback-count" role="status">3 位示例学员</p></div>
+            </section>
+          </div>
+          <div class="studio-preview-bottom"><span>体验之后，把它变成你的下一堂课。</span><button type="button" id="studio-start"><span data-studio-start-label>用我的材料做课件</span><span aria-hidden="true">↗</span></button></div>
         </section>
         <div class="course-toolbar"><h2>我的课程 <span id="course-count"></span></h2><label>班级筛选<select id="course-filter"><option value="">全部班级</option></select></label><button id="course-refresh" class="quiet-button">刷新</button></div>
         <p id="course-load-status" role="status" aria-live="polite"></p>
@@ -2897,9 +3138,6 @@ $('new-course-dialog').addEventListener('close', () => {
 $('new-course-close').onclick = closeNewCourse;
 for (const id of ['new-course-open','empty-new-course']) $(id).onclick = () => { if (!busy) openNewCourse(); };
 $('manual-course-open').onclick = () => { if (!busy) openNewCourse('goals'); };
-$('buddy-ppt').onclick = () => { if (!busy) openNewCourse('material'); };
-$('buddy-homework').onclick = () => { if (!busy) openNewCourse('goals'); };
-$('buddy-feedback').onclick = () => perform(() => switchView('review'), '正在读取课后反馈…');
 $('new-material-tab').onclick = () => setNewCourseTab('material');
 $('new-goals-tab').onclick = () => setNewCourseTab('goals');
 for (const id of ['tab-homework','tab-classroom']) $(id).onclick = () => setDetailTab(id.split('-')[1]);
@@ -4006,6 +4244,290 @@ $('review-next-lesson').onclick = () => perform(async () => {
     catch (error) { if (error.status === 401) await showTeacher(null); else throw error; }
   } catch (error) { status(error.message, true); }
 })();
+
+// The studio is a presentation layer; existing course actions remain the source of truth.
+(() => {
+  const stage = document.getElementById('biboo-studio');
+  if (!stage) return;
+  const byId = id => document.getElementById(id);
+  const isBusy = () => typeof busy !== 'undefined' && busy;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const speech = byId('studio-speech');
+  const prompt = byId('assistant-prompt');
+  const modes = ['ppt', 'practice', 'feedback'];
+  const modeButtons = [...document.querySelectorAll('button[data-studio-mode]')];
+  const modeCopy = {
+    ppt: {label: '会互动的课', cta: '用我的材料做课件', speech: '我是绘绘。点点课件，试试把课堂变好玩。'},
+    practice: {label: '勇敢的开口', cta: '准备一份跟读作业', speech: '我是朗朗。选一个单词，给孩子一个开口的小任务。'},
+    feedback: {label: '每一点进步', cta: '打开我的课后反馈', speech: '我是芽芽。把需要老师听一听的练习，轻轻找出来。'},
+  };
+  let mode = 'ppt';
+  const say = text => { if (speech && speech.textContent !== text) speech.textContent = text; };
+
+  function selectMode(next, announce = true) {
+    if (!modes.includes(next) || isBusy()) return;
+    mode = next;
+    stage.dataset.studioMode = next;
+    const playground = byId('studio-playground');
+    if (playground) playground.dataset.studioMode = next;
+    for (const button of modeButtons) {
+      const selected = button.dataset.studioMode === next;
+      button.setAttribute('aria-selected', String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    }
+    for (const key of modes) {
+      const panel = byId('studio-panel-' + key);
+      if (panel) panel.hidden = key !== next;
+    }
+    if (byId('studio-mode-label')) byId('studio-mode-label').textContent = modeCopy[next].label;
+    const start = byId('studio-start');
+    if (start) (start.querySelector('[data-studio-start-label]') || start).textContent = modeCopy[next].cta;
+    if (announce) say(modeCopy[next].speech);
+  }
+
+  function revealPlayground() {
+    const playground = byId('studio-playground');
+    if (!playground) return;
+    playground.scrollIntoView({behavior: reduced.matches ? 'auto' : 'smooth', block: 'start'});
+    const tab = modeButtons.find(button => button.dataset.studioMode === mode && !button.closest('[hidden]'));
+    tab?.focus({preventScroll: true});
+  }
+
+  for (const button of modeButtons) {
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      selectMode(button.dataset.studioMode);
+    });
+    button.addEventListener('keydown', event => {
+      if (isBusy() || event.altKey || event.ctrlKey || event.metaKey || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const index = modes.indexOf(button.dataset.studioMode);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? modes.length - 1
+        : (index + (event.key === 'ArrowRight' ? 1 : -1) + modes.length) % modes.length;
+      selectMode(modes[next]);
+      const group = button.closest('[role="tablist"]');
+      const peer = [...(group || document).querySelectorAll('button[data-studio-mode]')].find(item => item.dataset.studioMode === modes[next]);
+      peer?.focus();
+    });
+  }
+  byId('studio-start')?.addEventListener('click', event => {
+    event.preventDefault();
+    if (isBusy()) return;
+    if (mode === 'feedback') perform(async () => {
+      await switchView('review');
+      if (activeView === 'review') window.scrollTo({top:0,behavior:'instant'});
+    }, '正在读取课后反馈…');
+    else openNewCourse(mode === 'ppt' ? 'material' : 'goals');
+  });
+  byId('studio-try')?.addEventListener('click', event => {
+    event.preventDefault();
+    if (!isBusy()) revealPlayground();
+  });
+
+  const actors = [...stage.querySelectorAll('[data-studio-actor]')];
+  const greetingTimers = new Map();
+  const actorModes = {hui: 'ppt', lang: 'practice', ya: 'feedback'};
+  function clearGreetings() {
+    for (const actor of actors) actor.classList.remove('is-greeting');
+    for (const timer of greetingTimers.values()) clearTimeout(timer);
+    greetingTimers.clear();
+  }
+  for (const actor of actors) {
+    actor.addEventListener('click', event => {
+      event.preventDefault();
+      if (isBusy()) return;
+      clearTimeout(greetingTimers.get(actor));
+      if (!reduced.matches) {
+        actor.classList.add('is-greeting');
+        greetingTimers.set(actor, setTimeout(() => {
+          actor.classList.remove('is-greeting');
+          greetingTimers.delete(actor);
+        }, 700));
+      }
+      if (actor.dataset.studioActor === 'boo') {
+        prompt?.focus();
+      } else {
+        selectMode(actorModes[actor.dataset.studioActor]);
+        revealPlayground();
+      }
+    });
+  }
+
+  function respondToPrompt() {
+    if (isBusy()) return;
+    say(prompt?.value.trim()
+      ? '想法收到了，点「帮我准备」整理成教学目标。'
+      : '写下主题、孩子的年龄和英文词汇，我们一起准备这堂课。');
+  }
+  prompt?.addEventListener('focus', respondToPrompt);
+  prompt?.addEventListener('input', respondToPrompt);
+  const assistantStatus = byId('assistant-status');
+  if (assistantStatus) {
+    new MutationObserver(() => {
+      const text = assistantStatus.textContent.trim();
+      stage.classList.toggle('is-working', Boolean(isBusy() && text));
+      if (text) say(text);
+    }).observe(assistantStatus, {childList: true, subtree: true, characterData: true});
+  }
+
+  // Classroom preview: no requests, no edits to the teacher's material or course draft.
+  const slides = [...document.querySelectorAll('[data-preview-slide]')].sort((a, b) => Number(a.dataset.previewSlide) - Number(b.dataset.previewSlide));
+  const answers = [...document.querySelectorAll('[data-quiz-answer]')];
+  let slideIndex = 0;
+  function resetQuiz() {
+    if (byId('studio-answer')) byId('studio-answer').hidden = true;
+    if (byId('studio-quiz-status')) byId('studio-quiz-status').textContent = '';
+    for (const answer of answers) answer.classList.remove('is-correct', 'is-wrong');
+  }
+  function showSlide(index) {
+    if (isBusy() || !slides.length) return;
+    slideIndex = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, current) => { slide.hidden = current !== slideIndex; });
+    const counter = byId('studio-page-index');
+    if (counter) counter.textContent = `${String(slideIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    if (byId('studio-prev')) byId('studio-prev').disabled = slideIndex === 0;
+    if (byId('studio-next')) byId('studio-next').disabled = slideIndex === slides.length - 1;
+    resetQuiz();
+  }
+  byId('studio-prev')?.addEventListener('click', event => { event.preventDefault(); showSlide(slideIndex - 1); });
+  byId('studio-next')?.addEventListener('click', event => { event.preventDefault(); showSlide(slideIndex + 1); });
+  for (const answer of answers) {
+    answer.addEventListener('click', event => {
+      event.preventDefault();
+      if (isBusy()) return;
+      const correct = answer.dataset.quizAnswer === 'right';
+      for (const item of answers) item.classList.remove('is-correct', 'is-wrong');
+      answer.classList.add(correct ? 'is-correct' : 'is-wrong');
+      if (byId('studio-answer')) byId('studio-answer').hidden = !correct;
+      if (byId('studio-quiz-status')) byId('studio-quiz-status').textContent = correct
+        ? '答对了！让全班一起读一遍。' : '再想一想，换一个答案试试。';
+    });
+  }
+  byId('studio-reveal')?.addEventListener('click', event => {
+    event.preventDefault();
+    if (isBusy()) return;
+    if (byId('studio-answer')) byId('studio-answer').hidden = false;
+    if (byId('studio-quiz-status')) byId('studio-quiz-status').textContent = '答案揭晓！请孩子们一起说出这个单词。';
+    for (const item of answers) {
+      item.classList.remove('is-wrong');
+      item.classList.toggle('is-correct', item.dataset.quizAnswer === 'right');
+    }
+  });
+
+  const words = {
+    octopus: {meaning: '章鱼', tip: '伸出手臂模仿章鱼，和同桌说：It is an octopus.'},
+    crab: {meaning: '螃蟹', tip: '挥一挥小钳子，试着说：It is a crab.'},
+    turtle: {meaning: '海龟', tip: '慢慢走两步，再一起说：It is a turtle.'},
+  };
+  const wordButtons = [...document.querySelectorAll('[data-practice-word]')];
+  function selectWord(word) {
+    if (isBusy() || !words[word]) return;
+    for (const button of wordButtons) button.setAttribute('aria-pressed', String(button.dataset.practiceWord === word));
+    if (byId('studio-practice-word')) byId('studio-practice-word').textContent = word;
+    if (byId('studio-practice-meaning')) byId('studio-practice-meaning').textContent = words[word].meaning;
+    if (byId('studio-practice-tip')) byId('studio-practice-tip').textContent = words[word].tip;
+  }
+  for (const button of wordButtons) button.addEventListener('click', event => {
+    event.preventDefault(); selectWord(button.dataset.practiceWord);
+  });
+
+  const filters = [...document.querySelectorAll('[data-feedback-filter]')];
+  const feedbackCards = [...document.querySelectorAll('[data-feedback-status]')];
+  function filterFeedback(filter) {
+    if (isBusy() || !['all', 'review', 'done'].includes(filter)) return;
+    for (const button of filters) button.setAttribute('aria-pressed', String(button.dataset.feedbackFilter === filter));
+    let count = 0;
+    for (const card of feedbackCards) {
+      card.hidden = filter !== 'all' && card.dataset.feedbackStatus !== filter;
+      if (!card.hidden) count++;
+    }
+    if (byId('studio-feedback-count')) byId('studio-feedback-count').textContent = count + ' 条示例反馈';
+  }
+  for (const button of filters) button.addEventListener('click', event => {
+    event.preventDefault(); filterFeedback(button.dataset.feedbackFilter);
+  });
+
+  // Motion is limited to the visible hero and does not run an idle animation loop.
+  const motion = actors.map(actor => ({actor, x: 0, y: 0, tx: 0, ty: 0}));
+  let frame = 0;
+  let intersecting = true;
+  const clamp = value => Math.max(-1, Math.min(1, value));
+  function canMove() {
+    return !reduced.matches && finePointer.matches && !document.hidden && intersecting
+      && !stage.closest('[hidden]') && document.body.dataset.view === 'teacher'
+      && !byId('new-course-dialog')?.open;
+  }
+  function paintActor(item) {
+    item.actor.style.setProperty('--look-x', (item.x * 4).toFixed(2) + 'px');
+    item.actor.style.setProperty('--look-y', (item.y * 4).toFixed(2) + 'px');
+    item.actor.style.setProperty('--drift-x', (item.x * 14).toFixed(2) + 'px');
+    item.actor.style.setProperty('--drift-y', (item.y * 14).toFixed(2) + 'px');
+    item.actor.style.setProperty('--tilt', (item.x * 5).toFixed(2) + 'deg');
+  }
+  function stopMotion() {
+    cancelAnimationFrame(frame); frame = 0;
+    for (const item of motion) { item.x = item.y = item.tx = item.ty = 0; paintActor(item); }
+  }
+  function animate() {
+    frame = 0;
+    if (!canMove()) { stopMotion(); return; }
+    let unsettled = false;
+    for (const item of motion) {
+      item.x += (item.tx - item.x) * 0.16;
+      item.y += (item.ty - item.y) * 0.16;
+      if (Math.abs(item.tx - item.x) + Math.abs(item.ty - item.y) < 0.002) {
+        item.x = item.tx; item.y = item.ty;
+      } else unsettled = true;
+      paintActor(item);
+    }
+    if (unsettled) frame = requestAnimationFrame(animate);
+  }
+  const requestMotion = () => { if (!frame) frame = requestAnimationFrame(animate); };
+  stage.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse' || !canMove()) return;
+    const bounds = stage.getBoundingClientRect();
+    for (const item of motion) {
+      const actorBounds = item.actor.getBoundingClientRect();
+      item.tx = clamp((event.clientX - actorBounds.x - actorBounds.width / 2) / Math.max(bounds.width / 2, 1));
+      item.ty = clamp((event.clientY - actorBounds.y - actorBounds.height / 2) / Math.max(bounds.height / 2, 1));
+    }
+    requestMotion();
+  }, {passive: true});
+  stage.addEventListener('pointerleave', () => {
+    if (!canMove()) { stopMotion(); return; }
+    for (const item of motion) item.tx = item.ty = 0;
+    requestMotion();
+  });
+  function checkMotion() {
+    const paused = !canMove();
+    stage.classList.toggle('is-motion-paused', paused);
+    if (paused) { stopMotion(); clearGreetings(); }
+  }
+  reduced.addEventListener('change', checkMotion);
+  finePointer.addEventListener('change', checkMotion);
+  document.addEventListener('visibilitychange', checkMotion);
+  window.addEventListener('blur', stopMotion);
+  window.addEventListener('pagehide', () => { stopMotion(); clearGreetings(); });
+  const motionObserver = new MutationObserver(checkMotion);
+  motionObserver.observe(document.body, {attributes: true, attributeFilter: ['data-view', 'data-authenticated']});
+  for (let ancestor = stage; ancestor && ancestor !== document.body; ancestor = ancestor.parentElement) {
+    motionObserver.observe(ancestor, {attributes: true, attributeFilter: ['hidden']});
+  }
+  const courseDialog = byId('new-course-dialog');
+  if (courseDialog) motionObserver.observe(courseDialog, {attributes: true, attributeFilter: ['open']});
+  new IntersectionObserver(entries => {
+    intersecting = entries[0]?.isIntersecting ?? false;
+    checkMotion();
+  }).observe(stage);
+
+  selectMode('ppt', false);
+  showSlide(0);
+  selectWord('octopus');
+  filterFeedback('all');
+  checkMotion();
+})();
+
 </script>
 </body>
 </html>
