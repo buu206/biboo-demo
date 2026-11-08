@@ -1,4 +1,4 @@
-verify.sh 自检  2026-11-06 17:25:12  产品：Biboo（/Users/buu/Documents/ChatGPT/个人产品/idea-to-launch-kit/projects/Biboo）
+verify.sh 自检  2026-11-08 10:05:30  产品：Biboo（/Users/buu/Documents/ChatGPT/个人产品/idea-to-launch-kit/projects/Biboo）
 
 ================ 1. mock 自动化测试 ================
 ..........................................................               [100%]
@@ -8,7 +8,7 @@ verify.sh 自检  2026-11-06 17:25:12  产品：Biboo（/Users/buu/Documents/Cha
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-58 passed, 1 warning in 3.50s
+58 passed, 1 warning in 3.47s
 结果：通过（58/58）
 
 ================ 2. 真实模型冒烟记录（docs/evidence/<阶段>/冒烟记录.md，须由冒烟脚本写入，格式见通用手册第十节） ================
@@ -21,8 +21,8 @@ verify.sh 自检  2026-11-06 17:25:12  产品：Biboo（/Users/buu/Documents/Cha
 结果：通过
 
 ================ 4. 数据重启恢复（verify.sh 自己起服务、写随机标记、杀进程、再起、读回；钩子 scripts/restart-check.sh 只提供 start/write/read/stop） ================
-通过：起服务（PID 11727）→ 写入随机标记 → 杀掉 → 再起（PID 11792）→ 按 ID 1 读回，标记一致。
-结果：通过（进程 11727→11792，随机标记读回一致）
+通过：起服务（PID 71473）→ 写入随机标记 → 杀掉 → 再起（PID 71551）→ 按 ID 1 读回，标记一致。
+结果：通过（进程 71473→71551，随机标记读回一致）
 
 ================ 5. 前端类型检查 / Lint / 生产构建 ================
 未找到 frontend/package.json，本阶段无正式前端。
@@ -35,7 +35,7 @@ verify.sh 自检  2026-11-06 17:25:12  产品：Biboo（/Users/buu/Documents/Cha
 有：README.md
 有：docs/evidence/阶段2-2/照着做清单.md
 有：docs/evidence/阶段2-2/是否表.md
-有：docs/evidence/阶段2-2/ 下 2 张截图
+有：docs/evidence/阶段2-2/ 下 4 张截图
 通过：前面阶段（阶段0 阶段1 阶段2-1）的产物都在。
 结果：通过
 
@@ -44,6 +44,6 @@ verify.sh 自检  2026-11-06 17:25:12  产品：Biboo（/Users/buu/Documents/Cha
 是否表第 3 项  真实模型冒烟：   待验（缺冒烟记录）
 是否表第 4 项  前端检查与构建： N/A（本阶段无正式前端）
 是否表第 5 项  密钥排除：       通过
-是否表第 6 项  重启后数据恢复： 通过（进程 11727→11792，随机标记读回一致）
+是否表第 6 项  重启后数据恢复： 通过（进程 71473→71551，随机标记读回一致）
 是否表第 10 项 文件齐全与位置： 通过
 总判定：有不通过、未配置或待验项，对应是否表只能填"否"（第 3 项填"待验"）。

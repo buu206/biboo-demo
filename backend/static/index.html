@@ -1834,6 +1834,62 @@ body:not([data-authenticated]) #status {
     padding-top:16px;
   }
 }
+
+/* Course home: show a lesson when it is needed, not a page of process forms. */
+body,body[data-authenticated] {padding:24px 32px 64px;max-width:1180px;margin:0 auto;}
+.breadcrumb,.account-avatar,.account-copy small {display:none;}
+.app-header {margin:0 0 16px;min-height:44px;}
+.sidebar {position:static;inset:auto;width:auto;height:auto;padding:0 0 20px;border:0;border-radius:0;background:transparent;box-shadow:none;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;}
+.sidebar .brand {padding:0;gap:9px;}.brand small,.nav-label,.sidebar-note,.sidebar-foot {display:none;}
+.brand strong {font-size:23px;}.brand-mark {width:32px;height:32px;border-radius:11px;}
+.role-tabs {position:static;inset:auto;display:flex;flex-direction:row;gap:5px;border:0;padding:0;background:transparent;box-shadow:none;}
+.role-tabs a {min-height:40px;padding:8px 14px;border-radius:24px;font-size:13px;gap:7px;display:flex;flex-direction:row;}
+.role-tabs a[aria-current=page] {background:#e9e0f8;color:#51406d;box-shadow:none;}.role-tabs a[aria-current=page]::after {display:none;}
+.role-tabs a svg {width:17px;height:17px;}
+#workspace {max-width:none;}.banner {margin:0 0 20px;padding:9px 13px;font-size:12px;border:0;background:#eeebf4;color:#746a80;}
+#status {margin:0 0 12px;}#status:empty {display:none;}
+.course-welcome {display:flex;align-items:center;justify-content:space-between;padding:24px 32px;background:#eee6f7;border-radius:25px;margin:0 0 24px;gap:20px;}
+.course-welcome .eyebrow {display:none;}.course-welcome h2 {font-size:28px;margin:0 0 7px;}.course-welcome p:not(.eyebrow) {color:#71647e;}.course-welcome button {margin-top:16px;}.course-welcome svg {width:135px;height:115px;flex:none;}
+.course-toolbar {display:flex;align-items:center;gap:14px;margin-bottom:18px;}.course-toolbar h2 {margin-right:auto;font-size:20px;}.course-toolbar label {margin:0;display:flex;align-items:center;gap:8px;}.course-toolbar select {width:190px;margin:0;background:transparent;}.course-toolbar #course-count {font-size:13px;font-weight:400;color:var(--muted);margin-left:4px;}
+.quiet-button {background:transparent!important;border:0!important;color:#6a5b7a!important;box-shadow:none!important;padding:8px 10px;min-height:40px;font-weight:500;}
+.course-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+.course-card {display:flex;flex-direction:column;min-width:0;padding:22px;border:1px solid #ece7f2;border-radius:20px;background:#fff;transition:box-shadow .2s;}.course-card:hover {box-shadow:0 8px 24px #59467c0b;}
+.course-card-top {display:flex;align-items:center;justify-content:space-between;gap:10px;}.course-card-art {width:44px;height:44px;border-radius:14px;background:#eee8fa;color:#8c71b7;display:grid;place-items:center;font-size:23px;}
+.course-card:nth-child(3n+2) .course-card-art {background:#eef3dc;color:#7b8b50;}.course-card:nth-child(3n+3) .course-card-art {background:#f9eadd;color:#ab805e;}
+.course-state {font-size:12px;color:#887990;}.course-state.published {color:#60815d;}
+.course-card h3 {font-size:19px;line-height:1.5;margin:20px 0 8px;overflow-wrap:anywhere;}.course-card .course-class {font-size:12px;color:#8c8295;margin-bottom:24px;}.course-card .actions {margin-top:auto;gap:6px;}.course-card .actions button {font-size:12px;min-height:38px;padding:8px 12px;}
+.course-empty {text-align:center;padding:45px 20px;color:var(--muted);background:#fff;border-radius:20px;}.course-empty h3 {color:var(--ink);margin-bottom:8px;}.course-empty button {margin-top:18px;}
+#course-load-status:empty {display:none;}#course-load-status {margin:12px 0;color:var(--muted);}
+#lesson-output {margin:0;padding:0;border:0;background:transparent;box-shadow:none;scroll-margin-top:20px;}
+.course-detail-heading {display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0 24px;}.course-detail-heading h2 {font-size:29px;line-height:1.4;overflow-wrap:anywhere;}.course-detail-heading #lesson-state {font-size:12px;color:#85738e;margin-bottom:7px;}.course-detail-heading #course-meta {font-size:13px;color:var(--muted);margin-top:7px;}
+.detail-tabs,.new-course-tabs {display:flex;gap:6px;margin:20px 0;border-bottom:1px solid #e7e0ee;padding-bottom:8px;}
+.detail-tabs button,.new-course-tabs button {background:transparent;color:#877b92;border:0;box-shadow:none;min-height:42px;font-weight:500;}
+.detail-tabs button[aria-selected=true],.new-course-tabs button[aria-selected=true] {background:#ede5f7;color:#5e487b;font-weight:650;}
+#panel-homework,#panel-classroom {background:white;padding:28px;border-radius:22px;}
+.preview-section {margin:0 0 22px;}.preview-section h3 {font-size:13px;font-weight:600;color:#8c7e99;margin-bottom:12px;}
+.word-preview {display:flex;flex-wrap:wrap;gap:9px;}.word-preview span {padding:10px 16px;border-radius:11px;background:#f5f1fb;color:#57426c;font-size:17px;}
+.sentence-preview {list-style:none;margin:0;padding:0;}.sentence-preview li {padding:11px 0;border-bottom:1px solid #f2eef7;}.sentence-preview small {display:block;color:var(--muted);margin-top:3px;}
+.audio-preview {display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;}.audio-preview audio {max-width:100%;height:35px;}
+.course-publish-row {display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid #ede8f3;margin-top:28px;padding-top:22px;}.course-publish-row p {color:var(--muted);font-size:12px;}
+#published-actions {background:#f0f6ea;border:0;margin:25px 0 0;padding:22px;}.result-box>p {font-size:12px;color:#718068;}.classroom-download {display:flex;gap:20px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:22px;}.classroom-download h3 {font-size:19px;}.classroom-download p {font-size:12px;color:var(--muted);}.classroom-download>div {margin-right:auto;}#lesson-ppt-style-field {margin:0;max-width:220px;}
+.outline-preview-row {display:flex;gap:18px;padding:16px 0;border-bottom:1px solid #f1edf5;}.outline-preview-row .minutes {width:52px;flex:none;color:#9a85af;font-size:12px;}.outline-preview-row h4 {margin:0 0 5px;font-size:15px;}.outline-preview-row p {color:var(--muted);font-size:13px;overflow-wrap:anywhere;}
+#quality:empty {display:none;}#quality {padding:10px 16px;font-size:12px;}#edit-hint {font-size:12px;color:var(--purple-dark);}
+#new-course-dialog {border:0;border-radius:24px;padding:28px;width:min(660px,calc(100vw - 32px));max-height:calc(100dvh - 48px);overflow:auto;color:var(--ink);background:#fff;box-shadow:0 20px 100px #33244533;}
+#new-course-dialog::backdrop {background:#30273975;backdrop-filter:blur(3px);}.new-course-heading {display:flex;justify-content:space-between;gap:15px;}.new-course-heading h2 {font-size:24px;}.new-course-heading p {font-size:13px;color:var(--muted);margin-top:5px;}#new-course-close {font-size:26px;line-height:1;}
+#new-course-dialog form {margin:0;}#new-course-dialog .courseware-file {margin-bottom:18px;padding:20px 12px;}#new-course-dialog #target {padding:0;border:0;box-shadow:none;background:transparent;}
+#new-course-dialog details {margin:12px 0 20px;}#new-course-dialog summary {cursor:pointer;color:#7d688f;font-size:13px;padding:6px 0;}#new-course-dialog details[open]>summary {margin-bottom:12px;}.form-note {font-size:12px;color:var(--muted);line-height:1.7;}#new-course-dialog #target > .form-note {margin:14px 0 0;}
+#new-class-details #new-class {margin-top:10px;}#new-course-status:empty {display:none;}#new-course-status {font-size:13px;margin:10px 0;color:var(--muted);}
+.sr-only {position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+@media(max-width:800px) {.course-grid {grid-template-columns:repeat(2,minmax(0,1fr));}.course-detail-heading {align-items:flex-start;flex-direction:column;}}
+@media(max-width:560px) {
+ body,body[data-authenticated],body:not([data-authenticated]) {padding:18px 16px 36px;}.app-header {margin-bottom:12px;}#page-title {font-size:22px;}.account-copy {display:none;}
+ .sidebar {gap:10px;flex-wrap:wrap;padding-bottom:16px;}.sidebar .brand {display:none;}.role-tabs {width:100%;display:flex;justify-content:space-between;}.role-tabs a {padding:8px 11px;font-size:12px;gap:5px;}.role-tabs a svg {width:16px;height:16px;}
+ .course-welcome {padding:24px 22px;gap:4px;margin-bottom:24px;}.course-welcome h2 {font-size:23px;}.course-welcome .eyebrow {font-size:8px;letter-spacing:1px;}.course-welcome p {font-size:12px;}.course-welcome svg {width:78px;height:90px;}.course-welcome button {font-size:13px;padding:9px 13px;}
+ .course-toolbar {flex-wrap:wrap;gap:8px;}.course-toolbar h2 {width:100%;font-size:18px;}.course-toolbar label {margin-right:auto;font-size:11px;}.course-toolbar select {width:170px;padding:9px;}.course-grid {grid-template-columns:1fr;gap:13px;}.course-card {padding:20px;}.course-card h3 {margin-top:12px;}
+ #panel-homework,#panel-classroom {padding:20px 16px;}.course-detail-heading h2 {font-size:24px;}.course-detail-heading .actions {gap:5px;}.course-detail-heading .actions button {font-size:12px;padding:8px 12px;}.detail-tabs {gap:5px;}.detail-tabs button {padding:9px 15px;}.course-publish-row {flex-wrap:wrap;}.course-publish-row p {width:100%;}.classroom-download {gap:14px;}.classroom-download>div {width:100%;}.classroom-download #lesson-ppt-style-field {width:100%;max-width:none;}
+ #new-course-dialog {padding:22px 18px;max-height:calc(100dvh - 24px);width:calc(100vw - 24px);}.new-course-heading h2 {font-size:21px;}.new-course-heading p {font-size:12px;}.new-course-tabs button {padding:9px 14px;}.banner {font-size:11px;}.preview-section .word-preview span {font-size:16px;}#published-actions {padding:18px 14px;}
+}
+
 </style>
 </head>
 <body>
@@ -1898,7 +1954,7 @@ body:not([data-authenticated]) #status {
   <header class="app-header">
     <div>
       <p class="breadcrumb">
-        工作空间
+        Biboo
         <span>
           /
         </span>
@@ -1918,7 +1974,7 @@ body:not([data-authenticated]) #status {
         <p id="teacher">
         </p>
         <small>
-          你的教学工作台
+          一起陪伴孩子成长
         </small>
       </div>
       <button class="secondary" id="logout">
@@ -1979,7 +2035,7 @@ body:not([data-authenticated]) #status {
             <use href="#icon-grid"/>
           </svg>
           <span>
-            老师备课
+            我的课程
           </span>
         </a>
         <a id="view-review" data-view="review" href="?view=review">
@@ -1987,7 +2043,7 @@ body:not([data-authenticated]) #status {
             <use href="#icon-listen"/>
           </svg>
           <span>
-            老师复核
+            课后反馈
           </span>
         </a>
         <a id="view-student" data-view="student" href="?view=student">
@@ -2016,55 +2072,47 @@ body:not([data-authenticated]) #status {
     </aside>
     <p id="mode" class="banner" hidden>
     </p>
-    <section id="teacher-view" hidden aria-label="老师备课">
-      <div class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">
-            A LITTLE HELP, A BETTER LESSON
-          </p>
-          <h2>
-            把好课，带到每一次跟读。
-          </h2>
-          <p>
-            从一份教学材料开始，准备课堂课件，也为孩子留一份课后练习。
-          </p>
-          <div class="hero-pills">
-            <span>
-              01 上传材料
-            </span>
-            <span>
-              02 核对目标
-            </span>
-            <span>
-              03 生成并发布
-            </span>
-          </div>
+    <section id="teacher-view" hidden aria-label="我的课程">
+      <div id="course-home">
+        <div class="course-welcome">
+          <div><p class="eyebrow">A LITTLE HELP, A BETTER LESSON</p><h2>准备下一堂好课</h2><p>课件、作业和孩子们的反馈，都在这里。</p><button id="new-course-open">＋ 准备新课</button></div>
+          <svg viewBox="0 0 160 140" aria-hidden="true"><use href="#biboo-buddy"/></svg>
         </div>
-        <svg class="hero-art" viewBox="0 0 230 190" aria-hidden="true">
-          <circle cx="127" cy="92" r="78" fill="#ffffff42"/>
-          <path d="m36 35 4 10 11 2-9 7 1 11-9-6-10 4 4-11-7-9 11 1Z" fill="#d3b9e8"/>
-          <circle cx="204" cy="51" r="4" fill="#decda7"/>
-          <use href="#biboo-buddy" x="52" y="24" width="168" height="147"/>
-          <path d="m46 150 72-13 20 28-72 14Z" fill="#ccdbc0"/>
-          <path d="m46 146 72-13 20 28-72 14Z" fill="#dfedcf"/>
-          <path d="m60 145 52-9m-45 21 52-9" stroke="#b5c5a7" stroke-width="2"/>
-        </svg>
+        <div class="course-toolbar"><h2>我的课程 <span id="course-count"></span></h2><label>班级筛选<select id="course-filter"><option value="">全部班级</option></select></label><button id="course-refresh" class="quiet-button">刷新</button></div>
+        <p id="course-load-status" role="status" aria-live="polite"></p>
+        <div id="course-grid" class="course-grid"></div>
+        <div id="course-empty" class="course-empty" hidden><h3>这里还没有课程</h3><p>上传一份教学材料，或者写下这节课要教的词。</p><button id="empty-new-course">准备第一堂课</button></div>
       </div>
-      <div class="prep-grid">
-        <section class="card courseware" aria-labelledby="courseware-heading">
-          <div class="card-heading">
-            <span class="step-number">
-              01
-            </span>
-            <div>
-              <h2 id="courseware-heading">
-                上传教学材料
-              </h2>
-              <p>
-                教案、讲义和以前的课件，都可以成为起点。
-              </p>
+      <section id="lesson-output" class="course-detail" hidden aria-label="课程详情">
+        <button id="course-back" class="quiet-button">← 我的课程</button>
+        <div class="course-detail-heading"><div><p id="lesson-state"></p><h2 id="course-title"></h2><p id="course-meta"></p></div><div class="actions"><button id="edit-course" class="secondary">修改内容</button><button id="save" hidden>保存修改</button><button id="cancel-edit" class="quiet-button" hidden>取消修改</button><button id="regenerate" class="quiet-button" hidden>继续生成</button></div></div>
+        <p id="edit-hint" hidden>修改后可直接发布，Biboo 会先保存。离开时也会提醒你保存。</p>
+        <ul id="quality"></ul>
+        <select id="lesson-list" hidden aria-label="班级作业"></select>
+        <div id="detail" hidden>
+          <div class="detail-tabs" role="tablist" aria-label="课程内容"><button id="tab-homework" role="tab" aria-selected="true" aria-controls="panel-homework">课后作业</button><button id="tab-classroom" role="tab" aria-selected="false" aria-controls="panel-classroom" tabindex="-1">课堂课件</button></div>
+          <section id="panel-homework" role="tabpanel" aria-labelledby="tab-homework">
+            <div id="homework-preview"></div><div id="items" hidden></div>
+            <div id="draft-message" class="course-empty" hidden><h3>课程草稿已保存</h3><p>继续生成课件大纲和跟读题，完成后再发布。</p></div>
+            <div class="course-publish-row"><p id="publish-hint">检查题目后发布，孩子就能开始跟读。</p><button id="publish">发布作业</button></div>
+            <div id="published-actions" class="result-box" hidden>
+              <strong>作业已发布</strong><p>本机演示链接需在这台电脑、同一演示账号中打开。</p>
+              <label>跟读链接<input id="student-share-url" type="url" readonly></label>
+              <div class="actions"><button id="copy-student-link">复制跟读链接</button><a id="student-entry" class="download-button secondary" data-view="student">体验孩子端</a><a id="course-review" class="download-button secondary" data-view="review">看反馈</a></div>
             </div>
-          </div>
+          </section>
+          <section id="panel-classroom" role="tabpanel" aria-labelledby="tab-classroom" hidden>
+            <div class="classroom-download"><div><h3>带进课堂的 PPT</h3><p>文字可编辑，互动提示在备注里。</p></div><label id="lesson-ppt-style-field" for="lesson-ppt-style" hidden>PPT 风格<select id="lesson-ppt-style"><option value="children" selected>儿童互动（6–10岁）</option><option value="standard">文字整理</option></select></label><a id="lesson-ppt" class="download-button" download hidden>下载课堂 PPT</a></div>
+            <div id="outline-preview"></div><div id="outline" hidden></div>
+          </section>
+        </div>
+      </section>
+      <dialog id="new-course-dialog" aria-labelledby="new-course-title">
+        <div class="new-course-heading"><div><h2 id="new-course-title">准备新课</h2><p>从现有材料开始，也可以自己写几个目标。</p></div><button id="new-course-close" class="quiet-button" aria-label="关闭准备新课">×</button></div>
+        <div class="new-course-tabs" role="tablist" aria-label="新课准备方式"><button id="new-material-tab" role="tab" aria-selected="true" aria-controls="new-material-panel">从材料开始</button><button id="new-goals-tab" role="tab" aria-selected="false" aria-controls="new-goals-panel" tabindex="-1">自己填写</button></div>
+        <p id="new-course-status" role="status" aria-live="polite"></p>
+        <section id="new-material-panel" role="tabpanel" aria-labelledby="new-material-tab">
+          <h3 id="courseware-heading" class="sr-only">上传教学材料</h3>
           <form id="courseware-form">
             <div class="courseware-file">
               <span class="upload-glyph" aria-hidden="true">
@@ -2095,7 +2143,7 @@ body:not([data-authenticated]) #status {
               </select>
             </label>
             <small id="courseware-style-hint">
-              卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。本课 PPT 下载也使用这个风格。
+              卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。
             </small>
             <div class="actions">
               <button type="button" id="courseware-generate" disabled>
@@ -2105,7 +2153,7 @@ body:not([data-authenticated]) #status {
                 <svg aria-hidden="true">
                   <use href="#icon-spark"/>
                 </svg>
-                带入备课
+                用材料准备课程
               </button>
               <button type="button" id="courseware-example" class="secondary">
                 用示例材料试一试
@@ -2119,203 +2167,19 @@ body:not([data-authenticated]) #status {
               下载 PPTX
             </a>
           </div>
+
         </section>
-        <section class="card class-card">
-          <div class="card-heading">
-            <span class="step-number">
-              02
-            </span>
-            <div>
-              <h2>
-                选择班级
-              </h2>
-              <p>
-                这堂课，为哪一群孩子准备？
-              </p>
-            </div>
-          </div>
-          <label>
-            当前班级
-            <select id="classes">
-            </select>
-          </label>
-          <span class="new-class-title">
-            也可以创建一个新班级
-          </span>
-          <form id="new-class" class="row">
-            <label>
-              班级名称
-              <input name="name" maxlength="140" required placeholder="例如：周六英语班">
-            </label>
-            <button class="secondary">
-              建班
-            </button>
+        <section id="new-goals-panel" role="tabpanel" aria-labelledby="new-goals-tab" hidden>
+          <label>上课班级<select id="classes"></select></label>
+          <details id="new-class-details"><summary>＋ 新建班级</summary><form id="new-class" class="row"><label>班级名称<input name="name" maxlength="140" required placeholder="例如：周六英语班"></label><button class="secondary">建班</button></form></details>
+          <form id="target">
+            <label>这节课的主题<input name="topic" placeholder="例如：我的海洋生物" maxlength="140" required></label>
+            <label>想教的词汇<textarea name="vocabulary" placeholder="例如：octopus, crab, turtle（用逗号或换行分开）" required></textarea></label>
+            <details id="target-options"><summary>调整年龄、课时和句型</summary><div class="row"><label>年龄段<input name="age_band" value="6–10 岁" maxlength="140" required></label><label>课时（分钟）<input name="duration_minutes" type="number" min="5" max="180" value="25" required></label></div><label>句型（可选，每行一句）<textarea name="patterns" placeholder="It's got eight arms."></textarea></label><label>发音重点（可选）<input name="sound_focus" placeholder="例如：th"></label></details>
+            <button id="new-lesson">生成这堂课</button><p class="form-note">先生成草稿，检查后由你决定什么时候发布作业。</p>
           </form>
         </section>
-        <form class="card" id="target">
-          <div class="card-heading">
-            <span class="step-number">
-              03
-            </span>
-            <div>
-              <h2>
-                核对教学目标
-              </h2>
-              <p>
-                从材料带入，也可以直接填写。
-              </p>
-            </div>
-          </div>
-          <div class="row">
-            <label>
-              主题
-              <input name="topic" placeholder="例如：认识清辅音 th" maxlength="140" required>
-            </label>
-            <label>
-              年龄段
-              <input name="age_band" placeholder="7–9 岁" maxlength="140" required>
-            </label>
-            <label>
-              课时（分钟）
-              <input name="duration_minutes" type="number" min="5" max="180" value="25" required>
-            </label>
-          </div>
-          <label>
-            词汇（1–12 个，用逗号或换行分隔）
-            <textarea name="vocabulary" placeholder="think, three, thank" required>
-            </textarea>
-          </label>
-          <div class="goal-pair">
-            <label>
-              句型（可选，每行一句）
-              <textarea name="patterns" placeholder="I think there are three.">
-              </textarea>
-            </label>
-            <label>
-              发音重点（可选）
-              <input name="sound_focus" placeholder="例如：th">
-            </label>
-          </div>
-          <button id="new-lesson">
-            <svg aria-hidden="true">
-              <use href="#icon-spark"/>
-            </svg>
-            生成课件大纲与跟读作业
-          </button>
-        </form>
-        <aside class="card flow-card">
-          <p class="eyebrow">
-            MADE FOR YOUR CLASS
-          </p>
-          <h3>
-            同一份目标，两份好准备。
-          </h3>
-          <div class="flow-item">
-            <span class="flow-icon" aria-hidden="true">
-              <svg>
-                <use href="#icon-book"/>
-              </svg>
-            </span>
-            <div>
-              <strong>
-                带进课堂的 PPT
-              </strong>
-              <p>
-                用卡通、短句和课堂活动准备一份可以继续编辑的课件。
-              </p>
-            </div>
-          </div>
-          <div class="flow-item">
-            <span class="flow-icon" aria-hidden="true">
-              <svg>
-                <use href="#icon-mic"/>
-              </svg>
-            </span>
-            <div>
-              <strong>
-                带回家的跟读练习
-              </strong>
-              <p>
-                单词、句型和示范语音，让课堂内容在课后继续。
-              </p>
-            </div>
-          </div>
-          <p class="flow-foot">
-            发布前的每一处内容，都由你来确认。
-          </p>
-        </aside>
-      </div>
-      <section class="card" id="lesson-output">
-        <div class="card-heading">
-          <span class="step-number">
-            04
-          </span>
-          <div>
-            <h2>
-              检查、下载与发布
-            </h2>
-            <p>
-              把课堂活动和练习题，调整成你想要的样子。
-            </p>
-          </div>
-        </div>
-        <p>
-          修改后先保存。确认发布会生成示范音频并锁定这份作业。
-        </p>
-        <label>
-          班级作业
-          <select id="lesson-list">
-          </select>
-        </label>
-        <div id="detail" hidden>
-          <p id="lesson-state">
-          </p>
-          <ul id="quality">
-          </ul>
-          <label id="lesson-ppt-style-field" for="lesson-ppt-style" hidden>
-            本课 PPT 风格
-            <select id="lesson-ppt-style">
-              <option value="children" selected>儿童互动（6–10岁）</option>
-              <option value="standard">文字整理</option>
-            </select>
-          </label>
-          <div class="actions">
-            <button class="secondary" id="regenerate">
-              生成 / 重新生成
-            </button>
-            <button class="secondary" id="save">
-              保存修改
-            </button>
-            <a id="lesson-ppt" class="download-button secondary" download hidden>
-              下载本课 PPT
-            </a>
-            <button id="publish">
-              确认发布并生成音频
-            </button>
-          </div>
-          <div id="published-actions" class="result-box" hidden>
-            <p>
-              跟读作业已发布。在本次演示中，可切换到孩子视角。链接在登录同一个演示账号的浏览器中打开。
-            </p>
-            <label>
-              本课跟读链接
-              <input id="student-share-url" type="url" readonly>
-            </label>
-            <div class="actions">
-              <a id="student-entry" class="download-button" data-view="student">
-                打开孩子跟读
-              </a>
-              <button id="copy-student-link" class="secondary">
-                复制跟读链接
-              </button>
-            </div>
-          </div>
-          <div id="outline">
-          </div>
-          <div id="items">
-          </div>
-        </div>
-      </section>
+      </dialog>
     </section>
     <section id="student-view" hidden aria-label="孩子跟读">
       <div class="student-welcome">
@@ -2357,7 +2221,7 @@ body:not([data-authenticated]) #status {
         <p id="student-empty" hidden>
           还没有已发布的作业。请先在
           <a data-view="teacher" href="?view=teacher">
-            老师备课
+            我的课程
           </a>
           生成并发布。
         </p>
@@ -2540,7 +2404,7 @@ body:not([data-authenticated]) #status {
         <p id="review-empty" hidden>
           请先在
           <a data-view="teacher" href="?view=teacher">
-            老师备课
+            我的课程
           </a>
           创建班级。
         </p>
@@ -2635,12 +2499,18 @@ const api = async (path, method = 'GET', body) => {
 const stateLabels = {draft:'草稿', generated:'待发布', published:'已发布'};
 const kinds = {word:'单词', sentence:'句子', dialogue:'对话'};
 const list = value => value.split(/[,，\n]/).map(part => part.trim()).filter(Boolean);
-let lesson, studentLesson, classRows = [], activeView = 'teacher', busy = false;
+let lesson, studentLesson, classRows = [], courseRows = [], activeView = 'teacher', busy = false;
+let editingCourse = false, detailTab = 'homework', newCourseOrigin = null, newCourseSnapshot = '';
+let creationPending = false;
 const views = ['teacher', 'student', 'review'];
 const outlineFields = [], itemFields = [];
 function status(message, failed = false) {
   $('status').textContent = message;
   $('status').classList.toggle('error', failed);
+  if ($('new-course-dialog').open) {
+    $('new-course-status').textContent = message;
+    $('new-course-status').classList.toggle('error', failed);
+  }
 }
 function add(parent, tag, text) {
   const node = document.createElement(tag);
@@ -2655,13 +2525,31 @@ function field(parent, label, value, readOnly, type = 'text') {
   control.readOnly = readOnly;
   return control;
 }
+function setDetailTab(tab, focus = false) {
+  detailTab = tab === 'classroom' ? 'classroom' : 'homework';
+  for (const name of ['homework', 'classroom']) {
+    $('panel-' + name).hidden = name !== detailTab;
+    const button = $('tab-' + name);
+    button.setAttribute('aria-selected', String(name === detailTab));
+    button.tabIndex = name === detailTab ? 0 : -1;
+  }
+  if (focus) $('tab-' + detailTab).focus();
+}
+function setCourseEditing(enabled) {
+  editingCourse = Boolean(enabled && lesson?.status === 'generated');
+  $('items').hidden = $('outline').hidden = !editingCourse;
+  $('homework-preview').hidden = $('outline-preview').hidden = editingCourse;
+  $('save').hidden = $('cancel-edit').hidden = $('edit-hint').hidden = !editingCourse;
+  $('edit-course').hidden = lesson?.status !== 'generated' || editingCourse;
+  $('regenerate').hidden = lesson?.status !== 'draft' && !editingCourse;
+  $('regenerate').textContent = lesson?.status === 'draft' ? '继续生成' : '重新生成';
+}
 function render(data) {
   lesson = data;
   $('detail').hidden = !data;
-  $('outline').replaceChildren();
-  $('items').replaceChildren();
-  $('quality').replaceChildren();
+  for (const id of ['outline', 'items', 'quality', 'homework-preview', 'outline-preview']) $(id).replaceChildren();
   outlineFields.length = itemFields.length = 0;
+  setCourseEditing(false);
   if (!data) {
     $('student-share-url').value = '';
     $('student-entry').removeAttribute('href');
@@ -2669,67 +2557,205 @@ function render(data) {
     return;
   }
   const locked = data.status === 'published';
-  $('lesson-state').textContent = data.topic + ' · ' + stateLabels[data.status];
-  $('regenerate').hidden = locked;
-  $('save').hidden = $('publish').hidden = data.status !== 'generated';
-  updateLessonPptLink();
+  $('course-title').textContent = data.topic;
+  $('lesson-state').textContent = stateLabels[data.status];
+  $('course-meta').textContent = [classRows.find(row => row.id === data.class_id)?.name, data.age_band, data.duration_minutes + ' 分钟'].filter(Boolean).join(' · ');
+  $('publish').hidden = data.status !== 'generated';
+  $('draft-message').hidden = data.status !== 'draft';
+  $('publish-hint').hidden = locked;
+  $('publish-hint').textContent = data.status === 'draft' ? '草稿已经保存，可继续完成生成。' : '发布会生成示范语音并锁定题目；你可以先修改内容。';
   $('published-actions').hidden = !locked;
+  updateLessonPptLink();
   if (locked) {
     const url = viewUrl('student', data.id);
     $('student-entry').href = url;
     $('student-share-url').value = url;
     $('copy-student-link').textContent = '复制跟读链接';
+    $('course-review').href = viewUrl('review', data.id);
   }
   for (const note of data.quality_notes) add($('quality'), 'li', note);
   if (!data.outline) return;
-  add($('outline'), 'h3', '课堂大纲');
   for (const section of data.outline.sections) {
     const row = add($('outline'), 'div');
     row.className = 'entry row';
-    outlineFields.push({
-      title: field(row, '环节', section.title, locked),
-      minutes: field(row, '分钟', section.minutes, locked, 'number'),
-      activity: field(row, '活动', section.activity, locked, 'textarea'),
-    });
+    outlineFields.push({title:field(row, '环节', section.title, locked), minutes:field(row, '分钟', section.minutes, locked, 'number'), activity:field(row, '活动', section.activity, locked, 'textarea')});
+    const preview = add($('outline-preview'), 'div');
+    preview.className = 'outline-preview-row';
+    add(preview, 'span', section.minutes + ' 分钟').className = 'minutes';
+    const copy = add(preview, 'div');
+    add(copy, 'h4', section.title);
+    add(copy, 'p', section.activity);
   }
-  add($('items'), 'h3', '跟读作业');
-  for (const item of data.items) {
-    const row = add($('items'), 'div');
-    row.className = 'entry row';
-    itemFields.push({
-      id: item.id,
-      text: field(row, kinds[item.kind] + (item.speaker ? ' · ' + item.speaker : ''), item.text, locked),
-      translation: field(row, '译文', item.translation, locked),
-    });
-    if (item.audio_asset_id) {
-      const audio = add(row, 'audio');
-      audio.controls = true;
-      audio.preload = 'none';
-      audio.src = '/api/v1/assets/' + item.audio_asset_id;
+  const words = data.items.filter(item => item.kind === 'word');
+  if (words.length) {
+    const part = add($('homework-preview'), 'section'); part.className = 'preview-section';
+    add(part, 'h3', '这次练习的单词');
+    const group = add(part, 'div'); group.className = 'word-preview';
+    for (const item of words) add(group, 'span', item.text).lang = 'en';
+  }
+  const sentences = data.items.filter(item => item.kind !== 'word');
+  if (sentences.length) {
+    const part = add($('homework-preview'), 'section'); part.className = 'preview-section';
+    add(part, 'h3', '一起说一说');
+    const list = add(part, 'ul'); list.className = 'sentence-preview';
+    for (const item of sentences) {
+      const row = add(list, 'li');
+      add(row, 'span', (item.speaker ? item.speaker + ': ' : '') + item.text).lang = 'en';
+      if (item.translation) add(row, 'small', item.translation);
     }
   }
+  if (locked && data.items.length) {
+    const part = add($('homework-preview'), 'details');
+    add(part, 'summary', '试听示范语音');
+    for (const item of data.items) {
+      const row = add(part, 'div'); row.className = 'audio-preview';
+      add(row, 'span', item.text);
+      const audio = add(row, 'audio'); audio.controls = true; audio.preload = 'none';
+      audio.setAttribute('aria-label', '试听 ' + item.text);
+      audio.src = practiceMockMode ? '/api/v1/practice/items/' + item.id + '/demo-audio' : '/api/v1/assets/' + item.audio_asset_id;
+    }
+  }
+  for (const item of data.items) {
+    const row = add($('items'), 'div'); row.className = 'entry row';
+    itemFields.push({id:item.id, text:field(row, kinds[item.kind] + (item.speaker ? ' · ' + item.speaker : ''), item.text, locked), translation:field(row, '译文', item.translation, locked)});
+  }
+  setDetailTab(detailTab);
 }
 function choices(control, rows, label, placeholder) {
   control.replaceChildren(new Option(placeholder, ''));
   for (const row of rows) control.add(new Option(label(row), row.id));
 }
+function renderCourseCards() {
+  const filter = $('course-filter').value;
+  const rows = courseRows.filter(row => !filter || String(row.class_id) === filter);
+  $('course-grid').replaceChildren();
+  $('course-count').textContent = rows.length ? rows.length + ' 堂' : '';
+  $('course-empty').hidden = rows.length > 0;
+  for (const data of rows) {
+    const card = add($('course-grid'), 'article'); card.className = 'course-card';
+    const top = add(card, 'div'); top.className = 'course-card-top';
+    const art = add(top, 'span', '✧'); art.className = 'course-card-art'; art.setAttribute('aria-hidden','true');
+    add(top, 'span', stateLabels[data.status]).className = 'course-state ' + data.status;
+    add(card, 'h3', data.topic);
+    add(card, 'p', classRows.find(row => row.id === data.class_id)?.name || '我的班级').className = 'course-class';
+    const actions = add(card, 'div'); actions.className = 'actions';
+    const open = add(actions, 'button', data.status === 'published' ? '查看作业' : '继续准备');
+    open.onclick = () => perform(() => openCourse(data.id), '正在打开课程…');
+    if (data.status === 'published') {
+      const review = add(actions, 'button', '看反馈'); review.className = 'quiet-button';
+      review.onclick = () => perform(() => switchView('review', data.id), '正在读取反馈…');
+    } else if (data.status === 'generated') {
+      const ppt = add(actions, 'button', '看课件'); ppt.className = 'quiet-button';
+      ppt.onclick = () => perform(() => openCourse(data.id, 'classroom'), '正在打开课件…');
+    }
+  }
+}
 async function classes(selectId) {
   classRows = await api('/classes');
+  const previous = $('classes').value;
+  const filter = $('course-filter').value;
   choices($('classes'), classRows, row => row.name, '请选择班级');
-  $('classes').value = selectId ?? (classRows[0]?.id || '');
+  $('classes').value = selectId ?? (classRows.some(row => String(row.id) === previous) ? previous : (classRows[0]?.id || ''));
+  choices($('course-filter'), classRows, row => row.name, '全部班级');
+  $('course-filter').value = filter;
   await lessons();
 }
 async function lessons(selectId) {
-  const id = $('classes').value;
-  const rows = id ? await api('/lessons?class_id=' + id) : [];
-  choices($('lesson-list'), rows, row => row.topic + ' · ' + stateLabels[row.status], '请选择作业');
-  $('lesson-list').value = selectId ?? (rows[0]?.id || '');
-  await openLesson();
+  $('course-load-status').textContent = '正在读取课程…';
+  try {
+    courseRows = await api('/lessons');
+    choices($('lesson-list'), courseRows, row => row.topic + ' · ' + stateLabels[row.status], '请选择作业');
+    renderCourseCards();
+    $('course-load-status').textContent = '';
+    if (selectId) await openCourse(selectId, detailTab);
+  } catch (error) {
+    $('course-load-status').textContent = '课程暂时未能加载，点「刷新」重试。';
+    throw error;
+  }
 }
-async function openLesson() {
-  const id = $('lesson-list').value;
-  render(id ? await api('/lessons/' + id) : null);
+async function openCourse(id, tab = 'homework') {
+  if (!(await leaveCourseSafely())) return;
+  const data = await api('/lessons/' + id);
+  $('classes').value = data.class_id;
+  render(data);
+  $('course-home').hidden = true;
+  $('lesson-output').hidden = false;
+  setDetailTab(tab);
+  updateViewUrl('teacher', data.id);
+  $('lesson-output').scrollIntoView({block:'start'});
 }
+async function openLesson() { if ($('lesson-list').value) await openCourse($('lesson-list').value); }
+async function showCourseHome() {
+  if (!(await leaveCourseSafely())) return false;
+  render(null);
+  $('course-home').hidden = false;
+  $('lesson-output').hidden = true;
+  updateViewUrl('teacher');
+  return '';
+}
+function newCourseValues() {
+  const goals = [...$('target').elements].filter(control => control.name).map(control => [control.name, control.value]);
+  return JSON.stringify({goals,title:$('courseware-title').value,file:coursewareFile?.name || ''});
+}
+function setNewCourseTab(tab, focus = false) {
+  const material = tab !== 'goals';
+  $('new-material-panel').hidden = !material;
+  $('new-goals-panel').hidden = material;
+  for (const [id, selected] of [['new-material-tab',material],['new-goals-tab',!material]]) {
+    $(id).setAttribute('aria-selected',String(selected)); $(id).tabIndex = selected ? 0 : -1;
+  }
+  if (focus) $(material ? 'new-material-tab':'new-goals-tab').focus();
+}
+function openNewCourse(tab = 'material') {
+  newCourseOrigin = document.activeElement;
+  $('new-course-status').textContent = '';
+  if (!newCourseSnapshot) newCourseSnapshot = newCourseValues();
+  setNewCourseTab(tab);
+  $('new-course-dialog').showModal();
+  $(tab === 'goals' ? 'new-goals-tab':'new-material-tab').focus();
+}
+function closeNewCourse() {
+  if (busy) return;
+  $('new-course-dialog').close();
+}
+$('new-course-dialog').addEventListener('cancel', event => { if (busy) event.preventDefault(); });
+$('new-course-dialog').addEventListener('close', () => {
+  if (newCourseOrigin?.isConnected && !newCourseOrigin.closest('[hidden]')) newCourseOrigin.focus();
+  else ($('lesson-output').hidden ? $('new-course-open') : $('course-back')).focus();
+});
+$('new-course-close').onclick = closeNewCourse;
+for (const id of ['new-course-open','empty-new-course']) $(id).onclick = () => { if (!busy) openNewCourse(); };
+$('new-material-tab').onclick = () => setNewCourseTab('material');
+$('new-goals-tab').onclick = () => setNewCourseTab('goals');
+for (const id of ['tab-homework','tab-classroom']) $(id).onclick = () => setDetailTab(id.split('-')[1]);
+function tabKeys(ids, activate) {
+  for (const id of ids) $(id).onkeydown = event => {
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    event.preventDefault();
+    const index = ids.indexOf(id);
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? ids.length-1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + ids.length) % ids.length;
+    activate(ids[next]); $(ids[next]).focus();
+  };
+}
+tabKeys(['tab-homework','tab-classroom'], id => setDetailTab(id.split('-')[1]));
+tabKeys(['new-material-tab','new-goals-tab'], id => setNewCourseTab(id === 'new-goals-tab' ? 'goals':'material'));
+$('course-filter').onchange = renderCourseCards;
+$('course-refresh').onclick = () => perform(() => classes(), '正在刷新课程…');
+$('course-back').onclick = () => perform(showCourseHome, '正在返回课程…');
+$('edit-course').onclick = () => {
+  if (busy) return;
+  setCourseEditing(true);
+  $(detailTab === 'homework' ? 'items':'outline').querySelector('input,textarea')?.focus();
+};
+$('cancel-edit').onclick = () => {
+  if (busy || (hasUnsavedContent() && !confirm('放弃这次尚未保存的修改？'))) return;
+  render(lesson);
+};
+window.addEventListener('beforeunload', event => {
+  if (hasUnsavedContent() || (newCourseSnapshot && newCourseSnapshot !== newCourseValues())) {
+    event.preventDefault(); event.returnValue = '';
+  }
+});
 function viewUrl(view, lessonId) {
   const url = new URL(location.pathname, location.origin);
   if (view !== 'teacher') url.searchParams.set('view', view);
@@ -2740,10 +2766,11 @@ function updateViewUrl(view, lessonId) {
   history.replaceState(null, '', viewUrl(view, lessonId));
 }
 async function switchView(view, lessonId) {
+  if (!(await leaveCourseSafely())) return;
   activeView = views.includes(view) ? view : 'teacher';
   document.body.dataset.view = activeView;
   const pages = {
-    teacher: ['老师工作台', '从备课到跟读'],
+    teacher: ['我的课程', '我的课程'],
     student: ['孩子的练习空间', '一起，勇敢开口'],
     review: ['班级与课后反馈', '老师复核'],
   };
@@ -2758,6 +2785,9 @@ async function switchView(view, lessonId) {
     else link.removeAttribute('aria-current');
   }
   updateViewUrl(activeView, lessonId);
+  if (activeView === 'teacher') {
+    if (lessonId) await openCourse(lessonId); else await showCourseHome();
+  }
   if (activeView === 'student') await studentLessons(lessonId);
   if (activeView === 'review') await reviewClasses(lessonId);
 }
@@ -2787,16 +2817,20 @@ async function showTeacher(teacher) {
   selectPracticeLearner(teacher?.id);
   if (teacher) {
     $('teacher').textContent = teacher.name;
-    await classes();
     const query = new URLSearchParams(location.search);
+    await classes();
     await switchView(query.get('view'), query.get('lesson'));
   } else {
+    if ($('new-course-dialog').open) $('new-course-dialog').close();
+    courseRows = []; newCourseSnapshot = ''; creationPending = false;
+    $('course-grid').replaceChildren();
     document.body.removeAttribute('data-view');
     $('page-context').textContent = '欢迎来到 Biboo';
     $('page-title').textContent = '备好一堂课，陪伴每一次跟读';
     $('courseware-form').reset();
     $('target').reset();
     $('new-class').reset();
+    selectCoursewareStyle('children');
     selectCourseware(null);
     studentLesson = null;
     configurePractice(null);
@@ -2859,6 +2893,8 @@ submit('login', async fields => {
   return '已登录。';
 });
 $('logout').onclick = () => perform(async () => {
+  if (!(await leaveCourseSafely())) return '';
+  if (newCourseSnapshot && newCourseSnapshot !== newCourseValues() && !confirm('退出会清除这次尚未生成的新课内容。确认退出？')) return '';
   await api('/auth/logout', 'POST');
   await showTeacher(null);
   return '已退出。';
@@ -2867,62 +2903,99 @@ submit('new-class', async fields => {
   const row = await api('/classes', 'POST', {name: fields.get('name')});
   $('new-class').reset();
   await classes(row.id);
+  $('new-class-details').open = false;
   return '班级已创建。';
 });
-$('classes').onchange = () => perform(() => lessons());
+$('classes').onchange = () => {};
 $('lesson-list').onchange = () => perform(openLesson);
 submit('target', async fields => {
-  if (!$('classes').value) throw new Error('请先选择一个班级。');
+  if (creationPending) return '';
+  if (!$('classes').value) {
+    $('new-class-details').open = true;
+    throw new Error('先选一个班级；还没有班级时，可以在上方直接新建。');
+  }
   const target = Object.fromEntries(fields.entries());
   for (const key of ['vocabulary', 'sound_focus']) target[key] = list(target[key]);
   target.patterns = target.patterns.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
   target.duration_minutes = Number(target.duration_minutes);
   target.class_id = Number($('classes').value);
-  const draft = await api('/lessons', 'POST', target);
-  await lessons(draft.id);
-  await api('/lessons/' + draft.id + '/generate', 'POST');
-  await lessons(draft.id);
-  $('lesson-output').scrollIntoView({behavior:'smooth', block:'start'});
-  return '已生成课堂大纲与跟读作业。';
+  creationPending = true;
+  try {
+    const draft = await api('/lessons', 'POST', target);
+    $('target').reset(); newCourseSnapshot = '';
+    $('courseware-file').value = ''; $('courseware-title').value = ''; selectCourseware(null);
+    $('new-course-dialog').close();
+    await lessons(draft.id);
+    try { await api('/lessons/' + draft.id + '/generate', 'POST'); }
+    catch (error) {
+      let latest;
+      try { latest = await api('/lessons/' + draft.id); } catch (_) {}
+      if (latest?.status !== 'generated') {
+        if (latest) render(latest);
+        throw new Error(latest?.status === 'draft'
+          ? '课程草稿已保存。' + error.message + ' 可点「继续生成」重试。'
+          : '课程已创建，暂时无法确认生成结果。请刷新课程后再继续。');
+      }
+    }
+    await lessons(draft.id);
+    return '课程准备好了。检查一下题目，再决定是否发布作业。';
+  } finally { creationPending = false; }
 });
 $('regenerate').onclick = () => {
-  if (lesson.status === 'generated' && !confirm('重新生成会替换这份未发布的内容。继续吗？')) return;
+  if (busy || !lesson || !['draft', 'generated'].includes(lesson.status)) return;
+  if (lesson.status === 'generated' && !confirm('重新生成会替换当前课件大纲和作业题目，包括尚未保存的修改。继续吗？')) return;
   perform(async () => {
-    await api('/lessons/' + lesson.id + '/generate', 'POST');
-    await lessons(lesson.id);
-    return '已生成。';
-  }, '正在生成大纲与作业…');
+    const id = lesson.id;
+    const generated = await api('/lessons/' + id + '/generate', 'POST');
+    render(generated);
+    await lessons(id);
+    return '课程准备好了。';
+  }, '正在生成这堂课…');
 };
 function editedContent() {
-  return {
-    revision: lesson.revision,
-    outline: outlineFields.map(row => ({title: row.title.value, minutes: Number(row.minutes.value), activity: row.activity.value})),
-    items: itemFields.map(row => ({id: row.id, text: row.text.value, translation: row.translation.value})),
-  };
+  return {revision:lesson.revision,
+    outline:outlineFields.map(row => ({title:row.title.value,minutes:Number(row.minutes.value),activity:row.activity.value})),
+    items:itemFields.map(row => ({id:row.id,text:row.text.value,translation:row.translation.value}))};
 }
-$('save').onclick = () => perform(async () => {
-  render(await api('/lessons/' + lesson.id + '/content', 'PUT', editedContent()));
-  return '修改已保存。';
-});
 function hasUnsavedContent() {
+  if (!editingCourse || lesson?.status !== 'generated' || !lesson.outline) return false;
   const edited = editedContent();
-  const original = lesson.outline.sections;
-  return edited.outline.some((row, i) => Object.keys(row).some(key => row[key] !== original[i][key]))
-    || edited.items.some((row, i) => row.text !== lesson.items[i].text || row.translation !== lesson.items[i].translation);
+  return edited.outline.some((row,i) => Object.keys(row).some(key => row[key] !== lesson.outline.sections[i]?.[key]))
+    || edited.items.some((row,i) => row.text !== lesson.items[i]?.text || row.translation !== lesson.items[i]?.translation);
 }
+async function saveCurrentEdits() {
+  if (hasUnsavedContent()) {
+    const saved = await api('/lessons/' + lesson.id + '/content', 'PUT', editedContent());
+    render(saved);
+  } else setCourseEditing(false);
+}
+async function leaveCourseSafely() {
+  if (!hasUnsavedContent()) return true;
+  if (!confirm('还有未保存的修改。点「确定」保存后离开，点「取消」继续编辑。')) return false;
+  await saveCurrentEdits();
+  return true;
+}
+$('save').onclick = () => perform(async () => { await saveCurrentEdits(); return '修改已保存。'; }, '正在保存修改…');
 $('lesson-ppt').onclick = event => {
   if (!hasUnsavedContent()) return;
   event.preventDefault();
-  status('请先保存修改，再下载本课 PPT。', true);
+  perform(async () => {
+    await saveCurrentEdits();
+    const link = document.createElement('a'); link.href = $('lesson-ppt').href; link.download = ''; link.click();
+    return '已保存修改，正在下载本课 PPT。';
+  }, '正在保存并准备课件…');
 };
 $('publish').onclick = () => {
-  if (hasUnsavedContent()) return status('请先保存修改，再确认发布。', true);
-  if (!practiceMockMode && !confirm('确认发布当前版本？发布时会生成示范音频，发布后内容将锁定。')) return;
+  if (busy || lesson?.status !== 'generated') return;
+  if (!practiceMockMode && !confirm('发布当前作业并生成示范语音？发布后题目将锁定。')) return;
   perform(async () => {
-    await api('/lessons/' + lesson.id + '/publish', 'POST', {confirm: true, revision: lesson.revision});
-    await lessons(lesson.id);
-    return '已发布，可以打开孩子跟读。';
-  }, '正在生成示范音频并发布…');
+    await saveCurrentEdits();
+    const id = lesson.id;
+    await api('/lessons/' + id + '/publish', 'POST', {confirm:true,revision:lesson.revision});
+    await lessons(id);
+    setDetailTab('homework');
+    return '作业已发布。可以复制链接，或先体验孩子端。';
+  }, '正在保存并发布作业…');
 };
 
 const coursewareMime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
@@ -2991,7 +3064,7 @@ function updateLessonPptLink() {
     return;
   }
   ppt.href = '/api/v1/courseware/pptx/' + lesson.id + '?style=' + selectedCoursewareStyle();
-  ppt.textContent = selectedCoursewareStyle() === 'children' ? '下载本课儿童互动 PPT' : '下载本课文字 PPT';
+  ppt.textContent = selectedCoursewareStyle() === 'children' ? '下载儿童互动 PPT' : '下载文字 PPT';
   ppt.title = selectedCoursewareStyle() === 'children' ? '放映时先回答问题，再翻页揭晓；教学提示在备注里。' : '';
 }
 function fillGoals(goals) {
@@ -3000,7 +3073,7 @@ function fillGoals(goals) {
   fields.vocabulary.value = (goals.vocabulary || []).join('\n');
   fields.patterns.value = (goals.patterns || []).join('\n');
   fields.sound_focus.value = (goals.sound_focus || []).join(', ');
-  if (!fields.age_band.value) fields.age_band.value = '7–9 岁';
+  if (!fields.age_band.value) fields.age_band.value = '6–10 岁';
 }
 function uploadCourseware(action, title) {
   const query = new URLSearchParams({filename: coursewareFile.name, title});
@@ -3037,8 +3110,8 @@ function selectCoursewareStyle(style) {
   const children = selectedCoursewareStyle() === 'children';
   $('courseware-generate').textContent = children ? '生成儿童互动 PPT' : '生成文字 PPT';
   $('courseware-style-hint').textContent = children
-    ? '卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。本课 PPT 下载也使用这个风格。'
-    : '提取材料文字，按统一版式分页；原图和动画不保留。本课 PPT 下载也使用这个风格。';
+    ? '卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。'
+    : '提取材料文字，按统一版式分页；原图和动画不保留。';
   updateLessonPptLink();
 }
 $('courseware-style').onchange = event => selectCoursewareStyle(event.currentTarget.value);
@@ -3049,9 +3122,11 @@ $('courseware-form').onsubmit = event => {
   perform(async () => {
     const response = await uploadCourseware('goals', $('courseware-title').value.trim());
     fillGoals(await readResponse(response));
-    const step = $('classes').value ? $('target') : $('new-class');
-    step.scrollIntoView({behavior:'smooth', block:'start'});
-    return '教学目标已带入。请选择班级，核对目标后生成课件和跟读作业。';
+    setNewCourseTab('goals');
+    if (!$('classes').value) $('new-class-details').open = true;
+    $('new-course-dialog').scrollTop = 0;
+    $('target').elements.topic.focus();
+    return '材料里的目标已带入，可以修改后生成课程。';
   }, '正在从材料提取教学目标…', reportCourseware);
 };
 $('courseware-generate').onclick = () => {
@@ -3644,11 +3719,14 @@ $('review-refresh').onclick = () => perform(loadReview, '正在读取复核看�
 $('review-next-lesson').onclick = () => perform(async () => {
   if (!currentReview?.suggestion) return;
   const {suggestion, class_id} = currentReview;
+  if (!(await leaveCourseSafely())) return '';
   if ($('classes').value !== String(class_id)) await classes(class_id);
-  fillGoals(suggestion);
   await switchView('teacher');
-  $('target').scrollIntoView({behavior:'smooth', block:'start'});
-  return '下节课的目标已带入备课。';
+  openNewCourse('goals');
+  fillGoals(suggestion);
+  $('classes').value = class_id;
+  $('target').elements.topic.focus();
+  return '下节课的目标已带入，调整后生成一堂新课。';
 });
 
 (async () => {
