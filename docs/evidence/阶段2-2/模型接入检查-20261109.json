@@ -1,0 +1,51 @@
+{
+  "time": "2026-11-09T20:21:05.783246+08:00",
+  "scope": "虚构材料的单次连通检查，不代表阶段口语验收通过",
+  "calls": [
+    {
+      "event": "generate",
+      "model": "deepseek-flash",
+      "seconds": 1.741,
+      "request_id": "dc450c94-38e4-4a50-b8c6-772b3f042348",
+      "input_tokens": 434,
+      "output_tokens": 258,
+      "structure": "首测合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    }
+  ],
+  "lesson": {
+    "status": "passed",
+    "sentence_count": 3,
+    "outline_sections": 4
+  },
+  "tts": {
+    "status": 200,
+    "seconds": 3.582,
+    "model": "gemini-3.8-flash-tts",
+    "request_id": null,
+    "format": "wav",
+    "channels": 1,
+    "sample_rate": 24000,
+    "duration": 3.04
+  },
+  "application_tts_adapter": {
+    "status": "passed",
+    "mime": "audio/wav",
+    "calls": [
+      {
+        "event": "tts",
+        "model": "AIHubMix gemini-3.8-flash-tts",
+        "seconds": 3.438,
+        "request_id": null,
+        "input_tokens": null,
+        "output_tokens": null,
+        "structure": "WAV 合规",
+        "retry": 0,
+        "result": "通过",
+        "error": null
+      }
+    ]
+  }
+}

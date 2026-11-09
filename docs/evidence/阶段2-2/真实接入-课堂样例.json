@@ -1,0 +1,60 @@
+{
+  "outline": [
+    {
+      "title": "热身",
+      "minutes": 4,
+      "activity": "看海洋动物图片，做游泳动作"
+    },
+    {
+      "title": "跟读",
+      "minutes": 6,
+      "activity": "听词跟读，重点练习 f 音"
+    },
+    {
+      "title": "造句",
+      "minutes": 5,
+      "activity": "用句型 I can see a ___ 说句子"
+    },
+    {
+      "title": "对话",
+      "minutes": 5,
+      "activity": "两人用图片互相提问回答"
+    }
+  ],
+  "sentences": [
+    {
+      "text": "I can see a fish.",
+      "translation": "我能看到一条鱼。"
+    },
+    {
+      "text": "I can see a turtle.",
+      "translation": "我能看到一只海龟。"
+    },
+    {
+      "text": "I can see a crab.",
+      "translation": "我能看到一只螃蟹。"
+    }
+  ],
+  "dialogue": [
+    {
+      "text": "Can you see a fish?",
+      "translation": "你能看到一条鱼吗？",
+      "speaker": "A"
+    },
+    {
+      "text": "Yes, I can see a fish.",
+      "translation": "是的，我能看到一条鱼。",
+      "speaker": "B"
+    },
+    {
+      "text": "Can you see a crab?",
+      "translation": "你能看到一只螃蟹吗？",
+      "speaker": "A"
+    },
+    {
+      "text": "No, I can see a turtle.",
+      "translation": "不，我能看到一只海龟。",
+      "speaker": "B"
+    }
+  ]
+}

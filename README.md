@@ -2,7 +2,7 @@
 
 Biboo 帮英语老师用一份教学材料准备课堂 PPT 和跟读作业，再把需要人工判断的跟读交给老师复核。复核结果可以带进下一节课的备课。
 
-2026-11-08 交流材料：[老师沟通简版](docs/交流材料/Biboo-老师沟通简版.md) · [面试讲解与技术事实](docs/交流材料/Biboo-面试讲解与技术事实.md)。材料区分当前 Demo、已接入的真实模型路径和待验证能力；后续功能调整等老师反馈后继续。
+2026-11-08 交流材料：[老师沟通简版](docs/交流材料/Biboo-老师沟通简版.md) · [面试讲解与技术事实](docs/交流材料/Biboo-面试讲解与技术事实.md)。材料区分当前 Demo、已接入的真实模型路径和待验证能力。2026-11-09 起按用户要求开始独立真实模型测试，见下文。
 
 项目保存在私有 GitHub 仓库，后续完成并验证的更新会继续同步。[GitHub 仓库](https://github.com/buu206/biboo-demo)
 
@@ -81,6 +81,22 @@ BIBOO_FAKE_MODELS=1 BIBOO_DATA_DIR=../data/demo .venv/bin/python -m uvicorn app.
 
 模拟作业单独存放在 `data/demo/`，音频为测试提示音。真实环境默认用 `data/`，首次启动时自动运行数据库迁移。后台 API 说明在 [本机接口文档](http://127.0.0.1:8000/docs)。
 
+## 独立真实测试入口（2026-11-09）
+
+已有本机凭证可以直接复用。运行 `backend/.venv/bin/python scripts/real_test.py --check` 只检查配置，不发起收费请求；运行 `backend/.venv/bin/python scripts/real_test.py` 启动 [真实测试页面](http://localhost:18768/)。沿用本机 Demo 邀请码。请用此处的 `localhost` 地址，与旧 Demo 的 `127.0.0.1` 登录 Cookie 分开。
+
+启动器强制关闭模拟，数据隔离在 `data/real-test/`，只创建空白老师和「Biboo 真实测试班」。首次启动不会生成内容或发布作业。原有 `scripts/demo.py`、18766 端口和 `data/manual-demo/` 继续用于模拟演示。
+
+第一步先验作业文字和示范语音：
+
+1. 登录真实测试页面，点「开始备课」→「自己填写」。班级选「Biboo 真实测试班」。
+2. 主题填「海洋动物」，词汇填 `turtle, crab, fish`。展开「调整年龄、课时和句型」，年龄填 7–9 岁，时长填 20 分钟，句型填 `I can see a ___.`，发音重点填 `f`。
+3. 点「生成这堂课」。检查三个单词、例句、对话与活动是否围绕目标，文字是否适合孩子。此操作调用 DeepSeek。
+4. 核对内容后点「发布作业」。此操作逐条调用 AIHubMix 生成示范语音；本机测试的整份发布时限为 60 秒，不要连续点击。成功后点「体验孩子端」，试听单词和整句，判断音色、语速与停顿。
+5. 这一步先不提交跟读录音。腾讯云口语额度、成人录音测试和反馈效果单独验证；出现错误时保留页面提示，不以模拟结果代替。
+
+已完成一次虚构教材文字生成和新语音接口连通检查，记录见 [模型接入检查](docs/evidence/阶段2-2/模型接入检查-20261109.json)。这证明接口可调用，不代表口语评测、教学质量或全流程验收通过。首页目标提取与儿童 PPT 仍使用现有规则、模板和预置插画；任意材料的语义理解、AI 儿童教案和主题配图还未接入。
+
 ## 真实凭证和验证
 
 1. 打开 `backend/.env`。如果文件还未创建，先从 `backend/.env.example` 复制一份。设置 `TTS_PROVIDER=aihubmix` 和 `BIBOO_FAKE_MODELS=0`，填写 `DEEPSEEK_API_KEY` 与 `AIHUBMIX_API_KEY`。凭证保存在本机文件中。
@@ -88,7 +104,7 @@ BIBOO_FAKE_MODELS=1 BIBOO_DATA_DIR=../data/demo .venv/bin/python -m uvicorn app.
 3. 要在页面使用真实模型，先在产品目录运行 `backend/.venv/bin/python scripts/create_teacher.py "试用老师"` 创建真实数据目录的账号，再从 `backend/` 运行 `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000`。AIHubMix 验收只使用虚构练习文字，课堂样例须去掉姓名等个人信息。
 4. 从工具包根目录运行 `bash kit.sh 自检 Biboo`，或直接运行 `bash verify.sh Biboo 阶段2-1`。
 
-AIHubMix 的默认模型为 `gpt-4o-mini-tts`，音色为 `coral`。`AIHUBMIX_TTS_MODEL` 和 `AIHUBMIX_TTS_VOICE` 可配置。使用腾讯云语音合成时，将 `TTS_PROVIDER` 设为 `tencent` 并填写 `TENCENTCLOUD_SECRET_ID` 与 `TENCENTCLOUD_SECRET_KEY`。阶段 2-2 的发音评测凭证按该阶段方案准备。
+AIHubMix 的默认模型为 `gemini-3.8-flash-tts`，音色为 `Sulafat`，输出 WAV。`AIHUBMIX_TTS_MODEL`、`AIHUBMIX_TTS_VOICE` 和 `AIHUBMIX_TTS_INSTRUCTIONS` 可配置；Gemini 通过朗读指令控制语速，不发送旧接口的 `speed` 参数。旧 OpenAI TTS 的 MP3 路径仍兼容。使用腾讯云语音合成时，将 `TTS_PROVIDER` 设为 `tencent` 并填写 `TENCENTCLOUD_SECRET_ID` 与 `TENCENTCLOUD_SECRET_KEY`。阶段 2-2 的发音评测凭证按该阶段方案准备。
 
 ## 阶段 2-2 跟读验收
 

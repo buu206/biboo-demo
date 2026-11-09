@@ -217,6 +217,8 @@ def test_aihubmix_publishes_mp3_without_tencent_credentials(setup, monkeypatch):
     settings.deepseek_api_key = "test-only"
     settings.tts_provider = "aihubmix"
     settings.aihubmix_api_key = "hub-test"
+    settings.aihubmix_tts_model = "gpt-4o-mini-tts"
+    settings.aihubmix_tts_voice = "coral"
     assert settings.credentials_ready
     spoken = []
 
@@ -250,9 +252,10 @@ def test_aihubmix_publishes_mp3_without_tencent_credentials(setup, monkeypatch):
         assert events[1].detail["retry"] == 1
         assert events[1].detail["model"] == "AIHubMix gpt-4o-mini-tts"
         assert events[1].detail["request_id"] == "hub-request"
+        assert events[1].detail["structure"] == "MP3 合规"
 
 
-def test_aihubmix_invalid_audio_rolls_back_publication(setup, monkeypatch):
+def test_aihubmix_gemini_publishes_wav_with_delivery_instructions(setup, monkeypatch):
     app, client, target, _ = setup
     url = create(client, target)
     lesson = generate(client, url)
@@ -260,10 +263,55 @@ def test_aihubmix_invalid_audio_rolls_back_publication(setup, monkeypatch):
     settings.fake_models = False
     settings.tts_provider = "aihubmix"
     settings.aihubmix_api_key = "hub-test"
+    settings.aihubmix_tts_instructions = "Read exactly. Speak warmly and slightly slowly."
+    wav, _ = ai.mock_audio()
+    spoken = []
+
+    def respond(request):
+        assert request.url == httpx.URL("https://aihubmix.com/v1/audio/speech")
+        body = json.loads(request.content)
+        assert body["model"] == "gemini-3.8-flash-tts"
+        assert body["voice"] == "Sulafat"
+        assert body["response_format"] == "wav"
+        assert body["instructions"] == settings.aihubmix_tts_instructions
+        assert "speed" not in body
+        spoken.append(body["input"])
+        return httpx.Response(200, content=wav, headers={"x-request-id": "gemini-request"})
+
+    mock_aihubmix(monkeypatch, respond)
+    response = publish(client, url, lesson)
+    assert response.status_code == 200, response.text
+    published = response.json()
+    assert spoken == list(dict.fromkeys(item["text"] for item in published["items"]))
+    audio = client.get(f"{PREFIX}/assets/{published['items'][0]['audio_asset_id']}")
+    assert audio.headers["content-type"] == "audio/wav"
+    assert audio.content == wav
+    with Session(app.state.engine) as db:
+        assets = list(db.scalars(select(Asset)))
+        assert assets and all(asset.path.endswith(".wav") for asset in assets)
+        events = list(db.scalars(select(AuditLog).where(AuditLog.event == "tts")))
+        assert events and all(event.detail["structure"] == "WAV 合规" for event in events)
+        assert events[0].detail["request_id"] == "gemini-request"
+
+
+@pytest.mark.parametrize("tts_model, extension", [
+    ("gpt-4o-mini-tts", "mp3"), ("gemini-3.8-flash-tts", "wav"),
+])
+def test_aihubmix_invalid_audio_rolls_back_publication(setup, monkeypatch, tts_model, extension):
+    app, client, target, _ = setup
+    url = create(client, target)
+    lesson = generate(client, url)
+    settings = app.state.settings
+    settings.fake_models = False
+    settings.tts_provider = "aihubmix"
+    settings.aihubmix_api_key = "hub-test"
+    settings.aihubmix_tts_model = tts_model
+    settings.aihubmix_tts_voice = "coral" if extension == "mp3" else "Sulafat"
+    valid_audio = MP3_FRAME if extension == "mp3" else ai.mock_audio()[0]
 
     def respond(request):
         if json.loads(request.content)["input"] == target["vocabulary"][0]:
-            return httpx.Response(200, content=MP3_FRAME)
+            return httpx.Response(200, content=valid_audio)
         return httpx.Response(200, json={"error": "no audio returned"})
 
     mock_aihubmix(monkeypatch, respond)
@@ -271,7 +319,7 @@ def test_aihubmix_invalid_audio_rolls_back_publication(setup, monkeypatch):
     assert response.status_code == 503
     assert response.json()["error"]["code"] == "TTS_UNAVAILABLE"
     assert client.get(url).json() == lesson
-    assert not list(settings.data_dir.rglob("*.mp3"))
+    assert not list(settings.data_dir.rglob(f"*.{extension}"))
     with Session(app.state.engine) as db:
         assert db.scalar(select(func.count()).select_from(Asset)) == 0
 

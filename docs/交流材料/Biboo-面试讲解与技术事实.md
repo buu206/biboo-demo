@@ -1,5 +1,7 @@
 # Biboo｜面试讲解与技术事实
 
+> 2026-11-09 更新：新增独立真实测试入口，DeepSeek 单份生成和 AIHubMix Gemini 3.8 Flash TTS 已实测连通。下面关于原 18766 模拟 Demo 和固定工作流的说明仍适用；这次没有新增 Agent，也未完成真实口语评测或通用 AI 课件生成。
+
 整理日期：2026-11-08。以代码版本 `67d570a` 和当日证据为准；本文是讲解材料，没有新增产品能力。
 
 [私有 GitHub 仓库](https://github.com/buu206/biboo-demo) · [给老师看的简版](Biboo-老师沟通简版.md) · [本机 Demo](http://127.0.0.1:18766/?intro=1)
@@ -73,7 +75,7 @@ flowchart TD
 
 语音合成负责“说出来”，口语评测负责“分析读音”，两者不能互相替代；接入多个模型服务也不等于多 Agent。
 
-代码默认文本模型名为 `deepseek-flash`；AIHubMix TTS 默认 `gpt-4o-mini-tts`、音色 `coral`，腾讯云评测适配 SOE-N。这些是代码默认值和历史调用记录中的名称，不代表当前 Demo 正在调用它们；本次未读取密钥文件或改变模型配置。TTS 通过文字、音色和语速参数控制，没有额外的自然语言音色提示词。
+代码默认文本模型名为 `deepseek-flash`；2026-11-09 起 AIHubMix TTS 默认 `gemini-3.8-flash-tts`、音色 `Sulafat`，腾讯云评测适配 SOE-N。独立真实入口使用本机已有凭证，原 18766 Demo 仍模拟。Gemini TTS 用 `instructions` 控制语气与语速、输出 WAV；旧 OpenAI TTS 的 MP3 与 `speed` 参数分支继续兼容。当前仅确认真实文字和语音可调用，教学与试听质量需人工验收。
 
 ## 4. 技术架构与数据
 

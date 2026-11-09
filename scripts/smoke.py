@@ -131,11 +131,11 @@ def main():
             preview = None
             for item in published["items"]:
                 audio = api(client, "GET", f"/assets/{item['audio_asset_id']}")
-                assert audio.headers["content-type"] == "audio/mpeg" and audio.content
+                assert audio.headers["content-type"] in {"audio/mpeg", "audio/wav"} and audio.content
                 if preview is None and item["kind"] == "sentence":
-                    preview = audio.content
+                    preview = (audio.content, ".wav" if audio.headers["content-type"] == "audio/wav" else ".mp3")
             if preview is not None:
-                PREVIEW.write_bytes(preview)
+                PREVIEW.with_suffix(preview[1]).write_bytes(preview[0])
 
     print(f"真实链路通过，已写入 {LOG.name} 和 {SAMPLES.name}。请按样例评分。")
     return 0

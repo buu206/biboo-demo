@@ -20,9 +20,15 @@ class Settings(BaseModel):
     tts_provider: Literal["tencent", "aihubmix"] = "tencent"
     aihubmix_api_key: str = ""
     aihubmix_base_url: str = "https://aihubmix.com/v1"
-    aihubmix_tts_model: str = "gpt-4o-mini-tts"
-    aihubmix_tts_voice: str = "coral"
+    aihubmix_tts_model: str = "gemini-3.8-flash-tts"
+    aihubmix_tts_voice: str = "Sulafat"
     aihubmix_tts_speed: float = Field(default=0.8, ge=0.25, le=4)
+    aihubmix_tts_instructions: str = (
+        "Read the supplied text exactly, without adding or omitting words. "
+        "Use a warm, clear, natural adult teacher voice for children aged 6 to 10. "
+        "Speak slightly slower than normal, with gentle expression and clear pronunciation. "
+        "Use normal speech, not a cartoon or baby voice. No singing, music, or sound effects."
+    )
     tencentcloud_secret_id: str = ""
     tencentcloud_secret_key: str = ""
     tencent_soe_app_id: str = ""
@@ -30,7 +36,7 @@ class Settings(BaseModel):
     tts_region: str = "ap-shanghai"
     tts_voice_type: int = 101050
     tts_speed: float = Field(default=-1, ge=-2, le=6)
-    tts_timeout_seconds: int = Field(default=5, ge=1, le=10)
+    tts_timeout_seconds: int = Field(default=10, ge=1, le=10)
     tts_max_retries: int = Field(default=1, ge=0, le=1)
     publish_timeout_seconds: int = Field(default=30, ge=1, le=60)
 

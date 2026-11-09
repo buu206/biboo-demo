@@ -231,8 +231,40 @@ def checked_mp3(audio):
     return audio, "audio/mpeg"
 
 
+def checked_wav(audio):
+    if (
+        not 44 <= len(audio) <= MAX_AUDIO_BYTES
+        or audio[:4] != b"RIFF"
+        or audio[8:12] != b"WAVE"
+        or int.from_bytes(audio[4:8], "little") != len(audio) - 8
+    ):
+        raise ValueError("Unexpected WAV audio")
+    try:
+        with wave.open(io.BytesIO(audio), "rb") as stream:
+            channels, width, rate, frames, compression, _ = stream.getparams()
+            if (
+                compression != "NONE"
+                or channels not in (1, 2)
+                or width != 2
+                or not 8000 <= rate <= 48000
+                or not 0 < frames <= rate * 30
+            ):
+                raise ValueError("Unexpected WAV parameters")
+            if len(stream.readframes(frames)) != frames * channels * width:
+                raise ValueError("Incomplete WAV audio")
+    except (wave.Error, EOFError) as error:
+        raise ValueError("Invalid WAV audio") from error
+    return audio, "audio/wav"
+
+
 def request_aihubmix_audio(settings, text, timeout, call):
     deadline = time.monotonic() + timeout
+    gemini_tts = bool(re.match(r"^gemini-.*-tts", settings.aihubmix_tts_model.lower()))
+    options = (
+        {"response_format": "wav", "instructions": settings.aihubmix_tts_instructions}
+        if gemini_tts
+        else {"response_format": "mp3", "speed": settings.aihubmix_tts_speed}
+    )
     with OpenAI(
         api_key=settings.aihubmix_api_key,
         base_url=settings.aihubmix_base_url,
@@ -242,8 +274,7 @@ def request_aihubmix_audio(settings, text, timeout, call):
         model=settings.aihubmix_tts_model,
         voice=settings.aihubmix_tts_voice,
         input=text,
-        response_format="mp3",
-        speed=settings.aihubmix_tts_speed,
+        **options,
     ) as response:
         call.request_id = response.headers.get("x-request-id")
         audio = bytearray()
@@ -253,7 +284,7 @@ def request_aihubmix_audio(settings, text, timeout, call):
             if len(audio) + len(chunk) > MAX_AUDIO_BYTES:
                 raise ValueError("Unexpected audio size")
             audio.extend(chunk)
-    return checked_mp3(bytes(audio))
+    return checked_wav(bytes(audio)) if gemini_tts else checked_mp3(bytes(audio))
 
 
 def synthesize(settings, text, deadline, record):
@@ -272,7 +303,7 @@ def synthesize(settings, text, deadline, record):
         started = time.monotonic()
         try:
             result = request(settings, text, min(settings.tts_timeout_seconds, remaining), call)
-            call.structure = "MP3 合规"
+            call.structure = "WAV 合规" if result[1] == "audio/wav" else "MP3 合规"
             call.result = "通过"
             return result
         except TencentCloudSDKException as error:
