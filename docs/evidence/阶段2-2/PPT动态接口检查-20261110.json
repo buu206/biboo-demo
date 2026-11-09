@@ -1,0 +1,67 @@
+{
+  "mode": "ai",
+  "audio_words": 3,
+  "slide_count": 15,
+  "animated_slides": 10,
+  "fade_effects": 51,
+  "calls": [
+    {
+      "event": "courseware_copy",
+      "model": "deepseek-flash",
+      "seconds": 1.498,
+      "request_id": "7f6e84f0-28c3-445c-ba75-da99b129cc41",
+      "input_tokens": 377,
+      "output_tokens": 124,
+      "structure": "合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    },
+    {
+      "event": "tts",
+      "model": "AIHubMix gemini-3.8-flash-tts",
+      "seconds": 2.996,
+      "request_id": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "structure": "WAV 合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    },
+    {
+      "event": "tts",
+      "model": "AIHubMix gemini-3.8-flash-tts",
+      "seconds": 2.973,
+      "request_id": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "structure": "WAV 合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    },
+    {
+      "event": "tts",
+      "model": "AIHubMix gemini-3.8-flash-tts",
+      "seconds": 3.529,
+      "request_id": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "structure": "WAV 合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    }
+  ],
+  "native_powerpoint_playback": "not_tested",
+  "synthetic_material": true,
+  "audio_embedding": "native hyperlink sound; no external URLs",
+  "keynote_playback": "blocked by first-launch license agreement",
+  "powerpoint_playback": "pending",
+  "libreoffice_animation_import": "click sequence and fades retained",
+  "libreoffice_audio_import": "not retained; not certified",
+  "embedded_sound_buttons": 3,
+  "recorded_date": "2026-11-10",
+  "note": "All paid calls from the first synthetic probe; final file rebuilt offline with the same verified copy and audio."
+}

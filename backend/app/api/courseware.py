@@ -10,7 +10,7 @@ from app.core.errors import AppError, ErrorResponse, invalid_state
 from app.services.courseware_goals import MaterialGoals, suggest_goals
 from app.services.courseware_pptx import build_courseware
 from app.services.courseware_source import MAX_COURSEWARE_BYTES, extract_courseware
-from app.services.lessons import get_lesson
+from app.services.lessons import get_lesson, record_call
 
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 Filename = Annotated[str, Query(min_length=1, max_length=255)]
@@ -69,6 +69,41 @@ def render_courseware(
     return build_courseware(title, source, lesson=lesson)
 
 
+def teaching_export(request, db, teacher, title, source, existing=None, *, lesson=False):
+    from app.services.courseware_children_pptx import build_children_courseware
+    from app.services.courseware_teaching import prepare_teaching
+
+    settings = request.app.state.settings
+    plan, audio, mode, count = prepare_teaching(
+        settings, title, source, existing, teacher.id,
+        record_call(db.get_bind(), teacher.id, request.app.state.observer),
+    )
+    binary, slides = build_children_courseware(title, source, lesson=lesson,
+                                               teaching_plan=plan, audio_by_text=audio)
+    response = pptx_response(title, binary, slides, "children")
+    response.headers["X-Courseware-Planner"] = mode
+    response.headers["X-Courseware-Audio-Count"] = str(count)
+    response.headers["X-Courseware-Word-Count"] = str(len(plan.vocabulary))
+    return response
+
+
+def lesson_audio(settings, lesson, owner_id):
+    """Only owner-matched TTS assets, never learners' submitted recordings."""
+    clips = {}
+    root = settings.data_dir.resolve()
+    for item in lesson.items:
+        asset = item.audio
+        if not asset or asset.owner_id != owner_id or asset.kind != "tts":
+            continue
+        path = (root / asset.path).resolve()
+        if (not path.is_relative_to(root) or not path.is_file()
+                or not 0 < path.stat().st_size <= 2_000_000
+                or asset.mime not in {"audio/wav", "audio/mpeg"}):
+            continue
+        clips[item.text.casefold().strip(" .!?")] = (path.read_bytes(), asset.mime)
+    return clips
+
+
 @router.post("/goals", openapi_extra=UPLOAD_BODY)
 async def import_goals(
     request: Request, teacher: CurrentTeacher, filename: Filename, title: Title = "",
@@ -79,17 +114,20 @@ async def import_goals(
 
 @router.post("/pptx", response_class=Response, openapi_extra=UPLOAD_BODY)
 async def make_pptx(
-    request: Request, teacher: CurrentTeacher, filename: Filename, title: Title = "",
+    request: Request, db: Database, teacher: CurrentTeacher, filename: Filename, title: Title = "",
     style: CoursewareStyle = "standard",
 ) -> Response:
     clean_title, source = await material(request, filename, title)
+    if style == "children" and not request.app.state.settings.fake_models:
+        return await run_in_threadpool(teaching_export, request, db, teacher, clean_title, source)
     pptx, count = await run_in_threadpool(render_courseware, clean_title, source, style)
     return pptx_response(clean_title, pptx, count, style)
 
 
 @router.get("/pptx/{lesson_id}", response_class=Response)
+@router.post("/pptx/{lesson_id}", response_class=Response)
 def lesson_pptx(
-    lesson_id: int, db: Database, teacher: CurrentTeacher, style: CoursewareStyle = "standard",
+    request: Request, lesson_id: int, db: Database, teacher: CurrentTeacher, style: CoursewareStyle = "standard",
 ) -> Response:
     lesson = get_lesson(db, teacher.id, lesson_id)
     if not lesson.outline:
@@ -110,5 +148,15 @@ def lesson_pptx(
             "Sentence patterns", *lesson.patterns,
             "课堂活动", *lines,
         ]
-    pptx, count = render_courseware(lesson.topic, "\n".join(lines), style, lesson=True)
+    source = "\n".join(lines)
+    if style == "children":
+        clips = lesson_audio(request.app.state.settings, lesson, teacher.id)
+        if request.method == "POST" and not request.app.state.settings.fake_models:
+            return teaching_export(request, db, teacher, lesson.topic, source, clips, lesson=True)
+        if clips:
+            from app.services.courseware_children_pptx import build_children_courseware
+
+            pptx, count = build_children_courseware(lesson.topic, source, lesson=True, audio_by_text=clips)
+            return pptx_response(lesson.topic, pptx, count, style)
+    pptx, count = render_courseware(lesson.topic, source, style, lesson=True)
     return pptx_response(lesson.topic, pptx, count, style)

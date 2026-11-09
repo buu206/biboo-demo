@@ -17,6 +17,7 @@ from pptx.util import Inches, Pt
 
 from app.core.errors import AppError
 from app.services.courseware_plan import plan_courseware
+from app.services.courseware_motion import reveal, finish_motion, embed_audio
 from app.services.courseware_pptx import NON_XML
 
 ASSETS = Path(__file__).resolve().parents[1] / "assets/courseware/children"
@@ -168,13 +169,14 @@ def _cover(deck, plan):
     _text(slide, "6–10 岁  /  看一看 · 猜一猜 · 说一说", .8, 6.25, 6.8, .45, 18, MUTED)
     _notes(slide, plan.teacher_notes +
            "\n使用方法：在幻灯片放映模式中授课。猜谜页可点击图片或单词选答案；"
-           "也可以按下一页揭晓。错误反馈页隐藏在正常播放顺序之外。"
+           "点击空白处或按右箭头逐步揭晓，完成本页步骤后再翻页。错误反馈页隐藏在正常播放顺序之外。"
            "\n课堂重点来自上传材料。海洋背景中的动物用于情境导入，不要求额外记忆全部名称。")
 
 
-def build_children_courseware(title: str, source: str, *, lesson: bool = False) -> tuple[bytes, int]:
+def build_children_courseware(title: str, source: str, *, lesson: bool = False, teaching_plan=None, audio_by_text=None) -> tuple[bytes, int]:
     """Build a classroom sequence; the old text-layout exporter remains separate."""
-    plan = plan_courseware(NON_XML.sub("", title), NON_XML.sub("", source))
+    plan = teaching_plan or plan_courseware(NON_XML.sub("", title), NON_XML.sub("", source))
+    audio_by_text = audio_by_text or {}
     words = list(plan.vocabulary)
     if not words:
         raise AppError(422, "COURSEWARE_WORDS_MISSING", "没有识别到英文目标词，请在材料中补充“词汇”一栏后重试，或选择文字整理模式。")
@@ -210,16 +212,29 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
                        + ("\n图片是 Biboo 引导角色，并非该词的释义图。请结合上传材料解释词义。"
                           if word.asset == "owl" else ""))
         size = 66 if len(word.word) <= 10 else 49 if len(word.word) <= 18 else 34
-        _text(slide, word.word, .78, 1.5, 6.2, 1.55, size, bold=True)
+        word_shape = _text(slide, word.word, .78, 1.5, 6.2, 1.55, size, bold=True)
+        word_shapes = [word_shape]
         if word.label_zh:
-            _text(slide, word.label_zh, .84, 3.0, 5.7, .55, 26, TEAL)
-        _phrase(slide, word.model_sentence, .84, 4.1, 6.0, 1.5, 32)
-        _text(slide, word.gesture, .84, 6.10, 11.4, .62, 21, MUTED)
-        _picture(slide, word.asset, 7.0, 1.15, 5.55, 4.85,
+            meaning_shape = _text(slide, word.label_zh, .84, 3.0, 5.7, .55, 26, TEAL)
+            word_shapes.append(meaning_shape)
+        sentence_shape = _phrase(slide, word.model_sentence, .84, 4.1, 6.0, 1.5, 32)
+        gesture_shape = _text(slide, word.gesture, .84, 6.10, 11.4, .62, 21, MUTED)
+        picture_shape = _picture(slide, word.asset, 7.0, 1.15, 5.55, 4.85,
                  description=f"Cartoon teaching illustration for {word.word}")
         if word.asset == "owl":
             _text(slide, "跟着老师，看实物或材料中的图片", 7.0, 5.93, 5.55, .42,
                   17, MUTED, align=PP_ALIGN.CENTER)
+
+        reveal(slide, picture_shape)
+        reveal(slide, *word_shapes)
+        reveal(slide, sentence_shape)
+        reveal(slide, gesture_shape)
+        clip = audio_by_text.get(word.word.casefold().strip(" .!?"))
+        if clip:
+            embed_audio(slide, *clip)
+        _notes(slide, slide.notes_slide.notes_text_frame.text +
+               "\n放映节奏：点击1看图猜词；点击2揭晓单词和词义；点击3出例句；点击4做动作。"
+               + ("点击右下角喇叭播放示范，不会自动播放。" if clip else "本页未附示范语音，教师领读。"))
 
     question = answer_slide = retry_slide = None
     choices = []
@@ -258,8 +273,9 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
     _picture(move_slide, "owl", .65, 2.6, 4.4, 3.95)
     for index, word in enumerate(words[:3]):
         y = 2.67 + index * 1.18
-        _text(move_slide, word.word, 5.5, y, 6.8, .55, 31)
-        _text(move_slide, word.gesture, 5.5, y + .58, 6.8, .5, 20, MUTED)
+        move_word = _text(move_slide, word.word, 5.5, y, 6.8, .55, 31)
+        move_gesture = _text(move_slide, word.gesture, 5.5, y + .58, 6.8, .5, 20, MUTED)
+        reveal(move_slide, move_word, move_gesture)
     if answer_slide is not None:
         _link(answer_slide, "继续挑战", move_slide, .84, 6.15)
 
@@ -272,14 +288,21 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
     model = first.model_sentence if first else "I can say it."
     if pattern and "___" not in pattern:
         model = pattern
-    elif "___" in pattern and not re.match(r"It(?:'s| is) got", pattern):
+    elif teaching_plan is None and "___" in pattern and not re.match(r"It(?:'s| is) got", pattern):
         # Leave unfamiliar source frames intact instead of inserting a noun
         # without knowing its article, plural, or verb agreement.
         model = "选一个本课词，请老师帮你补完整。"
-    _phrase(slide, pattern, .8, 2.7, 7.1, 1.45, 37)
-    _phrase(slide, model, .84, 4.5, 6.6, 1.4, 30, color=TEAL)
-    _text(slide, "先听一句，再换一个词。", .84, 6.2, 8.0, .45, 22, MUTED)
+    pattern_shape = _phrase(slide, pattern, .8, 2.7, 7.1, 1.45, 37)
+    model_shape = _phrase(slide, model, .84, 4.5, 6.6, 1.4, 30, color=TEAL)
+    prompt_shape = _text(slide, "先听一句，再换一个词。", .84, 6.2, 8.0, .45, 22, MUTED)
     _picture(slide, first.asset if first else "owl", 8.1, 2.8, 4.4, 3.7)
+
+    reveal(slide, pattern_shape)
+    reveal(slide, model_shape)
+    reveal(slide, prompt_shape)
+    clip = audio_by_text.get(model.casefold().strip(" .!?"))
+    if clip:
+        embed_audio(slide, *clip)
 
     body_words = {"arms", "claws", "tentacles", "shell", "tail", "fin", "blowhole"}
     body_focus = plan.theme == "ocean" and any(word.word in body_words for word in words)
@@ -287,13 +310,18 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
                    hint="两人一组。一人指图，一人说；说完交换。",
                    note="给同桌各30秒。A指向已学图片，B说词或完整句，然后交换。"
                    "\n教师巡视只记录共性问题，不打断每一句表达。")
-    _text(slide, "A", .9, 2.75, .7, .7, 36, TEAL)
-    _text(slide, "What's it got?" if body_focus else "Your turn!",
+    role_a = _text(slide, "A", .9, 2.75, .7, .7, 36, TEAL)
+    question_frame = next((p for p in plan.patterns if "?" in p), None)
+    line_a = _text(slide, question_frame or ("What's it got?" if body_focus else "Your turn!"),
           1.85, 2.8, 7.2, .95, 35)
-    _text(slide, "B", .9, 4.15, .7, .7, 36, TEAL)
-    _phrase(slide, pattern, 1.85, 4.2, 7.2, 1.5, 34)
+    role_b = _text(slide, "B", .9, 4.15, .7, .7, 36, TEAL)
+    line_b = _phrase(slide, pattern, 1.85, 4.2, 7.2, 1.5, 34)
     _picture(slide, words[-1].asset if words else "owl", 9.0, 2.75, 3.5, 3.4)
-    _text(slide, "现在交换角色！", .9, 6.2, 8, .5, 24, TEAL)
+    swap = _text(slide, "现在交换角色！", .9, 6.2, 8, .5, 24, TEAL)
+
+    reveal(slide, role_a, line_a)
+    reveal(slide, role_b, line_b)
+    reveal(slide, swap, hide=(role_a, line_a, role_b, line_b))
 
     create = _activity(plan, "create")
     slide = _slide(deck, label="IMAGINE & CREATE", title="My new sea creature" if plan.theme == "ocean" else "My word picture",
@@ -307,8 +335,9 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
     else:
         tasks = [f"选{number}今天学过的词", "把它们画进同一幅图", "给同桌讲讲你的画"]
     for index, task in enumerate(tasks):
-        _text(slide, f"{index + 1}", .9, 2.9 + index * 1.1, .7, .6, 31, TEAL)
-        _text(slide, task, 1.9, 2.9 + index * 1.1, 6.2, .7, 29)
+        step_number = _text(slide, f"{index + 1}", .9, 2.9 + index * 1.1, .7, .6, 31, TEAL)
+        step_task = _text(slide, task, 1.9, 2.9 + index * 1.1, 6.2, .7, 29)
+        reveal(slide, step_number, step_task)
     _picture(slide, "owl", 8.5, 2.6, 4.0, 3.8)
     _text(slide, "可以画得很奇妙！", .9, 6.4, 7.6, .4, 21, MUTED)
 
@@ -320,7 +349,8 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
     if len(plan.patterns) > 1:
         frames.append(plan.patterns[1])
     for index, frame in enumerate(frames[:3]):
-        _phrase(slide, frame, .9, 2.65 + index * 1.2, 8.1, 1.08, 33)
+        frame_shape = _phrase(slide, frame, .9, 2.65 + index * 1.2, 8.1, 1.08, 33)
+        reveal(slide, frame_shape)
     _picture(slide, "owl", 9.2, 3.0, 3.1, 3.0)
     _text(slide, "听完，告诉伙伴：我喜欢你画的……", .9, 6.35, 11.5, .5, 22, MUTED)
 
@@ -333,12 +363,17 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
         _picture(slide, word.asset, .8 + index * span, 2.7, span - .15, 2.7)
         # For unillustrated vocabulary, a first-letter cue is meaningful; the owl is just a guide.
         label = "?" if word.asset != "owl" else word.word[0] + "…"
-        _text(slide, label, .8 + index * span, 5.6, span - .15, .8, 42, TEAL, align=PP_ALIGN.CENTER)
+        cue = _text(slide, label, .8 + index * span, 5.6, span - .15, .8, 42, TEAL, align=PP_ALIGN.CENTER)
+        recalled = _text(slide, word.word, .8 + index * span, 5.6, span - .15, .8,
+                         30 if len(word.word) <= 12 else 22, TEAL, align=PP_ALIGN.CENTER)
+        reveal(slide, recalled, hide=(cue,))
 
     finish = _slide(deck, label="WELL DONE, EXPLORER!", title="I can do it!", bg=YELLOW,
                     hint="选一件你今天学会的事，说给老师听。",
                     note=plan.teacher_notes + "\n\n上传材料原文（供教师核对，不在课堂投影展示）：\n" + plan.source_notes)
-    _text(finish, "我能说出新单词。\n我能说一句完整的话。\n我能介绍自己的作品。", .9, 3.0, 7.0, 2.6, 29)
+    for index, goal in enumerate(("我能说出新单词。", "我能说一句完整的话。", "我能介绍自己的作品。")):
+        goal_shape = _text(finish, goal, .9, 3.0 + index * .8, 7.0, .65, 29)
+        reveal(finish, goal_shape)
     _picture(finish, "owl", 8.3, 2.65, 4.1, 3.8)
     _text(finish, "See you next time!", .9, 6.25, 8.0, .6, 29, TEAL)
 
@@ -354,6 +389,11 @@ def build_children_courseware(title: str, source: str, *, lesson: bool = False) 
             target = answer_slide if index == plan.mystery.correct else retry_slide
             picture.click_action.target_slide = target
             label.click_action.target_slide = target
+    for slide in deck.slides:
+        if getattr(slide, "_biboo_builds", None):
+            _text(slide, "点击空白处 / → 逐步揭晓", 8.3, 7.02, 3.6, .27, 12, MUTED,
+                  align=PP_ALIGN.RIGHT, name="build-instructions")
+        finish_motion(slide)
     output = BytesIO()
     deck.save(output)
     return output.getvalue(), len(deck.slides)

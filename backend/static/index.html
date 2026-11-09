@@ -2474,7 +2474,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
             </div>
           </section>
           <section id="panel-classroom" role="tabpanel" aria-labelledby="tab-classroom" hidden>
-            <div class="classroom-download"><div><h3>带进课堂的 PPT</h3><p>文字可编辑，互动提示在备注里。</p></div><label id="lesson-ppt-style-field" for="lesson-ppt-style" hidden>PPT 风格<select id="lesson-ppt-style"><option value="children" selected>儿童互动（6–10岁）</option><option value="standard">文字整理</option></select></label><a id="lesson-ppt" class="download-button" download hidden>下载课堂 PPT</a></div>
+            <div class="classroom-download"><div><h3>带进课堂的 PPT</h3><p>点击逐步揭晓，示范声音按需播放；请用 PowerPoint 桌面版放映。</p></div><label id="lesson-ppt-style-field" for="lesson-ppt-style" hidden>PPT 风格<select id="lesson-ppt-style"><option value="children" selected>儿童互动（6–10岁）</option><option value="standard">文字整理</option></select></label><a id="lesson-ppt" class="download-button" download hidden>下载课堂 PPT</a></div>
             <div id="outline-preview"></div><div id="outline" hidden></div>
           </section>
         </div>
@@ -2515,7 +2515,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
               </select>
             </label>
             <small id="courseware-style-hint">
-              卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。
+              看图、揭词、说句子分步呈现，带点击游戏。真实模式会生成教学文案和单词语音；教学提示在备注里。
             </small>
             <div class="actions">
               <button type="button" id="courseware-generate" disabled>
@@ -3439,14 +3439,31 @@ async function leaveCourseSafely() {
   return true;
 }
 $('save').onclick = () => perform(async () => { await saveCurrentEdits(); return '修改已保存。'; }, '正在保存修改…');
+function pptTeachingSummary(response) {
+  const mode = response.headers.get('X-Courseware-Planner');
+  const audio = Number(response.headers.get('X-Courseware-Audio-Count') || 0);
+  const words = Number(response.headers.get('X-Courseware-Word-Count') || 0);
+  let text = '请用 PowerPoint 桌面版进入放映，点击空白处逐步揭晓。';
+  if (mode === 'fallback') text += ' AI 暂不可用，本次使用教学模板。';
+  if (mode === 'ai') text += ' AI 已辅助编写例句和动作，请课前核对。';
+  if (words) text += ' 已附 ' + audio + '/' + words + ' 个单词的示范声音，点击喇叭播放。';
+  if (words > audio) text += ' 未附声音的词请老师领读。';
+  return text;
+}
 $('lesson-ppt').onclick = event => {
-  if (!hasUnsavedContent()) return;
   event.preventDefault();
+  if (busy) return;
   perform(async () => {
-    await saveCurrentEdits();
-    const link = document.createElement('a'); link.href = $('lesson-ppt').href; link.download = ''; link.click();
-    return '已保存修改，正在下载本课 PPT。';
-  }, '正在保存并准备课件…');
+    if (hasUnsavedContent()) await saveCurrentEdits();
+    const response = await fetch($('lesson-ppt').href, {method:'POST'});
+    if (!response.ok) await readResponse(response);
+    if (response.headers.get('Content-Type')?.split(';')[0] !== coursewareMime) throw new Error('课件生成失败，请重试。');
+    const url = URL.createObjectURL(await response.blob());
+    const link = document.createElement('a'); link.href = url;
+    link.download = coursewareFilename(response, lesson.topic); link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    return '课堂 PPT 已生成。' + (selectedCoursewareStyle() === 'children' ? pptTeachingSummary(response) : '');
+  }, '正在生成课堂 PPT，准备分步动画和示范声音…');
 };
 $('publish').onclick = () => {
   if (busy || lesson?.status !== 'generated') return;
@@ -3654,7 +3671,7 @@ function selectCoursewareStyle(style) {
   const children = selectedCoursewareStyle() === 'children';
   $('courseware-generate').textContent = children ? '生成儿童互动 PPT' : '生成文字 PPT';
   $('courseware-style-hint').textContent = children
-    ? '卡通伙伴、大字短句和课堂游戏。投影给孩子看，教学提示放在备注里。'
+    ? '看图、揭词、说句子分步呈现，带点击游戏。真实模式会生成教学文案和单词语音；教学提示在备注里。'
     : '提取材料文字，按统一版式分页；原图和动画不保留。';
   updateLessonPptLink();
 }
@@ -3698,7 +3715,7 @@ $('courseware-generate').onclick = () => {
     $('courseware-result').hidden = false;
     const slides = Number(response.headers.get('X-Slide-Count'));
     const summary = slides > 0 ? '已生成 ' + slides + ' 页课件，可下载编辑。' : '已生成课件，可下载编辑。';
-    return children ? summary + ' 放映时先让孩子回答，再翻页揭晓；教学提示在 PPT 备注里。' : summary;
+    return children ? summary + ' ' + pptTeachingSummary(response) : summary;
   }, children ? '正在整理材料、安排课堂互动并生成 PPT…' : '正在读取材料并生成 PPT…', reportCourseware);
 };
 
