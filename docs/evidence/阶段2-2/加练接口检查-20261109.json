@@ -1,0 +1,37 @@
+{
+  "time": "2026-11-09T14:54:29.371573+00:00",
+  "scope": "受控的单音问题输入；真实调用反馈与语音接口，不代表真实录音已触发加练",
+  "feedback": "我们一起试试这个小动作。练 /f/：上齿轻碰下唇，轻轻吹气。先听示范读 fish，再把这个音放回 football。",
+  "drill": "fish",
+  "calls": [
+    {
+      "event": "practice_feedback",
+      "model": "deepseek-flash",
+      "seconds": 0.828,
+      "request_id": "bf0119e9-0f50-4da1-8aa9-82f51e8bf8c5",
+      "input_tokens": 196,
+      "output_tokens": 16,
+      "structure": "鼓励语与练习词白名单合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    },
+    {
+      "event": "tts",
+      "model": "AIHubMix gemini-3.8-flash-tts",
+      "seconds": 2.733,
+      "request_id": null,
+      "input_tokens": null,
+      "output_tokens": null,
+      "structure": "WAV 合规",
+      "retry": 0,
+      "result": "通过",
+      "error": null
+    }
+  ],
+  "audio": {
+    "mime": "audio/wav",
+    "bytes": 59878,
+    "status": "passed"
+  }
+}

@@ -15,12 +15,19 @@ from app.services import oral_provider
 from app.services.ai import Call, WORDS
 from app.services.lessons import record_call
 from app.services.oral_provider import OralPhone, OralResult, OralWord
-from app.services.practice_feedback import coach
+from app.services.practice_feedback import coach, supports_phone
 from app.services.recordings import normalize_wav
 from app.services.review import review_details
 
 GOOD_FEEDBACK = "这次读得很清楚，继续保持！"
 REVIEW_FEEDBACK = "谢谢你完成跟读，老师会再听一听。"
+REVIEW_MESSAGES = {
+    "audio_unclear": "这段录音还听不清，老师会帮你确认。",
+    "multiple_phone_issues": "这次有几处发音还需要确认，老师会先听一听，再告诉你从哪里练起。",
+    "low_overall_accuracy": "这次朗读和示范还有些不同，老师会先听一听，帮你找到练习重点。",
+    "unsupported_phone": "这个音请老师带你练，老师会再听一听。",
+    "practice_limit": "你已经认真练习了几次，接下来请老师帮你听一听。",
+}
 
 
 def evaluate(settings, pcm_wav, reference):
@@ -60,7 +67,13 @@ def assess(result, reference):
 
     low = [(word, phone.symbol) for word, phone in phones if phone.accuracy < 65]
     severe = [phone for _, phone in phones if phone.accuracy <= 55 and phone.symbol]
-    if result.accuracy >= 55 and len(low) == 1 and len(severe) == 1 and len(phones) >= 2:
+    if result.accuracy < 55:
+        return "teacher_review", None, "low_overall_accuracy"
+    if len(low) > 1:
+        return "teacher_review", None, "multiple_phone_issues"
+    if len(low) == 1 and len(severe) == 1 and len(phones) >= 2:
+        if not supports_phone(low[0][1]):
+            return "teacher_review", None, "unsupported_phone"
         return "practice", low[0], "localized_phone"
     return "teacher_review", None, "uncertain_pronunciation"
 
@@ -205,12 +218,12 @@ def submit(db, settings, owner_id, item_id, learner_id, request_key, drill, uplo
         if decision == "practice" and focus is not None:
             feedback, drill_text = coach(settings, *focus, record)
         else:
-            feedback = GOOD_FEEDBACK if decision == "good" else REVIEW_FEEDBACK
+            feedback = GOOD_FEEDBACK if decision == "good" else REVIEW_MESSAGES.get(reason, REVIEW_FEEDBACK)
 
         return save_attempt(db, settings, PracticeAttempt(
             owner_id=owner_id, item_id=item_id, learner_id=learner_id,
             request_key=request_key, audio_digest=checksum,
             audio_path=f"recordings/{owner_id}/{item_id}/{learner_id}/{request_key}.wav",
             reference=reference, round=round_number, decision=decision, feedback=feedback, drill_text=drill_text,
-            assessment={"policy": 1, "reason": reason, "provider": asdict(result) if result else None},
+            assessment={"policy": 2, "reason": reason, "provider": asdict(result) if result else None},
         ), audio)
