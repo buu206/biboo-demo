@@ -2125,6 +2125,59 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
 @media(max-width:500px) {.intro-portrait {width:186px;height:186px;}.intro-wordmark {font-size:38px;}.intro-caption {font-size:12px;}.intro-stage {padding-bottom:35px;}#intro-skip {top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));}.intro-cloud {bottom:-12vw;}.intro-cloud-right {bottom:-8vw;}}
 @media(prefers-reduced-motion:reduce) {#biboo-intro {transition:none;}#biboo-intro * {animation:none!important;}}
 .mobile-only {display:none;}@media(max-width:760px){.mobile-only{display:initial;}}
+/* Simplified task surfaces: keep choices available without competing with the primary action. */
+.simple-options { margin: 14px 0; color: #756881; font-size: 14px; }
+.simple-options > summary, .composer-more > summary { cursor: pointer; padding: 10px 0; min-height: 44px; }
+.simple-options[open] > summary { margin-bottom: 12px; }
+.composer-more { position: relative; font-size: 14px; color: #756881; }
+.composer-more[open] .composer-tool { position: absolute; top: 42px; left: 0; z-index: 5; white-space: nowrap; background: white; box-shadow: 0 8px 24px #3421471a; }
+.courseware-file { padding: 20px 16px; }
+.courseware-file .upload-glyph { width: 34px; height: 34px; margin-bottom: 6px; }
+.courseware-file label { margin-bottom: 4px; }
+.courseware-purpose { display: flex; align-items: center; gap: 16px; }
+.courseware-purpose select { width: auto; flex: 1; }
+#courseware-generate { width: 100%; min-height: 54px; }
+#class-options { padding: 0 16px; border: 1px solid #eae4f2; border-radius: 16px; }
+.student-teacher-return { display: none; }
+body[data-view="student"] .role-tabs, body[data-view="student"] #account { display: none; }
+body[data-view="student"] .student-teacher-return { display: inline-block; margin-left: auto; font-size: 13px; padding: 12px; color: #7e718a; }
+#student-view { max-width: 720px; margin: 0 auto; }
+#student-view .student-welcome { margin-bottom: 10px; }
+#student-view .student-welcome h2 { font-size: clamp(23px, 4vw, 30px); }
+#student-view .student-welcome .eyebrow { display: none; }
+.student-picker { padding: 0 16px; margin: 8px 0 18px; }
+.student-lesson-title { margin: 0; color: #776985; font-size: 15px; overflow-wrap: anywhere; }
+.practice-progress { display: flex; align-items: center; gap: 18px; color: #857396; font-size: 14px; }
+.practice-progress progress { flex: 1; width: 80px; height: 6px; accent-color: #a98bcc; border: 0; border-radius: 4px; overflow: hidden; }
+.practice-progress progress::-webkit-progress-bar { background: #eee6f5; }
+.practice-progress progress::-webkit-progress-value { background: #aa8bc7; }
+#practice-item-options { margin: 0; text-align: right; }
+#practice-item-options label { text-align: left; }
+#practice-original { padding: 22px 18px; margin-top: 8px; }
+#practice-original h3 { font-size: 14px; margin: 0; }
+#practice .practice-orbit { width: 100px; height: 92px; margin: 12px auto; }
+#practice-reference { font-size: clamp(32px, 7vw, 48px); margin: 14px 0 20px; overflow-wrap: anywhere; }
+#practice-speak { min-height: 50px; min-width: 180px; background: #fff; border: 1px solid #e5d9f2; }
+#practice .record-actions { justify-content: center; margin-top: 22px; }
+#practice .practice-primary, #practice-next { min-height: 58px; border-radius: 20px; font-size: 19px; padding: 14px 28px; width: min(100%, 340px); }
+#practice .practice-primary.recording { background: #a64867; color: #fff; border-color: #a64867; box-shadow: 0 4px 0 #873953; }
+.record-hint { font-size: 13px; color: #8c8096; text-align: center; }
+#practice-status:empty { display: none; }
+#practice-latest { margin-top: 24px; padding: 22px; }
+.practice-next-row { text-align: center; margin-top: 20px; }
+.practice-next-row:has([hidden]) { display: none; }
+.practice-history-options { border-top: 1px solid #eee6f4; padding-top: 12px; margin-top: 28px; }
+#practice .practice-management { margin: 0; padding: 0; border: 0; }
+#practice .file-alternative { margin-top: 16px; font-size: 13px; }
+@media (max-width: 600px) {
+  #practice { padding: 18px 16px; }
+  #student-view .student-welcome { padding: 12px 4px; }
+  #student-view .student-welcome .buddy { width: 54px; height: 54px; }
+  #student-view .student-welcome p { font-size: 13px; }
+  #practice .practice-primary, #practice-next { width: 100%; }
+  #practice-original { padding: 20px 12px; }
+  .courseware-purpose { flex-wrap: wrap; }
+}
 </style>
 </head>
 <body>
@@ -2331,6 +2384,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
           </span>
         </a>
       </nav>
+      <a class="student-teacher-return" data-view="teacher" href="?view=teacher">老师入口</a>
     <div id="account" hidden>
       <span class="account-avatar" aria-hidden="true">
         教
@@ -2414,7 +2468,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
             <form id="assistant-form" class="assistant-composer">
               <label class="sr-only" for="assistant-prompt">告诉布布，你的备课想法</label>
               <textarea id="assistant-prompt" maxlength="4000" rows="2" required placeholder="今天想带孩子探索什么？&#10;比如：6–8 岁的海洋动物课，学习 octopus、crab、turtle…" aria-describedby="assistant-help assistant-status"></textarea>
-              <div class="composer-actions"><div class="composer-tools"><button type="button" id="new-course-open" class="composer-tool"><svg aria-hidden="true"><use href="#icon-upload"/></svg>上传材料</button><button type="button" id="manual-course-open" class="composer-tool">自己填写</button></div><button id="assistant-start" class="assistant-submit"><span>帮我准备</span><span aria-hidden="true">↗</span></button></div>
+              <div class="composer-actions"><div class="composer-tools"><button type="button" id="new-course-open" class="composer-tool"><svg aria-hidden="true"><use href="#icon-upload"/></svg>上传材料</button><details class="composer-more"><summary>更多</summary><button type="button" id="manual-course-open" class="composer-tool">自己填写教学目标</button></details></div><button id="assistant-start" class="assistant-submit"><span>帮我准备</span><span aria-hidden="true">↗</span></button></div>
             </form>
             <div class="assistant-examples" aria-label="试试这些备课想法"><span>灵感从这里开始</span><button type="button" data-assistant-example="ocean">海洋探险</button><button type="button" data-assistant-example="fruit">水果小市场</button><button type="button" data-assistant-example="phonics">神奇的 th</button></div>
             <p id="assistant-status" class="assistant-status" role="status" aria-live="polite"></p>
@@ -2469,7 +2523,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
             <div class="course-publish-row"><p id="publish-hint">检查题目后发布，孩子就能开始跟读。</p><button id="publish">发布作业</button></div>
             <div id="published-actions" class="result-box" hidden>
               <strong>作业已发布</strong><p>本机演示链接需在这台电脑、同一演示账号中打开。</p>
-              <label>跟读链接<input id="student-share-url" type="url" readonly></label>
+              <details class="simple-options"><summary>查看跟读链接</summary><label>跟读链接<input id="student-share-url" type="url" readonly></label></details>
               <div class="actions"><button id="copy-student-link">复制跟读链接</button><a id="student-entry" class="download-button secondary" data-view="student">体验孩子端</a><a id="course-review" class="download-button secondary" data-view="review">看反馈</a></div>
             </div>
           </section>
@@ -2481,7 +2535,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
       </section>
       <dialog id="new-course-dialog" aria-labelledby="new-course-title">
         <div class="new-course-heading"><div><h2 id="new-course-title">准备新课</h2><p id="new-course-description">提供材料，再确认这堂课的目标。</p></div><button id="new-course-close" class="quiet-button" aria-label="关闭准备新课">×</button></div>
-        <div class="new-course-tabs" role="tablist" aria-label="新课准备方式"><button id="new-material-tab" role="tab" aria-selected="true" aria-controls="new-material-panel"><span class="step-number">1</span> 提供材料</button><button id="new-goals-tab" role="tab" aria-selected="false" aria-controls="new-goals-panel" tabindex="-1"><span class="step-number">2</span> 确认目标</button></div>
+        <div class="new-course-tabs" role="tablist" aria-label="新课准备方式"><button id="new-material-tab" role="tab" aria-selected="true" aria-controls="new-material-panel">上传材料</button><button id="new-goals-tab" role="tab" aria-selected="false" aria-controls="new-goals-panel" tabindex="-1">填写教学目标</button></div>
         <p id="new-course-status" role="status" aria-live="polite"></p>
         <section id="new-material-panel" role="tabpanel" aria-labelledby="new-material-tab">
           <h3 id="courseware-heading" class="sr-only">上传教学材料</h3>
@@ -2503,6 +2557,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
                 还未选择材料。
               </p>
             </div>
+            <details class="simple-options"><summary>调整主题与 PPT 风格</summary>
             <label for="courseware-title">
               本课主题（可选）
               <input id="courseware-title" maxlength="100" placeholder="默认使用材料文件名">
@@ -2517,20 +2572,27 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
             <small id="courseware-style-hint">
               看图、揭词、说句子分步呈现，带点击游戏。真实模式会生成教学文案和单词语音；教学提示在备注里。
             </small>
+            </details>
+            <label class="courseware-purpose">我想准备
+              <select id="courseware-purpose"><option value="ppt">课堂 PPT</option><option value="homework">跟读作业</option></select>
+            </label>
+            <p class="form-note" id="courseware-purpose-hint">默认适合 6–10 岁，含分步动画和单词示范音。</p>
             <div class="actions">
               <button type="button" id="courseware-generate" disabled>
                 生成儿童互动 PPT
               </button>
-              <button id="courseware-import" disabled>
+              <button id="courseware-import" disabled hidden>
                 <svg aria-hidden="true">
                   <use href="#icon-spark"/>
                 </svg>
                 用材料准备课程
               </button>
-              <button type="button" id="courseware-example" class="secondary">
-                用示例材料试一试
-              </button>
             </div>
+            <details class="simple-options"><summary>没有材料？用示例试试</summary>
+              <button type="button" id="courseware-example" class="secondary">
+                选择示例材料
+              </button>
+            </details>
           </form>
           <p id="courseware-status" role="status" aria-live="polite">
           </p>
@@ -2543,8 +2605,10 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
         </section>
         <section id="new-goals-panel" role="tabpanel" aria-labelledby="new-goals-tab" hidden>
           <div id="assistant-result" class="assistant-result" hidden><p id="assistant-result-summary"></p><p id="assistant-result-note"></p><details><summary>查看我的原始描述</summary><p id="assistant-original"></p></details></div>
+          <details id="class-options" class="simple-options"><summary id="class-summary">选择上课班级</summary>
           <label>上课班级<select id="classes"></select></label>
           <details id="new-class-details"><summary>＋ 新建班级</summary><form id="new-class" class="row"><label>班级名称<input name="name" maxlength="140" required placeholder="例如：周六英语班"></label><button class="secondary">建班</button></form></details>
+          </details>
           <form id="target">
             <label>这节课的主题<input name="topic" placeholder="例如：我的海洋生物" maxlength="140" required></label>
             <label>想教的词汇<textarea name="vocabulary" placeholder="例如：octopus, crab, turtle（用逗号或换行分开）" required></textarea></label>
@@ -2571,26 +2635,11 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
           </p>
         </div>
       </div>
-      <section class="card student-picker">
-        <label>
-          已发布作业
-          <select id="student-lesson">
-          </select>
-        </label>
-        <ol class="courseware-steps">
-          <li>
-            选一道题
-          </li>
-          <li>
-            听示范
-          </li>
-          <li>
-            录音并提交
-          </li>
-          <li>
-            看练习结果
-          </li>
-        </ol>
+      <section class="student-picker">
+        <p id="student-lesson-title" class="student-lesson-title"></p>
+        <details id="student-lesson-options" class="simple-options"><summary>换一份作业</summary>
+        <label>已发布作业<select id="student-lesson"></select></label>
+        </details>
         <p id="student-empty" hidden>
           还没有已发布的作业。请先在
           <a data-view="teacher" href="?view=teacher">
@@ -2600,26 +2649,15 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
         </p>
       </section>
       <section id="practice" class="card" hidden>
-        <div class="practice-top">
-          <div>
-            <p class="eyebrow">
-              ONE SMALL STEP AT A TIME
-            </p>
-            <h2>
-              开始练习
-            </h2>
-          </div>
-        </div>
-        <label>
-          选择练习题
-          <select id="practice-item">
-          </select>
-        </label>
+        <div class="practice-progress"><span id="practice-progress-label"></span><progress id="practice-progress" value="1" max="1" aria-label="当前题目位置"></progress></div>
+        <details id="practice-item-options" class="simple-options"><summary>换一道题</summary>
+        <label>选择练习题<select id="practice-item"></select></label>
+        </details>
         <p id="practice-status" role="status" aria-live="polite">
         </p>
         <div id="practice-original">
           <h3>
-            原题示范
+            先听一听，再跟着读
           </h3>
           <div class="practice-orbit">
             <svg viewBox="0 0 160 132" aria-hidden="true">
@@ -2637,7 +2675,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
             </svg>
             听示范
           </button>
-          <audio id="practice-example" controls preload="none" hidden>
+          <audio id="practice-example" preload="none" hidden>
           </audio>
         </div>
         <div id="practice-drill" hidden>
@@ -2661,31 +2699,29 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
         </div>
         <div id="practice-upload">
           <div class="record-actions">
-            <button id="practice-record" class="secondary">
+            <button id="practice-record" class="practice-primary">
               <svg aria-hidden="true">
                 <use href="#icon-mic"/>
               </svg>
-              开始录音
+              <span id="practice-record-label">我来读</span>
             </button>
-            <button id="practice-stop" class="secondary" hidden>
+            <button id="practice-stop" class="practice-primary recording" hidden>
               <svg aria-hidden="true">
                 <use href="#icon-mic"/>
               </svg>
-              结束录音
+              读好了，听听我的
             </button>
           </div>
-          <p>
-            每段录音最长 30 秒，文件最大 2 MB。演示请使用成人录音。
-          </p>
+          <p class="record-hint">点「我来读」开始，读完再点一次就可以。</p>
           <details class="file-alternative">
             <summary>
-              也可以上传已有录音
+              家长 / 老师帮忙
             </summary>
+            <p class="form-note">本机验收请用成人录音；每段最长 30 秒，最大 2 MB。</p>
             <label>
               选择 WAV 文件
               <input id="practice-file" type="file" accept=".wav,audio/wav,audio/x-wav">
             </label>
-          </details>
           <div id="practice-samples" hidden>
             <p>
               体验不同的练习反馈 · 模拟录音
@@ -2702,9 +2738,10 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
               </button>
             </div>
           </div>
+          </details>
           <audio id="practice-preview" controls preload="none" hidden>
           </audio>
-          <button id="practice-send">
+          <button id="practice-send" hidden>
             提交跟读
           </button>
         </div>
@@ -2715,10 +2752,12 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
           </p>
           <div id="practice-teacher-feedback">
           </div>
-          <a id="practice-review-entry" data-view="review" hidden>
+          <details class="simple-options"><summary>老师处理</summary><a id="practice-review-entry" data-view="review" hidden>
             打开老师复核
-          </a>
+          </a></details>
         </div>
+        <div class="practice-next-row"><button id="practice-next" hidden>下一题 →</button></div>
+        <details class="simple-options practice-history-options"><summary>练习记录与设置</summary>
           <div class="actions practice-management">
             <button id="practice-learner" class="secondary">
               换一个测试学员
@@ -2735,6 +2774,7 @@ html:has(#biboo-intro[open]) {overflow:hidden;}
         </p>
         <ol id="practice-history">
         </ol>
+        </details>
       </section>
     </section>
     <section id="review-view" hidden aria-label="老师复核">
@@ -3111,8 +3151,16 @@ async function classes(selectId) {
   $('classes').value = selectId ?? (classRows.some(row => String(row.id) === previous) ? previous : (classRows[0]?.id || ''));
   choices($('course-filter'), classRows, row => row.name, '全部班级');
   $('course-filter').value = filter;
+  $('course-filter').closest('label').hidden = classRows.length < 2;
+  updateClassSummary();
   await lessons();
 }
+function updateClassSummary() {
+  const selected = classRows.find(row => String(row.id) === $('classes').value);
+  $('class-summary').textContent = selected ? '上课班级：' + selected.name + ' · 可更换' : '先创建一个班级';
+  $('class-options').open = !selected;
+}
+$('classes').addEventListener('change', updateClassSummary);
 async function lessons(selectId) {
   $('course-load-status').textContent = '正在读取课程…';
   try {
@@ -3155,7 +3203,7 @@ function setNewCourseTab(tab, focus = false) {
   $('new-material-panel').hidden = !material;
   $('new-goals-panel').hidden = material;
   $('new-course-title').textContent = material ? '准备新课' : '确认这堂课';
-  $('new-course-description').textContent = material ? '提供材料，再确认这堂课的目标。也可以直接生成课堂 PPT。' : '目标都可以调整，确认后再生成课件大纲与作业。';
+  $('new-course-description').textContent = material ? '选一份材料，Biboo 帮你准备好。' : '看看主题和词汇，其他设置可以先用默认值。';
   for (const [id, selected] of [['new-material-tab',material],['new-goals-tab',!material]]) {
     $(id).setAttribute('aria-selected',String(selected)); $(id).tabIndex = selected ? 0 : -1;
   }
@@ -3256,6 +3304,7 @@ async function studentLessons(lessonId) {
   select.value = rows.some(row => String(row.id) === wanted) ? wanted : (rows[0]?.id || '');
   select.closest('label').hidden = rows.length === 0;
   $('student-empty').hidden = rows.length > 0;
+  $('student-lesson-options').hidden = rows.length < 2;
   await openStudentLesson();
 }
 async function openStudentLesson() {
@@ -3263,6 +3312,8 @@ async function openStudentLesson() {
   pausePracticeExamples();
   $('practice').hidden = true;
   studentLesson = id ? await api('/lessons/' + id) : null;
+  $('student-lesson-title').textContent = studentLesson?.topic || '';
+  $('student-lesson-options').open = false;
   configurePractice(studentLesson);
   updateViewUrl('student', id);
   await loadPractice();
@@ -3342,6 +3393,7 @@ $('copy-student-link').onclick = async () => {
     await navigator.clipboard.writeText(field.value);
     $('copy-student-link').textContent = '已复制跟读链接';
   } catch {
+    field.closest('details').open = true;
     field.focus();
     field.select();
     $('copy-student-link').textContent = '链接已选中，请复制';
@@ -3669,7 +3721,7 @@ function selectCoursewareStyle(style) {
   clearCoursewareResult();
   reportCourseware('');
   const children = selectedCoursewareStyle() === 'children';
-  $('courseware-generate').textContent = children ? '生成儿童互动 PPT' : '生成文字 PPT';
+  updateCoursewarePurpose();
   $('courseware-style-hint').textContent = children
     ? '看图、揭词、说句子分步呈现，带点击游戏。真实模式会生成教学文案和单词语音；教学提示在备注里。'
     : '提取材料文字，按统一版式分页；原图和动画不保留。';
@@ -3677,6 +3729,12 @@ function selectCoursewareStyle(style) {
 }
 $('courseware-style').onchange = event => selectCoursewareStyle(event.currentTarget.value);
 $('lesson-ppt-style').onchange = event => selectCoursewareStyle(event.currentTarget.value);
+function updateCoursewarePurpose() {
+  const homework = $('courseware-purpose').value === 'homework';
+  $('courseware-generate').textContent = homework ? '准备跟读作业' : (selectedCoursewareStyle() === 'children' ? '生成儿童互动 PPT' : '生成文字 PPT');
+  $('courseware-purpose-hint').textContent = homework ? '提取词汇和句型，确认后生成作业。发布前你还可以修改。' : (selectedCoursewareStyle() === 'children' ? '默认适合 6–10 岁，含分步动画和单词示范音。' : '按统一版式整理材料文字。');
+}
+$('courseware-purpose').onchange = updateCoursewarePurpose;
 $('courseware-form').onsubmit = event => {
   event.preventDefault();
   if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
@@ -3692,6 +3750,7 @@ $('courseware-form').onsubmit = event => {
   }, '正在从材料提取教学目标…', reportCourseware);
 };
 $('courseware-generate').onclick = () => {
+  if ($('courseware-purpose').value === 'homework') return $('courseware-form').requestSubmit();
   if (!coursewareFile) return reportCourseware('请先选择一份教学材料。', true);
   const title = $('courseware-title').value.trim();
   const children = selectedCoursewareStyle() === 'children';
@@ -3836,8 +3895,8 @@ function renderPractice() {
   const example = $('practice-example');
   const demoSource = practiceMockMode && item ? '/api/v1/practice/items/' + item.id + '/demo-audio' : null;
   const assetSource = !practiceMockMode && item?.audio_asset_id ? '/api/v1/assets/' + item.audio_asset_id : null;
-  $('practice-speak').hidden = !demoSource;
-  example.hidden = !assetSource;
+  $('practice-speak').hidden = !(demoSource || assetSource);
+  example.hidden = true;
   setPracticeAudioSource(example, demoSource || assetSource);
   $('practice-drill').hidden = !drill;
   $('practice-drill-text').textContent = drill?.text || '';
@@ -3860,6 +3919,7 @@ function renderPractice() {
   playback(teacherDetails, teacher?.audio_url, '听老师语音反馈');
   const reviewLink = $('practice-review-entry');
   reviewLink.hidden = latest?.decision !== 'teacher_review' || Boolean(teacher);
+  reviewLink.closest('details').hidden = reviewLink.hidden;
   if (!reviewLink.hidden) reviewLink.href = viewUrl('review', studentLesson.id);
   const history = $('practice-history');
   history.replaceChildren();
@@ -3878,6 +3938,15 @@ function updatePracticeControls() {
   const closed = latest?.decision === 'good' || latest?.decision === 'teacher_review';
   const canUpload = Boolean(item && practiceLoaded && !closed);
   const recording = Boolean(capture);
+  const index = studentLesson?.items.findIndex(row => row.id === item?.id) ?? -1;
+  const count = studentLesson?.items.length || 0;
+  $('practice-progress-label').textContent = count ? '第 ' + (index + 1) + ' / ' + count + ' 题' : '';
+  $('practice-progress').max = Math.max(count, 1);
+  $('practice-progress').value = index + 1;
+  $('practice-next').hidden = !closed || count < 2;
+  $('practice-next').textContent = index < count - 1 ? '下一题 →' : '回到第一题 ↺';
+  $('practice-next').disabled = busy || recording || Boolean(pendingAudio);
+  $('practice-item-options').hidden = count < 2;
   $('practice-speak').disabled = busy || recording;
   $('practice-drill-speak').disabled = busy || recording;
   $('practice-upload').hidden = !canUpload;
@@ -3888,10 +3957,13 @@ function updatePracticeControls() {
   $('practice-file').disabled = busy || recording || !canUpload;
   $('practice-samples').hidden = !practiceMockMode || !canUpload;
   practiceSampleButtons.forEach(button => button.disabled = busy || recording || !canUpload);
+  $('practice-send').hidden = !pendingAudio || recording;
   $('practice-send').disabled = busy || recording || !canUpload || !pendingAudio;
   $('practice-drill-mode').disabled = busy || recording;
   $('practice-learner').disabled = busy || recording;
-  $('practice-item').disabled = busy || recording;
+  $('practice-item').disabled = busy || recording || Boolean(pendingAudio);
+  $('student-lesson').disabled = busy || recording || Boolean(pendingAudio);
+  $('practice-record-label').textContent = pendingAudio ? '重新录音' : (latest?.decision === 'practice' ? '再读一次' : '我来读');
   $('practice-refresh').disabled = busy || recording || !item;
 }
 async function loadPractice() {
@@ -4006,17 +4078,29 @@ async function startPracticeRecording() {
   await startRecording(
     blob => perform(async () => {
       await usePracticeAudio(blob, false);
-      return '录音已就绪，可以试听或提交。';
+      practiceStatus('正在听你读，请稍等…');
+      return await submitPracticeAudio();
     }, '正在处理录音…', practiceStatus),
     () => practiceStatus('录音失败，请重试或上传 WAV 文件。', true),
     updatePracticeControls,
   );
-  return '正在录音，读完后点「结束录音」。';
+  return '正在听你读，读完点「读好了，听听我的」。';
 }
 
 $('practice-speak').onclick = () => playPracticeExample($('practice-example'));
 $('practice-drill-speak').onclick = () => playPracticeExample($('practice-drill-example'));
+$('practice-next').onclick = () => {
+  if (busy || capture || pendingAudio) return;
+  const items = studentLesson?.items || [];
+  const index = items.findIndex(row => row.id === practiceItem()?.id);
+  if (!items.length) return;
+  $('practice-item').value = items[(index + 1) % items.length].id;
+  $('practice-item').onchange();
+  $('practice-original').scrollIntoView({block: 'center', behavior: 'smooth'});
+  $('practice-speak').focus({preventScroll: true});
+};
 $('practice-item').onchange = () => {
+  $('practice-item-options').open = false;
   resetPractice();
   perform(loadPractice, '正在读取跟读记录…', practiceStatus);
 };
@@ -4052,7 +4136,7 @@ practiceSampleButtons.forEach(button => {
     return '已选中「' + button.textContent + '」，点「提交跟读」查看结果。';
   }, '正在准备模拟录音…', practiceStatus);
 });
-$('practice-send').onclick = () => perform(async () => {
+async function submitPracticeAudio() {
   const item = practiceItem();
   if (!item || !pendingAudio) return;
   const {wav, key, drill} = pendingAudio;
@@ -4067,7 +4151,8 @@ $('practice-send').onclick = () => perform(async () => {
   $('practice-drill-mode').checked = Boolean(attempt.drill);
   renderPractice();
   return '跟读结果已更新。';
-}, '正在评测跟读…', practiceStatus);
+}
+$('practice-send').onclick = () => perform(submitPracticeAudio, '正在听你读，请稍等…', practiceStatus);
 
 const studentProgressLabels = {completed:'已完成', pending_review:'等老师听', in_progress:'练习中'};
 let currentReview;
