@@ -34,8 +34,11 @@ def test_word_builds_hide_answers_until_later_clicks_and_keep_native_audio():
     second = {shapes[i].text for i in steps[1].xpath('.//p:spTgt/@spid', namespaces=NS)}
     assert second == {"crab", "螃蟹"}
     assert not any("crab" == getattr(shapes[i], "text", "") for i in first)
-    assert not root.xpath('.//p:audio')  # only an explicit sound click plays audio
-    assert root.xpath('.//a:hlinkClick/a:snd') and not root.xpath('.//a:videoFile')
+    assert root.xpath('.//p:audio/p:cMediaNode/p:cTn/p:stCondLst/p:cond/@delay') == ['indefinite']
+    assert root.xpath('.//a:audioFile') and not root.xpath('.//a:videoFile')
+    assert not root.xpath('.//a:hlinkClick/a:snd')
+    assert root.xpath('.//p:cmd/@cmd') == ['playFrom(0.0)']
+    assert root.xpath('.//p:cTn[@nodeType="interactiveSeq"]/p:stCondLst/p:cond/@evt') == ['onClick']
     assert len(root.xpath('p:timing')) == 1
     assert not root.xpath('p:transition/@advTm')  # teacher owns the pace
     with ZipFile(BytesIO(binary)) as package:
@@ -52,7 +55,7 @@ def test_word_builds_hide_answers_until_later_clicks_and_keep_native_audio():
     next(s for s in word_slide.shapes if s.has_text_frame and s.text == "crab").text = "CRAB"
     saved = BytesIO()
     deck.save(saved)
-    assert Presentation(BytesIO(saved.getvalue())).slides[2]._element.xpath('.//a:hlinkClick/a:snd')
+    assert Presentation(BytesIO(saved.getvalue())).slides[2]._element.xpath('.//a:audioFile')
 
 
 def test_partner_swap_exits_old_prompts_without_hiding_navigation():

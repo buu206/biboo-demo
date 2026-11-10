@@ -115,20 +115,62 @@ def embed_audio(slide, content, mime, *, x=11.55, y=6.12):
     image = BytesIO()
     poster.save(image, format="PNG")
     image.seek(0)
-    # A standard sound action on a visible picture is supported by PowerPoint
-    # without autoplay or a hidden video control. Short TTS clips need replay,
-    # not a transport bar. The relationship points inside the PPTX package.
+    # Use an actual audio object. An a:snd attached to an otherwise empty
+    # hyperlink can be ignored by presentation players, leaving a silent icon.
     from pptx.media import Video
+    from lxml import etree
 
     extension = "wav" if mime == "audio/wav" else "mp3"
     media = Video.from_blob(content, mime, f"teacher.{extension}")
     part = slide.part.package.get_or_add_media_part(media)
     audio_id = slide.part.relate_to(part, RT.AUDIO)
+    media_id = slide.part.relate_to(part, RT.MEDIA)
     audio = slide.shapes.add_picture(image, Inches(x), Inches(y), Inches(.62), Inches(.62))
     audio.name = "classroom-audio"
     audio._element.nvPicPr.cNvPr.set("descr", "点击播放示范声音；再次点击从头播放")
-    click = node("a:hlinkClick", audio._element.nvPicPr.cNvPr, endSnd=1)
+    click = node("a:hlinkClick", audio._element.nvPicPr.cNvPr, action="ppaction://media")
     click.set(qn("r:id"), "")
-    sound = node("a:snd", click, name=f"teacher.{extension}")
-    sound.set(qn("r:embed"), audio_id)
+    nv = audio._element.nvPicPr.nvPr
+    sound = node("a:audioFile", nv)
+    sound.set(qn("r:link"), audio_id)
+    ext = node("p:ext", node("p:extLst", nv), uri="{DAA4B4D4-6D71-4841-9C94-3DE7FCFB9230}")
+    p14 = "http://schemas.microsoft.com/office/powerpoint/2010/main"
+    embedded = etree.SubElement(ext, "{" + p14 + "}media", nsmap={"p14": p14})
+    embedded.set(qn("r:embed"), media_id)
+
+    timing = slide._element.find(qn("p:timing"))
+    if timing is None:
+        timing = node("p:timing")
+        slide._element.insert_element_before(timing, "p:extLst")
+        root = node("p:cTn", node("p:par", node("p:tnLst", timing)),
+                    dur="indefinite", restart="never", nodeType="tmRoot")
+        children = node("p:childTnLst", root)
+    else:
+        children = timing.find(".//" + qn("p:childTnLst"))
+
+    def on_speaker(parent):
+        condition = node("p:cond", parent, evt="onClick", delay=0)
+        node("p:spTgt", node("p:tgtEl", condition), spid=audio.shape_id)
+
+    sequence = node("p:seq", children, concurrent=1, nextAc="seek")
+    interactive = node("p:cTn", sequence, restart="whenNotActive", fill="hold",
+                       evtFilter="cancelBubble", nodeType="interactiveSeq")
+    on_speaker(node("p:stCondLst", interactive))
+    node("p:rtn", node("p:endSync", interactive, evt="end", delay=0), val="all")
+    effects = node("p:childTnLst", interactive)
+    for _ in range(2):
+        step = node("p:cTn", node("p:par", effects), fill="hold")
+        _condition(node("p:stCondLst", step), 0)
+        effects = node("p:childTnLst", step)
+    play = node("p:cTn", node("p:par", effects), presetID=1, presetClass="mediacall",
+                presetSubtype=0, fill="hold", nodeType="clickEffect")
+    _condition(node("p:stCondLst", play), 0)
+    command = node("p:cmd", node("p:childTnLst", play), type="call", cmd="playFrom(0.0)")
+    _behavior(command, audio.shape_id, 1)
+    on_speaker(node("p:nextCondLst", sequence))
+    media_node = node("p:cMediaNode", node("p:audio", children), vol=100000)
+    media_time = node("p:cTn", media_node, fill="hold", display=0)
+    _condition(node("p:stCondLst", media_time), "indefinite")
+    node("p:spTgt", node("p:tgtEl", media_node), spid=audio.shape_id)
+    # finish_motion merges the teaching builds and assigns unique timing IDs.
     return audio
