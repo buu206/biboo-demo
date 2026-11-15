@@ -2178,9 +2178,16 @@ body[data-view="student"] .student-teacher-return { display: inline-block; margi
   #practice-original { padding: 20px 12px; }
   .courseware-purpose { flex-wrap: wrap; }
 }
+.public-demo-banner {position:relative;z-index:60;padding:10px 18px;text-align:center;background:#f1ecfa;color:#675281;font-size:13px;line-height:1.6;}
+#practice-record,#practice-stop,#practice-file,#practice-upload .file-alternative label,#practice-preview {display:none!important;}
+#practice-upload .record-hint {display:none;}
+#courseware-purpose-hint {color:#765780;}
+#practice-upload .file-alternative {text-align:center;}
+#practice-samples .actions {justify-content:center;}
 </style>
 </head>
 <body>
+<aside class="public-demo-banner" role="note">免费演示 · AI 结果使用示例数据 · 操作仅保存在此浏览器，不上传材料或录音</aside>
   <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
     <defs>
 <symbol id="b-scene-card" viewBox="0 0 200 200"><g transform="rotate(-12 92 100)"><rect x="40" y="45" width="100" height="111" rx="12" fill="#318FF0"/><rect x="40" y="39" width="100" height="111" rx="12" fill="#B7DDFF"/></g><g transform="rotate(9 111 109)"><rect x="66" y="58" width="99" height="112" rx="12" fill="#FF9E70"/><rect x="66" y="52" width="99" height="112" rx="12" fill="#FFCFB4"/><path d="M94 131L113 85L132 131M101 117H125" fill="none" stroke="#FFF5EE" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
@@ -2522,9 +2529,9 @@ body[data-view="student"] .student-teacher-return { display: inline-block; margi
             <div id="draft-message" class="course-empty" hidden><h3>课程草稿已保存</h3><p>继续生成课件大纲和跟读题，完成后再发布。</p></div>
             <div class="course-publish-row"><p id="publish-hint">检查题目后发布，孩子就能开始跟读。</p><button id="publish">发布作业</button></div>
             <div id="published-actions" class="result-box" hidden>
-              <strong>作业已发布</strong><p>本机演示链接需在这台电脑、同一演示账号中打开。</p>
+              <strong>作业已发布</strong><p>分享链接包含演示题目，别人也能打开；双方的练习记录互不共享。</p>
               <details class="simple-options"><summary>查看跟读链接</summary><label>跟读链接<input id="student-share-url" type="url" readonly></label></details>
-              <div class="actions"><button id="copy-student-link">复制跟读链接</button><a id="student-entry" class="download-button secondary" data-view="student">体验孩子端</a><a id="course-review" class="download-button secondary" data-view="review">看反馈</a></div>
+              <div class="actions"><button id="copy-student-link">复制演示链接</button><a id="student-entry" class="download-button secondary" data-view="student">体验孩子端</a><a id="course-review" class="download-button secondary" data-view="review">看反馈</a></div>
             </div>
           </section>
           <section id="panel-classroom" role="tabpanel" aria-labelledby="tab-classroom" hidden>
@@ -2564,22 +2571,22 @@ body[data-view="student"] .student-teacher-return { display: inline-block; margi
             </label>
             <label for="courseware-style">
               课堂 PPT 风格
-              <select id="courseware-style" aria-describedby="courseware-style-hint">
+              <select disabled id="courseware-style" aria-describedby="courseware-style-hint">
                 <option value="children" selected>儿童互动（6–10岁）</option>
                 <option value="standard">文字整理</option>
               </select>
             </label>
             <small id="courseware-style-hint">
-              看图、揭词、说句子分步呈现，带点击游戏。真实模式会生成教学文案和单词语音；教学提示在备注里。
+              看图、揭词、说句子分步呈现，带点击游戏。公开演示下载固定样例；完整模型功能见 GitHub 仓库。
             </small>
             </details>
             <label class="courseware-purpose">我想准备
               <select id="courseware-purpose"><option value="ppt">课堂 PPT</option><option value="homework">跟读作业</option></select>
             </label>
-            <p class="form-note" id="courseware-purpose-hint">默认适合 6–10 岁，含分步动画和单词示范音。</p>
+            <p class="form-note" id="courseware-purpose-hint">免费版下载预制海洋主题 PPT；上传材料不影响样例内容。</p>
             <div class="actions">
               <button type="button" id="courseware-generate" disabled>
-                生成儿童互动 PPT
+                获取示例 PPT
               </button>
               <button id="courseware-import" disabled hidden>
                 <svg aria-hidden="true">
@@ -2713,18 +2720,18 @@ body[data-view="student"] .student-teacher-return { display: inline-block; margi
             </button>
           </div>
           <p class="record-hint">点「我来读」开始，读完再点一次就可以。</p>
-          <details class="file-alternative">
+          <details class="file-alternative" open>
             <summary>
-              家长 / 老师帮忙
+              选择一种演示结果
             </summary>
-            <p class="form-note">本机验收请用成人录音；每段最长 30 秒，最大 2 MB。</p>
+            <p class="form-note">无需麦克风。选一种示例，再点「提交跟读」查看模拟反馈。</p>
             <label>
-              选择 WAV 文件
+              公开演示不上传音频
               <input id="practice-file" type="file" accept=".wav,audio/wav,audio/x-wav">
             </label>
           <div id="practice-samples" hidden>
             <p>
-              体验不同的练习反馈 · 模拟录音
+              模拟结果，不是真实发音评分
             </p>
             <div class="actions">
               <button type="button" class="secondary" data-peak="3000">
@@ -2909,6 +2916,7 @@ body[data-view="student"] .student-teacher-return { display: inline-block; margi
   </div>
   <button type="button" id="intro-skip">跳过开场 <span aria-hidden="true">→</span></button>
 </dialog>
+<script src="./demo.js"></script>
 <script>
 // Independent of API startup: the welcome must never hold up login or a lesson.
 (() => {
@@ -3056,14 +3064,14 @@ function render(data) {
   $('publish').hidden = data.status !== 'generated';
   $('draft-message').hidden = data.status !== 'draft';
   $('publish-hint').hidden = locked;
-  $('publish-hint').textContent = data.status === 'draft' ? '草稿已经保存，可继续完成生成。' : '发布会生成示范语音并锁定题目；你可以先修改内容。';
+  $('publish-hint').textContent = data.status === 'draft' ? '草稿已经保存，可继续完成生成。' : '发布会锁定演示题目；朗读由浏览器提供，不调用付费模型。';
   $('published-actions').hidden = !locked;
   updateLessonPptLink();
   if (locked) {
     const url = viewUrl('student', data.id);
     $('student-entry').href = url;
     $('student-share-url').value = url;
-    $('copy-student-link').textContent = '复制跟读链接';
+    $('copy-student-link').textContent = '复制演示链接';
     $('course-review').href = viewUrl('review', data.id);
   }
   for (const note of data.quality_notes) add($('quality'), 'li', note);
@@ -3103,9 +3111,7 @@ function render(data) {
     for (const item of data.items) {
       const row = add(part, 'div'); row.className = 'audio-preview';
       add(row, 'span', item.text);
-      const audio = add(row, 'audio'); audio.controls = true; audio.preload = 'none';
-      audio.setAttribute('aria-label', '试听 ' + item.text);
-      audio.src = practiceMockMode ? '/api/v1/practice/items/' + item.id + '/demo-audio' : '/api/v1/assets/' + item.audio_asset_id;
+      const listen = add(row, 'button', '听 ' + item.text); listen.className='secondary'; listen.onclick=()=>{ try {BibooDemo.speak(item.text);} catch(error){status(error.message,true);} };
     }
   }
   for (const item of data.items) {
@@ -3261,7 +3267,8 @@ window.addEventListener('beforeunload', event => {
     event.preventDefault(); event.returnValue = '';
   }
 });
-function viewUrl(view, lessonId) {
+function viewUrl(view, lessonId) { return BibooDemo.share(view, lessonId); }
+function unusedOriginalViewUrl(view, lessonId) {
   const url = new URL(location.pathname, location.origin);
   if (view !== 'teacher') url.searchParams.set('view', view);
   if (lessonId) url.searchParams.set('lesson', lessonId);
@@ -3391,7 +3398,7 @@ $('copy-student-link').onclick = async () => {
   const field = $('student-share-url');
   try {
     await navigator.clipboard.writeText(field.value);
-    $('copy-student-link').textContent = '已复制跟读链接';
+    $('copy-student-link').textContent = '已复制演示链接';
   } catch {
     field.closest('details').open = true;
     field.focus();
@@ -3405,7 +3412,9 @@ submit('login', async fields => {
   await showTeacher(teacher);
   return '已登录。';
 });
-$('logout').onclick = () => perform(async () => {
+$('logout').textContent='重置体验';
+$('logout').onclick = () => {if(confirm('清除这个浏览器里的演示课程和练习记录？'))BibooDemo.reset();};
+const unusedOriginalLogout = () => perform(async () => {
   if (!(await leaveCourseSafely())) return '';
   if (((newCourseSnapshot && newCourseSnapshot !== newCourseValues()) || $('assistant-prompt').value.trim() !== assistantAcceptedPrompt) && !confirm('退出会清除这次尚未生成的新课内容。确认退出？')) return '';
   await api('/auth/logout', 'POST');
@@ -3491,7 +3500,8 @@ async function leaveCourseSafely() {
   return true;
 }
 $('save').onclick = () => perform(async () => { await saveCurrentEdits(); return '修改已保存。'; }, '正在保存修改…');
-function pptTeachingSummary(response) {
+function pptTeachingSummary(response) {return '免费版下载的是预制海洋主题样例，不根据本次材料生成；含点击动画与示范音。';}
+function unusedTeachingSummary(response) {
   const mode = response.headers.get('X-Courseware-Planner');
   const audio = Number(response.headers.get('X-Courseware-Audio-Count') || 0);
   const words = Number(response.headers.get('X-Courseware-Word-Count') || 0);
@@ -3519,14 +3529,14 @@ $('lesson-ppt').onclick = event => {
 };
 $('publish').onclick = () => {
   if (busy || lesson?.status !== 'generated') return;
-  if (!practiceMockMode && !confirm('发布当前作业并生成示范语音？发布后题目将锁定。')) return;
+  if (!confirm('确认发布这份演示作业？仅保存在当前浏览器，题目将锁定。')) return;
   perform(async () => {
     await saveCurrentEdits();
     const id = lesson.id;
     await api('/lessons/' + id + '/publish', 'POST', {confirm:true,revision:lesson.revision});
     await lessons(id);
     setDetailTab('homework');
-    return '作业已发布。可以复制链接，或先体验孩子端。';
+    return '演示作业已发布。可复制链接给别人体验，记录分别保存在各自浏览器。';
   }, '正在保存并发布作业…');
 };
 
@@ -3590,13 +3600,13 @@ function selectedCoursewareStyle() {
 function updateLessonPptLink() {
   const ppt = $('lesson-ppt');
   ppt.hidden = !lesson?.outline;
-  $('lesson-ppt-style-field').hidden = !lesson?.outline;
+  $('lesson-ppt-style-field').hidden = true;
   if (!lesson) {
     ppt.removeAttribute('href');
     return;
   }
   ppt.href = '/api/v1/courseware/pptx/' + lesson.id + '?style=' + selectedCoursewareStyle();
-  ppt.textContent = selectedCoursewareStyle() === 'children' ? '下载儿童互动 PPT' : '下载文字 PPT';
+  ppt.textContent = '下载示例 PPT';
   ppt.title = selectedCoursewareStyle() === 'children' ? '放映时先回答问题，再翻页揭晓；教学提示在备注里。' : '';
 }
 function fillGoals(goals) {
@@ -3697,7 +3707,8 @@ function uploadCourseware(action, title) {
     body: coursewareFile,
   }).catch(() => { throw new Error('暂时连不上 Biboo，请刷新后再试。'); });
 }
-function coursewareFilename(response, title) {
+function coursewareFilename(response, title) {return 'Biboo-海洋课堂-演示样例.pptx';}
+function unusedCoursewareFilename(response, title) {
   const disposition = response.headers.get('Content-Disposition') || '';
   const utf8Name = disposition.match(/filename\*=UTF-8''([^;]+)/i);
   if (utf8Name) {
@@ -3723,7 +3734,7 @@ function selectCoursewareStyle(style) {
   const children = selectedCoursewareStyle() === 'children';
   updateCoursewarePurpose();
   $('courseware-style-hint').textContent = children
-    ? '看图、揭词、说句子分步呈现，带点击游戏。真实模式会生成教学文案和单词语音；教学提示在备注里。'
+    ? '看图、揭词、说句子分步呈现，带点击游戏。公开演示下载固定样例；完整模型功能见 GitHub 仓库。'
     : '提取材料文字，按统一版式分页；原图和动画不保留。';
   updateLessonPptLink();
 }
@@ -3731,8 +3742,8 @@ $('courseware-style').onchange = event => selectCoursewareStyle(event.currentTar
 $('lesson-ppt-style').onchange = event => selectCoursewareStyle(event.currentTarget.value);
 function updateCoursewarePurpose() {
   const homework = $('courseware-purpose').value === 'homework';
-  $('courseware-generate').textContent = homework ? '准备跟读作业' : (selectedCoursewareStyle() === 'children' ? '生成儿童互动 PPT' : '生成文字 PPT');
-  $('courseware-purpose-hint').textContent = homework ? '提取词汇和句型，确认后生成作业。发布前你还可以修改。' : (selectedCoursewareStyle() === 'children' ? '默认适合 6–10 岁，含分步动画和单词示范音。' : '按统一版式整理材料文字。');
+  $('courseware-generate').textContent = homework ? '准备演示作业' : '获取示例 PPT';
+  $('courseware-purpose-hint').textContent = homework ? 'TXT / Markdown 在浏览器整理词汇；其他格式使用海洋示例。材料不会上传。' : '免费版提供预制海洋主题 PPT，可体验分步动画与声音，不根据上传材料生成。';
 }
 $('courseware-purpose').onchange = updateCoursewarePurpose;
 $('courseware-form').onsubmit = event => {
@@ -3838,7 +3849,7 @@ function cancelCapture() {
   current.onEnded?.();
 }
 function canRecordAudio() {
-  return Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+  return false; // Public demo never requests microphone access.
 }
 function resetPractice() {
   cancelCapture();
@@ -3862,29 +3873,11 @@ function pausePracticeExamples() {
   $('practice-example').pause();
   $('practice-drill-example').pause();
 }
-function setPracticeAudioSource(audio, source) {
-  if (audio.getAttribute('src') === source) return;
-  if (source) audio.src = source;
-  else {
-    audio.removeAttribute('src');
-    audio.load();
-  }
-}
-const practiceAudioError = '示范音频暂时无法播放，请再试一次。';
+function setPracticeAudioSource(audio, source) { audio.dataset.demoSource = source || ''; }
+const practiceAudioError = '浏览器朗读暂时不可用，可以先看文字或换浏览器。';
 async function playPracticeExample(audio) {
-  const source = audio.getAttribute('src');
-  if (!source || capture) return;
-  for (const audio of $('practice').querySelectorAll('audio')) audio.pause();
-  if ($('practice-status').textContent === practiceAudioError) practiceStatus('');
-  if (audio.error) audio.load();
-  audio.currentTime = 0;
-  try {
-    await audio.play();
-  } catch (error) {
-    if (error.name !== 'AbortError' && activeView === 'student' && audio.getAttribute('src') === source) {
-      practiceStatus(practiceAudioError, true);
-    }
-  }
+  try { BibooDemo.speak(audio.id === 'practice-drill-example' ? $('practice-drill-text').textContent : $('practice-reference').textContent); }
+  catch(error) { practiceStatus(error.message,true); }
 }
 function renderPractice() {
   const item = practiceItem();
@@ -4043,7 +4036,8 @@ function practiceSampleWav(peak) {
   }
   return pcmWav({length: samples.length, numberOfChannels: 1, getChannelData: () => samples});
 }
-async function startRecording(onAudio, onError, onEnded) {
+async function startRecording(onAudio, onError, onEnded) { throw new Error('公开演示使用预设结果，不采集录音。'); }
+async function unusedOriginalRecording(onAudio, onError, onEnded) {
   cancelCapture();
   const stream = await navigator.mediaDevices.getUserMedia({audio: true});
   try {
@@ -4150,7 +4144,7 @@ async function submitPracticeAudio() {
   clearPendingAudio();
   $('practice-drill-mode').checked = Boolean(attempt.drill);
   renderPractice();
-  return '跟读结果已更新。';
+  return '模拟反馈已更新；这不代表真实发音水平。';
 }
 $('practice-send').onclick = () => perform(submitPracticeAudio, '正在听你读，请稍等…', practiceStatus);
 
@@ -4284,7 +4278,7 @@ function reviewEntry(parent, attempt, pending) {
   stop.hidden = true;
   const file = add(add(fields, 'label', '或上传语音点评（可选 WAV）'), 'input');
   file.type = 'file';
-  file.accept = '.wav,audio/wav,audio/x-wav';
+  file.accept = '.wav,audio/wav,audio/x-wav'; file.closest('label').hidden = true;
   let recordedVoice = null, recording = false, processing = false;
   record.onclick = () => perform(async () => {
     if (processing) return;
@@ -4331,7 +4325,7 @@ function reviewEntry(parent, attempt, pending) {
       return;
     }
     const payload = {verdict:verdict.value, note:note.value.trim(), focus:verdict.value === 'practice' ? focus.value.trim() : ''};
-    const fileUpload = file.files[0];
+    const fileUpload = null;
     const report = (message, failed = false) => {
       feedbackStatus.textContent = message;
       reviewStatus(message, failed);
@@ -4383,7 +4377,7 @@ $('review-next-lesson').onclick = () => perform(async () => {
     if (health.mode !== 'real') {
       $('mode').hidden = false;
       $('mode').textContent = health.mode === 'mock'
-        ? '演示模式。可用预设录音测试跟读结果，示范使用本机英文语音。'
+        ? '免费公开演示。示范使用浏览器朗读，反馈为预设结果，不做真实口语评分。'
         : '跟读作业的真实模型凭证未配齐。';
     }
     try { await showTeacher(await api('/auth/me')); }
