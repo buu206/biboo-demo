@@ -4,9 +4,9 @@ Biboo 帮英语老师用一份教学材料准备课堂 PPT 和跟读作业，再
 
 2026-11-08 交流材料：[老师沟通简版](docs/交流材料/Biboo-老师沟通简版.md) · [面试讲解与技术事实](docs/交流材料/Biboo-面试讲解与技术事实.md)。材料区分当前 Demo、已接入的真实模型路径和待验证能力。2026-11-09 起按用户要求开始独立真实模型测试，见下文。
 
-项目保存在私有 GitHub 仓库，后续完成并验证的更新会继续同步。[GitHub 仓库](https://github.com/buu206/biboo-demo)
+项目保存在公开 GitHub 仓库，后续完成并验证的更新会继续同步。[GitHub 仓库](https://github.com/buu206/biboo-demo)
 
-仓库右侧 About 的 Website 指向本机 Demo。请在运行 Biboo 的这台 Mac 上打开，服务需要保持启动。[打开 Biboo Demo](http://127.0.0.1:18766/)
+免费公开演示：[打开 Biboo](https://buu206.github.io/biboo-demo/)。无需登录或本机启动服务。此版本使用示例数据，不调用付费 API；本地完整版操作见下文。
 
 ## 手动操作 Demo
 
@@ -145,3 +145,15 @@ AIHubMix 的默认模型为 `gemini-3.8-flash-tts`，音色为 `Sulafat`，输�
 老师上传区只有一个主操作，默认儿童互动 PPT，也可切换为跟读作业；教学目标和发布确认仍由老师完成。孩子端保留紫色猫头鹰，优先展示听与读，按题推进，更多选题、历史与测试工具折叠。顶部老师导航收为「老师入口」；这是界面简化，不改变现有演示账号和后端权限。
 
 用户已确认 PowerPoint / WPS 点喇叭有声音。本轮不修改 PPT 音频生成。浏览器回归使用独立模拟服务和合成测试音，没有采集麦克风或消耗模型额度；正式真实口语录音集验收仍未完成。
+
+## 免费公开演示（GitHub Pages）
+
+地址：https://buu206.github.io/biboo-demo/
+
+- 延用 Biboo 原界面，进入即为体验老师；课程、发布与复核保存在浏览器 localStorage。重置体验会清除此演示数据。
+- TXT / Markdown 仅在浏览器用规则提取词汇；PDF、PPTX、DOCX 使用示例目标。所有格式均不上传。
+- PPT 下载提供固定的海洋主题样例，含原生动画与示范音，不按当前材料生成。
+- 跟读采用用户选择的预设结果，不使用麦克风、不上传音频、不做真实评分；文字示范由浏览器朗读。
+- 分享链接携带演示题目，其他人可直接打开；反馈和练习记录不会跨设备同步。
+- 维护源：`backend/static/index.html` + `web/demo/demo.js`，`python3 scripts/build_pages.py` 输出 `public-demo/`。发布目录仅包含此产物，发布分支为 `gh-pages`。
+- 验证：`node scripts/test_pages.mjs`，以及浏览器走准备课程、发布、跟读、复核、分享流程。完整后端真实模式不受影响。

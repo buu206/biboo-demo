@@ -22,3 +22,6 @@ recordings/
 node_modules/
 .next/
 dist/
+
+# Generated public Pages demo
+public-demo/
